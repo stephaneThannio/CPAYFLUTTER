@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'pages/articles.dart';
 
 void main() {
   runApp(const MyApp());
@@ -152,6 +153,11 @@ class _MyHomePageState extends State<MyHomePage>
                               child: Align(
                                   alignment: const Alignment(0, 0.95),
                                   child: GestureDetector(
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Article())),
                                     onTapDown: _handleTapDown,
                                     onTapUp: _handleTapUp,
                                     onTapCancel: _handleTapCancel,
