@@ -1,7 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'pages/articles.dart';
+import 'pages/Accueil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage>
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const Article())),
+                                                const Accueil())),
                                     onTapDown: _handleTapDown,
                                     onTapUp: _handleTapUp,
                                     onTapCancel: _handleTapCancel,
