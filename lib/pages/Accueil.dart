@@ -17,14 +17,18 @@ class _AccueilState extends State<Accueil> {
       //Container(color: Colors.red,),
       const listdesArticles(),
       Container(color: Colors.green),
+      Container(color: Colors.red),
       Container(
         color: Colors.orange,
       ),
     ];
     final _kBottomNavBar = <BottomNavigationBarItem>[
-      const BottomNavigationBarItem(icon: Icon(Icons.cloud), label: 'tab1'),
-      const BottomNavigationBarItem(icon: Icon(Icons.alarm), label: 'tab2'),
-      const BottomNavigationBarItem(icon: Icon(Icons.forum), label: 'tab3'),
+      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'accueil'),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_cart_outlined), label: 'achat en ligne'),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.local_offer_outlined), label: 'tarifs'),
+      const BottomNavigationBarItem(icon: Icon(Icons.api), label: 'apis'),
     ];
 
     assert(_ktabpage.length == _kBottomNavBar.length);
