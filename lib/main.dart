@@ -146,65 +146,120 @@ class _MyHomePageState extends State<MyHomePage>
                               ),
                             ),
                             Container(
-                              color: Colors.blue,
+                              // color: Colors.blue,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      alignment: Alignment(0.1, 0),
+                                      image:
+                                          AssetImage("lib/photos/page2-1.jpg"),
+                                      fit: BoxFit.cover)),
+
+                              // child: Stack(
+                              //   children: [
+                              //     //Image.asset(name),
+                              //   ],
+                              // ),
+                              child: Align(
+                                alignment: Alignment(0, 1),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    //color: Colors.black.withOpacity(0.1),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.3),
+                                        //offset: Offset(0, 4),
+                                        blurRadius: 20,
+                                      ),
+                                    ],
+                                  ),
+                                  height: 200,
+                                  width: 400,
+                                  child: Align(
+                                    alignment: Alignment(0, 0),
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      'Protegez vous des voleurs',
+                                      style: TextStyle(
+                                        shadows: [
+                                          Shadow(
+                                            color:
+                                                Colors.black.withOpacity(0.8),
+                                            blurRadius: 10.0,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'PlusJakartaSans',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                             Container(
                               //color: Colors.green,
-                              child: Align(
-                                  alignment: const Alignment(0, 0.95),
-                                  child: GestureDetector(
-                                    onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Accueil())),
-                                    onTapDown: _handleTapDown,
-                                    onTapUp: _handleTapUp,
-                                    onTapCancel: _handleTapCancel,
-                                    child: ScaleTransition(
-                                      scale: _scaleAnimation,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: _isPressed
-                                                    ? Colors.black
-                                                        .withOpacity(0.5)
-                                                    : Colors.black,
-                                                blurRadius: 10.0,
-                                                spreadRadius: 2.0,
-                                                offset: Offset(0, 6),
-                                              ),
-                                            ],
-                                            color: const Color(0xFF6334A9),
-                                            borderRadius:
-                                                BorderRadius.circular(69)),
-                                        child: Align(
-                                          alignment: const Alignment(0, -0.20),
-                                          child: Text(
-                                            textAlign: TextAlign.center,
-                                            'Commencer',
-                                            style: TextStyle(
-                                              shadows: [
-                                                Shadow(
-                                                  color: Colors.black
-                                                      .withOpacity(0.2),
-                                                  blurRadius: 10.0,
-                                                  offset: Offset(0, 2),
+                              child: Stack(
+                                children: [
+                                  Align(
+                                      alignment: const Alignment(0, 0.95),
+                                      child: GestureDetector(
+                                        onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Accueil())),
+                                        onTapDown: _handleTapDown,
+                                        onTapUp: _handleTapUp,
+                                        onTapCancel: _handleTapCancel,
+                                        child: ScaleTransition(
+                                          scale: _scaleAnimation,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: _isPressed
+                                                        ? Colors.black
+                                                            .withOpacity(0.5)
+                                                        : Colors.black,
+                                                    blurRadius: 10.0,
+                                                    spreadRadius: 2.0,
+                                                    offset: Offset(0, 6),
+                                                  ),
+                                                ],
+                                                color: const Color(0xFF6334A9),
+                                                borderRadius:
+                                                    BorderRadius.circular(69)),
+                                            child: Align(
+                                              alignment:
+                                                  const Alignment(0, -0.20),
+                                              child: Text(
+                                                textAlign: TextAlign.center,
+                                                'Commencer',
+                                                style: TextStyle(
+                                                  shadows: [
+                                                    Shadow(
+                                                      color: Colors.black
+                                                          .withOpacity(0.2),
+                                                      blurRadius: 10.0,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontFamily: 'PlusJakartaSans',
                                                 ),
-                                              ],
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontFamily: 'PlusJakartaSans',
+                                              ),
                                             ),
+                                            height: 60,
+                                            width: 200,
                                           ),
                                         ),
-                                        height: 60,
-                                        width: 200,
-                                      ),
-                                    ),
-                                  )),
+                                      )),
+                                ],
+                              ),
                             )
                           ]),
                           //color: Colors.red,

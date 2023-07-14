@@ -1,14 +1,45 @@
-import 'package:flutter/material.dart';
+//import 'package:cpay/pages/myAccount/myAccunt.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../items/TextFieldPreuse.dart';
 
 class Login extends StatelessWidget {
   const Login({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
+    TextEditingController uName = TextEditingController();
+    TextEditingController pWD = TextEditingController();
+    String username = "";
+    String password = "";
+    void enregister() {
+      username = uName.text;
+      password = pWD.text;
+      print("username = $username, password =$password");
+    }
+
+    Future sendLoginRequest() async {
+      final request = await post(Uri.parse('https://api.c-pay.me'),
+          body: jsonEncode({
+            "app": "cpay",
+            "login": "0343787731",
+            "password": "1234",
+            "Autorization": "...",
+            "action": "authentification"
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      if (request.statusCode == 200) {
+        print(request.body);
+      } else {
+        print('request not send');
+      }
+    }
+
     return Container(
       child: Stack(
         children: <Widget>[
@@ -81,46 +112,47 @@ class Login extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const TextFieldPreuse(
+                  TextFieldPreuse(
+                    control: uName,
                     obscur: false,
-                    prefixIco: Icon(
-                      Icons.person,
+                    prefixIco: const Icon(
+                      Icons.phone,
                       color: Colors.white,
                     ),
                     sufixICO: Icon(null),
-                    label: "User Name",
-                    typeWord: TextCapitalization.words,
+                    label: "Telephone",
+                    typeWord: TextInputType.phone,
                   ),
-                  const TextFieldPreuse(
+                  TextFieldPreuse(
+                    control: pWD,
                     obscur: true,
-                    prefixIco: Icon(
+                    prefixIco: const Icon(
                       Icons.security,
                       color: Colors.white,
                     ),
-                    sufixICO: Icon(
+                    sufixICO: const Icon(
                       Icons.remove_red_eye,
                       color: Colors.white,
                     ),
                     label: "Password",
-                    typeWord: TextCapitalization.words,
+                    typeWord: TextInputType.text,
                   ),
                   Container(
                     //color: Colors.red,
                     width: 300,
                     height: 50,
                     child: ElevatedButton(
-                      child: const Text(
-                        textAlign: TextAlign.center,
-                        'Sing in',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.normal,
-                          color: Color(0xFF6334A9),
-                          fontFamily: 'PlusJakartaSans',
+                        child: const Text(
+                          textAlign: TextAlign.center,
+                          'Sign in',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFF6334A9),
+                            fontFamily: 'PlusJakartaSans',
+                          ),
                         ),
-                      ),
-                      onPressed: () => print('connect'),
-                    ),
+                        onPressed: () => {sendLoginRequest()}),
                   ),
                   Container(
                     //color: Colors.red,
@@ -140,7 +172,7 @@ class Login extends StatelessWidget {
                         ),
                         Text(
                           textAlign: TextAlign.center,
-                          'Sing in with',
+                          'Sign in with',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,

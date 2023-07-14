@@ -1,12 +1,52 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../items/TextFieldPreuse.dart';
+import 'package:http/http.dart';
 
 class CreateAccount extends StatelessWidget {
   const CreateAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController usernam = TextEditingController();
+    TextEditingController email = TextEditingController();
+    TextEditingController pwd = TextEditingController();
+    TextEditingController cpwd = TextEditingController();
+    String username;
+    String mail;
+    String password;
+    String cpassword;
+    void enregisterAUTH() {
+      username = usernam.text;
+      mail = email.text;
+      password = pwd.text;
+      cpassword = cpwd.text;
+      print(
+          "username = $username,mail=$mail password =$password cpassword =$cpassword");
+    }
+
+    Future sendCreateAccountRequest() async {
+      final request = await post(Uri.parse('https://api.c-pay.me'),
+          body: jsonEncode({
+            "app": "cpay",
+            "telephone": "0343787731",
+            "password": "1234",
+            "Autorization": "...",
+            "action": "inscription",
+            "code": "169926"
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      if (request.statusCode == 200) {
+        print(request.body);
+      } else {
+        print('request not send');
+      }
+    }
+
     return Container(
       child: Stack(
         children: <Widget>[
@@ -93,48 +133,64 @@ class CreateAccount extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const TextFieldPreuse(
+                  // TextFieldPreuse(
+                  //   control: usernam,
+                  //   obscur: false,
+                  //   prefixIco: const Icon(
+                  //     Icons.person,
+                  //     color: Colors.white,
+                  //   ),
+                  //   sufixICO: Icon(null),
+                  //   label: "your Name",
+                  //   typeWord: TextInputType.name,
+                  // ),
+                  TextFieldPreuse(
+                    control: email,
                     obscur: false,
-                    prefixIco: Icon(null),
+                    prefixIco: const Icon(
+                      Icons.phone,
+                      color: Colors.white,
+                    ),
                     sufixICO: Icon(null),
-                    label: "your Name",
-                    typeWord: TextCapitalization.words,
-                  ),
-                  const TextFieldPreuse(
-                    obscur: false,
-                    prefixIco: Icon(null),
-                    sufixICO: Icon(null),
-                    label: "Your email",
-                    typeWord: TextCapitalization.words,
+                    label: "Your Phone number",
+                    typeWord: TextInputType.phone,
                   ),
                   Container(
                     //color: Colors.red,
                     width: 300,
                     height: 50,
-                    child: const TextFieldPreuse(
+                    child: TextFieldPreuse(
+                      control: pwd,
                       obscur: true,
-                      prefixIco: Icon(null),
-                      sufixICO: Icon(
+                      prefixIco: const Icon(
+                        Icons.security,
+                        color: Colors.white,
+                      ),
+                      sufixICO: const Icon(
                         Icons.check_sharp,
                         color: Colors.white,
                       ),
                       label: "Your password",
-                      typeWord: TextCapitalization.words,
+                      typeWord: TextInputType.text,
                     ),
                   ),
                   Container(
                     //color: Colors.red,
                     width: 300,
                     height: 50,
-                    child: const TextFieldPreuse(
+                    child: TextFieldPreuse(
+                      control: cpwd,
                       obscur: true,
-                      prefixIco: Icon(null),
-                      sufixICO: Icon(
+                      prefixIco: const Icon(
+                        Icons.security,
+                        color: Colors.white,
+                      ),
+                      sufixICO: const Icon(
                         Icons.check_sharp,
                         color: Colors.white,
                       ),
                       label: "Confirm your password",
-                      typeWord: TextCapitalization.words,
+                      typeWord: TextInputType.text,
                     ),
                   ),
                   Container(
@@ -152,7 +208,7 @@ class CreateAccount extends StatelessWidget {
                           fontFamily: 'PlusJakartaSans',
                         ),
                       ),
-                      onPressed: () => print('Create Acoount'),
+                      onPressed: () => {sendCreateAccountRequest()},
                     ),
                   )
                 ],

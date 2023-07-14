@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class TextFieldPreuse extends StatelessWidget {
   final Icon prefixIco;
-  final TextCapitalization typeWord;
+  final TextInputType typeWord;
   final bool obscur;
   final Icon sufixICO;
   final String label;
+  final TextEditingController control;
 
   const TextFieldPreuse({
     super.key,
@@ -14,6 +15,7 @@ class TextFieldPreuse extends StatelessWidget {
     required this.typeWord,
     required this.sufixICO,
     required this.label,
+    required this.control,
   });
 
   @override
@@ -23,10 +25,11 @@ class TextFieldPreuse extends StatelessWidget {
       width: 300,
       height: 50,
       child: TextField(
+        controller: control,
         obscureText: obscur,
         cursorColor: Colors.white,
         style: const TextStyle(color: Colors.white),
-        textCapitalization: typeWord,
+        keyboardType: typeWord,
         decoration: InputDecoration(
             labelStyle: const TextStyle(color: Colors.white),
             fillColor: const Color(0xFF6334A9),

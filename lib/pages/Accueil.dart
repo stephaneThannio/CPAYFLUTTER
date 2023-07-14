@@ -25,10 +25,11 @@ class _AccueilState extends State<Accueil> {
     final _kBottomNavBar = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'accueil'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined), label: 'achat en ligne'),
+          icon: Icon(Icons.shopping_cart_outlined), label: 'mes achats'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.local_offer_outlined), label: 'tarifs'),
-      const BottomNavigationBarItem(icon: Icon(Icons.api), label: 'apis'),
+          icon: Icon(Icons.send_to_mobile_outlined), label: 'mes transaction'),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.qr_code), label: 'achat via QR code'),
     ];
 
     assert(_ktabpage.length == _kBottomNavBar.length);
@@ -69,7 +70,7 @@ class _AccueilState extends State<Accueil> {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.login,
+              Icons.account_circle_outlined,
               color: Colors.white,
             ),
             onPressed: () {
