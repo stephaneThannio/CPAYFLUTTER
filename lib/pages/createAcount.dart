@@ -266,8 +266,8 @@ class _CreateAccountState extends State<CreateAccount> {
                               ),
                             ),
                             onPressed: () => {
-                              sendCreateAccountRequest(),
-                              // Confirm()
+                              //sendCreateAccountRequest(),
+                              Confirm()
                             },
                           ),
                         )

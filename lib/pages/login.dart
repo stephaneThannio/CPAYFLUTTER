@@ -36,6 +36,7 @@ class _LoginState extends State<Login> {
   }
 
   void Welcome() {
+    User.getUser();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Accueil()));
   }

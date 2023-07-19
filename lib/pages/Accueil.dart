@@ -4,6 +4,7 @@ import 'package:cpay/pages/authentification.dart';
 //import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:cpay/items/Article.dart';
+import 'package:quickalert/quickalert.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -13,8 +14,9 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
+  //verification du connection
   late ConnectivityResult _connectionStatus;
-  late Duration dur;
+  //late Duration dur;
   final Connectivity _connectivity = Connectivity();
   int currentTabIndex = 0;
   void showSnackBar(ConnectivityResult status) {
@@ -69,6 +71,18 @@ class _AccueilState extends State<Accueil> {
     });
   }
 
+//=========================================================================
+  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
+      VoidCallback func) {
+    QuickAlert.show(
+        context: context,
+        type: typeAlert,
+        title: titreAlert,
+        text: TextAlert,
+        onConfirmBtnTap: func);
+  }
+
+  voiddeconnection() {}
   @override
   void initState() {
     // TODO: implement initState
@@ -130,25 +144,40 @@ class _AccueilState extends State<Accueil> {
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            print(User.sessionUser!.telephone);
+            print(User.sessionUser);
 
             // Action à effectuer lorsque l'icône de gauche est cliquée
           },
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.account_circle_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // Action à effectuer lorsque l'icône de droite est cliquée
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Authentification()));
-            },
-          ),
+          User.sessionUser == null
+              ? IconButton(
+                  icon: const Icon(
+                    Icons.account_circle_outlined,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    // Action à effectuer lorsque l'icône de droite est cliquée
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Authentification()));
+                  },
+                )
+              : IconButton(
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    // Action à effectuer lorsque l'icône de droite est cliquée
+                    Alert("Deconnexion", "Voulez vous vraiment deconnecter",
+                        QuickAlertType.confirm, () {
+                      User.logOut();
+                      Navigator.pop(context);
+                    });
+                  },
+                ),
         ],
         backgroundColor: const Color(0xFF6334A9),
       ),

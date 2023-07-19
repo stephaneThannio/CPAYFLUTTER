@@ -49,4 +49,11 @@ class User {
     var user = User.fromJson(decode);
     sessionUser = user;
   }
+
+  static void logOut() async {
+    SharedPreferences p = await SharedPreferences.getInstance();
+    p.setString("userdata", null.toString());
+    sessionUser = null;
+    p.commit();
+  }
 }
