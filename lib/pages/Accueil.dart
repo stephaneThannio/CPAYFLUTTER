@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
-import 'package:cpay/pages/confirmation.dart';
+//import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:cpay/items/Article.dart';
 
@@ -130,9 +130,8 @@ class _AccueilState extends State<Accueil> {
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            // print(User.sessionUser!.telephone);
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Confirmation()));
+            print(User.sessionUser!.telephone);
+
             // Action à effectuer lorsque l'icône de gauche est cliquée
           },
         ),
