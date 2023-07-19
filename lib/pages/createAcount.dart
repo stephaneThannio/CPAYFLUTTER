@@ -81,7 +81,7 @@ class CreateAccount extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                     blurRadius: 20,
                   ),
                 ],
@@ -91,8 +91,8 @@ class CreateAccount extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment(0, 0.9),
-            child: Container(
+            alignment: const Alignment(0, 0.9),
+            child: SizedBox(
               //container qui englobe les formulaire==========================================
               //color: Colors.yellow,
               height: 440,
@@ -100,11 +100,11 @@ class CreateAccount extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
+                  const SizedBox(
                     //color: Colors.red,
                     width: 300,
                     height: 50,
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -151,11 +151,11 @@ class CreateAccount extends StatelessWidget {
                       Icons.phone,
                       color: Colors.white,
                     ),
-                    sufixICO: Icon(null),
+                    sufixICO: const Icon(null),
                     label: "Your Phone number",
                     typeWord: TextInputType.phone,
                   ),
-                  Container(
+                  SizedBox(
                     //color: Colors.red,
                     width: 300,
                     height: 50,
@@ -174,7 +174,7 @@ class CreateAccount extends StatelessWidget {
                       typeWord: TextInputType.text,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     //color: Colors.red,
                     width: 300,
                     height: 50,
@@ -193,7 +193,7 @@ class CreateAccount extends StatelessWidget {
                       typeWord: TextInputType.text,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     //color: Colors.red,
                     width: 300,
                     height: 50,

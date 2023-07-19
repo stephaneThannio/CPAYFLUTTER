@@ -20,7 +20,7 @@ class TextFieldPreuse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       //color: Colors.red,
       width: 300,
       height: 50,

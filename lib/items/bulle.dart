@@ -13,7 +13,7 @@ class bulleRetraitVers extends StatelessWidget {
           color: Colors.black.withOpacity(0.8),
           blurRadius: 10.0,
           spreadRadius: 2.0,
-          offset: Offset(0, 6),
+          offset: const Offset(0, 6),
         ),
       ], color: Colors.white, borderRadius: BorderRadius.circular(20)),
       height: 180,
@@ -50,7 +50,7 @@ class bulleRetraitVers extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Container(
+          SizedBox(
             //color: Colors.orange,
             width: 130,
             height: 100,

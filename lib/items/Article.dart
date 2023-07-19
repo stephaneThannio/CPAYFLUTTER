@@ -50,7 +50,7 @@ class listdesArticles extends StatelessWidget {
         //   //color: Colors.red,
         // ),
         Expanded(
-          child: Container(
+          child: SizedBox(
             //container en vert Premier tab
             //color: Colors.green,
             height: 540,
@@ -70,7 +70,7 @@ class listdesArticles extends StatelessWidget {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: Alignment(-1, 0.4),
+                        alignment: const Alignment(-1, 0.4),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.1),
@@ -85,7 +85,7 @@ class listdesArticles extends StatelessWidget {
                                 Shadow(
                                   color: Colors.black.withOpacity(0.8),
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               fontSize: 24,
@@ -97,7 +97,7 @@ class listdesArticles extends StatelessWidget {
                         ),
                       ),
                       Align(
-                        alignment: Alignment(-1, 1),
+                        alignment: const Alignment(-1, 1),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.2),
@@ -114,7 +114,7 @@ class listdesArticles extends StatelessWidget {
                                 Shadow(
                                   color: Colors.black.withOpacity(0.8),
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               fontSize: 18,
@@ -141,7 +141,7 @@ class listdesArticles extends StatelessWidget {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: Alignment(-1, 0.4),
+                        alignment: const Alignment(-1, 0.4),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.1),
@@ -156,7 +156,7 @@ class listdesArticles extends StatelessWidget {
                                 Shadow(
                                   color: Colors.black.withOpacity(0.8),
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               fontSize: 24,
@@ -168,7 +168,7 @@ class listdesArticles extends StatelessWidget {
                         ),
                       ),
                       Align(
-                        alignment: Alignment(-1, 1),
+                        alignment: const Alignment(-1, 1),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.2),
@@ -185,7 +185,7 @@ class listdesArticles extends StatelessWidget {
                                 Shadow(
                                   color: Colors.black.withOpacity(0.8),
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               fontSize: 18,
@@ -212,7 +212,7 @@ class listdesArticles extends StatelessWidget {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: Alignment(-1, 0.4),
+                        alignment: const Alignment(-1, 0.4),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.1),
@@ -227,7 +227,7 @@ class listdesArticles extends StatelessWidget {
                                 Shadow(
                                   color: Colors.black.withOpacity(0.8),
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               fontSize: 24,
@@ -239,7 +239,7 @@ class listdesArticles extends StatelessWidget {
                         ),
                       ),
                       Align(
-                        alignment: Alignment(-1, 1),
+                        alignment: const Alignment(-1, 1),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.2),
@@ -256,7 +256,7 @@ class listdesArticles extends StatelessWidget {
                                 Shadow(
                                   color: Colors.black.withOpacity(0.8),
                                   blurRadius: 10.0,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               fontSize: 18,

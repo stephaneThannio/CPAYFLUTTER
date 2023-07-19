@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage>
   void _handleTapDown(TapDownDetails details) {
     setState(() {
       _isPressed = true;
-      final duration = Duration(milliseconds: 200);
+      const duration = Duration(milliseconds: 200);
       final position = details.localPosition;
       final pressProgress = position.dy.clamp(0, 100);
       final adjustedDuration = duration * (1 - pressProgress);
@@ -120,8 +120,8 @@ class _MyHomePageState extends State<MyHomePage>
                             Container(
                               // color: Colors.red,
                               child: Align(
-                                alignment: Alignment(-1, -0.8),
-                                child: Container(
+                                alignment: const Alignment(-1, -0.8),
+                                child: SizedBox(
                                   child: Text(
                                     textAlign: TextAlign.center,
                                     'c-Pay un moyen simple de paiement Anonyme',
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage>
                                         Shadow(
                                           color: Colors.black.withOpacity(0.8),
                                           blurRadius: 10.0,
-                                          offset: Offset(0, 4),
+                                          offset: const Offset(0, 4),
                                         ),
                                       ],
                                       fontSize: 24,
@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage>
                               //   ],
                               // ),
                               child: Align(
-                                alignment: Alignment(0, 1),
+                                alignment: const Alignment(0, 1),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     //color: Colors.black.withOpacity(0.1),
@@ -175,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage>
                                   height: 200,
                                   width: 400,
                                   child: Align(
-                                    alignment: Alignment(0, 0),
+                                    alignment: const Alignment(0, 0),
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       'Protegez vous des voleurs',
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage>
                                             color:
                                                 Colors.black.withOpacity(0.8),
                                             blurRadius: 10.0,
-                                            offset: Offset(0, 4),
+                                            offset: const Offset(0, 4),
                                           ),
                                         ],
                                         fontSize: 40,
@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                         : Colors.black,
                                                     blurRadius: 10.0,
                                                     spreadRadius: 2.0,
-                                                    offset: Offset(0, 6),
+                                                    offset: const Offset(0, 6),
                                                   ),
                                                 ],
                                                 color: const Color(0xFF6334A9),
@@ -243,7 +243,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                       color: Colors.black
                                                           .withOpacity(0.2),
                                                       blurRadius: 10.0,
-                                                      offset: Offset(0, 2),
+                                                      offset: const Offset(0, 2),
                                                     ),
                                                   ],
                                                   fontSize: 24,

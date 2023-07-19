@@ -14,7 +14,7 @@ class _AuthentificationState extends State<Authentification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF6334A9),
+      backgroundColor: const Color(0xFF6334A9),
       body: DefaultTabController(
           length: 2,
           child: Builder(

@@ -32,7 +32,7 @@ class _MyAccountState extends State<MyAccount>
     super.initState();
     _animcontroller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
     );
   }
 
@@ -62,7 +62,7 @@ class _MyAccountState extends State<MyAccount>
               ),
             ),
             Align(
-              alignment: Alignment(-0.9, -1),
+              alignment: const Alignment(-0.9, -1),
               child: Container(
                 color: Colors.green,
                 height: 50,
