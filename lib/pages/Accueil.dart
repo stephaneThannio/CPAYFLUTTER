@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
+import 'package:cpay/pages/login.dart';
 //import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:cpay/items/Article.dart';
@@ -72,6 +73,19 @@ class _AccueilState extends State<Accueil> {
   }
 
 //=========================================================================
+  bool log = true;
+  void verifIcon() {
+    if (User.sessionUser == null) {
+      setState(() {
+        log = false;
+      });
+    } else {
+      setState(() {
+        log = true;
+      });
+    }
+  }
+
   void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
@@ -118,9 +132,16 @@ class _AccueilState extends State<Accueil> {
       currentIndex: currentTabIndex,
       type: BottomNavigationBarType.fixed,
       onTap: (int index) {
-        setState(() {
-          currentTabIndex = index;
-        });
+        if (User.sessionUser != null) {
+          setState(() {
+            currentTabIndex = index;
+          });
+        } else {
+          Alert("Erreur", "Vous devez vous connecter d'abord",
+              QuickAlertType.error, () {
+            Navigator.pop(context);
+          });
+        }
       },
     );
     return Scaffold(
@@ -150,7 +171,7 @@ class _AccueilState extends State<Accueil> {
           },
         ),
         actions: [
-          User.sessionUser == null
+          User.sessionUser == null && log
               ? IconButton(
                   icon: const Icon(
                     Icons.account_circle_outlined,
@@ -164,20 +185,41 @@ class _AccueilState extends State<Accueil> {
                             builder: (context) => const Authentification()));
                   },
                 )
-              : IconButton(
-                  icon: const Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    // Action à effectuer lorsque l'icône de droite est cliquée
-                    Alert("Deconnexion", "Voulez vous vraiment deconnecter",
-                        QuickAlertType.confirm, () {
-                      User.logOut();
-                      Navigator.pop(context);
-                    });
-                  },
-                ),
+              : User.sessionUser == null && !log
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        // Action à effectuer lorsque l'icône de droite est cliquée
+                        Alert("Deconnexion", "Voulez vous vraiment deconnecter",
+                            QuickAlertType.confirm, () {
+                          User.logOut();
+                          Navigator.pop(context);
+                          setState(() {
+                            log = true;
+                          });
+                        });
+                      },
+                    )
+                  : IconButton(
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        // Action à effectuer lorsque l'icône de droite est cliquée
+                        Alert("Deconnexion", "Voulez vous vraiment deconnecter",
+                            QuickAlertType.confirm, () {
+                          User.logOut();
+                          Navigator.pop(context);
+                          setState(() {
+                            log = true;
+                          });
+                        });
+                      },
+                    ),
         ],
         backgroundColor: const Color(0xFF6334A9),
       ),

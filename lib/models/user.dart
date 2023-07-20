@@ -46,7 +46,7 @@ class User {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var data = spref.getString("userdata");
     var decode = json.decode(data.toString());
-    var user = User.fromJson(decode);
+    var user = decode != null ? User.fromJson(decode) : null;
     sessionUser = user;
   }
 
