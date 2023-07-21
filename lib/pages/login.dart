@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/Accueil.dart';
+import 'package:cpay/pages/confirmation.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -28,11 +29,13 @@ class _LoginState extends State<Login> {
   void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
-        context: context,
-        type: typeAlert,
-        title: titreAlert,
-        text: TextAlert,
-        onConfirmBtnTap: func);
+      context: context,
+      type: typeAlert,
+      title: titreAlert,
+      text: TextAlert,
+      onConfirmBtnTap: func,
+      confirmBtnColor: Color(0xFF6334A9),
+    );
   }
 
   void Welcome() {
@@ -70,17 +73,29 @@ class _LoginState extends State<Login> {
           loading = false;
           User.saveUser(User.fromJson(jsonDecode(data["mdata"])));
         });
-        Alert("bienvenue", "vous etes connecter", QuickAlertType.success,
-            Welcome);
+        Alert("bienvenue", 'Vous etes maintenant connecter a cpay',
+            QuickAlertType.success, Welcome);
       } else if (data["status"] == 'error') {
         setState(() {
           loading = false;
         });
-        Alert("Error", "Login ou mot de passe incorrect", QuickAlertType.error,
+        Alert("Error", data['mdata'].toString(), QuickAlertType.error,
             NotWelcome);
+      } else if (data["status"] == 'warning') {
+        setState(() {
+          loading = false;
+        });
+        Alert("Attention", data['mdata'].toString(), QuickAlertType.warning,
+            () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      Confirmation(phone: tel, pwd: password)));
+        });
       }
       // print(data["status"]);
-      print(data['mdata']);
+      print(data);
     } else {
       print('request not send');
     }
@@ -121,7 +136,9 @@ class _LoginState extends State<Login> {
             ),
           ),
           loading
-              ? Loading()
+              ? Loading(
+                  couleur: Colors.white,
+                )
               : Align(
                   alignment: const Alignment(0, 0.9),
                   child: SizedBox(
@@ -206,79 +223,84 @@ class _LoginState extends State<Login> {
                         ),
                         const SizedBox(
                           //color: Colors.red,
-                          width: 300,
-                          height: 50,
-                          child: Column(
-                            children: [
-                              Text(
-                                textAlign: TextAlign.center,
-                                'OR',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                              Text(
-                                textAlign: TextAlign.center,
-                                'Sign in with',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                            ],
-                          ),
+
+                          height: 25,
                         ),
-                        SizedBox(
-                          //color: Colors.red,
-                          width: 300,
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                //color: Colors.green,
-                                width: 50,
-                                height: 50,
-                                child: IconButton(
-                                  icon: Image.asset(
-                                      ('lib/photos/Facebook-logo.png')),
-                                  onPressed: () => print('log in facebook'),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              SizedBox(
-                                //color: Colors.green,
-                                width: 50,
-                                height: 50,
-                                child: IconButton(
-                                  icon: Image.asset(
-                                      ('lib/photos/google-logo.png')),
-                                  onPressed: () => print('log in google'),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              SizedBox(
-                                //color: Colors.green,
-                                width: 50,
-                                height: 50,
-                                child: IconButton(
-                                  icon: Image.asset(
-                                      ('lib/photos/twiter-logo.png')),
-                                  onPressed: () => print('log in twiter'),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                        // const SizedBox(
+                        //   //color: Colors.red,
+                        //   width: 300,
+                        //   height: 50,
+                        //   child: Column(
+                        //     children: [
+                        //       Text(
+                        //         textAlign: TextAlign.center,
+                        //         'OR',
+                        //         style: TextStyle(
+                        //           fontSize: 20,
+                        //           fontWeight: FontWeight.normal,
+                        //           color: Colors.white,
+                        //           fontFamily: 'PlusJakartaSans',
+                        //         ),
+                        //       ),
+                        //       Text(
+                        //         textAlign: TextAlign.center,
+                        //         'Sign in with',
+                        //         style: TextStyle(
+                        //           fontSize: 20,
+                        //           fontWeight: FontWeight.normal,
+                        //           color: Colors.white,
+                        //           fontFamily: 'PlusJakartaSans',
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   //color: Colors.red,
+                        //   width: 300,
+                        //   height: 50,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       SizedBox(
+                        //         //color: Colors.green,
+                        //         width: 50,
+                        //         height: 50,
+                        //         child: IconButton(
+                        //           icon: Image.asset(
+                        //               ('lib/photos/Facebook-logo.png')),
+                        //           onPressed: () => print('log in facebook'),
+                        //         ),
+                        //       ),
+                        //       const SizedBox(
+                        //         width: 20,
+                        //       ),
+                        //       SizedBox(
+                        //         //color: Colors.green,
+                        //         width: 50,
+                        //         height: 50,
+                        //         child: IconButton(
+                        //           icon: Image.asset(
+                        //               ('lib/photos/google-logo.png')),
+                        //           onPressed: () => print('log in google'),
+                        //         ),
+                        //       ),
+                        //       const SizedBox(
+                        //         width: 20,
+                        //       ),
+                        //       SizedBox(
+                        //         //color: Colors.green,
+                        //         width: 50,
+                        //         height: 50,
+                        //         child: IconButton(
+                        //           icon: Image.asset(
+                        //               ('lib/photos/twiter-logo.png')),
+                        //           onPressed: () => print('log in twiter'),
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
                   ),

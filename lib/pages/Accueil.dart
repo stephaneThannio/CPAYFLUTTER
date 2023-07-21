@@ -1,11 +1,14 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
-import 'package:cpay/pages/login.dart';
+import 'package:cpay/pages/qr_code_page.dart';
+//import 'package:cpay/pages/login.dart';
 //import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:cpay/items/Article.dart';
 import 'package:quickalert/quickalert.dart';
+
+import '../items/bulle.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -14,17 +17,14 @@ class Accueil extends StatefulWidget {
   State<Accueil> createState() => _AccueilState();
 }
 
-class _AccueilState extends State<Accueil> {
-  //verification du connection
+class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   late ConnectivityResult _connectionStatus;
   //late Duration dur;
   final Connectivity _connectivity = Connectivity();
   int currentTabIndex = 0;
+//=======================SnackBar============================================================================
   void showSnackBar(ConnectivityResult status) {
     final snackBar = SnackBar(
-      // duration: status == ConnectivityResult.none
-      //     ? Duration(days: 365)
-      //     : Duration.zero,
       content: Container(
         padding: const EdgeInsets.all(16),
         height: 90,
@@ -72,39 +72,83 @@ class _AccueilState extends State<Accueil> {
     });
   }
 
-//=========================================================================
+//========================Snackbar=========================================
+//=========================Titre de page control================================================
   bool log = true;
-  void verifIcon() {
-    if (User.sessionUser == null) {
+  String titre = "Articles";
+  void defTitle(int val) {
+    if (val == 0) {
       setState(() {
-        log = false;
+        titre = "Articles";
+      });
+    } else if (val == 1) {
+      setState(() {
+        titre = "Achats";
+      });
+    } else if (val == 2) {
+      setState(() {
+        titre = "Transactions";
+      });
+    } else if (val == 3) {
+      setState(() {
+        titre = "Achat via code Qr";
+      });
+    }
+  }
+//===========================Titre de page control===================================================================================
+
+//==============================Alert=======================================================================
+  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
+      VoidCallback func) {
+    QuickAlert.show(
+      context: context,
+      type: typeAlert,
+      title: titreAlert,
+      text: TextAlert,
+      onConfirmBtnTap: func,
+      confirmBtnColor: Color(0xFF6334A9),
+    );
+  }
+
+  //=====================Alert=======================================================================================
+  //====================controle de visibility==============================
+  late AnimationController _animcontroller;
+  bool isvisible = false;
+  setVisibleBulle() {
+    if (!isvisible) {
+      setState(() {
+        isvisible = true;
+        _animcontroller.forward();
       });
     } else {
       setState(() {
-        log = true;
+        isvisible = false;
+        _animcontroller.reverse();
       });
     }
   }
 
-  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
-      VoidCallback func) {
-    QuickAlert.show(
-        context: context,
-        type: typeAlert,
-        title: titreAlert,
-        text: TextAlert,
-        onConfirmBtnTap: func);
-  }
-
-  voiddeconnection() {}
+  //======================InitState======================================================================================
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     initConnectivity();
     User.getUser();
+    _animcontroller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _animcontroller.dispose();
+    super.dispose();
+  }
+
+//============================Widget=======================================================================
   @override
   Widget build(BuildContext context) {
     final ktabpage = <Widget>[
@@ -112,16 +156,14 @@ class _AccueilState extends State<Accueil> {
       const listdesArticles(),
       Container(color: Colors.green),
       Container(color: Colors.red),
-      Container(
-        color: Colors.orange,
-      ),
+      const QrCode(),
     ];
     final kBottomNavBar = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'accueil'),
       const BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart_outlined), label: 'mes achats'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.send_to_mobile_outlined), label: 'mes transaction'),
+          icon: Icon(Icons.send_to_mobile_outlined), label: 'mes transactions'),
       const BottomNavigationBarItem(
           icon: Icon(Icons.qr_code), label: 'achat via QR code'),
     ];
@@ -136,6 +178,7 @@ class _AccueilState extends State<Accueil> {
           setState(() {
             currentTabIndex = index;
           });
+          defTitle(index);
         } else {
           Alert("Erreur", "Vous devez vous connecter d'abord",
               QuickAlertType.error, () {
@@ -146,11 +189,11 @@ class _AccueilState extends State<Accueil> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
+        title: Center(
           child: Text(
             textAlign: TextAlign.center,
-            'Articles:',
-            style: TextStyle(
+            titre,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -223,7 +266,29 @@ class _AccueilState extends State<Accueil> {
         ],
         backgroundColor: const Color(0xFF6334A9),
       ),
-      body: ktabpage[currentTabIndex],
+      body: Stack(
+        children: [
+          ktabpage[currentTabIndex],
+          Align(
+            alignment: const Alignment(0.7, 0.7),
+            child: ScaleTransition(
+              scale: _animcontroller,
+              child: Visibility(
+                  visible: isvisible, child: const bulleRetraitVers()),
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFF6334A9),
+        onPressed: () {
+          setVisibleBulle();
+        },
+        child: const Icon(
+          Icons.payment,
+          color: Colors.white,
+        ),
+      ),
       bottomNavigationBar: botomNavBar,
     );
   }

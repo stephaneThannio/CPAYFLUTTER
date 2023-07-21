@@ -35,14 +35,19 @@ class _ConfirmationState extends State<Confirmation> {
   void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
-        context: context,
-        type: typeAlert,
-        title: titreAlert,
-        text: TextAlert,
-        onConfirmBtnTap: func);
+      context: context,
+      type: typeAlert,
+      title: titreAlert,
+      text: TextAlert,
+      onConfirmBtnTap: func,
+      confirmBtnColor: Color(0xFF6334A9),
+    );
   }
 
   Future resendcode() async {
+    setState(() {
+      loading = false;
+    });
     final request = await post(Uri.parse('https://api.c-pay.me'),
         body: jsonEncode({
           "app": "cpay",
@@ -56,6 +61,18 @@ class _ConfirmationState extends State<Confirmation> {
           'Content-Type': 'application/json; charset=UTF-8',
         });
     if (request.statusCode == 200) {
+      var data = jsonDecode(request.body);
+      {
+        if (data["status"] == 'success') {
+          setState(() {
+            loading = false;
+          });
+          Alert("validation", data["mdata"].toString(), QuickAlertType.success,
+              () {
+            Navigator.pop(context);
+          });
+        }
+      }
       setState(() {
         loading = false;
       });
@@ -88,8 +105,8 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        Alert("Felicitation", "Votre compte Cpay est cree",
-            QuickAlertType.success, () {
+        Alert("Felicitation", data["mdata"].toString(), QuickAlertType.success,
+            () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Accueil()));
         });
@@ -97,7 +114,7 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        Alert("Erreur", "code de validation Erreur", QuickAlertType.error, () {
+        Alert("Erreur", data["mdata"].toString(), QuickAlertType.error, () {
           Navigator.pop(context);
         });
       }
@@ -111,7 +128,9 @@ class _ConfirmationState extends State<Confirmation> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? Loading(
+            couleur: Color(0xFF6334A9),
+          )
         : Scaffold(
             body: Stack(
             children: [

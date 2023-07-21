@@ -83,7 +83,7 @@ class _MyAccountState extends State<MyAccount>
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF6334A9),
         onPressed: () {
-          setVisibleBulle();
+          //setVisibleBulle();
         },
         child: const Icon(
           Icons.payment,

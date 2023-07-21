@@ -36,11 +36,13 @@ class _CreateAccountState extends State<CreateAccount> {
   void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
-        context: context,
-        type: typeAlert,
-        title: titreAlert,
-        text: TextAlert,
-        onConfirmBtnTap: func);
+      context: context,
+      type: typeAlert,
+      title: titreAlert,
+      text: TextAlert,
+      onConfirmBtnTap: func,
+      confirmBtnColor: Color(0xFF6334A9),
+    );
   }
 
   void Confirm() {
@@ -98,7 +100,7 @@ class _CreateAccountState extends State<CreateAccount> {
           setState(() {
             loading = false;
           });
-          Alert("Error", "telephone deja utiliser", QuickAlertType.error, () {
+          Alert("Error", data["mdata"].toString(), QuickAlertType.error, () {
             Navigator.pop(context);
           });
         }
@@ -107,7 +109,10 @@ class _CreateAccountState extends State<CreateAccount> {
         print('request not send');
       }
     } else {
-      print('veillez confiremer le mot de passe');
+      Alert("Error", "Veillez verifeir le mot de passe", QuickAlertType.error,
+          () {
+        Navigator.pop(context);
+      });
     }
   }
 
@@ -146,9 +151,11 @@ class _CreateAccountState extends State<CreateAccount> {
             ),
           ),
           loading
-              ? Loading()
+              ? const Loading(
+                  couleur: Colors.white,
+                )
               : Align(
-                  alignment: const Alignment(0, 0.9),
+                  alignment: const Alignment(0, 0.7),
                   child: SizedBox(
                     //container qui englobe les formulaire==========================================
                     //color: Colors.yellow,
