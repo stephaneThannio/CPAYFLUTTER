@@ -215,7 +215,6 @@ class _CreateAccountState extends State<CreateAccount> {
                             Icons.phone,
                             color: Colors.white,
                           ),
-                          sufixICO: const Icon(null),
                           label: "Your Phone number",
                           typeWord: TextInputType.phone,
                         ),
@@ -230,8 +229,9 @@ class _CreateAccountState extends State<CreateAccount> {
                               Icons.security,
                               color: Colors.white,
                             ),
-                            sufixICO: const Icon(
-                              Icons.check_sharp,
+                            sufixICO: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.check_sharp),
                               color: Colors.white,
                             ),
                             label: "Your password",
@@ -249,8 +249,9 @@ class _CreateAccountState extends State<CreateAccount> {
                               Icons.security,
                               color: Colors.white,
                             ),
-                            sufixICO: const Icon(
-                              Icons.check_sharp,
+                            sufixICO: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.check_sharp),
                               color: Colors.white,
                             ),
                             label: "Confirm your password",

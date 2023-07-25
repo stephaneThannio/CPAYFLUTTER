@@ -186,7 +186,6 @@ class _LoginState extends State<Login> {
                             Icons.phone,
                             color: Colors.white,
                           ),
-                          sufixICO: const Icon(null),
                           label: "Telephone",
                           typeWord: TextInputType.phone,
                         ),
@@ -197,8 +196,9 @@ class _LoginState extends State<Login> {
                             Icons.security,
                             color: Colors.white,
                           ),
-                          sufixICO: const Icon(
-                            Icons.remove_red_eye,
+                          sufixICO: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.remove_red_eye),
                             color: Colors.white,
                           ),
                           label: "Password",

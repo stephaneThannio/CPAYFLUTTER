@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
 class TextFieldPreuse extends StatelessWidget {
-  final Icon prefixIco;
+  final Icon? prefixIco;
   final TextInputType typeWord;
   final bool obscur;
-  final Icon sufixICO;
-  final String label;
+  final IconButton? sufixICO;
+  final String? label;
+  final String? hint;
   final TextEditingController control;
-
+  final colorinside;
   const TextFieldPreuse({
     super.key,
     required this.obscur,
-    required this.prefixIco,
+    this.prefixIco,
+    this.colorinside = const Color(0xFF6334A9),
     required this.typeWord,
-    required this.sufixICO,
-    required this.label,
+    this.hint,
+    this.sufixICO,
+    this.label,
     required this.control,
   });
 
@@ -31,8 +34,9 @@ class TextFieldPreuse extends StatelessWidget {
         style: const TextStyle(color: Colors.white),
         keyboardType: typeWord,
         decoration: InputDecoration(
+            hintText: hint,
             labelStyle: const TextStyle(color: Colors.white),
-            fillColor: const Color(0xFF6334A9),
+            fillColor: colorinside,
             focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white, width: 5),
                 borderRadius: BorderRadius.all(Radius.circular(60))),
