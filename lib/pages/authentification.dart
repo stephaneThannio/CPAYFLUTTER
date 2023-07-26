@@ -47,7 +47,7 @@ class _AuthentificationState extends State<Authentification> {
                             children: [
                               Text(
                                 textAlign: TextAlign.center,
-                                'Create Account',
+                                'S\'inscrire',
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.normal,
