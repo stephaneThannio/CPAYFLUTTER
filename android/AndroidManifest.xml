@@ -1,20 +1,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.coding.informer.simple_material_app">
+    package="com.example.your_app_package_name">
 
+    <!-- Add other necessary permissions if needed -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <meta-data android:name="flutterEmbedding" android:value="2"/>
 
-    <application android:name="${applicationName}" android:label="simple_material_app" android:icon="@mipmap/ic_launcher">
-        <activity android:name=".MainActivity"
-                  android:launchMode="singleTop"
-                  android:theme="@android:style/Theme.Black.NoTitleBar"
-                  android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection"
-                  android:hardwareAccelerated="true"
-                  android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+    <application
+        android:name="io.flutter.app.FlutterApplication"
+        android:label="CPAY"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <!-- Add other necessary intent filters, if needed -->
+
+            <meta-data
+                android:name="flutterEmbedding"
+                android:value="2" />
         </activity>
     </application>
 </manifest>
