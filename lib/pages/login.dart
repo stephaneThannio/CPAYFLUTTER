@@ -48,6 +48,14 @@ class _LoginState extends State<Login> {
     Navigator.pop(context);
   }
 
+  bool _isPasswordVisible = false;
+  
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isPasswordVisible = !_isPasswordVisible;
+    });
+  }
+
   Future sendLoginRequest() async {
     tel = uName.text;
     password = pWD.text;
@@ -156,19 +164,19 @@ class _LoginState extends State<Login> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              // Text(
+                              //   textAlign: TextAlign.center,
+                              //   'Authentification',
+                              //   style: TextStyle(
+                              //     fontSize: 30,
+                              //     fontWeight: FontWeight.normal,
+                              //     color: Colors.white,
+                              //     fontFamily: 'PlusJakartaSans',
+                              //   ),
+                              // ),
                               Text(
                                 textAlign: TextAlign.center,
-                                'welcome to',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                              Text(
-                                textAlign: TextAlign.center,
-                                'c-Pay',
+                                'Authentification',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
@@ -191,14 +199,16 @@ class _LoginState extends State<Login> {
                         ),
                         TextFieldPreuse(
                           control: pWD,
-                          obscur: true,
+                          obscur: !_isPasswordVisible, // Use the _isPasswordVisible to toggle obscureText
                           prefixIco: const Icon(
                             Icons.security,
                             color: Colors.white,
                           ),
                           sufixICO: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.remove_red_eye),
+                            onPressed: _togglePasswordVisibility, // Toggle the visibility of the password
+                            icon: Icon(
+                              _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                            ),
                             color: Colors.white,
                           ),
                           label: "Password",
@@ -211,7 +221,7 @@ class _LoginState extends State<Login> {
                           child: ElevatedButton(
                               child: const Text(
                                 textAlign: TextAlign.center,
-                                'Sign in',
+                                'Se connecter',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.normal,
