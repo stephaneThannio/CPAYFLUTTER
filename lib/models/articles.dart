@@ -33,7 +33,7 @@ List<Article> articles = [
       image: 'lib/photos/articles/casquegame.jpg'),
   Article(
       reference: '5',
-      titre: 'speacker Jbl boomBox',
+      titre: 'speacker Jbl boomBox accessoire en plein air',
       prix: '2 400 000 ariary',
       image: 'lib/photos/articles/speacker2.jpg'),
   Article(

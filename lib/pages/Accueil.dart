@@ -2,6 +2,7 @@
 
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/mes_articles.dart';
@@ -11,6 +12,7 @@ import 'package:cpay/pages/qr_code_page.dart';
 import 'package:flutter/material.dart';
 //import 'package:cpay/items/Article.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../items/bulle.dart';
@@ -23,61 +25,45 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
-  //late ConnectivityResult _connectionStatus;
+  late ConnectivityResult _connectionStatus;
   //late Duration dur;
-  //final Connectivity _connectivity = Connectivity();
+  final Connectivity _connectivity = Connectivity();
   int currentTabIndex = 0;
-//=======================SnackBar============================================================================
-  // void showSnackBar(ConnectivityResult status) {
-  //   final snackBar = SnackBar(
-  //     content: Container(
-  //       padding: const EdgeInsets.all(16),
-  //       height: 90,
-  //       decoration: BoxDecoration(
-  //         borderRadius: const BorderRadius.all(Radius.circular(20)),
-  //         color: Color(
-  //             status == ConnectivityResult.none ? 0xFFC72C41 : 0xFF5B931C),
-  //       ),
-  //       child: Column(
-  //         children: [
-  //           Text(
-  //             status == ConnectivityResult.none ? 'Erreur' : 'OK',
-  //             style: const TextStyle(fontSize: 18, color: Colors.white),
-  //           ),
-  //           Text(
-  //               status == ConnectivityResult.none
-  //                   ? 'veillez activer votre connection.'
-  //                   : 'La connexion est retablis.',
-  //               style: const TextStyle(fontSize: 12, color: Colors.white)),
-  //         ],
-  //       ),
-  //     ),
-  //     margin: const EdgeInsets.only(
-  //       bottom: 550,
-  //       left: 10,
-  //       right: 10,
-  //     ),
-  //     behavior: SnackBarBehavior.floating,
-  //     backgroundColor: Colors.transparent,
-  //     elevation: 0,
-  //   );
-  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  // }
+//=======================Toast============================================================================
+  setToast(ConnectivityResult status) {
+    if (status == ConnectivityResult.none) {
+      fToast.showToast(
+        child: toastOffline,
+        gravity: ToastGravity.TOP,
+        toastDuration: const Duration(days: 365),
+      );
+    } else {
+      fToast.removeQueuedCustomToasts();
+      fToast.showToast(
+        child: toastOnline,
+        gravity: ToastGravity.TOP,
+        toastDuration: const Duration(seconds: 2),
+      );
+    }
+  }
 
-  // Future<void> initConnectivity() async {
-  //   final ConnectivityResult result = await _connectivity.checkConnectivity();
-  //   setState(() {
-  //     _connectionStatus = result;
-  //   });
-  //   _connectivity.onConnectivityChanged.listen((ConnectivityResult status) {
-  //     setState(() {
-  //       _connectionStatus = status;
-  //     });
-  //     showSnackBar(_connectionStatus);
-  //   });
-  // }
+  Future<void> initConnectivity() async {
+    final ConnectivityResult result = await _connectivity.checkConnectivity();
+    setState(() {
+      _connectionStatus = result;
+    });
+    _connectivity.onConnectivityChanged.listen((ConnectivityResult status) {
+      setState(() {
+        _connectionStatus = status;
+      });
+      setToast(_connectionStatus);
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setToast(_connectionStatus);
+    });
+  }
 
-//========================Snackbar=========================================
+//========================Toast=========================================
 //=========================Titre de page control================================================
   bool log = true;
   String titre = "Articles";
@@ -153,15 +139,19 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   }
 
   //======================InitState======================================================================================
+  late FToast fToast;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    //initConnectivity();
+    initConnectivity();
+    fToast = FToast();
+    // if you want to use context from globally instead of content we need to pass navigatorKey.currentContext!
+    fToast.init(context);
     User.getUser();
     visibledep();
-    _animcontroller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _animcontroller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
   }
 
   @override
@@ -232,8 +222,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MesArticles()));
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => const MesArticles()));
 
             // Action à effectuer lorsque l'icône de gauche est cliquée
           },
@@ -313,6 +303,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           visibledep2();
           //setcontrol();
           print(visibledepar);
+          fToast.removeCustomToast();
         },
         child: const Icon(
           Icons.payment,
@@ -322,4 +313,40 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       bottomNavigationBar: botomNavBar,
     );
   }
+
+  Widget toastOffline = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Colors.red,
+    ),
+    child: const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.wifi_off_outlined),
+        SizedBox(
+          width: 12.0,
+        ),
+        Text("vous n'etes pas connecter"),
+      ],
+    ),
+  );
+
+  Widget toastOnline = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Colors.green,
+    ),
+    child: const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.wifi),
+        SizedBox(
+          width: 12.0,
+        ),
+        Text("Connection retablis"),
+      ],
+    ),
+  );
 }

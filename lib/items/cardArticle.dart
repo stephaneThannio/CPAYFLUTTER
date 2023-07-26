@@ -93,7 +93,6 @@ class cardArticle extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      height: 20,
                       width: 110,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
