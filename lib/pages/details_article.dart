@@ -9,6 +9,25 @@ class DetaisArticle extends StatefulWidget {
 }
 
 class _DetaisArticleState extends State<DetaisArticle> {
+  int nbticket = 0;
+  comtageTiketsplus() {
+    setState(() {
+      nbticket = nbticket + 1;
+    });
+  }
+
+  comptageTicketmoins() {
+    if (nbticket > 0) {
+      setState(() {
+        nbticket = nbticket - 1;
+      });
+    } else {
+      setState(() {
+        nbticket = nbticket - 0;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,14 +111,14 @@ class _DetaisArticleState extends State<DetaisArticle> {
                           fontFamily: 'PlusJakartaSans',
                         ),
                       ),
-                      onPressed: () => {}),
+                      onPressed: () => {comptageTicketmoins()}),
                 ),
                 Container(
                   margin: EdgeInsets.all(10),
-                  child: const Text(
+                  child: Text(
                     textAlign: TextAlign.center,
-                    "1",
-                    style: TextStyle(
+                    nbticket.toString(),
+                    style: const TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -125,7 +144,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                           fontFamily: 'PlusJakartaSans',
                         ),
                       ),
-                      onPressed: () => {}),
+                      onPressed: () => {comtageTiketsplus()}),
                 ),
               ],
             ),
