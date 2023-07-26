@@ -183,13 +183,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       const QrCode(),
     ];
     final kBottomNavBar = <BottomNavigationBarItem>[
-      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'accueil'),
+      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ACCUEIL'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined), label: 'mes achats'),
+          icon: Icon(Icons.shopping_cart_outlined), label: 'ACHATS'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.send_to_mobile_outlined), label: 'mes transactions'),
+          icon: Icon(Icons.send_to_mobile_outlined), label: 'TRANSACTIONS'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code), label: 'achat via QR code'),
+          icon: Icon(Icons.qr_code), label: 'SCAN QR'),
     ];
 
     assert(ktabpage.length == kBottomNavBar.length);
@@ -204,9 +204,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          Alert("Erreur", "Vous devez vous connecter d'abord",
+          Alert("Authentification requis", "Veuillez vous connecter.",
               QuickAlertType.error, () {
-            Navigator.pop(context);
+            Navigator.pop(context, 'Se connecter');
           });
         }
       },

@@ -266,7 +266,7 @@ class _CreateAccountState extends State<CreateAccount> {
                           child: ElevatedButton(
                             child: const Text(
                               textAlign: TextAlign.center,
-                              'Valider',
+                              'S\'inscrire',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
