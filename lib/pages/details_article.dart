@@ -9,6 +9,25 @@ class DetaisArticle extends StatefulWidget {
 }
 
 class _DetaisArticleState extends State<DetaisArticle> {
+  int ticketsNumber = 0;
+  plusTickets() {
+    setState(() {
+      ticketsNumber = ticketsNumber + 1;
+    });
+  }
+
+  lesTickets() {
+    if (ticketsNumber > 0) {
+      setState(() {
+        ticketsNumber = ticketsNumber - 1;
+      });
+    } else {
+      setState(() {
+        ticketsNumber = ticketsNumber - 0;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,11 +184,11 @@ class _DetaisArticleState extends State<DetaisArticle> {
                               fontFamily: 'PlusJakartaSans',
                             ),
                           ),
-                          onPressed: () => {}),
-                      const Text(
+                          onPressed: () => {lesTickets()}),
+                      Text(
                         textAlign: TextAlign.center,
-                        '1',
-                        style: TextStyle(
+                        ticketsNumber.toString(),
+                        style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -191,7 +210,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                               fontFamily: 'PlusJakartaSans',
                             ),
                           ),
-                          onPressed: () => {}),
+                          onPressed: () => {plusTickets()}),
                     ],
                   ),
                 ),
@@ -232,7 +251,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
           ],
