@@ -1,4 +1,7 @@
+import 'package:cpay/items/itemsTab/achatapi.dart';
 import 'package:cpay/items/itemsTab/depos.dart';
+import 'package:cpay/items/itemsTab/retrait.dart';
+import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:flutter/material.dart';
 
 class Transaction extends StatefulWidget {
@@ -9,14 +12,32 @@ class Transaction extends StatefulWidget {
 }
 
 class _TransactionState extends State<Transaction> {
+  // Color _defaultButtonColor = Colors.blue;
+  // Color _pressedButtonColor = Colors.green;
+  // Color _overlayButtonColor = Colors.red;
+  // MaterialStateProperty<Color> _buttonOverlayColor() {
+  //   return MaterialStateProperty.resolveWith<Color>(
+  //       (Set<MaterialState> states) {
+  //     if (states.contains(MaterialState.pressed)) {
+  //       return _overlayButtonColor; // Couleur de superposition lorsque le bouton est pressé longuement
+  //     } else {
+  //       return Colors
+  //           .transparent; // Aucune superposition de couleur lorsque le bouton n'est pas pressé longuement
+  //     }
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     final tabpage = <Widget>[
       const Depot(),
+      const Virement(),
+      const AchatApis(),
+      const Retrait()
       // const Center(child: Text('Depots')),
-      const Center(child: Text('Virement')),
-      const Center(child: Text('Achats Api')),
-      const Center(child: Text('Retrait')),
+      // const Center(child: Text('Virement')),
+      //const Center(child: Text('Achats Api')),
+      //const Center(child: Text('Retrait')),
     ];
     final buttonTop = <Tab>[
       const Tab(
@@ -38,7 +59,7 @@ class _TransactionState extends State<Transaction> {
       length: tabpage.length,
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.person_outline),
+          leading: const Icon(Icons.person_outline),
           actions: [
             Text('CPAY103514814501'),
             SizedBox(
@@ -48,6 +69,16 @@ class _TransactionState extends State<Transaction> {
             Text('180000 MGA')
           ],
           bottom: TabBar(
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+              color: Color(0xFF6334A9),
+            ),
+            labelColor: Colors.white,
+
+            //splashBorderRadius: BorderRadius.circular(20),
+            //overlayColor: _buttonOverlayColor(),
             tabs: buttonTop,
           ),
         ),
