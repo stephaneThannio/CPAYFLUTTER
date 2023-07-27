@@ -7,6 +7,7 @@ import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/mes_articles.dart';
 import 'package:cpay/pages/qr_code_page.dart';
+import 'package:cpay/pages/transaction.dart';
 //import 'package:cpay/pages/login.dart';
 //import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
@@ -201,7 +202,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       // const listdesArticles(),
       const MesArticles(),
       Container(color: Colors.green),
-      Container(color: Colors.red),
+      const Transaction(),
+      //Container(color: Colors.red),
       const QrCode(),
     ];
     final kBottomNavBar = <BottomNavigationBarItem>[
@@ -255,7 +257,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MesArticles()));
+                MaterialPageRoute(builder: (context) => const Transaction()));
 
             // Action à effectuer lorsque l'icône de gauche est cliquée
           },
