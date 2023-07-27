@@ -50,34 +50,27 @@ class _MesArticlesState extends State<MesArticles> {
         body: Center(
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment(0, 1),
-            child: Container(
-              height: 550,
-              //color: Colors.red,
-              child: GridView.builder(
-                  itemCount: !recherche ? articles.length : afterRech.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 0.75),
-                  itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DetaisArticle(
-                                      article: !recherche
-                                          ? articles[index]
-                                          : afterRech[index]))),
-                          child: cardArticle(
-                            couleurCpay: couleurCpay,
-                            article:
-                                !recherche ? articles[index] : afterRech[index],
-                          ),
-                        ),
-                      )),
-            ),
-          ),
+          GridView.builder(
+              itemCount: !recherche ? articles.length : afterRech.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 0.75),
+              itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetaisArticle(
+                                  article: !recherche
+                                      ? articles[index]
+                                      : afterRech[index]))),
+                      child: cardArticle(
+                        couleurCpay: couleurCpay,
+                        article:
+                            !recherche ? articles[index] : afterRech[index],
+                      ),
+                    ),
+                  )),
           Align(
             alignment: Alignment(0, -0.95),
             child: barredeRecherche(context),
