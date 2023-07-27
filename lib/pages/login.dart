@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
   }
 
   bool _isPasswordVisible = false;
-  
+
   void _togglePasswordVisibility() {
     setState(() {
       _isPasswordVisible = !_isPasswordVisible;
@@ -199,15 +199,19 @@ class _LoginState extends State<Login> {
                         ),
                         TextFieldPreuse(
                           control: pWD,
-                          obscur: !_isPasswordVisible, // Use the _isPasswordVisible to toggle obscureText
+                          obscur:
+                              !_isPasswordVisible, // Use the _isPasswordVisible to toggle obscureText
                           prefixIco: const Icon(
                             Icons.security,
                             color: Colors.white,
                           ),
                           sufixICO: IconButton(
-                            onPressed: _togglePasswordVisibility, // Toggle the visibility of the password
+                            onPressed:
+                                _togglePasswordVisibility, // Toggle the visibility of the password
                             icon: Icon(
-                              _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                             ),
                             color: Colors.white,
                           ),

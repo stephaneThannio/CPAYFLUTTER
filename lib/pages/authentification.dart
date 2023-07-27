@@ -30,7 +30,6 @@ class _AuthentificationState extends State<Authentification> {
         backgroundColor: const Color(0xFF6334A9),
         body: Stack(
           children: <Widget>[
-            page ? const Login() : const CreateAccount(),
             Align(
               alignment:
                   page ? const Alignment(0, 0.8) : const Alignment(0, 0.9),
@@ -39,11 +38,15 @@ class _AuthentificationState extends State<Authentification> {
                 width: 140,
                 height: 25,
                 child: ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF6334A9),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: const BorderSide(
+                                width: 1, color: Colors.white))),
                     child: page
                         ? const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 textAlign: TextAlign.center,
@@ -56,24 +59,34 @@ class _AuthentificationState extends State<Authentification> {
                                 ),
                               ),
                               Icon(
-                                Icons.arrow_right_alt_sharp,
+                                Icons.arrow_forward,
                                 color: Colors.white,
                               )
                             ],
                           )
-                        : const Text(
-                            textAlign: TextAlign.center,
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white,
-                              fontFamily: 'PlusJakartaSans',
-                            ),
+                        : const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                textAlign: TextAlign.center,
+                                'Se connecter',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white,
+                                  fontFamily: 'PlusJakartaSans',
+                                ),
+                              ),
+                            ],
                           ),
                     onPressed: () => {setpage()}),
               ),
             ),
+            page ? const Login() : const CreateAccount(),
           ],
         ));
   }
