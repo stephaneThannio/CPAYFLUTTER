@@ -12,227 +12,230 @@ class _DetaisArticleState extends State<DetaisArticle> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Details du produits"),
-      ),
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(widget.article.image)),
+        appBar: AppBar(
+          title: const Text("Details du produits"),
+        ),
+        body: Column(
+          children: [
+            Container(
               //color: Colors.green,
+              height: 400,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(widget.article.image)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20)),
+                margin: EdgeInsets.all(20),
+              ),
             ),
-            height: 400,
-          ),
-          Container(
-            //color: Colors.amber,
-            height: 200,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment(-1, -1),
-                  child: Container(
-                    //color: Colors.green,
-                    height: 50,
-                    width: 250,
-                    child: Align(
-                      alignment: Alignment(-1, -1),
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        widget.article.titre,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'PlusJakartaSans',
-                        ),
+            Container(
+              margin: EdgeInsets.only(left: 30, right: 30),
+              //color: Colors.amber,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 20,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF6334A9),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: const Text(
+                      textAlign: TextAlign.center,
+                      'Dispo',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                        fontFamily: 'PlusJakartaSans',
                       ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment(1, -1),
-                  child: Container(
-                    //color: Colors.red,
-                    height: 50,
-                    width: 160,
-                    child: Align(
-                      alignment: Alignment(-1, -1),
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        widget.article.prix,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'PlusJakartaSans',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment(-1, -0.2),
-                  child: Container(
+                  Container(
                     //color: Colors.orange,
-                    height: 70,
-                    width: 150,
-                    child: Stack(
-                      children: [
-                        const Align(
-                          alignment: Alignment(0, -1),
-                          child: Text(
+                    child: const Text(
+                      textAlign: TextAlign.center,
+                      'Tirage dans:',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black,
+                        fontFamily: 'PlusJakartaSans',
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 30),
+                    //color: Colors.green,
+                    child: Text(
+                      textAlign: TextAlign.start,
+                      widget.article.titre,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'PlusJakartaSans',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                    //color: Colors.orange,
+                    margin: EdgeInsets.only(right: 30),
+                    child: Container(
+                      height: 40,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          color: const Color(0xFF6334A9).withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.timer_sharp,
+                            color: Colors.black,
+                          ),
+                          Text(
                             textAlign: TextAlign.center,
-                            'tickets',
+                            '4j',
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(left: 30, right: 30, top: 10),
+                //color: Colors.indigo,
+                child: const Text(
+                  textAlign: TextAlign.start,
+                  "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: 160,
+                  margin: EdgeInsets.only(left: 30),
+                  //color: Colors.green,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                          child: const Text(
+                            textAlign: TextAlign.center,
+                            '-',
+                            style: TextStyle(
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontFamily: 'PlusJakartaSans',
                             ),
                           ),
+                          onPressed: () => {}),
+                      const Text(
+                        textAlign: TextAlign.center,
+                        '1',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontFamily: 'PlusJakartaSans',
                         ),
-                        Align(
-                          alignment: Alignment(1, 0),
-                          child: SizedBox(
-                            width: 60,
-                            height: 50,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
-                                ),
-                                child: const Text(
-                                  textAlign: TextAlign.center,
-                                  '+',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontFamily: 'PlusJakartaSans',
-                                  ),
-                                ),
-                                onPressed: () => {}),
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
                           ),
-                        ),
-                        const Align(
-                          alignment: Alignment(0, 0),
-                          child: SizedBox(
-                            width: 60,
-                            height: 50,
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              '1',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontFamily: 'PlusJakartaSans',
-                              ),
+                          child: const Text(
+                            textAlign: TextAlign.center,
+                            '+',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontFamily: 'PlusJakartaSans',
                             ),
                           ),
-                        ),
-                        Align(
-                          alignment: Alignment(-1, 0),
-                          child: SizedBox(
-                            width: 60,
-                            height: 50,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
-                                ),
-                                child: const Text(
+                          onPressed: () => {}),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 50,
+                  child: Container(
+                    margin: EdgeInsets.only(right: 30),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF6334A9)),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              //mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
                                   textAlign: TextAlign.center,
-                                  '-',
+                                  'Acheter',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontFamily: 'PlusJakartaSans',
                                   ),
                                 ),
-                                onPressed: () => {}),
-                          ),
+                                Icon(
+                                  Icons.shopping_cart_rounded,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                        onPressed: () => {}),
                   ),
-                )
+                ),
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 200,
-                height: 60,
-                child: ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              textAlign: TextAlign.center,
-                              'Enregistrer',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'PlusJakartaSans',
-                              ),
-                            ),
-                            Icon(
-                              Icons.save_alt,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    onPressed: () => {}),
-              ),
-              SizedBox(
-                width: 200,
-                height: 60,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6334A9)),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              textAlign: TextAlign.center,
-                              'Acheter',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'PlusJakartaSans',
-                              ),
-                            ),
-                            Icon(
-                              Icons.shopping_cart_rounded,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    onPressed: () => {}),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        ));
   }
 }

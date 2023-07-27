@@ -2,6 +2,7 @@
 
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/mes_articles.dart';
@@ -11,6 +12,7 @@ import 'package:cpay/pages/qr_code_page.dart';
 import 'package:flutter/material.dart';
 //import 'package:cpay/items/Article.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../items/bulle.dart';
@@ -23,9 +25,9 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
-  //late ConnectivityResult _connectionStatus;
+  late ConnectivityResult _connectionStatus;
   //late Duration dur;
-  //final Connectivity _connectivity = Connectivity();
+  final Connectivity _connectivity = Connectivity();
   int currentTabIndex = 0;
 //=======================SnackBar============================================================================
   // void showSnackBar(ConnectivityResult status) {
@@ -63,19 +65,36 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   //   );
   //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
   // }
+  notifConnection(ConnectivityResult status) {
+    if (status == ConnectivityResult.none) {
+      fToast.showToast(
+          child: notificatinConnectionDesabled,
+          toastDuration: Duration(days: 365),
+          gravity: ToastGravity.TOP);
+    } else {
+      fToast.removeQueuedCustomToasts();
+      fToast.showToast(
+          child: notificatinConnectionEnabled,
+          toastDuration: Duration(seconds: 2),
+          gravity: ToastGravity.TOP);
+    }
+  }
 
-  // Future<void> initConnectivity() async {
-  //   final ConnectivityResult result = await _connectivity.checkConnectivity();
-  //   setState(() {
-  //     _connectionStatus = result;
-  //   });
-  //   _connectivity.onConnectivityChanged.listen((ConnectivityResult status) {
-  //     setState(() {
-  //       _connectionStatus = status;
-  //     });
-  //     showSnackBar(_connectionStatus);
-  //   });
-  // }
+  Future<void> initConnectivity() async {
+    final ConnectivityResult result = await _connectivity.checkConnectivity();
+    setState(() {
+      _connectionStatus = result;
+    });
+    _connectivity.onConnectivityChanged.listen((ConnectivityResult status) {
+      setState(() {
+        _connectionStatus = status;
+      });
+      notifConnection(_connectionStatus);
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifConnection(_connectionStatus);
+    });
+  }
 
 //========================Snackbar=========================================
 //=========================Titre de page control================================================
@@ -153,11 +172,14 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   }
 
   //======================InitState======================================================================================
+  late FToast fToast;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    //initConnectivity();
+    fToast = FToast();
+    fToast.init(context);
+    initConnectivity();
     User.getUser();
     visibledep();
     _animcontroller =
@@ -322,4 +344,39 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       bottomNavigationBar: botomNavBar,
     );
   }
+
+  Widget notificatinConnectionDesabled = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Colors.red,
+    ),
+    child: const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.wifi_off_sharp),
+        SizedBox(
+          width: 12.0,
+        ),
+        Text('Connexion perdue')
+      ],
+    ),
+  );
+  Widget notificatinConnectionEnabled = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Colors.green,
+    ),
+    child: const Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.wifi),
+        SizedBox(
+          width: 12.0,
+        ),
+        Text('Connexion retablis')
+      ],
+    ),
+  );
 }

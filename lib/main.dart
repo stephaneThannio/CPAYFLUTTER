@@ -243,7 +243,8 @@ class _MyHomePageState extends State<MyHomePage>
                                                       color: Colors.black
                                                           .withOpacity(0.2),
                                                       blurRadius: 10.0,
-                                                      offset: const Offset(0, 2),
+                                                      offset:
+                                                          const Offset(0, 2),
                                                     ),
                                                   ],
                                                   fontSize: 24,
