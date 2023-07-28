@@ -17,6 +17,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../items/bulle.dart';
+import '../items/itemsTab/Showdialog/fairedepot.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -194,6 +195,14 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  Future<void> dialogadepot() async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const Dodeposit();
+        });
+  }
+
 //============================Widget=======================================================================
   @override
   Widget build(BuildContext context) {
@@ -256,8 +265,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Transaction()));
+            dialogadepot();
 
             // Action à effectuer lorsque l'icône de gauche est cliquée
           },
