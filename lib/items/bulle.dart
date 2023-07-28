@@ -1,3 +1,4 @@
+import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
 import 'package:flutter/material.dart';
 
 class bulleRetraitVers extends StatelessWidget {
@@ -7,6 +8,14 @@ class bulleRetraitVers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> dialogadepot() async {
+      await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const Dodeposit();
+          });
+    }
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Align(
@@ -71,7 +80,7 @@ class bulleRetraitVers extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all(
                             const Color(0xFF6334A9),
                           )),
-                      onPressed: () => print('depot'),
+                      onPressed: () => dialogadepot(),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
