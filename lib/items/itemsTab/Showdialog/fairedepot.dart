@@ -8,12 +8,17 @@ class Dodeposit extends StatefulWidget {
 }
 
 class _DodepositState extends State<Dodeposit> {
-  String? selected;
-  bool mode = false;
-  setmode() {
-    if (mode) {
+  String selected = "Mvola";
+  bool mode = true;
+  setmode(String val) {
+    print(val);
+    if (val == "Mvola") {
       setState(() {
-        mode = !mode;
+        mode = true;
+      });
+    } else if (val == "banc transfert") {
+      setState(() {
+        mode = false;
       });
     }
   }
@@ -27,12 +32,15 @@ class _DodepositState extends State<Dodeposit> {
           title: Text('mode de payment:'),
           trailing: DropdownButton(
             value: selected,
-            hint: const Text('Choisir'),
+            //hint: const Text('Choisir'),
             onChanged: (String? valeur) {
               if (valeur != null) {
-                setState(() => selected = valeur);
+                setState(() {
+                  selected = valeur;
+                  //
+                });
               }
-              setmode();
+              setmode(valeur.toString());
             },
             items: [
               DropdownMenuItem<String>(
@@ -53,6 +61,12 @@ class _DodepositState extends State<Dodeposit> {
           ),
         ),
         mode ? depotMvola() : depotBtransfert()
+        // Stack(
+        //   children: [
+        //     Visibility(visible: mode, child: depotMvola()),
+        //     Visibility(visible: !mode, child: depotBtransfert())
+        //   ],
+        // )
       ],
     );
   }
