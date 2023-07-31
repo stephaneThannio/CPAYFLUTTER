@@ -42,7 +42,7 @@ class _CreateAccountState extends State<CreateAccount> {
       title: titreAlert,
       text: TextAlert,
       onConfirmBtnTap: func,
-      confirmBtnColor: Color(0xFF6334A9),
+      confirmBtnColor: const Color(0xFF6334A9),
     );
   }
 

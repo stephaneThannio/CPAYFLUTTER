@@ -1,8 +1,8 @@
 import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
 import 'package:flutter/material.dart';
 
-class bulleRetraitVers extends StatelessWidget {
-  const bulleRetraitVers({
+class BulleRetraitVers extends StatelessWidget {
+  const BulleRetraitVers({
     super.key,
   });
 
@@ -19,7 +19,7 @@ class bulleRetraitVers extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Align(
-        alignment: Alignment(0.6, 0.65),
+        alignment: const Alignment(0.6, 0.65),
         child: Container(
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(

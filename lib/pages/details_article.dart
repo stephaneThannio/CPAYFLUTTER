@@ -46,11 +46,11 @@ class _DetaisArticleState extends State<DetaisArticle> {
                         image: AssetImage(widget.article.image)),
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 30, right: 30),
+              margin: const EdgeInsets.only(left: 30, right: 30),
               //color: Colors.amber,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +88,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -96,7 +96,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.only(left: 30),
+                    margin: const EdgeInsets.only(left: 30),
                     //color: Colors.green,
                     child: Text(
                       textAlign: TextAlign.start,
@@ -112,7 +112,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                 ),
                 Container(
                     //color: Colors.orange,
-                    margin: EdgeInsets.only(right: 30),
+                    margin: const EdgeInsets.only(right: 30),
                     child: Container(
                       height: 40,
                       width: 150,
@@ -143,7 +143,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 30, right: 30, top: 10),
+                margin: const EdgeInsets.only(left: 30, right: 30, top: 10),
                 //color: Colors.indigo,
                 child: const Text(
                   textAlign: TextAlign.start,
@@ -156,7 +156,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -164,7 +164,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
               children: [
                 Container(
                   width: 160,
-                  margin: EdgeInsets.only(left: 30),
+                  margin: const EdgeInsets.only(left: 30),
                   //color: Colors.green,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -218,7 +218,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                   width: 200,
                   height: 50,
                   child: Container(
-                    margin: EdgeInsets.only(right: 30),
+                    margin: const EdgeInsets.only(right: 30),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF6334A9)),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/articles.dart';
 
-class cardArticle extends StatelessWidget {
-  const cardArticle(
+class CardArticle extends StatelessWidget {
+  const CardArticle(
       {super.key, required this.couleurCpay, required this.article});
   final Article article;
   final Color couleurCpay;
@@ -17,7 +17,7 @@ class cardArticle extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 8,
             blurRadius: 7,
-            offset: Offset(0, 3), // Décalage de l'ombre
+            offset: const Offset(0, 3), // Décalage de l'ombre
           ),
         ],
         borderRadius: BorderRadius.circular(20),

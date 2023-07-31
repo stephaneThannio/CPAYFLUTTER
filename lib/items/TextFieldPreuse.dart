@@ -8,7 +8,7 @@ class TextFieldPreuse extends StatelessWidget {
   final String? label;
   final String? hint;
   final TextEditingController control;
-  final colorinside;
+  final Color colorinside;
   const TextFieldPreuse({
     super.key,
     required this.obscur,

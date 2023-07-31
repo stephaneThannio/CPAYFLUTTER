@@ -60,7 +60,7 @@ class _TransactionState extends State<Transaction> {
       child: Scaffold(
         appBar: AppBar(
           leading: const Icon(Icons.person_outline),
-          actions: [
+          actions: const [
             Text('CPAY103514814501'),
             SizedBox(
               width: 150,
@@ -83,8 +83,8 @@ class _TransactionState extends State<Transaction> {
           ),
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: tabpage,
-          physics: NeverScrollableScrollPhysics(),
         ),
       ),
     );

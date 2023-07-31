@@ -36,11 +36,11 @@ class _QrCodeState extends State<QrCode> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          BuildQrView(context),
+          buildQrView(context),
           Align(
-            alignment: Alignment(0, 1),
+            alignment: const Alignment(0, 1),
             child: Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                   color: Colors.white24,
                   borderRadius: BorderRadius.circular(8)),
@@ -48,7 +48,7 @@ class _QrCodeState extends State<QrCode> {
                 barcode != null
                     ? "Resultat = ${barcode!.code}"
                     : "veillez scanner le code!",
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           )
@@ -57,7 +57,7 @@ class _QrCodeState extends State<QrCode> {
     );
   }
 
-  Widget BuildQrView(BuildContext context) => QRView(
+  Widget buildQrView(BuildContext context) => QRView(
         key: qrKey,
         onQRViewCreated: onQRViewCreated,
         overlay: QrScannerOverlayShape(

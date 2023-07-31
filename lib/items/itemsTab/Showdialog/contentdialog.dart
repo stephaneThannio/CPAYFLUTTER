@@ -28,7 +28,7 @@ class _ContentdepotdialogState extends State<Contentdepotdialog> {
       length: tabpage.length,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('faire un depot'),
+          title: const Text('faire un depot'),
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: const BoxDecoration(
@@ -44,8 +44,8 @@ class _ContentdepotdialogState extends State<Contentdepotdialog> {
           ),
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: tabpage,
-          physics: NeverScrollableScrollPhysics(),
         ),
       ),
     );

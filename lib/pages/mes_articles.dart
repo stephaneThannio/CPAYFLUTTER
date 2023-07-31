@@ -16,7 +16,7 @@ class MesArticles extends StatefulWidget {
 
 class _MesArticlesState extends State<MesArticles> {
   TextEditingController rechCOntrol = TextEditingController();
-  Color couleurCpay = Color(0xFF6334A9);
+  Color couleurCpay = const Color(0xFF6334A9);
   int listeArticlelength = articles.length;
   List<Article> afterRech = [];
   bool recherche = false;
@@ -65,7 +65,7 @@ class _MesArticlesState extends State<MesArticles> {
                                   article: !recherche
                                       ? articles[index]
                                       : afterRech[index]))),
-                      child: cardArticle(
+                      child: CardArticle(
                         couleurCpay: couleurCpay,
                         article:
                             !recherche ? articles[index] : afterRech[index],
@@ -73,7 +73,7 @@ class _MesArticlesState extends State<MesArticles> {
                     ),
                   )),
           Align(
-            alignment: Alignment(0, -0.95),
+            alignment: const Alignment(0, -0.95),
             child: barredeRecherche(context),
           ),
         ],

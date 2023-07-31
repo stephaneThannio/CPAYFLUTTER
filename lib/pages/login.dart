@@ -24,27 +24,27 @@ class _LoginState extends State<Login> {
   String tel = "";
   String password = "";
   bool loading = false;
-  Duration dur = Duration(days: 365);
+  Duration dur = const Duration(days: 365);
 
-  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
+  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
       context: context,
       type: typeAlert,
       title: titreAlert,
-      text: TextAlert,
+      text: textAlert,
       onConfirmBtnTap: func,
-      confirmBtnColor: Color(0xFF6334A9),
+      confirmBtnColor: const Color(0xFF6334A9),
     );
   }
 
-  void Welcome() {
+  void welcome() {
     User.getUser();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Accueil()));
   }
 
-  void NotWelcome() {
+  void notWelcome() {
     Navigator.pop(context);
   }
 
@@ -81,19 +81,19 @@ class _LoginState extends State<Login> {
           loading = false;
           User.saveUser(User.fromJson(jsonDecode(data["mdata"])));
         });
-        Alert("bienvenue", 'Vous etes maintenant connecter a cpay',
-            QuickAlertType.success, Welcome);
+        alert("bienvenue", 'Vous etes maintenant connecter a cpay',
+            QuickAlertType.success, welcome);
       } else if (data["status"] == 'error') {
         setState(() {
           loading = false;
         });
-        Alert("Error", data['mdata'].toString(), QuickAlertType.error,
-            NotWelcome);
+        alert("Error", data['mdata'].toString(), QuickAlertType.error,
+            notWelcome);
       } else if (data["status"] == 'warning') {
         setState(() {
           loading = false;
         });
-        Alert("Attention", data['mdata'].toString(), QuickAlertType.warning,
+        alert("Attention", data['mdata'].toString(), QuickAlertType.warning,
             () {
           Navigator.push(
               context,
@@ -144,7 +144,7 @@ class _LoginState extends State<Login> {
             ),
           ),
           loading
-              ? Loading(
+              ? const Loading(
                   couleur: Colors.white,
                 )
               : Align(
@@ -164,16 +164,6 @@ class _LoginState extends State<Login> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Text(
-                              //   textAlign: TextAlign.center,
-                              //   'Authentification',
-                              //   style: TextStyle(
-                              //     fontSize: 30,
-                              //     fontWeight: FontWeight.normal,
-                              //     color: Colors.white,
-                              //     fontFamily: 'PlusJakartaSans',
-                              //   ),
-                              // ),
                               Text(
                                 textAlign: TextAlign.center,
                                 'Authentification',
@@ -240,81 +230,6 @@ class _LoginState extends State<Login> {
 
                           height: 25,
                         ),
-                        // const SizedBox(
-                        //   //color: Colors.red,
-                        //   width: 300,
-                        //   height: 50,
-                        //   child: Column(
-                        //     children: [
-                        //       Text(
-                        //         textAlign: TextAlign.center,
-                        //         'OR',
-                        //         style: TextStyle(
-                        //           fontSize: 20,
-                        //           fontWeight: FontWeight.normal,
-                        //           color: Colors.white,
-                        //           fontFamily: 'PlusJakartaSans',
-                        //         ),
-                        //       ),
-                        //       Text(
-                        //         textAlign: TextAlign.center,
-                        //         'Sign in with',
-                        //         style: TextStyle(
-                        //           fontSize: 20,
-                        //           fontWeight: FontWeight.normal,
-                        //           color: Colors.white,
-                        //           fontFamily: 'PlusJakartaSans',
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   //color: Colors.red,
-                        //   width: 300,
-                        //   height: 50,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       SizedBox(
-                        //         //color: Colors.green,
-                        //         width: 50,
-                        //         height: 50,
-                        //         child: IconButton(
-                        //           icon: Image.asset(
-                        //               ('lib/photos/Facebook-logo.png')),
-                        //           onPressed: () => print('log in facebook'),
-                        //         ),
-                        //       ),
-                        //       const SizedBox(
-                        //         width: 20,
-                        //       ),
-                        //       SizedBox(
-                        //         //color: Colors.green,
-                        //         width: 50,
-                        //         height: 50,
-                        //         child: IconButton(
-                        //           icon: Image.asset(
-                        //               ('lib/photos/google-logo.png')),
-                        //           onPressed: () => print('log in google'),
-                        //         ),
-                        //       ),
-                        //       const SizedBox(
-                        //         width: 20,
-                        //       ),
-                        //       SizedBox(
-                        //         //color: Colors.green,
-                        //         width: 50,
-                        //         height: 50,
-                        //         child: IconButton(
-                        //           icon: Image.asset(
-                        //               ('lib/photos/twiter-logo.png')),
-                        //           onPressed: () => print('log in twiter'),
-                        //         ),
-                        //       )
-                        //     ],
-                        //   ),
-                        // )
                       ],
                     ),
                   ),

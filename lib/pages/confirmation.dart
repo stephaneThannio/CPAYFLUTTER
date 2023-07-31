@@ -32,15 +32,15 @@ class _ConfirmationState extends State<Confirmation> {
     print(code);
   }
 
-  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
+  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
       context: context,
       type: typeAlert,
       title: titreAlert,
-      text: TextAlert,
+      text: textAlert,
       onConfirmBtnTap: func,
-      confirmBtnColor: Color(0xFF6334A9),
+      confirmBtnColor: const Color(0xFF6334A9),
     );
   }
 
@@ -67,7 +67,7 @@ class _ConfirmationState extends State<Confirmation> {
           setState(() {
             loading = false;
           });
-          Alert("validation", data["mdata"].toString(), QuickAlertType.success,
+          alert("validation", data["mdata"].toString(), QuickAlertType.success,
               () {
             Navigator.pop(context);
           });
@@ -105,7 +105,7 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        Alert("Felicitation", data["mdata"].toString(), QuickAlertType.success,
+        alert("Felicitation", data["mdata"].toString(), QuickAlertType.success,
             () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Accueil()));
@@ -114,7 +114,7 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        Alert("Erreur", data["mdata"].toString(), QuickAlertType.error, () {
+        alert("Erreur", data["mdata"].toString(), QuickAlertType.error, () {
           Navigator.pop(context);
         });
       }
@@ -128,14 +128,14 @@ class _ConfirmationState extends State<Confirmation> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading(
+        ? const Loading(
             couleur: Color(0xFF6334A9),
           )
         : Scaffold(
             body: Stack(
             children: [
               Align(
-                alignment: Alignment(0, 0),
+                alignment: const Alignment(0, 0),
                 child: Form(
                   child: Container(
                     height: 400,
@@ -330,7 +330,8 @@ class _ConfirmationState extends State<Confirmation> {
                                 height: 50,
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xFF6334A9)),
+                                        backgroundColor:
+                                            const Color(0xFF6334A9)),
                                     onPressed: () => resendcode(),
                                     child: const Row(
                                       mainAxisAlignment:
@@ -358,7 +359,8 @@ class _ConfirmationState extends State<Confirmation> {
                                 height: 50,
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xFF6334A9)),
+                                        backgroundColor:
+                                            const Color(0xFF6334A9)),
                                     onPressed: () => sendValidation(),
                                     child: const Row(
                                       mainAxisAlignment:

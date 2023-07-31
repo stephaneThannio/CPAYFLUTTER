@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class listdesArticles extends StatelessWidget {
-  const listdesArticles({
+class ListdesArticles extends StatelessWidget {
+  const ListdesArticles({
     super.key,
   });
 

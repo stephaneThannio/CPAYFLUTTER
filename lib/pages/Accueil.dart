@@ -71,13 +71,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     if (status == ConnectivityResult.none) {
       fToast.showToast(
           child: notificatinConnectionDesabled,
-          toastDuration: Duration(days: 365),
+          toastDuration: const Duration(days: 365),
           gravity: ToastGravity.TOP);
     } else {
       fToast.removeQueuedCustomToasts();
       fToast.showToast(
           child: notificatinConnectionEnabled,
-          toastDuration: Duration(seconds: 2),
+          toastDuration: const Duration(seconds: 2),
           gravity: ToastGravity.TOP);
     }
   }
@@ -124,13 +124,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
 //===========================Titre de page control===================================================================================
 
 //==============================Alert=======================================================================
-  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
+  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
       context: context,
       type: typeAlert,
       title: titreAlert,
-      text: TextAlert,
+      text: textAlert,
       onConfirmBtnTap: func,
       confirmBtnColor: const Color(0xFF6334A9),
     );
@@ -184,8 +184,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     initConnectivity();
     User.getUser();
     visibledep();
-    _animcontroller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _animcontroller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
   }
 
   @override
@@ -237,7 +237,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          Alert("Authentification requis", "Veuillez vous connecter.",
+          alert("Authentification requis", "Veuillez vous connecter.",
               QuickAlertType.error, () {
             Navigator.pop(context, 'Se connecter');
           });
@@ -265,7 +265,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            dialogadepot();
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => const Retiremoney()));
 
             // Action à effectuer lorsque l'icône de gauche est cliquée
           },
@@ -293,7 +294,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                       ),
                       onPressed: () {
                         // Action à effectuer lorsque l'icône de droite est cliquée
-                        Alert("Deconnexion", "Voulez vous vraiment deconnecter",
+                        alert("Deconnexion", "Voulez vous vraiment deconnecter",
                             QuickAlertType.confirm, () {
                           User.logOut();
                           Navigator.pop(context);
@@ -310,7 +311,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                       ),
                       onPressed: () {
                         // Action à effectuer lorsque l'icône de droite est cliquée
-                        Alert("Deconnexion", "Voulez vous vraiment deconnecter",
+                        alert("Deconnexion", "Voulez vous vraiment deconnecter",
                             QuickAlertType.confirm, () {
                           User.logOut();
                           Navigator.pop(context);
@@ -328,12 +329,12 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           ktabpage[currentTabIndex],
           Visibility(
             visible: visibledepar,
-            child: const bulleRetraitVers()
+            child: const BulleRetraitVers()
                 .animate(
                   controller: _animcontroller,
                 )
                 .scale(
-                    duration: Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 100),
                     alignment: const Alignment(0.8, 0.8)),
           )
         ],
