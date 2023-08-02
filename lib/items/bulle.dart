@@ -1,4 +1,5 @@
 import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
+import 'package:cpay/items/itemsTab/Showdialog/faireretrait.dart';
 import 'package:flutter/material.dart';
 
 class BulleRetraitVers extends StatelessWidget {
@@ -13,6 +14,14 @@ class BulleRetraitVers extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return const Dodeposit();
+          });
+    }
+
+    Future<void> dialogretrait() async {
+      await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const Retireit();
           });
     }
 
@@ -111,7 +120,7 @@ class BulleRetraitVers extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all(
                             const Color(0xFF6334A9),
                           )),
-                      onPressed: () => print('Retrait'),
+                      onPressed: () => dialogretrait(),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
