@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:cpay/items/loading.dart';
@@ -34,13 +36,13 @@ class _CreateAccountState extends State<CreateAccount> {
     print("phone = $phone, password =$password cpassword =$cpassword");
   }
 
-  void Alert(String titreAlert, String TextAlert, QuickAlertType typeAlert,
+  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
       context: context,
       type: typeAlert,
       title: titreAlert,
-      text: TextAlert,
+      text: textAlert,
       onConfirmBtnTap: func,
       confirmBtnColor: const Color(0xFF6334A9),
     );
@@ -65,228 +67,222 @@ class _CreateAccountState extends State<CreateAccount> {
     //mail = email.text;
     password = pwd.text;
     cpassword = cpwd.text;
-    if (password == cpassword) {
-      setState(() {
-        loading = true;
-      });
-      final request = await post(Uri.parse('https://api.c-pay.me'),
-          body: jsonEncode({
-            "app": "cpay",
-            "telephone": phone,
-            "password": cpassword,
-            "Autorization": "...",
-            "action": "inscription",
-            "act": "generate"
-          }),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          });
-      if (request.statusCode == 200) {
-        var data = jsonDecode(request.body);
-        if (data["status"] == 'success') {
-          setState(() {
-            loading = false;
-          });
-          Alert("validation", "Code de validation envoyer.",
-              QuickAlertType.success, () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Confirmation(
-                          phone: phone,
-                          pwd: cpassword,
-                        )));
-          });
-        } else if (data["status"] == 'error') {
-          setState(() {
-            loading = false;
-          });
-          Alert("Error", data["mdata"].toString(), QuickAlertType.error, () {
-            Navigator.pop(context);
-          });
-        }
-        print(request.body);
-      } else {
-        print('request not send');
-      }
-    } else {
-      Alert("Error", "Veillez verifeir le mot de passe", QuickAlertType.error,
-          () {
+    if (phone.length < 10) {
+      alert('Erreur', 'le numero n est pas correct', QuickAlertType.error, () {
         Navigator.pop(context);
       });
+    } else {
+      if (password == cpassword) {
+        setState(() {
+          loading = true;
+        });
+        final request = await post(Uri.parse('https://api.c-pay.me'),
+            body: jsonEncode({
+              "app": "cpay",
+              "telephone": phone,
+              "password": cpassword,
+              "Autorization": "...",
+              "action": "inscription",
+              "act": "generate"
+            }),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            });
+        if (request.statusCode == 200) {
+          var data = jsonDecode(request.body);
+          if (data["status"] == 'success') {
+            setState(() {
+              loading = false;
+            });
+            alert("validation", "Code de validation envoyer.",
+                QuickAlertType.success, () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Confirmation(
+                            phone: phone,
+                            pwd: cpassword,
+                          )));
+            });
+          } else if (data["status"] == 'error') {
+            setState(() {
+              loading = false;
+            });
+            alert("Error", data["mdata"].toString(), QuickAlertType.error, () {
+              Navigator.pop(context);
+            });
+          }
+          print(request.body);
+        } else {
+          print('request not send');
+        }
+      } else {
+        alert("Error", "Veillez verifeir le mot de passe", QuickAlertType.error,
+            () {
+          Navigator.pop(context);
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          //la photo de logo cpay==========================================================
-          Align(
-            alignment: const Alignment(0, -0.7),
-            child: SizedBox(
-              width: 200,
-              height: 200,
-              child: Center(
-                child: Image.asset(('lib/photos/285-min.png')),
-              ),
+    return Stack(
+      children: <Widget>[
+        //la photo de logo cpay==========================================================
+        Align(
+          alignment: const Alignment(0, -0.7),
+          child: SizedBox(
+            width: 200,
+            height: 200,
+            child: Center(
+              child: Image.asset(('lib/photos/285-min.png')),
             ),
           ),
-          //l'ombre======================================================
-          Align(
-            alignment: const Alignment(0.04, -0.29),
-            child: Container(
-              decoration: BoxDecoration(
-                //color: Colors.black.withOpacity(0.1),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    offset: const Offset(0, 4),
-                    blurRadius: 20,
-                  ),
-                ],
-              ),
-              width: 120,
-              height: 30,
+        ),
+        //l'ombre======================================================
+        Align(
+          alignment: const Alignment(0.04, -0.29),
+          child: Container(
+            decoration: BoxDecoration(
+              //color: Colors.black.withOpacity(0.1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  offset: const Offset(0, 4),
+                  blurRadius: 20,
+                ),
+              ],
             ),
+            width: 120,
+            height: 30,
           ),
-          loading
-              ? const Loading(
-                  couleur: Colors.white,
-                )
-              : Align(
-                  alignment: const Alignment(0, 0.7),
-                  child: SizedBox(
-                    //container qui englobe les formulaire==========================================
-                    //color: Colors.yellow,
-                    height: 440,
-                    width: 400,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const SizedBox(
-                          //color: Colors.red,
-                          width: 300,
-                          height: 50,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                textAlign: TextAlign.center,
-                                'Create',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                textAlign: TextAlign.center,
-                                'ACCOUNT',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // TextFieldPreuse(
-                        //   control: usernam,
-                        //   obscur: false,
-                        //   prefixIco: const Icon(
-                        //     Icons.person,
-                        //     color: Colors.white,
-                        //   ),
-                        //   sufixICO: Icon(null),
-                        //   label: "your Name",
-                        //   typeWord: TextInputType.name,
-                        // ),
-                        TextFieldPreuse(
-                          control: phonenbr,
-                          obscur: false,
-                          prefixIco: const Icon(
-                            Icons.phone,
-                            color: Colors.white,
-                          ),
-                          label: "Telephone",
-                          typeWord: TextInputType.phone,
-                        ),
-                        SizedBox(
-                          //color: Colors.red,
-                          width: 300,
-                          height: 50,
-                          child: TextFieldPreuse(
-                            control: pwd,
-                            obscur: true,
-                            prefixIco: const Icon(
-                              Icons.security,
-                              color: Colors.white,
-                            ),
-                            sufixICO: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.check_sharp),
-                              color: Colors.white,
-                            ),
-                            label: "Mot de passe",
-                            typeWord: TextInputType.text,
-                          ),
-                        ),
-                        SizedBox(
-                          //color: Colors.red,
-                          width: 300,
-                          height: 50,
-                          child: TextFieldPreuse(
-                            control: cpwd,
-                            obscur: true,
-                            prefixIco: const Icon(
-                              Icons.security,
-                              color: Colors.white,
-                            ),
-                            sufixICO: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.check_sharp),
-                              color: Colors.white,
-                            ),
-                            label: "Confirmation du mot de passe",
-                            typeWord: TextInputType.text,
-                          ),
-                        ),
-                        SizedBox(
-                          //color: Colors.red,
-                          width: 300,
-                          height: 50,
-                          child: ElevatedButton(
-                            child: const Text(
+        ),
+        loading
+            ? const Loading(
+                containcouleur: Color(0xFF6334A9),
+                spincouleur: Colors.white,
+              )
+            : Align(
+                alignment: const Alignment(0, 0.7),
+                child: SizedBox(
+                  //container qui englobe les formulaire==========================================
+                  //color: Colors.yellow,
+                  height: 440,
+                  width: 400,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SizedBox(
+                        //color: Colors.red,
+                        width: 300,
+                        height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
                               textAlign: TextAlign.center,
-                              'S\'inscrire',
+                              'Create',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 30,
                                 fontWeight: FontWeight.normal,
-                                color: Color(0xFF6334A9),
+                                color: Colors.white,
                                 fontFamily: 'PlusJakartaSans',
                               ),
                             ),
-                            onPressed: () => {
-                              sendCreateAccountRequest(),
-                              //Confirm()
-                            },
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              textAlign: TextAlign.center,
+                              'ACCOUNT',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontFamily: 'PlusJakartaSans',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextFieldPreuse(
+                        control: phonenbr,
+                        obscur: false,
+                        prefixIco: const Icon(
+                          Icons.phone,
+                          color: Colors.white,
+                        ),
+                        label: "Telephone",
+                        typeWord: TextInputType.phone,
+                      ),
+                      SizedBox(
+                        //color: Colors.red,
+                        width: 300,
+                        height: 50,
+                        child: TextFieldPreuse(
+                          control: pwd,
+                          obscur: true,
+                          prefixIco: const Icon(
+                            Icons.security,
+                            color: Colors.white,
                           ),
-                        )
-                      ],
-                    ),
+                          sufixICO: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.check_sharp),
+                            color: Colors.white,
+                          ),
+                          label: "Mot de passe",
+                          typeWord: TextInputType.text,
+                        ),
+                      ),
+                      SizedBox(
+                        //color: Colors.red,
+                        width: 300,
+                        height: 50,
+                        child: TextFieldPreuse(
+                          control: cpwd,
+                          obscur: true,
+                          prefixIco: const Icon(
+                            Icons.security,
+                            color: Colors.white,
+                          ),
+                          sufixICO: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.check_sharp),
+                            color: Colors.white,
+                          ),
+                          label: "Confirmation du mot de passe",
+                          typeWord: TextInputType.text,
+                        ),
+                      ),
+                      SizedBox(
+                        //color: Colors.red,
+                        width: 300,
+                        height: 50,
+                        child: ElevatedButton(
+                          child: const Text(
+                            textAlign: TextAlign.center,
+                            'S\'inscrire',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                              color: Color(0xFF6334A9),
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
+                          onPressed: () => {
+                            sendCreateAccountRequest(),
+                            //Confirm()
+                          },
+                        ),
+                      )
+                    ],
                   ),
-                  //============================================================================================
-                )
-        ],
-      ),
+                ),
+                //============================================================================================
+              )
+      ],
     );
   }
 }

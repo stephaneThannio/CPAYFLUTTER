@@ -1,5 +1,7 @@
 //import 'dart:js_interop';
 
+// ignore_for_file: avoid_print
+
 import 'package:cpay/items/TextFieldPreuse.dart';
 import 'package:cpay/models/articles.dart';
 import 'package:cpay/pages/details_article.dart';

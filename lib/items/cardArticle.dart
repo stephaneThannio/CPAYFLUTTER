@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 import '../models/articles.dart';
 
-class CardArticle extends StatelessWidget {
+class CardArticle extends StatefulWidget {
   const CardArticle(
       {super.key, required this.couleurCpay, required this.article});
   final Article article;
   final Color couleurCpay;
+
+  @override
+  State<CardArticle> createState() => _CardArticleState();
+}
+
+class _CardArticleState extends State<CardArticle> {
+  Color domin = Color(0xFF6334A9).withOpacity(0.4);
+  late PaletteGenerator paletteGenerator;
+  Future colorer() async {
+    ImageProvider img = AssetImage(widget.article.image);
+    paletteGenerator = await PaletteGenerator.fromImageProvider(img);
+    setState(() {
+      domin = paletteGenerator.dominantColor?.color ??
+          Color(0xFF6334A9).withOpacity(0.4);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    colorer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +45,7 @@ class CardArticle extends StatelessWidget {
           ),
         ],
         borderRadius: BorderRadius.circular(20),
-        color: couleurCpay.withOpacity(0.4),
+        color: domin,
       ),
       height: 250,
       width: 180,
@@ -34,13 +58,13 @@ class CardArticle extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(article.image)),
+                  fit: BoxFit.cover, image: AssetImage(widget.article.image)),
               //color: Colors.orange,
             ),
             height: 180,
             width: 160,
           ),
-          Container(
+          SizedBox(
             //color: Colors.green,
             height: 50,
             width: 160,
@@ -54,7 +78,7 @@ class CardArticle extends StatelessWidget {
                       width: 50,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: couleurCpay.withOpacity(0.6)),
+                          color: widget.couleurCpay.withOpacity(0.6)),
                       child: const Center(
                         child: Text(
                           textAlign: TextAlign.center,
@@ -73,7 +97,7 @@ class CardArticle extends StatelessWidget {
                       width: 50,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: couleurCpay.withOpacity(0.6)),
+                          color: widget.couleurCpay.withOpacity(0.6)),
                       child: const Center(
                         child: Text(
                           textAlign: TextAlign.center,
@@ -97,11 +121,11 @@ class CardArticle extends StatelessWidget {
                       width: 110,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: couleurCpay.withOpacity(0.6)),
+                          color: widget.couleurCpay.withOpacity(0.6)),
                       child: Center(
                         child: Text(
                           textAlign: TextAlign.center,
-                          article.titre,
+                          widget.article.titre,
                           style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
@@ -116,11 +140,11 @@ class CardArticle extends StatelessWidget {
                       width: 110,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: couleurCpay.withOpacity(0.6)),
+                          color: widget.couleurCpay.withOpacity(0.6)),
                       child: Center(
                         child: Text(
                           textAlign: TextAlign.center,
-                          article.prix,
+                          widget.article.prix,
                           style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.normal,

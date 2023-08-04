@@ -110,39 +110,35 @@ class _MyHomePageState extends State<MyHomePage>
             child: DefaultTabController(
               length: 3,
               child: Builder(
-                builder: (BuildContext context) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
+                builder: (BuildContext context) => Stack(
+                  children: [
+                    Column(
+                      children: <Widget>[
+                        Expanded(
                           child: TabBarView(children: <Widget>[
-                            Container(
-                              // color: Colors.red,
-                              child: Align(
-                                alignment: const Alignment(-1, -0.8),
-                                child: SizedBox(
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    'c-Pay un moyen simple de paiement Anonyme',
-                                    style: TextStyle(
-                                      shadows: [
-                                        Shadow(
-                                          color: Colors.black.withOpacity(0.8),
-                                          blurRadius: 10.0,
-                                          offset: const Offset(0, 4),
-                                        ),
-                                      ],
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontFamily: 'PlusJakartaSans',
-                                    ),
+                            Align(
+                              alignment: const Alignment(-1, -0.8),
+                              child: SizedBox(
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  'c-Pay un moyen simple de paiement Anonyme',
+                                  style: TextStyle(
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.black.withOpacity(0.8),
+                                        blurRadius: 10.0,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontFamily: 'PlusJakartaSans',
                                   ),
-                                  //color: Colors.greenAccent,
-                                  height: 150,
-                                  width: 200,
                                 ),
+                                //color: Colors.greenAccent,
+                                height: 150,
+                                width: 200,
                               ),
                             ),
                             Container(
@@ -198,8 +194,7 @@ class _MyHomePageState extends State<MyHomePage>
                                 ),
                               ),
                             ),
-                            Container(
-                              //color: Colors.green,
+                            Center(
                               child: Stack(
                                 children: [
                                   Align(
@@ -263,29 +258,18 @@ class _MyHomePageState extends State<MyHomePage>
                               ),
                             )
                           ]),
-                          //color: Colors.red,
                         ),
-                        //   child: IconTheme(
-                        // data: IconThemeData(
-                        //   size: 128.0,
-                        //   color: Theme.of(context).colorScheme.secondary,
-                        // ),
-                        // child: const TabBarView(children: kicons),
-                      ),
-                      const TabPageSelector(),
-                    ],
-                  ),
+                      ],
+                    ),
+                    const Align(
+                        alignment: Alignment(0, 1), child: TabPageSelector()),
+                  ],
                 ),
               ),
             ),
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: null,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

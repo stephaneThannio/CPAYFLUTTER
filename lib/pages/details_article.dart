@@ -36,7 +36,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
         ),
         body: Column(
           children: [
-            Container(
+            SizedBox(
               //color: Colors.green,
               height: 400,
               child: Container(
@@ -72,17 +72,14 @@ class _DetaisArticleState extends State<DetaisArticle> {
                       ),
                     ),
                   ),
-                  Container(
-                    //color: Colors.orange,
-                    child: const Text(
-                      textAlign: TextAlign.center,
-                      'Tirage dans:',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black,
-                        fontFamily: 'PlusJakartaSans',
-                      ),
+                  const Text(
+                    textAlign: TextAlign.center,
+                    'Tirage dans:',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      fontFamily: 'PlusJakartaSans',
                     ),
                   )
                 ],
@@ -145,13 +142,15 @@ class _DetaisArticleState extends State<DetaisArticle> {
               child: Container(
                 margin: const EdgeInsets.only(left: 30, right: 30, top: 10),
                 //color: Colors.indigo,
-                child: const Text(
-                  textAlign: TextAlign.start,
-                  "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
+                child: const SingleChildScrollView(
+                  child: Text(
+                    textAlign: TextAlign.start,
+                    " olerm upsom it has no doubght to make mistqake inside the computer when you are in the bathroom It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -185,14 +184,16 @@ class _DetaisArticleState extends State<DetaisArticle> {
                             ),
                           ),
                           onPressed: () => {lesTickets()}),
-                      Text(
-                        textAlign: TextAlign.center,
-                        ticketsNumber.toString(),
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'PlusJakartaSans',
+                      Expanded(
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          ticketsNumber.toString(),
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontFamily: 'PlusJakartaSans',
+                          ),
                         ),
                       ),
                       ElevatedButton(

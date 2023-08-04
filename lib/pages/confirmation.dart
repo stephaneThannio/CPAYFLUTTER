@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:cpay/items/loading.dart';
@@ -29,7 +31,6 @@ class _ConfirmationState extends State<Confirmation> {
   String code = "";
   void verification() {
     code = nb1.text + nb2.text + nb3.text + nb4.text + nb5.text + nb6.text;
-    print(code);
   }
 
   void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
@@ -129,7 +130,8 @@ class _ConfirmationState extends State<Confirmation> {
   Widget build(BuildContext context) {
     return loading
         ? const Loading(
-            couleur: Color(0xFF6334A9),
+            spincouleur: Color(0xFF6334A9),
+            containcouleur: Colors.transparent,
           )
         : Scaffold(
             body: Stack(
@@ -137,12 +139,12 @@ class _ConfirmationState extends State<Confirmation> {
               Align(
                 alignment: const Alignment(0, 0),
                 child: Form(
-                  child: Container(
+                  child: SizedBox(
                     height: 400,
                     //color: Colors.amber,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           //color: Colors.blue,
                           width: 500,
                           height: 60,
@@ -170,7 +172,7 @@ class _ConfirmationState extends State<Confirmation> {
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 400,
                           height: 200,
                           //color: Colors.orange,
@@ -318,7 +320,7 @@ class _ConfirmationState extends State<Confirmation> {
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 400,
                           height: 100,
                           //color: Colors.green,

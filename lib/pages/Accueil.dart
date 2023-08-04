@@ -3,6 +3,7 @@
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+//import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/mes_articles.dart';
@@ -32,41 +33,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   final Connectivity _connectivity = Connectivity();
   int currentTabIndex = 0;
 //=======================SnackBar============================================================================
-  // void showSnackBar(ConnectivityResult status) {
-  //   final snackBar = SnackBar(
-  //     content: Container(
-  //       padding: const EdgeInsets.all(16),
-  //       height: 90,
-  //       decoration: BoxDecoration(
-  //         borderRadius: const BorderRadius.all(Radius.circular(20)),
-  //         color: Color(
-  //             status == ConnectivityResult.none ? 0xFFC72C41 : 0xFF5B931C),
-  //       ),
-  //       child: Column(
-  //         children: [
-  //           Text(
-  //             status == ConnectivityResult.none ? 'Erreur' : 'OK',
-  //             style: const TextStyle(fontSize: 18, color: Colors.white),
-  //           ),
-  //           Text(
-  //               status == ConnectivityResult.none
-  //                   ? 'veillez activer votre connection.'
-  //                   : 'La connexion est retablis.',
-  //               style: const TextStyle(fontSize: 12, color: Colors.white)),
-  //         ],
-  //       ),
-  //     ),
-  //     margin: const EdgeInsets.only(
-  //       bottom: 550,
-  //       left: 10,
-  //       right: 10,
-  //     ),
-  //     behavior: SnackBarBehavior.floating,
-  //     backgroundColor: Colors.transparent,
-  //     elevation: 0,
-  //   );
-  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  // }
+
   notifConnection(ConnectivityResult status) {
     if (status == ConnectivityResult.none) {
       fToast.showToast(
@@ -258,17 +225,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-        // leading: Container(
-        //   decoration: BoxDecoration(
-        //       color: Colors.white, borderRadius: BorderRadius.circular(60)),
-        // ),
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => const Retiremoney()));
-
-            // Action à effectuer lorsque l'icône de gauche est cliquée
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.loading,
+            );
           },
         ),
         actions: [
@@ -344,8 +307,6 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         onPressed: () {
           setVisibleBulle();
           visibledep2();
-          //setcontrol();
-          print(visibledepar);
         },
         child: const Icon(
           Icons.payment,

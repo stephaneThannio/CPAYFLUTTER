@@ -53,14 +53,16 @@ class BulleRetraitVers extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      textAlign: TextAlign.center,
-                      'PAYEMENT',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'PlusJakartaSans',
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        'PAYEMENT',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
                       ),
                     ),
                     Icon(
@@ -97,14 +99,16 @@ class BulleRetraitVers extends StatelessWidget {
                             Icons.add,
                             color: Colors.white,
                           ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            'Depot',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontFamily: 'PlusJakartaSans',
+                          Expanded(
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              'Depot',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontFamily: 'PlusJakartaSans',
+                              ),
                             ),
                           ),
                         ],
@@ -128,14 +132,16 @@ class BulleRetraitVers extends StatelessWidget {
                             Icons.money_off,
                             color: Colors.white,
                           ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            'Retrait',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontFamily: 'PlusJakartaSans',
+                          Expanded(
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              'Retrait',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontFamily: 'PlusJakartaSans',
+                              ),
                             ),
                           ),
                         ],

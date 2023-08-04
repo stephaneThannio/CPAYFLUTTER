@@ -12,21 +12,6 @@ class Transaction extends StatefulWidget {
 }
 
 class _TransactionState extends State<Transaction> {
-  // Color _defaultButtonColor = Colors.blue;
-  // Color _pressedButtonColor = Colors.green;
-  // Color _overlayButtonColor = Colors.red;
-  // MaterialStateProperty<Color> _buttonOverlayColor() {
-  //   return MaterialStateProperty.resolveWith<Color>(
-  //       (Set<MaterialState> states) {
-  //     if (states.contains(MaterialState.pressed)) {
-  //       return _overlayButtonColor; // Couleur de superposition lorsque le bouton est pressé longuement
-  //     } else {
-  //       return Colors
-  //           .transparent; // Aucune superposition de couleur lorsque le bouton n'est pas pressé longuement
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final tabpage = <Widget>[
@@ -34,10 +19,6 @@ class _TransactionState extends State<Transaction> {
       const Virement(),
       const AchatApis(),
       const Retrait()
-      // const Center(child: Text('Depots')),
-      // const Center(child: Text('Virement')),
-      //const Center(child: Text('Achats Api')),
-      //const Center(child: Text('Retrait')),
     ];
     final buttonTop = <Tab>[
       const Tab(
@@ -76,9 +57,6 @@ class _TransactionState extends State<Transaction> {
               color: Color(0xFF6334A9),
             ),
             labelColor: Colors.white,
-
-            //splashBorderRadius: BorderRadius.circular(20),
-            //overlayColor: _buttonOverlayColor(),
             tabs: buttonTop,
           ),
         ),
