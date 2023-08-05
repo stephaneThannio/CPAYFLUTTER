@@ -87,6 +87,7 @@ class _LoginState extends State<Login> {
           setState(() {
             loading = false;
             User.saveUser(User.fromJson(jsonDecode(data["mdata"])));
+            print(data);
           });
           alert("bienvenue", 'Vous etes maintenant connecter a cpay',
               QuickAlertType.success, welcome);

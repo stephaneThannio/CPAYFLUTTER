@@ -228,10 +228,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         leading: IconButton(
           icon: Image.asset(('lib/photos/285-min.png')),
           onPressed: () {
-            QuickAlert.show(
-              context: context,
-              type: QuickAlertType.loading,
-            );
+            print(User.sessionUser!.id_cdc_status);
           },
         ),
         actions: [

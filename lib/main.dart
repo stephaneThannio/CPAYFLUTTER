@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/Accueil.dart';
 
 void main() {
@@ -42,6 +43,33 @@ class _MyHomePageState extends State<MyHomePage>
   bool _isPressed = false;
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
+  bool firstuses = false;
+  var use;
+  Future uses() async {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    firstuses = true;
+    spref.setBool("usescase", firstuses);
+    spref.commit();
+  }
+
+  Future ifuse() async {
+    SharedPreferences ifuses = await SharedPreferences.getInstance();
+    use = ifuses.getBool("usescase");
+  }
+
+  gotohome() {
+    if (use == true) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Accueil()));
+    } else {
+      Navigator.of(context);
+    }
+  }
+
+  void verifuse() {
+    ifuse().whenComplete(() => gotohome());
+  }
+
   // This widget is the root of your application.
   @override
   void initState() {
@@ -57,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage>
         _animationController.reverse();
       }
     });
+    verifuse();
   }
 
   @override
@@ -197,14 +226,64 @@ class _MyHomePageState extends State<MyHomePage>
                             Center(
                               child: Stack(
                                 children: [
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                            alignment: Alignment(0.1, 0),
+                                            image: AssetImage(
+                                                "lib/photos/page3.png"),
+                                            fit: BoxFit.cover)),
+                                    child: Align(
+                                      alignment: const Alignment(0, 0.9),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          //color: Colors.black.withOpacity(0.1),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              //offset: Offset(0, 4),
+                                              blurRadius: 20,
+                                            ),
+                                          ],
+                                        ),
+                                        height: 200,
+                                        width: 400,
+                                        child: Align(
+                                          alignment: const Alignment(0, 0),
+                                          child: Text(
+                                            textAlign: TextAlign.center,
+                                            'Un seul compte pour tout l argent du monde',
+                                            style: TextStyle(
+                                              shadows: [
+                                                Shadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.8),
+                                                  blurRadius: 10.0,
+                                                  offset: const Offset(0, 4),
+                                                ),
+                                              ],
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   Align(
                                       alignment: const Alignment(0, 0.95),
                                       child: GestureDetector(
-                                        onTap: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const Accueil())),
+                                        onTap: () {
+                                          uses();
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const Accueil()));
+                                        },
                                         onTapDown: _handleTapDown,
                                         onTapUp: _handleTapUp,
                                         onTapCancel: _handleTapCancel,

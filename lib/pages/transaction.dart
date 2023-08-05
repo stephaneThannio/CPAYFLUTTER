@@ -4,6 +4,8 @@ import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:flutter/material.dart';
 
+import '../models/user.dart';
+
 class Transaction extends StatefulWidget {
   const Transaction({super.key});
 
@@ -41,9 +43,9 @@ class _TransactionState extends State<Transaction> {
       child: Scaffold(
         appBar: AppBar(
           leading: const Icon(Icons.person_outline),
-          actions: const [
-            Text('CPAY103514814501'),
-            SizedBox(
+          actions: [
+            Text(User.sessionUser!.iban),
+            const SizedBox(
               width: 150,
             ),
             Text('Solde: '),
