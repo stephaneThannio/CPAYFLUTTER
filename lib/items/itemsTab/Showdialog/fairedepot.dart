@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:cpay/api/api.dart';
+import 'package:cpay/items/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -17,6 +18,7 @@ class _DodepositState extends State<Dodeposit> {
   TextEditingController controlnum = TextEditingController();
   TextEditingController controlibanBNC = TextEditingController();
   TextEditingController controlmontantBNC = TextEditingController();
+
   //TextEditingController controlnum = TextEditingController();
   String iban = '';
   String montant = '';
@@ -53,7 +55,14 @@ class _DodepositState extends State<Dodeposit> {
     );
   }
 
+  void retour() {
+    Navigator.pop(context);
+  }
+
   Future onpressContinuerMvola() async {
+    setState(() {
+      loading = true;
+    });
     iban = controliban.text;
     montant = controlmontant.text;
     numero = controlnum.text;
@@ -61,11 +70,21 @@ class _DodepositState extends State<Dodeposit> {
     print("iban:$iban,montant:$montant, numero:$numero");
     var res = await Api.faireDepotMvola(iban, montant, numero);
     if (res['status'] == "Success") {
-      alert('Succes', res['mdata'].toString(), QuickAlertType.success);
+      setState(() {
+        loading = false;
+        retour();
+        alert('Succes', res['mdata'].toString(), QuickAlertType.success);
+      });
     } else if (res['status'] == "Warning") {
-      alert('titreAlert', res['mdata'].toString(), QuickAlertType.warning);
+      setState(() {
+        loading = false;
+        alert('titreAlert', res['mdata'].toString(), QuickAlertType.warning);
+      });
     } else if (res['status'] == "Error") {
-      alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+      setState(() {
+        loading = false;
+        alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+      });
     }
   }
 
@@ -85,45 +104,54 @@ class _DodepositState extends State<Dodeposit> {
       ),
       title: const Center(child: Text('Faire un depot')),
       children: [
-        ListTile(
-          title: const Text('mode de payment:'),
-          trailing: DropdownButton(
-            value: selected,
-            //hint: const Text('Choisir'),
-            onChanged: (String? valeur) {
-              if (valeur != null) {
-                setState(() {
-                  selected = valeur;
-                  //
-                });
-              }
-              setmode(valeur.toString());
-            },
-            items: [
-              DropdownMenuItem<String>(
-                  value: "Mvola",
-                  child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: Image.asset('lib/photos/mvola.webp'),
-                  )),
-              DropdownMenuItem<String>(
-                  value: "banc transfert",
-                  child: SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: Image.asset('lib/photos/banktransfert.png'),
-                  ))
-            ],
-          ),
-        ),
-        mode ? depotMvola() : depotBtransfert()
-        // Stack(
-        //   children: [
-        //     Visibility(visible: mode, child: depotMvola()),
-        //     Visibility(visible: !mode, child: depotBtransfert())
-        //   ],
-        // )
+        loading
+            ? const Loading(
+                spincouleur: Color(0xFF6334A9),
+                containcouleur: Colors.transparent)
+            : Column(
+                children: [
+                  ListTile(
+                    title: const Text('mode de payment:'),
+                    trailing: DropdownButton(
+                      value: selected,
+                      //hint: const Text('Choisir'),
+                      onChanged: (String? valeur) {
+                        if (valeur != null) {
+                          setState(() {
+                            selected = valeur;
+                            //
+                          });
+                        }
+                        setmode(valeur.toString());
+                      },
+                      items: [
+                        DropdownMenuItem<String>(
+                            value: "Mvola",
+                            child: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: Image.asset('lib/photos/mvola.webp'),
+                            )),
+                        DropdownMenuItem<String>(
+                            value: "banc transfert",
+                            child: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child:
+                                  Image.asset('lib/photos/banktransfert.png'),
+                            ))
+                      ],
+                    ),
+                  ),
+                  mode ? depotMvola() : depotBtransfert()
+                  // Stack(
+                  //   children: [
+                  //     Visibility(visible: mode, child: depotMvola()),
+                  //     Visibility(visible: !mode, child: depotBtransfert())
+                  //   ],
+                  // )
+                ],
+              )
       ],
     );
   }
