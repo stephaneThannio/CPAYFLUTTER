@@ -128,272 +128,283 @@ class _ConfirmationState extends State<Confirmation> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? const Loading(
-            spincouleur: Color(0xFF6334A9),
-            containcouleur: Colors.transparent,
-          )
-        : Scaffold(
-            body: Stack(
-            children: [
-              Align(
-                alignment: const Alignment(0, 0),
-                child: Form(
-                  child: SizedBox(
-                    height: 400,
-                    //color: Colors.amber,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          //color: Colors.blue,
-                          width: 500,
-                          height: 60,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Code de validation',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontFamily: 'PlusJakartaSans',
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: loading
+          ? const Loading(
+              spincouleur: Color(0xFF6334A9),
+              containcouleur: Colors.transparent,
+            )
+          : Scaffold(
+              body: Stack(
+              children: [
+                Align(
+                  alignment: const Alignment(0, 0),
+                  child: Form(
+                    child: SizedBox(
+                      height: 400,
+                      //color: Colors.amber,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            //color: Colors.blue,
+                            width: 500,
+                            height: 60,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Code de validation',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontFamily: 'PlusJakartaSans',
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Nous allons vous envoyer un code de validation au numero ${widget.phone}',
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                  fontFamily: 'PlusJakartaSans',
+                                Text(
+                                  'Nous allons vous envoyer un code de validation au numero ${widget.phone}',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                    fontFamily: 'PlusJakartaSans',
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 400,
-                          height: 200,
-                          //color: Colors.orange,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                height: 68,
-                                width: 64,
-                                child: TextField(
-                                  controller: nb1,
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      FocusScope.of(context).nextFocus();
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)))),
-                                  style: Theme.of(context).textTheme.headline6,
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                          SizedBox(
+                            width: 400,
+                            height: 200,
+                            //color: Colors.orange,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  height: 68,
+                                  width: 64,
+                                  child: TextField(
+                                    controller: nb1,
+                                    onChanged: (value) {
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)))),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(1),
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 68,
-                                width: 64,
-                                child: TextField(
-                                  controller: nb2,
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      FocusScope.of(context).nextFocus();
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)))),
-                                  style: Theme.of(context).textTheme.headline6,
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                SizedBox(
+                                  height: 68,
+                                  width: 64,
+                                  child: TextField(
+                                    controller: nb2,
+                                    onChanged: (value) {
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)))),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(1),
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 68,
-                                width: 64,
-                                child: TextField(
-                                  controller: nb3,
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      FocusScope.of(context).nextFocus();
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)))),
-                                  style: Theme.of(context).textTheme.headline6,
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                SizedBox(
+                                  height: 68,
+                                  width: 64,
+                                  child: TextField(
+                                    controller: nb3,
+                                    onChanged: (value) {
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)))),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(1),
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 68,
-                                width: 64,
-                                child: TextField(
-                                  controller: nb4,
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      FocusScope.of(context).nextFocus();
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)))),
-                                  style: Theme.of(context).textTheme.headline6,
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                SizedBox(
+                                  height: 68,
+                                  width: 64,
+                                  child: TextField(
+                                    controller: nb4,
+                                    onChanged: (value) {
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)))),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(1),
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 68,
-                                width: 64,
-                                child: TextField(
-                                  controller: nb5,
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      FocusScope.of(context).nextFocus();
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)))),
-                                  style: Theme.of(context).textTheme.headline6,
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                SizedBox(
+                                  height: 68,
+                                  width: 64,
+                                  child: TextField(
+                                    controller: nb5,
+                                    onChanged: (value) {
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)))),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(1),
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 68,
-                                width: 64,
-                                child: TextField(
-                                  controller: nb6,
-                                  onChanged: (value) {
-                                    if (value.length == 1) {
-                                      FocusScope.of(context).nextFocus();
-                                    }
-                                  },
-                                  decoration: const InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0)))),
-                                  style: Theme.of(context).textTheme.headline6,
-                                  keyboardType: TextInputType.number,
-                                  textAlign: TextAlign.center,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(1),
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                SizedBox(
+                                  height: 68,
+                                  width: 64,
+                                  child: TextField(
+                                    controller: nb6,
+                                    onChanged: (value) {
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    decoration: const InputDecoration(
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)))),
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(1),
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 400,
-                          height: 100,
-                          //color: Colors.green,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                width: 160,
-                                height: 50,
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xFF6334A9)),
-                                    onPressed: () => resendcode(),
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.refresh,
-                                          color: Colors.white,
-                                        ),
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          'Renvoyer',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                          SizedBox(
+                            width: 400,
+                            height: 100,
+                            //color: Colors.green,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  width: 160,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF6334A9)),
+                                      onPressed: () => resendcode(),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.refresh,
                                             color: Colors.white,
-                                            fontFamily: 'PlusJakartaSans',
                                           ),
-                                        ),
-                                      ],
-                                    )),
-                              ),
-                              SizedBox(
-                                width: 160,
-                                height: 50,
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xFF6334A9)),
-                                    onPressed: () => sendValidation(),
-                                    child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.check,
-                                          color: Colors.white,
-                                        ),
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          'valider',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            'Renvoyer',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                                SizedBox(
+                                  width: 160,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF6334A9)),
+                                      onPressed: () => sendValidation(),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.check,
                                             color: Colors.white,
-                                            fontFamily: 'PlusJakartaSans',
                                           ),
-                                        ),
-                                      ],
-                                    )),
-                              )
-                            ],
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            'valider',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
-          ));
+                )
+              ],
+            )),
+    );
   }
 }

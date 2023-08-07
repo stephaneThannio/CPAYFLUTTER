@@ -3,6 +3,7 @@
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:cpay/main.dart';
 //import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
@@ -12,6 +13,7 @@ import 'package:cpay/pages/transaction.dart';
 //import 'package:cpay/pages/login.dart';
 //import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 //import 'package:cpay/items/Article.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -211,106 +213,117 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         }
       },
     );
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            textAlign: TextAlign.center,
-            titre,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontFamily: 'PlusJakartaSans',
+    return WillPopScope(
+      onWillPop: () async {
+        SystemNavigator.pop();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text(
+              textAlign: TextAlign.center,
+              titre,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'PlusJakartaSans',
+              ),
             ),
           ),
-        ),
-        leading: IconButton(
-          icon: Image.asset(('lib/photos/285-min.png')),
-          onPressed: () {
-            print(User.sessionUser!.id_cdc_status);
-          },
-        ),
-        actions: [
-          User.sessionUser == null && log
-              ? IconButton(
-                  icon: const Icon(
-                    Icons.account_circle_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    // Action à effectuer lorsque l'icône de droite est cliquée
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Authentification()));
-                  },
-                )
-              : User.sessionUser == null && !log
-                  ? IconButton(
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        // Action à effectuer lorsque l'icône de droite est cliquée
-                        alert("Deconnexion", "Voulez vous vraiment deconnecter",
-                            QuickAlertType.confirm, () {
-                          User.logOut();
-                          Navigator.pop(context);
-                          setState(() {
-                            log = true;
-                          });
-                        });
-                      },
-                    )
-                  : IconButton(
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        // Action à effectuer lorsque l'icône de droite est cliquée
-                        alert("Deconnexion", "Voulez vous vraiment deconnecter",
-                            QuickAlertType.confirm, () {
-                          User.logOut();
-                          Navigator.pop(context);
-                          setState(() {
-                            log = true;
-                          });
-                        });
-                      },
+          leading: IconButton(
+            icon: Image.asset(('lib/photos/285-min.png')),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MyApp()));
+            },
+          ),
+          actions: [
+            User.sessionUser == null && log
+                ? IconButton(
+                    icon: const Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.white,
                     ),
-        ],
-        backgroundColor: const Color(0xFF6334A9),
-      ),
-      body: Stack(
-        children: [
-          ktabpage[currentTabIndex],
-          Visibility(
-            visible: visibledepar,
-            child: const BulleRetraitVers()
-                .animate(
-                  controller: _animcontroller,
-                )
-                .scale(
-                    duration: const Duration(milliseconds: 100),
-                    alignment: const Alignment(0.8, 0.8)),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFF6334A9),
-        onPressed: () {
-          setVisibleBulle();
-          visibledep2();
-        },
-        child: const Icon(
-          Icons.payment,
-          color: Colors.white,
+                    onPressed: () {
+                      // Action à effectuer lorsque l'icône de droite est cliquée
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Authentification()));
+                    },
+                  )
+                : User.sessionUser == null && !log
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // Action à effectuer lorsque l'icône de droite est cliquée
+                          alert(
+                              "Deconnexion",
+                              "Voulez vous vraiment deconnecter",
+                              QuickAlertType.confirm, () {
+                            User.logOut();
+                            Navigator.pop(context);
+                            setState(() {
+                              log = true;
+                            });
+                          });
+                        },
+                      )
+                    : IconButton(
+                        icon: const Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // Action à effectuer lorsque l'icône de droite est cliquée
+                          alert(
+                              "Deconnexion",
+                              "Voulez vous vraiment deconnecter",
+                              QuickAlertType.confirm, () {
+                            User.logOut();
+                            Navigator.pop(context);
+                            setState(() {
+                              log = true;
+                            });
+                          });
+                        },
+                      ),
+          ],
+          backgroundColor: const Color(0xFF6334A9),
         ),
+        body: Stack(
+          children: [
+            ktabpage[currentTabIndex],
+            Visibility(
+              visible: visibledepar,
+              child: const BulleRetraitVers()
+                  .animate(
+                    controller: _animcontroller,
+                  )
+                  .scale(
+                      duration: const Duration(milliseconds: 100),
+                      alignment: const Alignment(0.8, 0.8)),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xFF6334A9),
+          onPressed: () {
+            setVisibleBulle();
+            visibledep2();
+          },
+          child: const Icon(
+            Icons.payment,
+            color: Colors.white,
+          ),
+        ),
+        bottomNavigationBar: botomNavBar,
       ),
-      bottomNavigationBar: botomNavBar,
     );
   }
 

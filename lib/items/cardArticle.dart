@@ -10,21 +10,9 @@ class CardArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 8,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // Décalage de l'ombre
-          ),
-        ],
-        borderRadius: BorderRadius.circular(20),
-        color: couleurCpay.withOpacity(0.4),
-      ),
-      height: 250,
-      width: 180,
+    return Card(
+      elevation: 2,
+      color: couleurCpay.withOpacity(0.4),
       child: Column(
         children: <Widget>[
           const SizedBox(
