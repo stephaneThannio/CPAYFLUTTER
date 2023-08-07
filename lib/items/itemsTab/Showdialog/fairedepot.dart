@@ -71,11 +71,15 @@ class _DodepositState extends State<Dodeposit> {
     var res = await Api.faireDepotMvola(iban, montant, numero);
     print(res);
     if (res['status'] == "Success") {
-      setState(() {
-        loading = false;
-        retour();
-        alert('Succes', res['mdata'].toString(), QuickAlertType.success);
-      });
+      var req2 = await Api.listenStatus(res['serverCorrelationId']);
+      print(req2);
+      if (req2['status'] == "completed") {
+        setState(() {
+          loading = false;
+          retour();
+          alert('Succes', res['mdata'].toString(), QuickAlertType.success);
+        });
+      }
     } else if (res['status'] == "Warning") {
       setState(() {
         loading = false;

@@ -24,4 +24,15 @@ class Api {
       print("request not found");
     }
   }
+
+  static listenStatus(String servercorrelationid) async {
+    final request =
+        await get(Uri.parse("https://api.c-pay.me/mvola/$servercorrelationid"));
+    if (request.statusCode == 200) {
+      var data = jsonDecode(request.body);
+      return data;
+    } else {
+      print("error");
+    }
+  }
 }
