@@ -1,5 +1,6 @@
 import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
 import 'package:cpay/items/itemsTab/Showdialog/faireretrait.dart';
+import 'package:cpay/pages/depotpage.dart';
 import 'package:flutter/material.dart';
 
 class BulleRetraitVers extends StatelessWidget {
@@ -30,17 +31,33 @@ class BulleRetraitVers extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Card(
-            elevation: 10,
-            color: Colors.white,
+          SizedBox(
+            height: 70,
+            width: 70,
             child: Column(
               children: [
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: IconButton(
-                      onPressed: null,
-                      icon: Image.asset('lib/photos/depot.png')),
+                Container(
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 7,
+                          blurRadius: 9,
+                          offset: Offset(2, 5), // Décalage vertical de l'ombre
+                        ),
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(60)),
+                  child: SizedBox(
+                    height: 45,
+                    width: 45,
+                    child: IconButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PageDepot())),
+                        icon: Image.asset('lib/photos/depot.png')),
+                  ),
                 ),
                 const Text(
                   textAlign: TextAlign.center,
@@ -48,63 +65,95 @@ class BulleRetraitVers extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
                   ),
                 ),
               ],
             ),
           ),
-          Card(
-            elevation: 10,
-            color: Colors.white,
+          SizedBox(
+            height: 70,
+            width: 70,
             child: Column(
               children: [
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: IconButton(
-                      onPressed: null,
-                      icon: Image.asset('lib/photos/retrait.png')),
+                Container(
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 7,
+                          blurRadius: 9,
+                          offset: Offset(2, 5), // Décalage vertical de l'ombre
+                        ),
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(60)),
+                  child: SizedBox(
+                    height: 45,
+                    width: 45,
+                    child: IconButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PageDepot())),
+                        icon: Image.asset('lib/photos/retrait.png')),
+                  ),
                 ),
                 const Text(
                   textAlign: TextAlign.center,
-                  'Retrait',
+                  'retrait',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
                   ),
                 ),
               ],
             ),
           ),
-          Card(
-            elevation: 10,
-            color: Colors.white,
+          SizedBox(
+            height: 70,
+            width: 70,
             child: Column(
               children: [
-                SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: IconButton(
-                      onPressed: null,
-                      icon: Image.asset('lib/photos/transfert.png')),
+                Container(
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 7,
+                          blurRadius: 9,
+                          offset: Offset(2, 5), // Décalage vertical de l'ombre
+                        ),
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(60)),
+                  child: SizedBox(
+                    height: 45,
+                    width: 45,
+                    child: IconButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PageDepot())),
+                        icon: Image.asset('lib/photos/transfert.png')),
+                  ),
                 ),
                 const Text(
                   textAlign: TextAlign.center,
-                  'Transfert',
+                  'transfert',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
                   ),
                 ),
               ],
             ),
-          )
+          ),
           // ElevatedButton(
           //   style: ButtonStyle(
           //       shape: MaterialStateProperty.all(

@@ -302,12 +302,23 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           children: [
             ktabpage[currentTabIndex],
             Visibility(
+                    visible: visibledepar,
+                    child: Scaffold(
+                      backgroundColor: Colors.white.withOpacity(0.5),
+                    ))
+                .animate(
+                  controller: _animcontroller,
+                )
+                .fade(
+                  duration: const Duration(milliseconds: 100),
+                ),
+            Visibility(
               visible: visibledepar,
               child: Align(
                 alignment: Alignment(1, 0.6),
                 child: SizedBox(
-                  width: 80,
                   height: 300,
+                  width: 70,
                   child: const BulleRetraitVers()
                       .animate(
                         controller: _animcontroller,
@@ -317,7 +328,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           alignment: const Alignment(1, 1)),
                 ),
               ),
-            )
+            ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
