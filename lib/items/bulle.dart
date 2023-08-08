@@ -25,115 +25,152 @@ class BulleRetraitVers extends StatelessWidget {
           });
     }
 
-    return Card(
-      child: Column(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-              child: Container(
-            decoration: const BoxDecoration(
-                color: const Color(0xFF6334A9),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                )),
-            child: const Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      'PAYEMENT',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'PlusJakartaSans',
-                      ),
-                    ),
-                  ),
-                  Icon(
-                    Icons.payment,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-          )),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          Card(
+            elevation: 10,
+            color: Colors.white,
             child: Column(
               children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(
-                        const Color(0xFF6334A9),
-                      )),
-                  onPressed: () => dialogadepot(),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                      Expanded(
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          'Depot',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'PlusJakartaSans',
-                          ),
-                        ),
-                      ),
-                    ],
+                SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: IconButton(
+                      onPressed: null,
+                      icon: Image.asset('lib/photos/depot.png')),
+                ),
+                const Text(
+                  textAlign: TextAlign.center,
+                  'Depot',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                    fontFamily: 'PlusJakartaSans',
                   ),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(
-                        const Color(0xFF6334A9),
-                      )),
-                  onPressed: () => dialogretrait(),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.money_off,
-                        color: Colors.white,
-                      ),
-                      Expanded(
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          'Retrait',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'PlusJakartaSans',
-                          ),
-                        ),
-                      ),
-                    ],
+              ],
+            ),
+          ),
+          Card(
+            elevation: 10,
+            color: Colors.white,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: IconButton(
+                      onPressed: null,
+                      icon: Image.asset('lib/photos/retrait.png')),
+                ),
+                const Text(
+                  textAlign: TextAlign.center,
+                  'Retrait',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                    fontFamily: 'PlusJakartaSans',
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Card(
+            elevation: 10,
+            color: Colors.white,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: IconButton(
+                      onPressed: null,
+                      icon: Image.asset('lib/photos/transfert.png')),
+                ),
+                const Text(
+                  textAlign: TextAlign.center,
+                  'Transfert',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
+                    fontFamily: 'PlusJakartaSans',
                   ),
                 ),
               ],
             ),
           )
+          // ElevatedButton(
+          //   style: ButtonStyle(
+          //       shape: MaterialStateProperty.all(
+          //         RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10.0),
+          //         ),
+          //       ),
+          //       backgroundColor: MaterialStateProperty.all(
+          //         const Color(0xFF6334A9),
+          //       )),
+          //   onPressed: () => dialogadepot(),
+          //   child: const Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Icon(
+          //         Icons.add,
+          //         color: Colors.white,
+          //       ),
+          //       Expanded(
+          //         child: Text(
+          //           textAlign: TextAlign.center,
+          //           'Depot',
+          //           style: TextStyle(
+          //             fontSize: 20,
+          //             fontWeight: FontWeight.bold,
+          //             color: Colors.white,
+          //             fontFamily: 'PlusJakartaSans',
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // ElevatedButton(
+          //   style: ButtonStyle(
+          //       shape: MaterialStateProperty.all(
+          //         RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(10.0),
+          //         ),
+          //       ),
+          //       backgroundColor: MaterialStateProperty.all(
+          //         const Color(0xFF6334A9),
+          //       )),
+          //   onPressed: () => dialogretrait(),
+          //   child: const Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Icon(
+          //         Icons.money_off,
+          //         color: Colors.white,
+          //       ),
+          //       Expanded(
+          //         child: Text(
+          //           textAlign: TextAlign.center,
+          //           'Retrait',
+          //           style: TextStyle(
+          //             fontSize: 20,
+          //             fontWeight: FontWeight.bold,
+          //             color: Colors.white,
+          //             fontFamily: 'PlusJakartaSans',
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

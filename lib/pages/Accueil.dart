@@ -304,15 +304,15 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             Visibility(
               visible: visibledepar,
               child: Align(
-                alignment: const Alignment(0.8, 0.67),
+                alignment: Alignment(1, 0.6),
                 child: SizedBox(
-                  height: 200,
-                  width: 200,
+                  width: 80,
+                  height: 300,
                   child: const BulleRetraitVers()
                       .animate(
                         controller: _animcontroller,
                       )
-                      .scale(
+                      .scaleY(
                           duration: const Duration(milliseconds: 100),
                           alignment: const Alignment(1, 1)),
                 ),
