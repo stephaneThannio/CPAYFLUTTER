@@ -304,7 +304,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             Visibility(
                     visible: visibledepar,
                     child: Scaffold(
-                      backgroundColor: Colors.white.withOpacity(0.5),
+                      backgroundColor: Colors.black.withOpacity(0.5),
                     ))
                 .animate(
                   controller: _animcontroller,
