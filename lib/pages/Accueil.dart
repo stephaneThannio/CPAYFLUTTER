@@ -236,7 +236,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             icon: Image.asset(('lib/photos/285-min.png')),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MyApp()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BulleRetraitVers()));
             },
           ),
           actions: [
@@ -301,13 +303,20 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             ktabpage[currentTabIndex],
             Visibility(
               visible: visibledepar,
-              child: const BulleRetraitVers()
-                  .animate(
-                    controller: _animcontroller,
-                  )
-                  .scale(
-                      duration: const Duration(milliseconds: 100),
-                      alignment: const Alignment(0.8, 0.8)),
+              child: Align(
+                alignment: const Alignment(0.8, 0.67),
+                child: SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: const BulleRetraitVers()
+                      .animate(
+                        controller: _animcontroller,
+                      )
+                      .scale(
+                          duration: const Duration(milliseconds: 100),
+                          alignment: const Alignment(1, 1)),
+                ),
+              ),
             )
           ],
         ),
