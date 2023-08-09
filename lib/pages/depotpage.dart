@@ -1,11 +1,14 @@
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/loading.dart';
+import 'package:cpay/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:quickalert/quickalert.dart';
 
 class PageDepot extends StatefulWidget {
-  const PageDepot({super.key});
+  const PageDepot({
+    super.key,
+  });
 
   @override
   State<PageDepot> createState() => _PageDepotState();
@@ -14,6 +17,7 @@ class PageDepot extends StatefulWidget {
 class _PageDepotState extends State<PageDepot> {
   String paymenmode = "Mvola";
   bool loading = false;
+  bool enabled = false;
   Color mvolaContentColor = Colors.green;
   Color banktransferContentcolor = Colors.transparent;
   TextEditingController controliban = TextEditingController();
@@ -117,7 +121,29 @@ class _PageDepotState extends State<PageDepot> {
       });
     }
   }
+
+  ifibannotnul() {
+    User.getUser();
+    if (User.sessionUser != null) {
+      setState(() {
+        controliban = TextEditingController(text: User.sessionUser!.iban);
+        enabled = false;
+      });
+    } else {
+      setState(() {
+        controliban = TextEditingController();
+        enabled = true;
+      });
+    }
+  }
+
   //===================================================================
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ifibannotnul();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +218,7 @@ class _PageDepotState extends State<PageDepot> {
                                     Expanded(
                                         child: TextField(
                                       controller: controliban,
+                                      enabled: enabled,
                                       keyboardType: TextInputType.text,
                                       maxLines: 1,
                                       decoration:
@@ -363,7 +390,9 @@ class _PageDepotState extends State<PageDepot> {
                                       fontFamily: 'PlusJakartaSans',
                                     ),
                                   ),
-                                  onPressed: () => {onpressContinuerMvola()}),
+                                  onPressed: () => {
+                                        onpressContinuerMvola(),
+                                      }),
                             ),
                           ],
                         ),
