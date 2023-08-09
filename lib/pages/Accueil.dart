@@ -96,11 +96,14 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
+      confirmBtnText: "Se connecter",
+      cancelBtnText: "Annuler",
       context: context,
       type: typeAlert,
       title: titreAlert,
       text: textAlert,
       onConfirmBtnTap: func,
+      showCancelBtn: true,
       confirmBtnColor: const Color(0xFF6334A9),
     );
   }
