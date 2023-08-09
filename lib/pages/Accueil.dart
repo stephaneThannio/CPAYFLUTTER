@@ -207,8 +207,11 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           defTitle(index);
         } else {
           alert("Authentification requis", "Veuillez vous connecter.",
-              QuickAlertType.error, () {
-            Navigator.pop(context, 'Se connecter');
+              QuickAlertType.info, () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const Authentification()));
           });
         }
       },
