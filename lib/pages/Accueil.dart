@@ -195,7 +195,6 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     ];
 
     assert(ktabpage.length == kBottomNavBar.length);
-
     final botomNavBar = BottomNavigationBar(
       items: kBottomNavBar,
       currentIndex: currentTabIndex,
@@ -207,34 +206,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          // Display an alert with "Se connecter" button
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text("Authentification requis"),
-              content: Text("Veuillez vous connecter."),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop('Annuler');
-                  },
-                  child: Text('Annuler'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop('Se connecter');
-                    // Navigate to the login page here
-                    // For example: Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  child: Text('Se connecter'),
-                ),
-              ],
-            ),
-          );
+          alert("Authentification requis", "Veuillez vous connecter.",
+              QuickAlertType.error, () {
+            Navigator.pop(context, 'Se connecter');
+          });
         }
       },
     );
-
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
