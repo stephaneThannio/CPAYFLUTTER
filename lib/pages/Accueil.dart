@@ -8,7 +8,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/mes_articles.dart';
+import 'package:cpay/pages/premierDemarage.dart';
 import 'package:cpay/pages/qr_code_page.dart';
+//import 'package:cpay/pages/splashscreen.dart';
 import 'package:cpay/pages/transaction.dart';
 //import 'package:cpay/pages/login.dart';
 //import 'package:cpay/pages/confirmation.dart';
@@ -96,14 +98,12 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
       VoidCallback func) {
     QuickAlert.show(
-      confirmBtnText: "Se connecter",
-      cancelBtnText: "Annuler",
+      confirmBtnText: "Se Connecter",
       context: context,
       type: typeAlert,
       title: titreAlert,
       text: textAlert,
       onConfirmBtnTap: func,
-      showCancelBtn: true,
       confirmBtnColor: const Color(0xFF6334A9),
     );
   }
@@ -241,10 +241,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           leading: IconButton(
             icon: Image.asset(('lib/photos/285-min.png')),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BulleRetraitVers()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Commencer()));
             },
           ),
           actions: [
