@@ -10,21 +10,9 @@ class PageDepot extends StatefulWidget {
 
 class _PageDepotState extends State<PageDepot>
     with SingleTickerProviderStateMixin {
-  //late AnimationController _animationController;
-  //late AnimationController _animationController2;
   String paymenmode = "Mvola";
   Color mvolaContentColor = Colors.green;
   Color banktransferContentcolor = Colors.transparent;
-
-  // setAnimation() {
-  //   if (paymenmode == "Mvola") {
-  //     _animationController.forward();
-  //     //_animationController2.reverse();
-  //   } else if (paymenmode == "banc transfert") {
-  //     _animationController.reverse();
-  //     //_animationController2.forward();
-  //   }
-  // }
 
   onBouttonMvolatap() {
     setState(() {
@@ -53,25 +41,6 @@ class _PageDepotState extends State<PageDepot>
       });
     }
   }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   //_animationController = AnimationController(
-  //       //vsync: this, duration: const Duration(milliseconds: 200));
-  //   // _animationController2 = AnimationController(
-  //   //     vsync: this, duration: const Duration(milliseconds: 300));
-  //   //setAnimation();
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   //_animationController.dispose();
-  //   //_animationController2.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
