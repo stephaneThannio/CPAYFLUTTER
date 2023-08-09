@@ -124,8 +124,11 @@ class _PageDepotState extends State<PageDepot> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     return loading
-        ? const Loading(
-            spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+        ? Loading(
+            spincouleur: Color(0xFF6334A9),
+            containcouleur: Colors.white,
+            hauteurContainer: screenheight,
+          )
         : Scaffold(
             body: SingleChildScrollView(
               child: SizedBox(

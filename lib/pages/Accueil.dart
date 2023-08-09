@@ -3,7 +3,7 @@
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:cpay/main.dart';
+
 //import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
