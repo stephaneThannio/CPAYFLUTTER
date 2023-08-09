@@ -187,7 +187,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     final kBottomNavBar = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ACCUEIL'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined), label: 'ACHATS'),
+          icon: Icon(Icons.shopping_cart_outlined), label: 'TRADING'),
       const BottomNavigationBarItem(
           icon: Icon(Icons.send_to_mobile_outlined), label: 'TRANSACTIONS'),
       const BottomNavigationBarItem(
@@ -195,6 +195,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     ];
 
     assert(ktabpage.length == kBottomNavBar.length);
+
     final botomNavBar = BottomNavigationBar(
       items: kBottomNavBar,
       currentIndex: currentTabIndex,
@@ -206,13 +207,34 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          alert("Authentification requis", "Veuillez vous connecter.",
-              QuickAlertType.error, () {
-            Navigator.pop(context, 'Se connecter');
-          });
+          // Display an alert with "Se connecter" button
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Authentification requis"),
+              content: Text("Veuillez vous connecter."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop('Annuler');
+                  },
+                  child: Text('Annuler'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop('Se connecter');
+                    // Navigate to the login page here
+                    // For example: Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text('Se connecter'),
+                ),
+              ],
+            ),
+          );
         }
       },
     );
+
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();

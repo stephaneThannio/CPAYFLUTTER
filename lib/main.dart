@@ -19,12 +19,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CPAY',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'CPAY Company For Madagascar'),
     );
   }
 }
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage>
                               child: SizedBox(
                                 child: Text(
                                   textAlign: TextAlign.center,
-                                  'c-Pay un moyen simple de paiement Anonyme',
+                                  'CPAY un moyen simple de paiement Anonyme',
                                   style: TextStyle(
                                     shadows: [
                                       Shadow(
@@ -253,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage>
                                           alignment: const Alignment(0, 0),
                                           child: Text(
                                             textAlign: TextAlign.center,
-                                            'Un seul compte pour tout l argent du monde',
+                                            'Un seul compte pour tout l\'argent du monde',
                                             style: TextStyle(
                                               shadows: [
                                                 Shadow(
