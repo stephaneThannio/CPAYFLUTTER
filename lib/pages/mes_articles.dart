@@ -56,7 +56,7 @@ class _MesArticlesState extends State<MesArticles> {
           GridView.builder(
               itemCount: !recherche ? articles.length : afterRech.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 0.75),
+                  crossAxisCount: 1, childAspectRatio: 0.75),
               itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(

@@ -3,6 +3,7 @@
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:cpay/items/cardArticle.dart';
 
 //import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
@@ -23,6 +24,7 @@ import 'package:quickalert/quickalert.dart';
 
 import '../items/bulle.dart';
 import '../items/itemsTab/Showdialog/fairedepot.dart';
+import '../models/articles.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -147,6 +149,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
 
   //======================InitState======================================================================================
   late FToast fToast;
+  late Article article;
   @override
   void initState() {
     // TODO: implement initState
@@ -241,8 +244,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           leading: IconButton(
             icon: Image.asset(('lib/photos/285-min.png')),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Commencer()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CardArticle(
+                            article: articles[1],
+                            couleurCpay: const Color(0xFF6334A9),
+                          )));
             },
           ),
           actions: [
