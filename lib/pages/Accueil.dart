@@ -95,10 +95,10 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
 //===========================Titre de page control===================================================================================
 
 //==============================Alert=======================================================================
-  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
-      VoidCallback func) {
+  void alert(String titreAlert, String textAlert, String comfirmText,
+      QuickAlertType typeAlert, VoidCallback func) {
     QuickAlert.show(
-      confirmBtnText: "Se Connecter",
+      confirmBtnText: comfirmText,
       context: context,
       type: typeAlert,
       title: titreAlert,
@@ -210,7 +210,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           defTitle(index);
         } else {
           alert("Authentification requis", "Veuillez vous connecter.",
-              QuickAlertType.info, () {
+              "Se Connecter", QuickAlertType.info, () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -271,6 +271,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           alert(
                               "Deconnexion",
                               "Voulez vous vraiment deconnecter",
+                              "Deconnexion",
                               QuickAlertType.confirm, () {
                             User.logOut();
                             Navigator.pop(context);
@@ -290,6 +291,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           alert(
                               "Deconnexion",
                               "Voulez vous vraiment deconnecter",
+                              "Deconnexion",
                               QuickAlertType.confirm, () {
                             User.logOut();
                             Navigator.pop(context);

@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cpay/items/loading.dart';
@@ -76,45 +77,57 @@ class _CreateAccountState extends State<CreateAccount> {
         setState(() {
           loading = true;
         });
-        final request = await post(Uri.parse('https://api.c-pay.me'),
-            body: jsonEncode({
-              "app": "cpay",
-              "telephone": phone,
-              "password": cpassword,
-              "Autorization": "...",
-              "action": "inscription",
-              "act": "generate"
-            }),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            });
-        if (request.statusCode == 200) {
-          var data = jsonDecode(request.body);
-          if (data["status"] == 'success') {
+        try {
+          final request = await post(Uri.parse('https://api.c-pay.me'),
+              body: jsonEncode({
+                "app": "cpay",
+                "telephone": phone,
+                "password": cpassword,
+                "Autorization": "...",
+                "action": "inscription",
+                "act": "generate"
+              }),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+              }).timeout(Duration(seconds: 20));
+          if (request.statusCode == 200) {
+            var data = jsonDecode(request.body);
+            if (data["status"] == 'success') {
+              setState(() {
+                loading = false;
+              });
+              alert("validation", "Code de validation envoyer.",
+                  QuickAlertType.success, () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Confirmation(
+                              phone: phone,
+                              pwd: cpassword,
+                            )));
+              });
+            } else if (data["status"] == 'error') {
+              setState(() {
+                loading = false;
+              });
+              alert("Error", data["mdata"].toString(), QuickAlertType.error,
+                  () {
+                Navigator.pop(context);
+              });
+            }
+            print(request.body);
+          } else {
+            print('request not send');
+          }
+        } catch (error) {
+          if (error is TimeoutException) {
             setState(() {
               loading = false;
-            });
-            alert("validation", "Code de validation envoyer.",
-                QuickAlertType.success, () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Confirmation(
-                            phone: phone,
-                            pwd: cpassword,
-                          )));
-            });
-          } else if (data["status"] == 'error') {
-            setState(() {
-              loading = false;
-            });
-            alert("Error", data["mdata"].toString(), QuickAlertType.error, () {
-              Navigator.pop(context);
+              alert("Error", "erreur de connection", QuickAlertType.error, () {
+                Navigator.pop(context);
+              });
             });
           }
-          print(request.body);
-        } else {
-          print('request not send');
         }
       } else {
         alert("Error", "Veillez verifeir le mot de passe", QuickAlertType.error,

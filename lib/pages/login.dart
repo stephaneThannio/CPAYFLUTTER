@@ -1,6 +1,7 @@
 //import 'package:cpay/pages/myAccount/myAccunt.dart';
 // ignore_for_file: avoid_print, duplicate_ignore
 
+import 'dart:async';
 import 'dart:convert';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/models/user.dart';
@@ -69,52 +70,64 @@ class _LoginState extends State<Login> {
         loading = true;
       });
       //AlertLoad();
-      final request = await post(Uri.parse('https://api.c-pay.me'),
-          body: jsonEncode({
-            "app": "cpay",
-            "login": tel,
-            "password": password,
-            "Autorization": "...",
-            "action": "authentification"
-          }),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          });
-      // ignore: duplicate_ignore
-      if (request.statusCode == 200) {
-        var data = jsonDecode(request.body);
-        if (data["status"] == 'logged_in') {
+      try {
+        final request = await post(Uri.parse('https://api.c-pay.me'),
+            body: jsonEncode(
+              {
+                "app": "cpay",
+                "login": tel,
+                "password": password,
+                "Autorization": "...",
+                "action": "authentification"
+              },
+            ),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            }).timeout(Duration(seconds: 20));
+        // ignore: duplicate_ignore
+        if (request.statusCode == 200) {
+          var data = jsonDecode(request.body);
+          if (data["status"] == 'logged_in') {
+            setState(() {
+              loading = false;
+              User.saveUser(User.fromJson(jsonDecode(data["mdata"])));
+              print(data);
+            });
+            alert("bienvenue", 'Vous etes maintenant connecter a cpay',
+                QuickAlertType.success, welcome);
+          } else if (data["status"] == 'error') {
+            setState(() {
+              loading = false;
+            });
+            alert("Error", data['mdata'].toString(), QuickAlertType.error,
+                notWelcome);
+          } else if (data["status"] == 'warning') {
+            setState(() {
+              loading = false;
+            });
+            alert("Attention", data['mdata'].toString(), QuickAlertType.warning,
+                () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Confirmation(phone: tel, pwd: password)));
+            });
+          }
+          // print(data["status"]);
+          // ignore: avoid_print
+          print(data);
+        } else {
+          print('request not send');
+        }
+      } catch (error) {
+        if (error is TimeoutException) {
           setState(() {
             loading = false;
-            User.saveUser(User.fromJson(jsonDecode(data["mdata"])));
-            print(data);
-          });
-          alert("bienvenue", 'Vous etes maintenant connecter a cpay',
-              QuickAlertType.success, welcome);
-        } else if (data["status"] == 'error') {
-          setState(() {
-            loading = false;
-          });
-          alert("Error", data['mdata'].toString(), QuickAlertType.error,
-              notWelcome);
-        } else if (data["status"] == 'warning') {
-          setState(() {
-            loading = false;
-          });
-          alert("Attention", data['mdata'].toString(), QuickAlertType.warning,
-              () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Confirmation(phone: tel, pwd: password)));
+            alert("TimeOut", "erreur de connexion au serveur",
+                QuickAlertType.error, notWelcome);
           });
         }
-        // print(data["status"]);
-        // ignore: avoid_print
-        print(data);
-      } else {
-        print('request not send');
       }
     }
   }

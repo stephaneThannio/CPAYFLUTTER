@@ -92,6 +92,11 @@ class _PageDepotState extends State<PageDepot> {
       Future.delayed(Duration(seconds: 1), () {
         afterSucces(resi);
       });
+    } else if (req2['status'] == "failed") {
+      setState(() {
+        loading = false;
+        alert("erreur", "Erreur de transfert", QuickAlertType.error);
+      });
     }
   }
 
@@ -118,6 +123,11 @@ class _PageDepotState extends State<PageDepot> {
       setState(() {
         loading = false;
         alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+      });
+    } else if (res['status'] == "timeOut") {
+      setState(() {
+        loading = false;
+        alert('titreAlert', "erreur du connexion", QuickAlertType.error);
       });
     }
   }
