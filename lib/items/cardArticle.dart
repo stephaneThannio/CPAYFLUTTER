@@ -95,7 +95,7 @@ class _CardArticleState extends State<CardArticle> {
                               textAlign: TextAlign.center,
                               widget.article.titre,
                               style: const TextStyle(
-                                fontSize: 20,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontFamily: 'PlusJakartaSans',
@@ -116,7 +116,7 @@ class _CardArticleState extends State<CardArticle> {
                                 //     offset: const Offset(0, 4),
                                 //   ),
                                 // ],
-                                fontSize: 15,
+                                fontSize: 14,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.white,
                                 fontFamily: 'PlusJakartaSans',
@@ -131,7 +131,7 @@ class _CardArticleState extends State<CardArticle> {
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(20)),
-                                  height: 20,
+                                  height: 12,
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: FractionallySizedBox(
@@ -160,7 +160,7 @@ class _CardArticleState extends State<CardArticle> {
                                     //     offset: const Offset(0, 4),
                                     //   ),
                                     // ],
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.normal,
                                     color: Colors.white,
                                     fontFamily: 'PlusJakartaSans',
@@ -187,7 +187,7 @@ class _CardArticleState extends State<CardArticle> {
                                       //     offset: const Offset(0, 4),
                                       //   ),
                                       // ],
-                                      fontSize: 15,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.normal,
                                       color: Colors.white,
                                       fontFamily: 'PlusJakartaSans',
@@ -202,9 +202,9 @@ class _CardArticleState extends State<CardArticle> {
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         textAlign: TextAlign.center,
-                                        'Tenter',
+                                        'Achat ticket',
                                         style: TextStyle(
-                                          fontSize: 22,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.normal,
                                           color: Colors.white,
                                           fontFamily: 'PlusJakartaSans',
