@@ -248,7 +248,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                   context,
                   MaterialPageRoute(
                       builder: (context) => CardArticle(
-                            article: articles[1],
+                            article: articles[3],
                             couleurCpay: const Color(0xFF6334A9),
                           )));
             },

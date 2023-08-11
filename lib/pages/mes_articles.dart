@@ -56,28 +56,21 @@ class _MesArticlesState extends State<MesArticles> {
           GridView.builder(
               itemCount: !recherche ? articles.length : afterRech.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1, childAspectRatio: 0.75),
-              itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetaisArticle(
-                                  article: !recherche
-                                      ? articles[index]
-                                      : afterRech[index]))),
-                      child: CardArticle(
-                        couleurCpay: couleurCpay,
-                        article:
-                            !recherche ? articles[index] : afterRech[index],
-                      ),
+                  crossAxisCount: 1, childAspectRatio: 2.2),
+              itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetaisArticle(
+                                article: !recherche
+                                    ? articles[index]
+                                    : afterRech[index]))),
+                    child: CardArticle(
+                      couleurCpay: couleurCpay,
+                      article: !recherche ? articles[index] : afterRech[index],
                     ),
                   )),
-          Align(
-            alignment: const Alignment(0, -0.95),
-            child: barredeRecherche(context),
-          ),
+          barredeRecherche(context),
         ],
       ),
     ));
