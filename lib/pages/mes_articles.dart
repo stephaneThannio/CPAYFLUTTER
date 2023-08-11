@@ -57,20 +57,27 @@ class _MesArticlesState extends State<MesArticles> {
               itemCount: !recherche ? articles.length : afterRech.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1, childAspectRatio: 2.2),
-              itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetaisArticle(
-                                article: !recherche
-                                    ? articles[index]
-                                    : afterRech[index]))),
-                    child: CardArticle(
-                      couleurCpay: couleurCpay,
-                      article: !recherche ? articles[index] : afterRech[index],
+              itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetaisArticle(
+                                  article: !recherche
+                                      ? articles[index]
+                                      : afterRech[index]))),
+                      child: CardArticle(
+                        couleurCpay: couleurCpay,
+                        article:
+                            !recherche ? articles[index] : afterRech[index],
+                      ),
                     ),
                   )),
-          barredeRecherche(context),
+          Align(
+            alignment: const Alignment(0, -0.95),
+            child: barredeRecherche(context),
+          ),
         ],
       ),
     ));
