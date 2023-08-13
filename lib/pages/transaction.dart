@@ -3,6 +3,7 @@ import 'package:cpay/items/itemsTab/depos.dart';
 import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../models/user.dart';
 
@@ -45,11 +46,11 @@ class _TransactionState extends State<Transaction> {
           leading: const Icon(Icons.person_outline),
           actions: [
             Text(User.sessionUser!.iban),
-            const SizedBox(
-              width: 150,
+            SizedBox(
+              width: 150.w,
             ),
-            Text('Solde: '),
-            Text('180000 MGA')
+            const Text('Solde: '),
+            const Text('180000 MGA')
           ],
           bottom: TabBar(
             indicatorSize: TabBarIndicatorSize.tab,

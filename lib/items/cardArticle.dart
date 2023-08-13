@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../models/articles.dart';
 
 class CardArticle extends StatefulWidget {
@@ -53,6 +53,7 @@ class _CardArticleState extends State<CardArticle> {
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -61,7 +62,7 @@ class _CardArticleState extends State<CardArticle> {
             elevation: 2,
             color: widget.couleurCpay.withOpacity(0.6),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(7.0.sp),
               child: Row(
                 children: <Widget>[
                   // const SizedBox(
@@ -75,15 +76,15 @@ class _CardArticleState extends State<CardArticle> {
                           image: AssetImage(widget.article.image)),
                       //color: Colors.orange,
                     ),
-                    height: 180,
-                    width: 160,
+                    height: 160.sh,
+                    width: 140.w,
                   ),
-                  const SizedBox(
-                    width: 10,
+                  SizedBox(
+                    width: 8.w,
                   ),
                   Expanded(
-                    child: Container(
-                      height: 180,
+                    child: SizedBox(
+                      height: 160.w,
                       //color: Colors.red,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +95,8 @@ class _CardArticleState extends State<CardArticle> {
                             child: Text(
                               textAlign: TextAlign.center,
                               widget.article.titre,
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 fontFamily: 'PlusJakartaSans',
@@ -103,9 +104,9 @@ class _CardArticleState extends State<CardArticle> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(bottom: 10),
+                            margin: const EdgeInsets.only(bottom: 10),
                             //color: Colors.orange,
-                            child: const Text(
+                            child: Text(
                               textAlign: TextAlign.center,
                               "ref MBP-320-Madagascar",
                               style: TextStyle(
@@ -116,10 +117,63 @@ class _CardArticleState extends State<CardArticle> {
                                 //     offset: const Offset(0, 4),
                                 //   ),
                                 // ],
-                                fontSize: 14,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.white,
                                 fontFamily: 'PlusJakartaSans',
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              //color: Colors.orange,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      widget.article.prix,
+                                      textScaleFactor: 1.0,
+                                      style: TextStyle(
+                                        // shadows: [
+                                        //   Shadow(
+                                        //     color: Colors.black.withOpacity(0.8),
+                                        //     blurRadius: 10.0,
+                                        //     offset: const Offset(0, 4),
+                                        //   ),
+                                        // ],
+                                        fontSize: 10.sp,
+
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                        fontFamily: 'PlusJakartaSans',
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFF34A94E),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          textAlign: TextAlign.center,
+                                          'Achat ticket',
+                                          style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.white,
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -131,7 +185,7 @@ class _CardArticleState extends State<CardArticle> {
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(20)),
-                                  height: 12,
+                                  height: 10.h,
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: FractionallySizedBox(
@@ -152,7 +206,7 @@ class _CardArticleState extends State<CardArticle> {
                                 child: Text(
                                   textAlign: TextAlign.center,
                                   "$percent %",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     // shadows: [
                                     //   Shadow(
                                     //     color: Colors.black.withOpacity(0.8),
@@ -160,7 +214,7 @@ class _CardArticleState extends State<CardArticle> {
                                     //     offset: const Offset(0, 4),
                                     //   ),
                                     // ],
-                                    fontSize: 12,
+                                    fontSize: 10.sp,
                                     fontWeight: FontWeight.normal,
                                     color: Colors.white,
                                     fontFamily: 'PlusJakartaSans',
@@ -168,53 +222,6 @@ class _CardArticleState extends State<CardArticle> {
                                 ),
                               ),
                             ],
-                          ),
-                          Expanded(
-                            child: Container(
-                              //color: Colors.orange,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    widget.article.prix,
-                                    style: const TextStyle(
-                                      // shadows: [
-                                      //   Shadow(
-                                      //     color: Colors.black.withOpacity(0.8),
-                                      //     blurRadius: 10.0,
-                                      //     offset: const Offset(0, 4),
-                                      //   ),
-                                      // ],
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.white,
-                                      fontFamily: 'PlusJakartaSans',
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xFF34A94E),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        textAlign: TextAlign.center,
-                                        'Achat ticket',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white,
-                                          fontFamily: 'PlusJakartaSans',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                           ),
 
                           // StepProgressIndicator(

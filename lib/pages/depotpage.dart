@@ -3,6 +3,7 @@ import 'package:cpay/items/loading.dart';
 import 'package:cpay/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickalert/quickalert.dart';
 
 class PageDepot extends StatefulWidget {
@@ -89,7 +90,7 @@ class _PageDepotState extends State<PageDepot> {
             QuickAlertType.success);
       });
     } else if (req2['status'] == "pending") {
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () {
         afterSucces(resi);
       });
     } else if (req2['status'] == "failed") {
@@ -161,6 +162,9 @@ class _PageDepotState extends State<PageDepot> {
     double screenheight = MediaQuery.of(context).size.height;
     return loading
         ? Loading(
+            alingementmainax: MainAxisAlignment.center,
+            titreLoading: "Attente acceptation du paiment",
+            contenttext: "verifiez votre telephone",
             spincouleur: Color(0xFF6334A9),
             containcouleur: Colors.white,
             hauteurContainer: screenheight,
@@ -184,7 +188,7 @@ class _PageDepotState extends State<PageDepot> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 width: double.infinity,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -192,7 +196,7 @@ class _PageDepotState extends State<PageDepot> {
                                     Text(
                                       'Faire un depot',
                                       style: TextStyle(
-                                        fontSize: 25,
+                                        fontSize: 25.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: 'PlusJakartaSans',
@@ -201,7 +205,7 @@ class _PageDepotState extends State<PageDepot> {
                                     Text(
                                       'Veillez remplir le formulaire',
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 20.sp,
                                         fontWeight: FontWeight.normal,
                                         color: Colors.white,
                                         fontFamily: 'PlusJakartaSans',
@@ -215,7 +219,7 @@ class _PageDepotState extends State<PageDepot> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),
                                 width: double.infinity,
-                                height: 70,
+                                height: 70.h,
                                 child: Row(
                                   children: [
                                     IconButton(
@@ -244,7 +248,7 @@ class _PageDepotState extends State<PageDepot> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),
                                 width: double.infinity,
-                                height: 70,
+                                height: 70.h,
                                 child: Row(
                                   children: [
                                     IconButton(
@@ -271,7 +275,7 @@ class _PageDepotState extends State<PageDepot> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),
                                 width: double.infinity,
-                                height: 70,
+                                height: 70.h,
                                 child: Row(
                                   children: [
                                     IconButton(
@@ -305,21 +309,21 @@ class _PageDepotState extends State<PageDepot> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const SizedBox(
+                            SizedBox(
                               width: double.infinity,
                               child: Text(
                                 'METHODE DE PAYEMENT',
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 25.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF6334A9),
+                                  color: const Color(0xFF6334A9),
                                   fontFamily: 'PlusJakartaSans',
                                 ),
                               ),
                             ),
                             SizedBox(
                               width: double.infinity,
-                              height: 100,
+                              height: 100.h,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -334,8 +338,8 @@ class _PageDepotState extends State<PageDepot> {
                                           color: mvolaContentColor,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      height: 100,
-                                      width: 100,
+                                      height: 100.h,
+                                      width: 100.w,
                                       child: paymenmode == "Mvola"
                                           ? Card(
                                               elevation: 6,
@@ -366,8 +370,8 @@ class _PageDepotState extends State<PageDepot> {
                                           color: banktransferContentcolor,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      height: 100,
-                                      width: 100,
+                                      height: 100.h,
+                                      width: 100.w,
                                       child: paymenmode == "banc transfert"
                                           ? Card(
                                               elevation: 6,
@@ -385,16 +389,16 @@ class _PageDepotState extends State<PageDepot> {
                               ),
                             ),
                             SizedBox(
-                              width: 200,
-                              height: 50,
+                              width: 200.w,
+                              height: 50.h,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF6334A9)),
-                                  child: const Text(
+                                  child: Text(
                                     textAlign: TextAlign.center,
                                     'Continuer',
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.normal,
                                       color: Colors.white,
                                       fontFamily: 'PlusJakartaSans',

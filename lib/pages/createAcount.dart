@@ -5,7 +5,9 @@ import 'dart:convert';
 
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/pages/confirmation.dart';
+import 'package:cpay/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../items/TextFieldPreuse.dart';
@@ -89,7 +91,7 @@ class _CreateAccountState extends State<CreateAccount> {
               }),
               headers: <String, String>{
                 'Content-Type': 'application/json; charset=UTF-8',
-              }).timeout(Duration(seconds: 20));
+              }).timeout(const Duration(seconds: 20));
           if (request.statusCode == 200) {
             var data = jsonDecode(request.body);
             if (data["status"] == 'success') {
@@ -138,164 +140,206 @@ class _CreateAccountState extends State<CreateAccount> {
     }
   }
 
+  bool pagechange = false;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        //la photo de logo cpay==========================================================
-        Align(
-          alignment: const Alignment(0, -0.7),
-          child: SizedBox(
-            width: 200,
-            height: 200,
-            child: Center(
-              child: Image.asset(('lib/photos/285-min.png')),
-            ),
-          ),
-        ),
-        //l'ombre======================================================
-        Align(
-          alignment: const Alignment(0.04, -0.29),
-          child: Container(
-            decoration: BoxDecoration(
-              //color: Colors.black.withOpacity(0.1),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  offset: const Offset(0, 4),
-                  blurRadius: 20,
-                ),
+    double screenheight = MediaQuery.of(context).size.height;
+    return !pagechange
+        ? SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                //la photo de logo cpay==========================================================
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(scale: 8.sp, ('lib/photos/285-min.png')),
+                    //l'ombre======================================================
+                    Container(
+                      decoration: BoxDecoration(
+                        //color: Colors.black.withOpacity(0.1),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            offset: const Offset(0, 4),
+                            blurRadius: 20,
+                          ),
+                        ],
+                      ),
+                      width: 100.w,
+                      height: 28.h,
+                    ),
+                    loading
+                        ? const Loading(
+                            containcouleur: Color(0xFF6334A9),
+                            spincouleur: Colors.white,
+                          )
+                        : Container(
+                            //color: Colors.amber,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 20.sp,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      'Create ACCOUNT',
+                                      style: TextStyle(
+                                        fontSize: 28.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                        fontFamily: 'PlusJakartaSans',
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20.sp,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 280.sp,
+                                  height: 50.sp,
+                                  child: TextFieldPreuse(
+                                    control: phonenbr,
+                                    obscur: false,
+                                    prefixIco: Icon(
+                                      size: 20.sp,
+                                      Icons.phone,
+                                      color: Colors.white,
+                                    ),
+                                    label: "Telephone",
+                                    typeWord: TextInputType.phone,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.sp,
+                                ),
+                                SizedBox(
+                                  //color: Colors.red,
+                                  width: 280.sp,
+                                  height: 50.sp,
+                                  child: TextFieldPreuse(
+                                    control: pwd,
+                                    obscur: true,
+                                    prefixIco: Icon(
+                                      size: 20.sp,
+                                      Icons.security,
+                                      color: Colors.white,
+                                    ),
+                                    sufixICO: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.check_sharp,
+                                        size: 20.sp,
+                                      ),
+                                      color: Colors.white,
+                                    ),
+                                    label: "Mot de passe",
+                                    typeWord: TextInputType.text,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.sp,
+                                ),
+                                SizedBox(
+                                  //color: Colors.red,
+                                  width: 280.sp,
+                                  height: 50.sp,
+                                  child: TextFieldPreuse(
+                                    control: cpwd,
+                                    obscur: true,
+                                    prefixIco: Icon(
+                                      size: 20.sp,
+                                      Icons.security,
+                                      color: Colors.white,
+                                    ),
+                                    sufixICO: IconButton(
+                                      onPressed: () {},
+                                      icon:
+                                          Icon(size: 20.sp, Icons.check_sharp),
+                                      color: Colors.white,
+                                    ),
+                                    label: "Confirmation du mot de passe",
+                                    typeWord: TextInputType.text,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.sp,
+                                ),
+                                SizedBox(
+                                  //color: Colors.red,
+                                  width: 280.sp,
+                                  height: 50.sp,
+                                  child: ElevatedButton(
+                                    child: Text(
+                                      textAlign: TextAlign.center,
+                                      'S\'inscrire',
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: const Color(0xFF6334A9),
+                                        fontFamily: 'PlusJakartaSans',
+                                      ),
+                                    ),
+                                    onPressed: () => {
+                                      sendCreateAccountRequest(),
+                                      //Confirm()
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.sp,
+                                ),
+                                SizedBox(
+                                  //color: Colors.red,
+                                  width: 140.sp,
+                                  height: 25.sp,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF6334A9),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              side: const BorderSide(
+                                                  width: 1,
+                                                  color: Colors.white))),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Icon(
+                                            Icons.arrow_back,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            'Se connecter',
+                                            style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.white,
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () => {
+                                            setState(() {
+                                              pagechange = true;
+                                            })
+                                          }),
+                                ),
+                              ],
+                            ),
+                          )
+                  ],
+                )
               ],
             ),
-            width: 120,
-            height: 30,
-          ),
-        ),
-        loading
-            ? const Loading(
-                containcouleur: Color(0xFF6334A9),
-                spincouleur: Colors.white,
-              )
-            : Align(
-                alignment: const Alignment(0, 0.7),
-                child: SizedBox(
-                  //container qui englobe les formulaire==========================================
-                  //color: Colors.yellow,
-                  height: 440,
-                  width: 400,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(
-                        //color: Colors.red,
-                        width: 300,
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              textAlign: TextAlign.center,
-                              'Create',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.white,
-                                fontFamily: 'PlusJakartaSans',
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              textAlign: TextAlign.center,
-                              'ACCOUNT',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'PlusJakartaSans',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      TextFieldPreuse(
-                        control: phonenbr,
-                        obscur: false,
-                        prefixIco: const Icon(
-                          Icons.phone,
-                          color: Colors.white,
-                        ),
-                        label: "Telephone",
-                        typeWord: TextInputType.phone,
-                      ),
-                      SizedBox(
-                        //color: Colors.red,
-                        width: 300,
-                        height: 50,
-                        child: TextFieldPreuse(
-                          control: pwd,
-                          obscur: true,
-                          prefixIco: const Icon(
-                            Icons.security,
-                            color: Colors.white,
-                          ),
-                          sufixICO: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.check_sharp),
-                            color: Colors.white,
-                          ),
-                          label: "Mot de passe",
-                          typeWord: TextInputType.text,
-                        ),
-                      ),
-                      SizedBox(
-                        //color: Colors.red,
-                        width: 300,
-                        height: 50,
-                        child: TextFieldPreuse(
-                          control: cpwd,
-                          obscur: true,
-                          prefixIco: const Icon(
-                            Icons.security,
-                            color: Colors.white,
-                          ),
-                          sufixICO: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.check_sharp),
-                            color: Colors.white,
-                          ),
-                          label: "Confirmation du mot de passe",
-                          typeWord: TextInputType.text,
-                        ),
-                      ),
-                      SizedBox(
-                        //color: Colors.red,
-                        width: 300,
-                        height: 50,
-                        child: ElevatedButton(
-                          child: const Text(
-                            textAlign: TextAlign.center,
-                            'S\'inscrire',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                              color: Color(0xFF6334A9),
-                              fontFamily: 'PlusJakartaSans',
-                            ),
-                          ),
-                          onPressed: () => {
-                            sendCreateAccountRequest(),
-                            //Confirm()
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                //============================================================================================
-              )
-      ],
-    );
+          )
+        : const Login();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFieldPreuse extends StatelessWidget {
   final Icon? prefixIco;
@@ -25,24 +26,24 @@ class TextFieldPreuse extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       //color: Colors.red,
-      width: 300,
-      height: 50,
+      width: 300.w,
       child: TextField(
         controller: control,
         obscureText: obscur,
         cursorColor: Colors.white,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(fontSize: 12.sp, color: Colors.white),
         keyboardType: typeWord,
         decoration: InputDecoration(
+            //contentPadding: EdgeInsets.all(18.sp),
             hintText: hint,
-            labelStyle: const TextStyle(color: Colors.white),
+            labelStyle: TextStyle(fontSize: 12.sp, color: Colors.white),
             fillColor: colorinside,
-            focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 5),
-                borderRadius: BorderRadius.all(Radius.circular(60))),
-            enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 5),
-                borderRadius: BorderRadius.all(Radius.circular(60))),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 5.w),
+                borderRadius: const BorderRadius.all(Radius.circular(60))),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 5.w),
+                borderRadius: const BorderRadius.all(Radius.circular(60))),
             filled: true,
             labelText: label,
             prefixIcon: prefixIco,

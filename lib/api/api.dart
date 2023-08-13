@@ -18,7 +18,7 @@ class Api {
           }),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-          }).timeout(Duration(seconds: 20));
+          }).timeout(const Duration(seconds: 20));
       if (request.statusCode == 200) {
         var data = jsonDecode(request.body);
         return data;

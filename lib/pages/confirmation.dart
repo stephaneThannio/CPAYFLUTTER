@@ -198,7 +198,7 @@ class _ConfirmationState extends State<Confirmation> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)))),
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     inputFormatters: [
@@ -222,7 +222,7 @@ class _ConfirmationState extends State<Confirmation> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)))),
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     inputFormatters: [
@@ -246,7 +246,7 @@ class _ConfirmationState extends State<Confirmation> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)))),
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     inputFormatters: [
@@ -270,7 +270,7 @@ class _ConfirmationState extends State<Confirmation> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)))),
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     inputFormatters: [
@@ -294,7 +294,7 @@ class _ConfirmationState extends State<Confirmation> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)))),
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     inputFormatters: [
@@ -318,7 +318,7 @@ class _ConfirmationState extends State<Confirmation> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)))),
                                     style:
-                                        Theme.of(context).textTheme.headline6,
+                                        Theme.of(context).textTheme.titleLarge,
                                     keyboardType: TextInputType.number,
                                     textAlign: TextAlign.center,
                                     inputFormatters: [

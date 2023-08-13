@@ -2,6 +2,7 @@ import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
 import 'package:cpay/items/itemsTab/Showdialog/faireretrait.dart';
 import 'package:cpay/pages/depotpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BulleRetraitVers extends StatelessWidget {
   const BulleRetraitVers({
@@ -32,8 +33,8 @@ class BulleRetraitVers extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 70,
-            width: 70,
+            height: 70.h,
+            width: 70.w,
             child: Column(
               children: [
                 Container(
@@ -43,14 +44,14 @@ class BulleRetraitVers extends StatelessWidget {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 7,
                           blurRadius: 9,
-                          offset: Offset(2, 5), // Décalage vertical de l'ombre
+                          offset: const Offset(2, 5), // Décalage vertical de l'ombre
                         ),
                       ],
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(60)),
                   child: SizedBox(
-                    height: 45,
-                    width: 45,
+                    height: 45.h,
+                    width: 45.w,
                     child: IconButton(
                         onPressed: () => Navigator.push(
                             context,
@@ -59,11 +60,11 @@ class BulleRetraitVers extends StatelessWidget {
                         icon: Image.asset('lib/photos/depot.png')),
                   ),
                 ),
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
                   'Depot',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
@@ -73,8 +74,8 @@ class BulleRetraitVers extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 70,
-            width: 70,
+            height: 70.h,
+            width: 70.w,
             child: Column(
               children: [
                 Container(
@@ -84,14 +85,14 @@ class BulleRetraitVers extends StatelessWidget {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 7,
                           blurRadius: 9,
-                          offset: Offset(2, 5), // Décalage vertical de l'ombre
+                          offset: const Offset(2, 5), // Décalage vertical de l'ombre
                         ),
                       ],
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(60)),
                   child: SizedBox(
-                    height: 45,
-                    width: 45,
+                    height: 45.h,
+                    width: 45.w,
                     child: IconButton(
                         onPressed: () => Navigator.push(
                             context,
@@ -100,11 +101,11 @@ class BulleRetraitVers extends StatelessWidget {
                         icon: Image.asset('lib/photos/retrait.png')),
                   ),
                 ),
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
                   'retrait',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
@@ -114,8 +115,8 @@ class BulleRetraitVers extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 70,
-            width: 70,
+            height: 70.h,
+            width: 70.w,
             child: Column(
               children: [
                 Container(
@@ -125,14 +126,14 @@ class BulleRetraitVers extends StatelessWidget {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 7,
                           blurRadius: 9,
-                          offset: Offset(2, 5), // Décalage vertical de l'ombre
+                          offset: const Offset(2, 5), // Décalage vertical de l'ombre
                         ),
                       ],
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(60)),
                   child: SizedBox(
-                    height: 45,
-                    width: 45,
+                    height: 45.h,
+                    width: 45.w,
                     child: IconButton(
                         onPressed: () => Navigator.push(
                             context,
@@ -141,11 +142,11 @@ class BulleRetraitVers extends StatelessWidget {
                         icon: Image.asset('lib/photos/transfert.png')),
                   ),
                 ),
-                const Text(
+                Text(
                   textAlign: TextAlign.center,
                   'transfert',
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
                     fontFamily: 'PlusJakartaSans',

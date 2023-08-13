@@ -1,6 +1,7 @@
 import 'package:cpay/main.dart';
 import 'package:cpay/pages/Accueil.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -54,15 +55,17 @@ class _SplashscreenState extends State<Splashscreen> {
       body: Center(
         child: SizedBox(
           //color: Colors.red,
-          height: 150,
-          width: 150,
+          height: 150.sp,
+          width: 150.sp,
           child: Column(
             children: [
               Expanded(
-                child: Image.asset(('lib/photos/285-min.png')),
+                child: Image.asset(
+                    height: 150.sp, width: 150.sp, ('lib/photos/285-min.png')),
               ),
-              const Expanded(
-                  child: SpinKitSpinningLines(color: Color(0xFF6334A9)))
+              Expanded(
+                  child: SpinKitSpinningLines(
+                      size: 70.sp, color: const Color(0xFF6334A9)))
             ],
           ),
         ),

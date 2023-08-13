@@ -1,5 +1,6 @@
 import 'package:cpay/pages/Accueil.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Commencer extends StatefulWidget {
@@ -95,6 +96,7 @@ class _CommencerState extends State<Commencer>
 
   @override
   Widget build(BuildContext context) {
+    double screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -119,8 +121,8 @@ class _CommencerState extends State<Commencer>
                             Align(
                               alignment: const Alignment(-1, -0.8),
                               child: SizedBox(
-                                height: 150,
-                                width: 200,
+                                height: 150.sp,
+                                width: 200.sp,
                                 child: Text(
                                   textAlign: TextAlign.center,
                                   'CPAY un moyen simple de paiement Anonyme',
@@ -132,7 +134,7 @@ class _CommencerState extends State<Commencer>
                                         offset: const Offset(0, 4),
                                       ),
                                     ],
-                                    fontSize: 24,
+                                    fontSize: 24.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                     fontFamily: 'PlusJakartaSans',
@@ -167,8 +169,8 @@ class _CommencerState extends State<Commencer>
                                       ),
                                     ],
                                   ),
-                                  height: 200,
-                                  width: 400,
+                                  height: 200.sp,
+                                  width: 400.sp,
                                   child: Align(
                                     alignment: const Alignment(0, 0),
                                     child: Text(
@@ -183,7 +185,7 @@ class _CommencerState extends State<Commencer>
                                             offset: const Offset(0, 4),
                                           ),
                                         ],
-                                        fontSize: 40,
+                                        fontSize: 40.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: 'PlusJakartaSans',
@@ -193,19 +195,22 @@ class _CommencerState extends State<Commencer>
                                 ),
                               ),
                             ),
-                            Center(
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                            alignment: Alignment(0.1, 0),
-                                            image: AssetImage(
-                                                "lib/photos/page3.png"),
-                                            fit: BoxFit.cover)),
-                                    child: Align(
-                                      alignment: const Alignment(0, 0.9),
-                                      child: Container(
+                            Container(
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      alignment: Alignment(0.1, 0),
+                                      image: AssetImage("lib/photos/page3.png"),
+                                      fit: BoxFit.cover)),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: (screenheight * 0.5).sp,
+                                  //color: Colors.red,
+                                  margin: const EdgeInsets.only(bottom: 30),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
                                         decoration: BoxDecoration(
                                           //color: Colors.black.withOpacity(0.1),
                                           boxShadow: [
@@ -217,8 +222,8 @@ class _CommencerState extends State<Commencer>
                                             ),
                                           ],
                                         ),
-                                        height: 200,
-                                        width: 400,
+                                        height: 200.sp,
+                                        width: 400.sp,
                                         child: Align(
                                           alignment: const Alignment(0, 0),
                                           child: Text(
@@ -233,7 +238,7 @@ class _CommencerState extends State<Commencer>
                                                   offset: const Offset(0, 4),
                                                 ),
                                               ],
-                                              fontSize: 40,
+                                              fontSize: 40.sp,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                               fontFamily: 'PlusJakartaSans',
@@ -241,11 +246,7 @@ class _CommencerState extends State<Commencer>
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Align(
-                                      alignment: const Alignment(0, 0.95),
-                                      child: GestureDetector(
+                                      GestureDetector(
                                         onTap: () {
                                           uses();
                                           Navigator.push(
@@ -275,8 +276,8 @@ class _CommencerState extends State<Commencer>
                                                 color: const Color(0xFF6334A9),
                                                 borderRadius:
                                                     BorderRadius.circular(69)),
-                                            height: 60,
-                                            width: 200,
+                                            height: 60.h,
+                                            width: 200.w,
                                             child: Align(
                                               alignment:
                                                   const Alignment(0, -0.20),
@@ -293,7 +294,7 @@ class _CommencerState extends State<Commencer>
                                                           const Offset(0, 2),
                                                     ),
                                                   ],
-                                                  fontSize: 24,
+                                                  fontSize: 24.sp,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                   fontFamily: 'PlusJakartaSans',
@@ -302,8 +303,10 @@ class _CommencerState extends State<Commencer>
                                             ),
                                           ),
                                         ),
-                                      )),
-                                ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             )
                           ]),

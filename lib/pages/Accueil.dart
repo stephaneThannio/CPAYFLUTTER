@@ -9,8 +9,8 @@ import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/mes_articles.dart';
-import 'package:cpay/pages/premierDemarage.dart';
 import 'package:cpay/pages/qr_code_page.dart';
+import 'package:cpay/pages/splashscreen.dart';
 //import 'package:cpay/pages/splashscreen.dart';
 import 'package:cpay/pages/transaction.dart';
 //import 'package:cpay/pages/login.dart';
@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:cpay/items/Article.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quickalert/quickalert.dart';
 
@@ -144,6 +145,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       _animcontroller.forward();
     } else {
       _animcontroller.reverse();
+      setState(() {
+        visibledepar = false;
+      });
     }
   }
 
@@ -191,18 +195,38 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       const QrCode(),
     ];
     final kBottomNavBar = <BottomNavigationBarItem>[
-      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ACCUEIL'),
-      const BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined), label: 'TRADING'),
-      const BottomNavigationBarItem(
-          icon: Icon(Icons.send_to_mobile_outlined), label: 'TRANSACTIONS'),
-      const BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code), label: 'SCAN QR'),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home,
+            size: 20.0.sp,
+          ),
+          label: 'ACCUEIL'),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.shopping_cart_outlined,
+            size: 20.0.sp,
+          ),
+          label: 'TRADING'),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.send_to_mobile_outlined,
+            size: 20.0.sp,
+          ),
+          label: 'TRANSACTIONS'),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.qr_code,
+            size: 20.0.sp,
+          ),
+          label: 'SCAN QR'),
     ];
 
     assert(ktabpage.length == kBottomNavBar.length);
     final botomNavBar = BottomNavigationBar(
       items: kBottomNavBar,
+      iconSize: 20.0.sp,
+      selectedFontSize: 12.0.sp,
+      unselectedFontSize: 10.0.sp,
       currentIndex: currentTabIndex,
       type: BottomNavigationBarType.fixed,
       onTap: (int index) {
@@ -233,8 +257,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             child: Text(
               textAlign: TextAlign.center,
               titre,
-              style: const TextStyle(
-                fontSize: 20,
+              style: TextStyle(
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 fontFamily: 'PlusJakartaSans',
@@ -242,21 +266,24 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             ),
           ),
           leading: IconButton(
-            icon: Image.asset(('lib/photos/285-min.png')),
+            icon: Image(
+              width: 30.sp,
+              height: 30.sp,
+              image: AssetImage('lib/photos/285-min.png'),
+            ),
+            // iconSize: 200,
+            // icon: Image.asset(
+            //     width: 200.w, height: 50.h, ('lib/photos/285-min.png')),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CardArticle(
-                            article: articles[3],
-                            couleurCpay: const Color(0xFF6334A9),
-                          )));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Splashscreen()));
             },
           ),
           actions: [
             User.sessionUser == null && log
                 ? IconButton(
-                    icon: const Icon(
+                    icon: Icon(
+                      size: 20.sp,
                       Icons.account_circle_outlined,
                       color: Colors.white,
                     ),
@@ -270,7 +297,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                   )
                 : User.sessionUser == null && !log
                     ? IconButton(
-                        icon: const Icon(
+                        icon: Icon(
+                          size: 20.sp,
                           Icons.logout,
                           color: Colors.white,
                         ),
@@ -317,8 +345,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             ktabpage[currentTabIndex],
             Visibility(
                     visible: visibledepar,
-                    child: Scaffold(
-                      backgroundColor: Colors.black.withOpacity(0.5),
+                    child: Container(
+                      color: Colors.black.withOpacity(0.5),
                     ))
                 .animate(
                   controller: _animcontroller,
@@ -329,10 +357,10 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             Visibility(
               visible: visibledepar,
               child: Align(
-                alignment: Alignment(1, 0.6),
+                alignment: const Alignment(1, 0.6),
                 child: SizedBox(
-                  height: 300,
-                  width: 70,
+                  height: 300.h,
+                  width: 70.w,
                   child: const BulleRetraitVers()
                       .animate(
                         controller: _animcontroller,
@@ -345,15 +373,20 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xFF6334A9),
-          onPressed: () {
-            setVisibleBulle();
-            visibledep2();
-          },
-          child: const Icon(
-            Icons.payment,
-            color: Colors.white,
+        floatingActionButton: SizedBox(
+          height: 50.sp,
+          width: 50.sp,
+          child: FloatingActionButton(
+            backgroundColor: const Color(0xFF6334A9),
+            onPressed: () {
+              setVisibleBulle();
+              visibledep2();
+            },
+            child: Icon(
+              size: 25.sp,
+              Icons.payment,
+              color: Colors.white,
+            ),
           ),
         ),
         bottomNavigationBar: botomNavBar,
@@ -362,36 +395,36 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   }
 
   Widget notificatinConnectionDesabled = Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    padding: EdgeInsets.symmetric(horizontal: 24.0.h, vertical: 12.0.w),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(25.0),
       color: Colors.red,
     ),
-    child: const Row(
+    child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(Icons.wifi_off_sharp),
+        const Icon(Icons.wifi_off_sharp),
         SizedBox(
-          width: 12.0,
+          width: 12.0.w,
         ),
-        Text('Connexion perdue')
+        const Text('Connexion perdue')
       ],
     ),
   );
   Widget notificatinConnectionEnabled = Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+    padding: EdgeInsets.symmetric(horizontal: 24.0.w, vertical: 12.0.h),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(25.0),
       color: Colors.green,
     ),
-    child: const Row(
+    child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(Icons.wifi),
+        const Icon(Icons.wifi),
         SizedBox(
-          width: 12.0,
+          width: 12.0.w,
         ),
-        Text('Connexion retablis')
+        const Text('Connexion retablis')
       ],
     ),
   );

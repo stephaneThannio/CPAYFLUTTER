@@ -1,5 +1,6 @@
 import 'package:cpay/models/articles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetaisArticle extends StatefulWidget {
   const DetaisArticle({super.key, required this.article});
@@ -32,198 +33,211 @@ class _DetaisArticleState extends State<DetaisArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Details du produits"),
+          title: Text(
+            "Details du produits",
+            style: TextStyle(fontSize: 20.sp),
+          ),
+          leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(
+                Icons.arrow_back,
+                size: 20.sp,
+              )),
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              //color: Colors.green,
-              height: 400,
-              child: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(widget.article.image)),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                margin: const EdgeInsets.all(20),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 30, right: 30),
-              //color: Colors.amber,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 20,
-                    width: 50,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  //color: Colors.green,
+                  height: 320.sp,
+                  child: Container(
                     decoration: BoxDecoration(
-                        color: const Color(0xFF6334A9),
-                        borderRadius: BorderRadius.circular(30)),
-                    child: const Text(
-                      textAlign: TextAlign.center,
-                      'Dispo',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(widget.article.image)),
                         color: Colors.white,
-                        fontFamily: 'PlusJakartaSans',
+                        borderRadius: BorderRadius.circular(20)),
+                    margin: const EdgeInsets.all(20),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 28.sp, right: 28.sp),
+                  //color: Colors.amber,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFF6334A9),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 8.sp, left: 8.sp),
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              'Dispo',
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontFamily: 'PlusJakartaSans',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        'Tirage dans:',
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15.sp,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 30),
+                        //color: Colors.green,
+                        child: Text(
+                          textAlign: TextAlign.start,
+                          widget.article.titre,
+                          style: TextStyle(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'PlusJakartaSans',
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  const Text(
-                    textAlign: TextAlign.center,
-                    'Tirage dans:',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black,
-                      fontFamily: 'PlusJakartaSans',
-                    ),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 30),
-                    //color: Colors.green,
+                    Container(
+                        //color: Colors.orange,
+                        margin: const EdgeInsets.only(right: 30),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF6334A9).withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: 30.sp,
+                                right: 30.sp,
+                                top: 5.sp,
+                                bottom: 5.sp),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  size: 23.sp,
+                                  Icons.timer_sharp,
+                                  color: Colors.black,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  '4j',
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                    fontFamily: 'PlusJakartaSans',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(left: 30.sp, right: 30.sp, top: 10.sp),
+                  //color: Colors.indigo,
+                  child: SingleChildScrollView(
                     child: Text(
                       textAlign: TextAlign.start,
-                      widget.article.titre,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'PlusJakartaSans',
+                      " olerm upsom it has no doubght to make mistqake inside the computer when you are in the bathroom It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.normal,
                         color: Colors.black,
                       ),
                     ),
                   ),
                 ),
-                Container(
-                    //color: Colors.orange,
-                    margin: const EdgeInsets.only(right: 30),
-                    child: Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: const Color(0xFF6334A9).withOpacity(0.6),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(
+                  height: 15.sp,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      margin: EdgeInsets.only(left: 30.sp),
+                      //color: Colors.green,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.timer_sharp,
-                            color: Colors.black,
-                          ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                              ),
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                '-',
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontFamily: 'PlusJakartaSans',
+                                ),
+                              ),
+                              onPressed: () => {lesTickets()}),
                           Text(
                             textAlign: TextAlign.center,
-                            '4j',
+                            ticketsNumber.toString(),
                             style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
+                              fontSize: 28.sp,
+                              fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontFamily: 'PlusJakartaSans',
                             ),
                           ),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                              ),
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                '+',
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontFamily: 'PlusJakartaSans',
+                                ),
+                              ),
+                              onPressed: () => {plusTickets()}),
                         ],
                       ),
-                    ))
-              ],
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 30, right: 30, top: 10),
-                //color: Colors.indigo,
-                child: const SingleChildScrollView(
-                  child: Text(
-                    textAlign: TextAlign.start,
-                    " olerm upsom it has no doubght to make mistqake inside the computer when you are in the bathroom It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black,
                     ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 160,
-                  margin: const EdgeInsets.only(left: 30),
-                  //color: Colors.green,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                          child: const Text(
-                            textAlign: TextAlign.center,
-                            '-',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontFamily: 'PlusJakartaSans',
-                            ),
-                          ),
-                          onPressed: () => {lesTickets()}),
-                      Expanded(
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          ticketsNumber.toString(),
-                          style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontFamily: 'PlusJakartaSans',
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                          child: const Text(
-                            textAlign: TextAlign.center,
-                            '+',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontFamily: 'PlusJakartaSans',
-                            ),
-                          ),
-                          onPressed: () => {plusTickets()}),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 30),
-                    child: ElevatedButton(
+                    ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF6334A9)),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Row(
@@ -233,13 +247,14 @@ class _DetaisArticleState extends State<DetaisArticle> {
                                   textAlign: TextAlign.center,
                                   'Acheter',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                     fontFamily: 'PlusJakartaSans',
                                   ),
                                 ),
                                 Icon(
+                                  size: 23.sp,
                                   Icons.shopping_cart_rounded,
                                   color: Colors.white,
                                 )
@@ -248,14 +263,14 @@ class _DetaisArticleState extends State<DetaisArticle> {
                           ],
                         ),
                         onPressed: () => {}),
-                  ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15.sp,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 15,
-            ),
-          ],
+          ),
         ));
   }
 }

@@ -6,6 +6,7 @@ import 'package:cpay/items/TextFieldPreuse.dart';
 import 'package:cpay/models/articles.dart';
 import 'package:cpay/pages/details_article.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../items/cardArticle.dart';
 
@@ -51,32 +52,36 @@ class _MesArticlesState extends State<MesArticles> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Stack(
+      child: Column(
         children: [
-          GridView.builder(
-              itemCount: !recherche ? articles.length : afterRech.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1, childAspectRatio: 2.2),
-              itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                    child: GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetaisArticle(
-                                  article: !recherche
-                                      ? articles[index]
-                                      : afterRech[index]))),
-                      child: CardArticle(
-                        couleurCpay: couleurCpay,
-                        article:
-                            !recherche ? articles[index] : afterRech[index],
+          barredeRecherche(context),
+          Expanded(
+            child: ListView.builder(
+                itemCount: !recherche ? articles.length : afterRech.length,
+                itemBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.only(right: 7.0.w, left: 7.0.w),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetaisArticle(
+                                    article: !recherche
+                                        ? articles[index]
+                                        : afterRech[index]))),
+                        child: SizedBox(
+                          height: 160.spMax,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                            child: CardArticle(
+                              couleurCpay: couleurCpay,
+                              article: !recherche
+                                  ? articles[index]
+                                  : afterRech[index],
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  )),
-          Align(
-            alignment: const Alignment(0, -0.95),
-            child: barredeRecherche(context),
+                    )),
           ),
         ],
       ),
@@ -88,8 +93,7 @@ class _MesArticlesState extends State<MesArticles> {
       decoration: BoxDecoration(
           //color: Colors.grey,
           borderRadius: BorderRadius.circular(20)),
-      height: 50,
-      width: 400,
+      height: 40.sp,
       child: TextFieldPreuse(
           hint: 'Rechercher',
           obscur: false,
@@ -100,14 +104,20 @@ class _MesArticlesState extends State<MesArticles> {
                   onPressed: () {
                     rechercher();
                   },
-                  icon: const Icon(Icons.search),
+                  icon: Icon(
+                    Icons.search,
+                    size: 20.sp,
+                  ),
                   color: Colors.white,
                 )
               : IconButton(
                   onPressed: () {
                     motvide();
                   },
-                  icon: const Icon(Icons.refresh),
+                  icon: Icon(
+                    Icons.refresh,
+                    size: 20.sp,
+                  ),
                   color: Colors.white,
                 ),
           control: rechCOntrol),

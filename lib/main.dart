@@ -1,8 +1,8 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:cpay/pages/premierDemarage.dart';
-import 'package:cpay/pages/splashscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/Accueil.dart';
@@ -21,14 +21,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'CPAY',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'CPAY Company For Madagascar'),
-    );
+    return ScreenUtilInit(
+        designSize: const Size(360, 640),
+        builder: (context, child) => MaterialApp(
+              title: 'CPAY',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+              home: const MyHomePage(title: 'CPAY Company For Madagascar'),
+            ));
   }
 }
 
@@ -68,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   attendre() {
-    Future.delayed(Duration(seconds: 1), gotohome);
+    Future.delayed(const Duration(seconds: 1), gotohome);
   }
 
   void verifuse() {
