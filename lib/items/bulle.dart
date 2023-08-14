@@ -58,8 +58,8 @@ class BulleRetraitVers extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(60.sp)),
                   child: SizedBox(
-                    height: 45.h,
-                    width: 45.w,
+                    height: 45.sp,
+                    width: 45.sp,
                     child: IconButton(
                         onPressed: () {
                           func();
@@ -85,8 +85,8 @@ class BulleRetraitVers extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 70.h,
-            width: 70.w,
+            height: 70.sp,
+            width: 70.sp,
             child: Column(
               children: [
                 Container(
@@ -103,8 +103,8 @@ class BulleRetraitVers extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(60.sp)),
                   child: SizedBox(
-                    height: 45.h,
-                    width: 45.w,
+                    height: 45.sp,
+                    width: 45.sp,
                     child: IconButton(
                         onPressed: () {
                           func();
@@ -130,8 +130,8 @@ class BulleRetraitVers extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 70.h,
-            width: 70.w,
+            height: 70.sp,
+            width: 70.sp,
             child: Column(
               children: [
                 Container(
@@ -148,8 +148,8 @@ class BulleRetraitVers extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(60.sp)),
                   child: SizedBox(
-                    height: 45.h,
-                    width: 45.w,
+                    height: 45.sp,
+                    width: 45.sp,
                     child: IconButton(
                         onPressed: () {
                           func();
