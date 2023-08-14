@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BulleRetraitVers extends StatelessWidget {
+  final Function func;
   const BulleRetraitVers({
     super.key,
+    required this.func,
   });
 
   @override
@@ -27,6 +29,11 @@ class BulleRetraitVers extends StatelessWidget {
           });
     }
 
+    void goTodepot() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const PageDepot()));
+    }
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
@@ -44,7 +51,8 @@ class BulleRetraitVers extends StatelessWidget {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 7,
                           blurRadius: 9,
-                          offset: const Offset(2, 5), // Décalage vertical de l'ombre
+                          offset: const Offset(
+                              2, 5), // Décalage vertical de l'ombre
                         ),
                       ],
                       color: Colors.white,
@@ -53,10 +61,13 @@ class BulleRetraitVers extends StatelessWidget {
                     height: 45.h,
                     width: 45.w,
                     child: IconButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PageDepot())),
+                        onPressed: () {
+                          func();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PageDepot()));
+                        },
                         icon: Image.asset('lib/photos/depot.png')),
                   ),
                 ),
@@ -85,7 +96,8 @@ class BulleRetraitVers extends StatelessWidget {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 7,
                           blurRadius: 9,
-                          offset: const Offset(2, 5), // Décalage vertical de l'ombre
+                          offset: const Offset(
+                              2, 5), // Décalage vertical de l'ombre
                         ),
                       ],
                       color: Colors.white,
@@ -94,10 +106,13 @@ class BulleRetraitVers extends StatelessWidget {
                     height: 45.h,
                     width: 45.w,
                     child: IconButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PageDepot())),
+                        onPressed: () {
+                          func();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PageDepot()));
+                        },
                         icon: Image.asset('lib/photos/retrait.png')),
                   ),
                 ),
@@ -126,7 +141,8 @@ class BulleRetraitVers extends StatelessWidget {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 7,
                           blurRadius: 9,
-                          offset: const Offset(2, 5), // Décalage vertical de l'ombre
+                          offset: const Offset(
+                              2, 5), // Décalage vertical de l'ombre
                         ),
                       ],
                       color: Colors.white,
@@ -135,10 +151,13 @@ class BulleRetraitVers extends StatelessWidget {
                     height: 45.h,
                     width: 45.w,
                     child: IconButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PageDepot())),
+                        onPressed: () {
+                          func();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PageDepot()));
+                        },
                         icon: Image.asset('lib/photos/transfert.png')),
                   ),
                 ),

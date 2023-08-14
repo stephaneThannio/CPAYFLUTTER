@@ -8,6 +8,7 @@ import 'package:cpay/items/cardArticle.dart';
 //import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
+import 'package:cpay/pages/depotpage.dart';
 import 'package:cpay/pages/mes_articles.dart';
 import 'package:cpay/pages/qr_code_page.dart';
 import 'package:cpay/pages/splashscreen.dart';
@@ -180,6 +181,17 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         builder: (BuildContext context) {
           return const Dodeposit();
         });
+  }
+
+  ontabBullButton() {
+    setVisibleBulle();
+    visibledep2();
+  }
+
+  goTodepot() {
+    print('HELLO');
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const PageDepot()));
   }
 
 //============================Widget=======================================================================
@@ -361,7 +373,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                 child: SizedBox(
                   height: 300.h,
                   width: 70.w,
-                  child: const BulleRetraitVers()
+                  child: BulleRetraitVers(
+                    func: () => ontabBullButton(),
+                  )
                       .animate(
                         controller: _animcontroller,
                       )
