@@ -96,7 +96,8 @@ class _PageDepotState extends State<PageDepot> {
     } else if (req2['status'] == "failed") {
       setState(() {
         loading = false;
-        alert("erreur", "Erreur de transfert", QuickAlertType.error);
+        alert("Transaction echouée", "la transaction a été rejetée",
+            QuickAlertType.error);
       });
     }
   }
