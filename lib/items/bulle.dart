@@ -40,8 +40,8 @@ class BulleRetraitVers extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 70.h,
-            width: 70.w,
+            height: 70.sp,
+            width: 70.sp,
             child: Column(
               children: [
                 Container(
