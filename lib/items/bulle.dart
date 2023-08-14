@@ -56,7 +56,7 @@ class BulleRetraitVers extends StatelessWidget {
                         ),
                       ],
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(60)),
+                      borderRadius: BorderRadius.circular(60.sp)),
                   child: SizedBox(
                     height: 45.h,
                     width: 45.w,
@@ -101,7 +101,7 @@ class BulleRetraitVers extends StatelessWidget {
                         ),
                       ],
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(60)),
+                      borderRadius: BorderRadius.circular(60.sp)),
                   child: SizedBox(
                     height: 45.h,
                     width: 45.w,
@@ -146,7 +146,7 @@ class BulleRetraitVers extends StatelessWidget {
                         ),
                       ],
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(60)),
+                      borderRadius: BorderRadius.circular(60.sp)),
                   child: SizedBox(
                     height: 45.h,
                     width: 45.w,
