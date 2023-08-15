@@ -266,7 +266,7 @@ class _PageDepotState extends State<PageDepot> {
                                       maxLines: 1,
                                       decoration:
                                           const InputDecoration.collapsed(
-                                              hintText: "Montant"),
+                                              hintText: "Montant MGA"),
                                     ))
                                   ],
                                 ),
@@ -294,7 +294,7 @@ class _PageDepotState extends State<PageDepot> {
                                       maxLines: 1,
                                       decoration:
                                           const InputDecoration.collapsed(
-                                              hintText: "Telephone"),
+                                              hintText: "Telephone MVOLA"),
                                     ))
                                   ],
                                 ),
@@ -313,7 +313,7 @@ class _PageDepotState extends State<PageDepot> {
                             SizedBox(
                               width: double.infinity,
                               child: Text(
-                                'METHODE DE PAYEMENT',
+                                'METHODE DE PAIEMENT',
                                 style: TextStyle(
                                   fontSize: 25.sp,
                                   fontWeight: FontWeight.bold,

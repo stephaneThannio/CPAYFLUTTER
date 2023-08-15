@@ -84,7 +84,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       });
     } else if (val == 1) {
       setState(() {
-        titre = "Achats";
+        titre = "Trading";
       });
     } else if (val == 2) {
       setState(() {
