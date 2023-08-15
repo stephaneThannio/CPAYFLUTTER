@@ -224,7 +224,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             Icons.send_to_mobile_outlined,
             size: 20.0.sp,
           ),
-          label: 'TRANSACTIONS'),
+          label: 'MON COMPTE'),
       BottomNavigationBarItem(
           icon: Icon(
             Icons.qr_code,
