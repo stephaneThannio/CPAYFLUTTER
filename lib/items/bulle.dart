@@ -73,9 +73,9 @@ class BulleRetraitVers extends StatelessWidget {
                 ),
                 Text(
                   textAlign: TextAlign.center,
-                  'Depot',
+                  'DEPOT',
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 8.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
@@ -118,9 +118,9 @@ class BulleRetraitVers extends StatelessWidget {
                 ),
                 Text(
                   textAlign: TextAlign.center,
-                  'retrait',
+                  'RETRAIT',
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 8.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
@@ -163,9 +163,9 @@ class BulleRetraitVers extends StatelessWidget {
                 ),
                 Text(
                   textAlign: TextAlign.center,
-                  'transfert',
+                  'TRANSFERT',
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 8.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.white,
                     fontFamily: 'PlusJakartaSans',
