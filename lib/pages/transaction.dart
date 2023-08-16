@@ -85,7 +85,7 @@ class _TransactionState extends State<Transaction> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'Current Ballance',
+                        'Solde',
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.normal,
@@ -111,9 +111,9 @@ class _TransactionState extends State<Transaction> {
                           left: 30.0.sp,
                           right: 30.0.sp),
                       child: Text(
-                        '15000MGA',
+                        '120 000 000 000 MGA',
                         style: TextStyle(
-                          fontSize: 25.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           color: const Color(0xFF6334A9),
                           fontFamily: 'PlusJakartaSans',

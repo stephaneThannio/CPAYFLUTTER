@@ -90,7 +90,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       });
     } else if (val == 2) {
       setState(() {
-        titre = "Transactions";
+        titre = "IBAN";
       });
     } else if (val == 3) {
       setState(() {
