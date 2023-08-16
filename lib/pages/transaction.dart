@@ -1,7 +1,11 @@
+import 'package:cpay/api/api.dart';
 import 'package:cpay/items/itemsTab/achatapi.dart';
 import 'package:cpay/items/itemsTab/depos.dart';
+//import 'package:cpay/items/itemsTab/depos.dart';
+import 'package:cpay/items/itemsTab/depotitem.dart';
 import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
+import 'package:cpay/items/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,10 +19,41 @@ class Transaction extends StatefulWidget {
 }
 
 class _TransactionState extends State<Transaction> {
+  Map<String, dynamic> list = {};
+  bool loading = false;
+  String totalSold = '';
+  String totaldepot = '';
+  String totalretrait = '';
+
+  Future getdepot() async {
+    setState(() {
+      loading = true;
+    });
+    list = await Api.getDepotlist(User.sessionUser!.iban);
+    if (list.isNotEmpty) {
+      setState(() {
+        loading = false;
+        totalSold = list['solde'];
+        // totaldepot = list['solde'];
+        // totalretrait = list['solde'];
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdepot();
+  }
+
   @override
   Widget build(BuildContext context) {
     final tabpage = <Widget>[
-      const Depot(),
+      loading
+          ? const Loading(
+              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+          : DepotListe(list: list),
       const Virement(),
       const AchatApis(),
       const Retrait()
@@ -54,9 +89,22 @@ class _TransactionState extends State<Transaction> {
               child: Center(
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 30.sp,
+                    ),
                     Text(
                       textAlign: TextAlign.center,
-                      'CPAY0123456789',
+                      "iban:",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                        fontFamily: 'PlusJakartaSans',
+                      ),
+                    ),
+                    Text(
+                      textAlign: TextAlign.center,
+                      User.sessionUser!.iban,
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -111,7 +159,7 @@ class _TransactionState extends State<Transaction> {
                           left: 30.0.sp,
                           right: 30.0.sp),
                       child: Text(
-                        '120 000 000 000 MGA',
+                        "$totalSold MGA",
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -124,8 +172,75 @@ class _TransactionState extends State<Transaction> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 50,
+                  width: 150,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.arrow_circle_up_outlined,
+                        color: Colors.grey,
+                      ),
+                      title: Text(
+                        "$totalSold MGA",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF6334A9),
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Total depot",
+                        style: TextStyle(
+                          fontSize: 9.sp,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 150,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.arrow_circle_down_outlined,
+                        color: Colors.grey,
+                      ),
+                      title: Text(
+                        "$totalSold MGA",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF6334A9),
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Total retrait",
+                        style: TextStyle(
+                          fontSize: 9.sp,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
             SizedBox(
-              height: 50.sp,
+              height: 20.sp,
             ),
             SizedBox(
               width: (MediaQuery.of(context).size.width) * 0.8,

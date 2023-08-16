@@ -1,10 +1,18 @@
-import 'package:cpay/models/depottransaction.dart';
+//import 'package:cpay/models/depottransaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DepotItem extends StatelessWidget {
-  const DepotItem({super.key, required this.depots});
-  final Depotransaction depots;
+  const DepotItem(
+      {super.key,
+      required this.status,
+      required this.date,
+      required this.montant,
+      required this.application});
+  final String status;
+  final String date;
+  final String montant;
+  final String application;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +26,7 @@ class DepotItem extends StatelessWidget {
             color: Colors.white,
             child: ListTile(
               title: Text(
-                depots.status,
+                status,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.bold,
@@ -27,7 +35,7 @@ class DepotItem extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                depots.date,
+                date,
                 style: TextStyle(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.normal,
@@ -36,7 +44,7 @@ class DepotItem extends StatelessWidget {
                 ),
               ),
               trailing: Text(
-                depots.montant,
+                "$montant MGA",
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
@@ -47,12 +55,14 @@ class DepotItem extends StatelessWidget {
               leading: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.sp),
-                    color: Colors.grey),
+                    color: const Color(0xFF6334A9).withOpacity(0.5)),
                 child: IconButton(
                   icon: Image(
                     width: 30.sp,
                     height: 30.sp,
-                    image: AssetImage('lib/photos/mvola.webp'),
+                    image: application == "MVOLA"
+                        ? const AssetImage('lib/photos/mvola.webp')
+                        : const AssetImage('lib/photos/banktransfert.png'),
                   ),
                   onPressed: () {},
                 ),

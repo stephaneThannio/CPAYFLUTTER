@@ -3,9 +3,10 @@
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:cpay/items/cardArticle.dart';
+import 'package:cpay/api/api.dart';
+//import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/items/itemsTab/depotitem.dart';
-import 'package:cpay/models/depottransaction.dart';
+//import 'package:cpay/models/depottransaction.dart';
 
 //import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
@@ -13,7 +14,7 @@ import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
 import 'package:cpay/pages/mes_articles.dart';
 import 'package:cpay/pages/qr_code_page.dart';
-import 'package:cpay/pages/splashscreen.dart';
+//import 'package:cpay/pages/splashscreen.dart';
 //import 'package:cpay/pages/splashscreen.dart';
 import 'package:cpay/pages/transaction.dart';
 //import 'package:cpay/pages/login.dart';
@@ -90,7 +91,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       });
     } else if (val == 2) {
       setState(() {
-        titre = "IBAN";
+        titre = "Mon compte";
       });
     } else if (val == 3) {
       setState(() {
@@ -98,6 +99,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       });
     }
   }
+
+  Map<String, dynamic> list = {};
 //===========================Titre de page control===================================================================================
 
 //==============================Alert=======================================================================
@@ -196,6 +199,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         context, MaterialPageRoute(builder: (context) => const PageDepot()));
   }
 
+  Future getdepot() async {
+    list = await Api.getDepotlist(User.sessionUser!.iban);
+
+    print(list['depot'][1]['date']);
+    print(list.length);
+  }
+
 //============================Widget=======================================================================
   @override
   Widget build(BuildContext context) {
@@ -289,12 +299,15 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             // icon: Image.asset(
             //     width: 200.w, height: 50.h, ('lib/photos/285-min.png')),
             onPressed: () {
-              Navigator.push(
+              getdepot().whenComplete(() => Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => DepotItem(
-                            depots: depotTransaction[0],
-                          )));
+                            status: list['depot'][0]["status_payment"],
+                            date: list['depot'][0]["date"],
+                            montant: list['depot'][0]["montant"],
+                            application: list['depot'][0]["application"],
+                          ))));
             },
           ),
           actions: [

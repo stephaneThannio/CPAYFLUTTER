@@ -43,4 +43,24 @@ class Api {
       print("error");
     }
   }
+
+  static getDepotlist(String iban) async {
+    final request = await post(Uri.parse('https://api.c-pay.me/depot'),
+        body: jsonEncode({
+          "app": "cpay",
+          "session": iban,
+          "Autorization": "...",
+          "action": "get_transactions",
+          "page": "1"
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        });
+    if (request.statusCode == 200) {
+      var data = jsonDecode(request.body);
+      return data;
+    } else {
+      return null;
+    }
+  }
 }
