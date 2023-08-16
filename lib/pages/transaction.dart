@@ -42,30 +42,111 @@ class _TransactionState extends State<Transaction> {
     return DefaultTabController(
       length: tabpage.length,
       child: Scaffold(
-        appBar: AppBar(
-          leading: const Icon(Icons.person_outline),
-          actions: [
-            Text(User.sessionUser!.iban),
+        body: Column(
+          children: [
+            Container(
+              height: 100.sp,
+              decoration: BoxDecoration(
+                  color: const Color(0xFF6334A9),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(50.sp),
+                      bottomRight: Radius.circular(50.sp))),
+              child: Center(
+                child: Column(
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      'CPAY0123456789',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'PlusJakartaSans',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.sp,
+                    ),
+                    Container(
+                      width: 60.sp,
+                      height: 1.sp,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: Column(
+                children: [
+                  Container(
+                    // color: Colors.blue,
+                    height: 50.sp,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Current Ballance',
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(60.sp)),
+                      border: Border.all(
+                        width: 1,
+                        color: const Color(0xFF6334A9),
+                      ),
+                      //color: Colors.green,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: 8.0,
+                          bottom: 8.0.sp,
+                          left: 30.0.sp,
+                          right: 30.0.sp),
+                      child: Text(
+                        '15000MGA',
+                        style: TextStyle(
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF6334A9),
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
-              width: 150.w,
+              height: 50.sp,
             ),
-            const Text('Solde: '),
-            const Text('180000 MGA')
+            SizedBox(
+              width: (MediaQuery.of(context).size.width) * 0.8,
+              child: TabBar(
+                labelColor: Colors.grey,
+                tabs: buttonTop,
+              ),
+            ),
+            SizedBox(
+              height: 20.sp,
+            ),
+            Expanded(
+              child: Container(
+                //color: Colors.red,
+                child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: tabpage,
+                ),
+              ),
+            ),
           ],
-          bottom: TabBar(
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicator: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-              color: Color(0xFF6334A9),
-            ),
-            labelColor: Colors.white,
-            tabs: buttonTop,
-          ),
-        ),
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: tabpage,
         ),
       ),
     );

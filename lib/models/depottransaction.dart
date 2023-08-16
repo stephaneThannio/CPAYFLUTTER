@@ -25,5 +25,15 @@ List<Depotransaction> depotTransaction = [
       date: '20-02-2022',
       montant: '30 000 MGA',
       status: 'En Attente',
+      payment: "virement bancaire"),
+  Depotransaction(
+      date: '20-02-2022',
+      montant: '30 000 MGA',
+      status: 'En Attente',
+      payment: "virement bancaire"),
+  Depotransaction(
+      date: '20-02-2022',
+      montant: '30 000 MGA',
+      status: 'En Attente',
       payment: "virement bancaire")
 ];

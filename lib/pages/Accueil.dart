@@ -4,6 +4,8 @@
 //import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/items/cardArticle.dart';
+import 'package:cpay/items/itemsTab/depotitem.dart';
+import 'package:cpay/models/depottransaction.dart';
 
 //import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
@@ -287,8 +289,12 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             // icon: Image.asset(
             //     width: 200.w, height: 50.h, ('lib/photos/285-min.png')),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Splashscreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DepotItem(
+                            depots: depotTransaction[0],
+                          )));
             },
           ),
           actions: [
