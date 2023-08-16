@@ -13,7 +13,7 @@ class Depotransaction {
 List<Depotransaction> depotTransaction = [
   Depotransaction(
       date: '28-02-2022',
-      montant: '10 000 MGA',
+      montant: '1 000 000 000 000 MGA',
       status: 'En Attente',
       payment: "virement bancaire"),
   Depotransaction(
