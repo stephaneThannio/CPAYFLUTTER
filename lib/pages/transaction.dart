@@ -2,7 +2,7 @@ import 'package:cpay/api/api.dart';
 import 'package:cpay/items/itemsTab/achatapi.dart';
 import 'package:cpay/items/itemsTab/depos.dart';
 //import 'package:cpay/items/itemsTab/depos.dart';
-import 'package:cpay/items/itemsTab/depotitem.dart';
+//import 'package:cpay/items/itemsTab/depotitem.dart';
 import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:cpay/items/loading.dart';
@@ -40,6 +40,7 @@ class _TransactionState extends State<Transaction> {
     }
   }
 
+//
   @override
   void initState() {
     // TODO: implement initState

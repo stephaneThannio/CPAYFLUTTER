@@ -76,6 +76,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     });
   }
 
+//
 //========================Snackbar=========================================
 //=========================Titre de page control================================================
   bool log = true;

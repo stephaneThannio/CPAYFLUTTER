@@ -2,6 +2,7 @@ import 'package:cpay/items/itemsTab/depotitem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+//
 class DepotListe extends StatelessWidget {
   const DepotListe({
     super.key,
