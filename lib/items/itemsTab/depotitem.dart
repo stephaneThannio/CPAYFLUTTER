@@ -13,7 +13,7 @@ class DepotItem extends StatelessWidget {
   final String date;
   final String montant;
   final String application;
-//
+
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.height;

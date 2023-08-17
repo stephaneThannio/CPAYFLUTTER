@@ -40,7 +40,7 @@ class _TransactionState extends State<Transaction> {
     }
   }
 
-//
+
   @override
   void initState() {
     // TODO: implement initState

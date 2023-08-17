@@ -8,7 +8,7 @@ class DepotListe extends StatelessWidget {
     super.key,
     required this.list,
   });
-
+//
   final Map<String, dynamic> list;
 
   @override
