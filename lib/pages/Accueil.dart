@@ -2,10 +2,12 @@
 
 //import 'package:animator/animator.dart';
 //import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:convert';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/api/api.dart';
 //import 'package:cpay/items/cardArticle.dart';
-import 'package:cpay/items/itemsTab/depotitem.dart';
+//import 'package:cpay/items/itemsTab/depotitem.dart';
 //import 'package:cpay/models/depottransaction.dart';
 
 //import 'package:cpay/items/cardArticle.dart';
@@ -76,7 +78,6 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     });
   }
 
-
 //========================Snackbar=========================================
 //=========================Titre de page control================================================
   bool log = true;
@@ -102,6 +103,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   }
 
   Map<String, dynamic> list = {};
+  List<Map<String, dynamic>> list22 = [];
+  var list2;
 //===========================Titre de page control===================================================================================
 
 //==============================Alert=======================================================================
@@ -202,9 +205,19 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
 
   Future getdepot() async {
     list = await Api.getDepotlist(User.sessionUser!.iban);
+    if (list['depot'][1]['application'] != "MVOLA") {
+      list2 = List<Map<String, dynamic>>.from(
+          jsonDecode(list['depot'][0]['application']));
+      print(" aa ${list2[0].entries.elementAt(0).value}");
+    } else {
+      list2 = list['depot'][1]['application'];
+      print(" bb $list2");
+    }
 
-    print(list['depot'][1]['date']);
-    print(list.length);
+    // print(list2[0]);
+
+    // print(list.length);
+    //}
   }
 
 //============================Widget=======================================================================
@@ -300,15 +313,10 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             // icon: Image.asset(
             //     width: 200.w, height: 50.h, ('lib/photos/285-min.png')),
             onPressed: () {
-              getdepot().whenComplete(() => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DepotItem(
-                            status: list['depot'][0]["status_payment"],
-                            date: list['depot'][0]["date"],
-                            montant: list['depot'][0]["montant"],
-                            application: list['depot'][0]["application"],
-                          ))));
+              getdepot();
+              // .whenComplete(() => print(
+              //       list['depot'][0]["application"],
+              //     ));
             },
           ),
           actions: [

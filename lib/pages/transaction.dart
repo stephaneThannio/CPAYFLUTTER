@@ -1,8 +1,6 @@
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/itemsTab/achatapi.dart';
 import 'package:cpay/items/itemsTab/depos.dart';
-//import 'package:cpay/items/itemsTab/depos.dart';
-//import 'package:cpay/items/itemsTab/depotitem.dart';
 import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:cpay/items/loading.dart';
@@ -39,7 +37,6 @@ class _TransactionState extends State<Transaction> {
       });
     }
   }
-
 
   @override
   void initState() {
@@ -246,6 +243,7 @@ class _TransactionState extends State<Transaction> {
             SizedBox(
               width: (MediaQuery.of(context).size.width) * 0.8,
               child: TabBar(
+                unselectedLabelColor: const Color(0xFF6334A9),
                 labelColor: Colors.grey,
                 tabs: buttonTop,
               ),
