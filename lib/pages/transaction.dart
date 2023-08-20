@@ -92,7 +92,7 @@ class _TransactionState extends State<Transaction> {
                     ),
                     Text(
                       textAlign: TextAlign.center,
-                      "iban:",
+                      "iban CPAY:",
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.normal,

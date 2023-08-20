@@ -111,14 +111,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   void alert(String titreAlert, String textAlert, String comfirmText,
       QuickAlertType typeAlert, VoidCallback func) {
     QuickAlert.show(
-      confirmBtnText: comfirmText,
-      context: context,
-      type: typeAlert,
-      title: titreAlert,
-      text: textAlert,
-      onConfirmBtnTap: func,
-      confirmBtnColor: const Color(0xFF6334A9),
-    );
+        confirmBtnText: comfirmText,
+        context: context,
+        type: typeAlert,
+        title: titreAlert,
+        text: textAlert,
+        onConfirmBtnTap: func,
+        confirmBtnColor: const Color(0xFF6334A9));
   }
 
   //=====================Alert=======================================================================================

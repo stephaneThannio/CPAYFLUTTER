@@ -117,7 +117,7 @@ class InfoBnc extends StatelessWidget {
                                               left: 30.0.sp,
                                               right: 30.0.sp),
                                           child: Text(
-                                            "${list[0].entries.elementAt(0).value.toString()} EUR",
+                                            "Montant à transferer\n${list[0].entries.elementAt(0).value.toString()} EUR",
                                             style: TextStyle(
                                               fontSize: 18.sp,
                                               fontWeight: FontWeight.bold,
@@ -137,6 +137,30 @@ class InfoBnc extends StatelessWidget {
                                     //color: Colors.red,
                                     child: Column(
                                       children: [
+                                        ListTile(
+                                          title: Text(
+                                            "REFERENCE",
+                                            style: TextStyle(
+                                              fontSize: 15.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFF6334A9),
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
+                                          ),
+                                          subtitle: Text(
+                                            list[0]
+                                                .entries
+                                                .elementAt(5)
+                                                .value
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.grey,
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
+                                          ),
+                                        ),
                                         ListTile(
                                           title: Text(
                                             "IBAN",
@@ -223,30 +247,6 @@ class InfoBnc extends StatelessWidget {
                                             list[0]
                                                 .entries
                                                 .elementAt(4)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                        ),
-                                        ListTile(
-                                          title: Text(
-                                            "REFERENCE",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(5)
                                                 .value
                                                 .toString(),
                                             style: TextStyle(
