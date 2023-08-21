@@ -63,4 +63,58 @@ class Api {
       return null;
     }
   }
+
+  static getReference(String iban, String montant) async {
+    try {
+      var request = await post(Uri.parse('https://api.c-pay.me/depot'),
+          body: jsonEncode({
+            "app": "cpay",
+            "iban": iban,
+            "Autorization": "...",
+            "action": "get_reference",
+            "montant": montant
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      if (request.statusCode == 200) {
+        // Map<String, dynamic> data =
+        //     Map<String, dynamic>.from(jsonDecode(request.body));
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return null;
+      }
+    } catch (erreur) {
+      print(erreur);
+    }
+  }
+
+  static sendrequestdepositBnktransfer(
+      String iban, String montant, String ref) async {
+    try {
+      var request = await post(Uri.parse('https://api.c-pay.me/depot'),
+          body: jsonEncode({
+            "app": "cpay",
+            "iban": iban,
+            "Autorization": "...",
+            "action": "depot_bank",
+            "montant": montant,
+            "reference": ref
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          });
+      if (request.statusCode == 200) {
+        // Map<String, dynamic> data =
+        //     Map<String, dynamic>.from(jsonDecode(request.body));
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return null;
+      }
+    } catch (erreur) {
+      print(erreur);
+    }
+  }
 }
