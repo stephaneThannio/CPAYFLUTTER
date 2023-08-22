@@ -84,23 +84,11 @@ class InfoBnc extends StatelessWidget {
                                 Center(
                                   child: Column(
                                     children: [
-                                      Container(
-                                        // color: Colors.blue,
+                                      SizedBox(
                                         height: 50.sp,
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            'Montant a trasferer',
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                       Container(
+                                        width: 200.sp,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(60.sp)),
@@ -110,21 +98,36 @@ class InfoBnc extends StatelessWidget {
                                           ),
                                           //color: Colors.green,
                                         ),
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 8.0,
-                                              bottom: 8.0.sp,
-                                              left: 30.0.sp,
-                                              right: 30.0.sp),
-                                          child: Text(
-                                            "Montant à transferer\n${list[0].entries.elementAt(0).value.toString()} EUR",
-                                            style: TextStyle(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              // color: Colors.blue,
+
+                                              child: Align(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  'Montant a trasferer',
+                                                  style: TextStyle(
+                                                    fontSize: 15.sp,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    color: Colors.grey,
+                                                    fontFamily:
+                                                        'PlusJakartaSans',
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Text(
+                                              "${list[0].entries.elementAt(0).value.toString()} EUR",
+                                              style: TextStyle(
+                                                fontSize: 18.sp,
+                                                fontWeight: FontWeight.bold,
+                                                color: const Color(0xFF6334A9),
+                                                fontFamily: 'PlusJakartaSans',
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],

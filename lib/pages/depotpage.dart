@@ -182,11 +182,13 @@ class _PageDepotState extends State<PageDepot> {
     if (User.sessionUser != null) {
       setState(() {
         controliban = TextEditingController(text: User.sessionUser!.iban);
+        controlibanBNCT = TextEditingController(text: User.sessionUser!.iban);
         enabled = false;
       });
     } else {
       setState(() {
         controliban = TextEditingController();
+        controlibanBNCT = TextEditingController();
         enabled = true;
       });
     }
@@ -603,9 +605,13 @@ class _PageDepotState extends State<PageDepot> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Virement bancaire',
-                          style: TextStyle(color: Colors.white),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 20, right: 20, top: 10),
+                          child: const Text(
+                            'Virement bancaire',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                         Container(
                           margin: const EdgeInsets.only(
@@ -614,12 +620,19 @@ class _PageDepotState extends State<PageDepot> {
                               "Montant a transferer :${montantEuro}Euro \nIBAN:$iban_bank \nBIC:$bank_bic \nNom:$bank_nom Domiciliation:$bank_domiciliation \nREFERENCE:$reference \nDATE: ${DateTime.now()}",
                               style: TextStyle(color: Colors.white)),
                         ),
-                        const Text(
-                            'Veuillez faire un virement sur le compte Bancaire de CPAY avec la référence et le somme indiqué ci-dessus, puis cliquer sur continuer, et votre demande de dépôt sera en attente de validation, dès que votre transaction est valider, la somme sera mis sur votre compte.\n',
-                            style: TextStyle(color: Colors.white)),
-                        const Text(
-                            'NB: Veuillez mettre dans la référence de transfert sur le virement: REFERENCE + Montant MGA + Nom + Contact',
-                            style: TextStyle(color: Colors.white)),
+                        Container(
+                          margin: const EdgeInsets.only(left: 20, right: 20),
+                          child: const Text(
+                              'Veuillez faire un virement sur le compte Bancaire de CPAY avec la référence et le somme indiqué ci-dessus, puis cliquer sur continuer, et votre demande de dépôt sera en attente de validation, dès que votre transaction est valider, la somme sera mis sur votre compte.\n',
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10),
+                          child: const Text(
+                              'NB: Veuillez mettre dans la référence de transfert sur le virement: REFERENCE + Montant MGA + Nom + Contact',
+                              style: TextStyle(color: Colors.white)),
+                        ),
                       ],
                     ),
                   ),

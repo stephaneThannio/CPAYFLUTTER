@@ -85,7 +85,7 @@ class _LoginState extends State<Login> {
             ),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
-            }).timeout(const Duration(seconds: 20));
+            });
         // ignore: duplicate_ignore
         if (request.statusCode == 200) {
           var data = jsonDecode(request.body);
@@ -130,6 +130,7 @@ class _LoginState extends State<Login> {
                 QuickAlertType.error, notWelcome);
           });
         }
+        print(error);
       }
     }
   }

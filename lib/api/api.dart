@@ -44,14 +44,14 @@ class Api {
     }
   }
 
-  static getDepotlist(String iban) async {
+  static getDepotlist(String iban, int page) async {
     final request = await post(Uri.parse('https://api.c-pay.me/depot'),
         body: jsonEncode({
           "app": "cpay",
           "session": iban,
           "Autorization": "...",
           "action": "get_transactions",
-          "page": "1"
+          "page": page
         }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

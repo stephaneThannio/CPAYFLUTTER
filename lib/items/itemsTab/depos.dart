@@ -7,37 +7,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //
 class DepotListe extends StatelessWidget {
-  const DepotListe({
-    super.key,
-    required this.list,
-  });
+  const DepotListe({super.key, required this.list, required this.control});
 //
-  final Map<String, dynamic> list;
-
+  final List list;
+  // final Map<String, dynamic> list;
+  final ScrollController control;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: list['depot'].length,
+        controller: control,
+        itemCount: list.length,
         itemBuilder: (context, index) => SizedBox(
             height: 70.spMax,
             child: GestureDetector(
               onTap: () {
-                if (list['depot'][index]['application'] != "MVOLA") {
+                if (list[index]['application'] != "MVOLA") {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => InfoBnc(
                                 list: List<Map<String, dynamic>>.from(
-                                    jsonDecode(
-                                        list['depot'][index]['application'])),
+                                    jsonDecode(list[index]['application'])),
                               )));
                 }
               },
               child: DepotItem(
-                status: list['depot'][index]["status_payment"],
-                date: list['depot'][index]["date"],
-                montant: list['depot'][index]["montant"],
-                application: list['depot'][index]["application"],
+                status: list[index]["status_payment"],
+                date: list[index]["date"],
+                montant: list[index]["montant"],
+                application: list[index]["application"],
               ),
             )));
   }

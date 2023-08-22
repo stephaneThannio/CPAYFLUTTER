@@ -202,22 +202,22 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         context, MaterialPageRoute(builder: (context) => const PageDepot()));
   }
 
-  Future getdepot() async {
-    list = await Api.getDepotlist(User.sessionUser!.iban);
-    if (list['depot'][1]['application'] != "MVOLA") {
-      list2 = List<Map<String, dynamic>>.from(
-          jsonDecode(list['depot'][0]['application']));
-      print(" aa ${list2[0].entries.elementAt(0).value}");
-    } else {
-      list2 = list['depot'][1]['application'];
-      print(" bb $list2");
-    }
+  // Future getdepot() async {
+  //   list = await Api.getDepotlist(User.sessionUser!.iban);
+  //   if (list['depot'][1]['application'] != "MVOLA") {
+  //     list2 = List<Map<String, dynamic>>.from(
+  //         jsonDecode(list['depot'][0]['application']));
+  //     print(" aa ${list2[0].entries.elementAt(0).value}");
+  //   } else {
+  //     list2 = list['depot'][1]['application'];
+  //     print(" bb $list2");
+  //   }
 
-    // print(list2[0]);
+  //   // print(list2[0]);
 
-    // print(list.length);
-    //}
-  }
+  //   // print(list.length);
+  //   //}
+  // }
 
 //============================Widget=======================================================================
   @override
@@ -312,7 +312,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             // icon: Image.asset(
             //     width: 200.w, height: 50.h, ('lib/photos/285-min.png')),
             onPressed: () {
-              getdepot();
+              //getdepot();
               // .whenComplete(() => print(
               //       list['depot'][0]["application"],
               //     ));

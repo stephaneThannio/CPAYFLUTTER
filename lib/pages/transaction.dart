@@ -18,31 +18,72 @@ class Transaction extends StatefulWidget {
 
 class _TransactionState extends State<Transaction> {
   Map<String, dynamic> list = {};
+  List listeee = [];
+  Map<String, dynamic> listnext = {};
   bool loading = false;
   String totalSold = '';
   String totaldepot = '';
   String totalretrait = '';
-
+  int page = 1;
+  ScrollController scrollController = ScrollController();
   Future getdepot() async {
     setState(() {
       loading = true;
     });
-    list = await Api.getDepotlist(User.sessionUser!.iban);
+    list = await Api.getDepotlist(User.sessionUser!.iban, page);
+    for (int i = 0; i < list['depot'].length; i++) {
+      listeee.add(list['depot'][i]);
+    }
+
     if (list.isNotEmpty) {
       setState(() {
         loading = false;
         totalSold = list['solde'];
-        // totaldepot = list['solde'];
-        // totalretrait = list['solde'];
+        page = page + 1;
       });
     }
+    //print(listeee[0][0]['date']);
+    print(page);
+  }
+
+  Future scrolllistner() async {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      list = await Api.getDepotlist(User.sessionUser!.iban, page);
+      for (int i = 0; i < list['depot'].length; i++) {
+        if (page <= list["total_page_depot"]) {
+          listeee.add(list['depot'][i]);
+        }
+      }
+      setState(() {
+        if (page <= list["total_page_depot"]) {
+          page = page + 1;
+          print(page);
+        }
+      });
+    }
+    //   listnext = await Api.getDepotlist(User.sessionUser!.iban, page);
+    // }
+    // listnext.forEach((key, value) {
+    //   list[key] = value;
+    // });
+    // setState(() {});
+    //print(list['depot']);
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    scrollController.addListener(scrolllistner);
     getdepot();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    scrollController.dispose();
   }
 
   @override
@@ -51,7 +92,7 @@ class _TransactionState extends State<Transaction> {
       loading
           ? const Loading(
               spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
-          : DepotListe(list: list),
+          : DepotListe(list: listeee, control: scrollController),
       const Virement(),
       const AchatApis(),
       const Retrait()
@@ -179,9 +220,14 @@ class _TransactionState extends State<Transaction> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: ListTile(
-                      leading: const Icon(
-                        Icons.arrow_circle_up_outlined,
-                        color: Colors.grey,
+                      leading: GestureDetector(
+                        onTap: () {
+                          print(list.length);
+                        },
+                        child: const Icon(
+                          Icons.arrow_circle_up_outlined,
+                          color: Colors.grey,
+                        ),
                       ),
                       title: Text(
                         "$totalSold MGA",
