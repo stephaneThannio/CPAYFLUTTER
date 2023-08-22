@@ -1,5 +1,5 @@
-import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
-import 'package:cpay/items/itemsTab/Showdialog/faireretrait.dart';
+//import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
+//import 'package:cpay/items/itemsTab/Showdialog/faireretrait.dart';
 import 'package:cpay/pages/depotpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,21 +13,21 @@ class BulleRetraitVers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> dialogadepot() async {
-      await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const Dodeposit();
-          });
-    }
+    // Future<void> dialogadepot() async {
+    //   await showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) {
+    //         return const Dodeposit();
+    //       });
+    // }
 
-    Future<void> dialogretrait() async {
-      await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const Retireit();
-          });
-    }
+    // Future<void> dialogretrait() async {
+    //   await showDialog(
+    //       context: context,
+    //       builder: (BuildContext context) {
+    //         return const Retireit();
+    //       });
+    // }
 
     void goTodepot() {
       Navigator.push(

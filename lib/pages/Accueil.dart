@@ -1,36 +1,17 @@
-//import 'dart:ffi';
-
-//import 'package:animator/animator.dart';
-//import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:cpay/api/api.dart';
-//import 'package:cpay/items/cardArticle.dart';
-//import 'package:cpay/items/itemsTab/depotitem.dart';
-//import 'package:cpay/models/depottransaction.dart';
-
-//import 'package:cpay/items/cardArticle.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
 import 'package:cpay/pages/mes_articles.dart';
 import 'package:cpay/pages/qr_code_page.dart';
-//import 'package:cpay/pages/splashscreen.dart';
-//import 'package:cpay/pages/splashscreen.dart';
 import 'package:cpay/pages/transaction.dart';
-//import 'package:cpay/pages/login.dart';
-//import 'package:cpay/pages/confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:cpay/items/Article.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:quickalert/quickalert.dart';
-
 import '../items/bulle.dart';
-import '../items/itemsTab/Showdialog/fairedepot.dart';
 import '../models/articles.dart';
 
 class Accueil extends StatefulWidget {
@@ -183,13 +164,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  Future<void> dialogadepot() async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return const Dodeposit();
-        });
-  }
+  // Future<void> dialogadepot() async {
+  //   await showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return const Dodeposit();
+  //       });
+  // }
 
   ontabBullButton() {
     setVisibleBulle();

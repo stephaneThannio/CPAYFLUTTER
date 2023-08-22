@@ -6,6 +6,7 @@ import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../models/user.dart';
 
@@ -17,66 +18,151 @@ class Transaction extends StatefulWidget {
 }
 
 class _TransactionState extends State<Transaction> {
-  Map<String, dynamic> list = {};
-  List listeee = [];
+  Map<String, dynamic> listeGlobal = {};
+
+  List listedepot = [];
+  List listvirement = [];
+  List listveretrait = [];
   Map<String, dynamic> listnext = {};
   bool loading = false;
   String totalSold = '';
+  int sold = 0;
+  NumberFormat format = NumberFormat("#,###");
   String totaldepot = '';
   String totalretrait = '';
-  int page = 1;
+  int pagedep = 1;
+  int pagevir = 1;
+  int pageRTR = 1;
   ScrollController scrollController = ScrollController();
+  ScrollController scrollControllerVIR = ScrollController();
+  ScrollController scrollControllerRTR = ScrollController();
+
+  //depot===========================================
   Future getdepot() async {
     setState(() {
       loading = true;
     });
-    list = await Api.getDepotlist(User.sessionUser!.iban, page);
-    for (int i = 0; i < list['depot'].length; i++) {
-      listeee.add(list['depot'][i]);
+    listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, 1);
+    for (int i = 0; i < listeGlobal["depot"].length; i++) {
+      listedepot.add(listeGlobal["depot"][i]);
     }
-
-    if (list.isNotEmpty) {
-      setState(() {
-        loading = false;
-        totalSold = list['solde'];
-        page = page + 1;
-      });
+    if (listeGlobal.isNotEmpty) {
+      if (mounted) {
+        setState(() {
+          loading = false;
+          totalSold = listeGlobal['solde'];
+          sold = int.parse(totalSold);
+          pagedep = pagedep + 1;
+        });
+      }
     }
-    //print(listeee[0][0]['date']);
-    print(page);
   }
 
   Future scrolllistner() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      list = await Api.getDepotlist(User.sessionUser!.iban, page);
-      for (int i = 0; i < list['depot'].length; i++) {
-        if (page <= list["total_page_depot"]) {
-          listeee.add(list['depot'][i]);
+      listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pagedep);
+      for (int i = 0; i < listeGlobal["depot"].length; i++) {
+        if (pagedep <= listeGlobal["total_page_depot"]) {
+          listedepot.add(listeGlobal["depot"][i]);
+        }
+      }
+      if (mounted) {
+        setState(() {
+          if (pagedep <= listeGlobal["total_page_depot"]) {
+            pagedep = pagedep + 1;
+            //print(page);
+          }
+        });
+      }
+    }
+  }
+//====================================================================
+//===virement========================================================
+
+  Future getdeVirement() async {
+    setState(() {
+      loading = true;
+    });
+    listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, 1);
+    for (int i = 0; i < listeGlobal["virement"].length; i++) {
+      listvirement.add(listeGlobal["virement"][i]);
+    }
+    if (listeGlobal.isNotEmpty) {
+      setState(() {
+        loading = false;
+        pagevir = pagevir + 1;
+      });
+    }
+  }
+
+  Future scrolllistnervirement() async {
+    if (scrollControllerVIR.position.pixels ==
+        scrollControllerVIR.position.maxScrollExtent) {
+      listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pagevir);
+      for (int i = 0; i < listeGlobal["virement"].length; i++) {
+        if (pagevir <= listeGlobal["total_page_virement"]) {
+          listvirement.add(listeGlobal["virement"][i]);
         }
       }
       setState(() {
-        if (page <= list["total_page_depot"]) {
-          page = page + 1;
-          print(page);
+        if (pagevir <= listeGlobal["total_page_virement"]) {
+          pagevir = pagevir + 1;
+          //print(page);
         }
       });
     }
-    //   listnext = await Api.getDepotlist(User.sessionUser!.iban, page);
-    // }
-    // listnext.forEach((key, value) {
-    //   list[key] = value;
-    // });
-    // setState(() {});
-    //print(list['depot']);
   }
 
+//===================================================================
+//===Retrait========================================================
+
+  Future getRetrait() async {
+    setState(() {
+      loading = true;
+    });
+    listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, 1);
+    for (int i = 0; i < listeGlobal["retrait"].length; i++) {
+      listveretrait.add(listeGlobal["retrait"][i]);
+    }
+    if (listeGlobal.isNotEmpty) {
+      setState(() {
+        loading = false;
+        pageRTR = pageRTR + 1;
+      });
+    }
+  }
+
+  Future scrolllistRetrait() async {
+    if (scrollControllerRTR.position.pixels ==
+        scrollControllerRTR.position.maxScrollExtent) {
+      listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pageRTR);
+      for (int i = 0; i < listeGlobal["retrait"].length; i++) {
+        if (pageRTR <= listeGlobal["total_page_retrait"]) {
+          listveretrait.add(listeGlobal["retrait"][i]);
+        }
+      }
+      setState(() {
+        if (pageRTR <= listeGlobal["total_page_retrait"]) {
+          pageRTR = pageRTR + 1;
+          //print(page);
+        }
+      });
+    }
+  }
+
+//===================================================================
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     scrollController.addListener(scrolllistner);
+    scrollControllerVIR.addListener(scrolllistnervirement);
+    scrollControllerRTR.addListener(scrolllistRetrait);
+
     getdepot();
+    getdeVirement();
+    getRetrait();
   }
 
   @override
@@ -84,6 +170,8 @@ class _TransactionState extends State<Transaction> {
     // TODO: implement dispose
     super.dispose();
     scrollController.dispose();
+    scrollControllerVIR.dispose();
+    scrollControllerRTR.dispose();
   }
 
   @override
@@ -92,10 +180,16 @@ class _TransactionState extends State<Transaction> {
       loading
           ? const Loading(
               spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
-          : DepotListe(list: listeee, control: scrollController),
-      const Virement(),
+          : DepotListe(list: listedepot, control: scrollController),
+      loading
+          ? const Loading(
+              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+          : Virement(list: listvirement, control: scrollControllerVIR),
       const AchatApis(),
-      const Retrait()
+      loading
+          ? const Loading(
+              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+          : Retrait(list: listveretrait, control: scrollControllerRTR),
     ];
     final buttonTop = <Tab>[
       const Tab(
@@ -198,7 +292,7 @@ class _TransactionState extends State<Transaction> {
                           left: 30.0.sp,
                           right: 30.0.sp),
                       child: Text(
-                        "$totalSold MGA",
+                        "${format.format(sold)} MGA",
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -220,17 +314,12 @@ class _TransactionState extends State<Transaction> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: ListTile(
-                      leading: GestureDetector(
-                        onTap: () {
-                          print(list.length);
-                        },
-                        child: const Icon(
-                          Icons.arrow_circle_up_outlined,
-                          color: Colors.grey,
-                        ),
+                      leading: const Icon(
+                        Icons.arrow_circle_up_outlined,
+                        color: Colors.grey,
                       ),
                       title: Text(
-                        "$totalSold MGA",
+                        "${format.format(sold)} MGA",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
@@ -261,7 +350,7 @@ class _TransactionState extends State<Transaction> {
                         color: Colors.grey,
                       ),
                       title: Text(
-                        "$totalSold MGA",
+                        "${format.format(sold)} MGA",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,

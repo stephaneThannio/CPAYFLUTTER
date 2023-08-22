@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/models/user.dart';
@@ -91,13 +89,6 @@ class _PageDepotState extends State<PageDepot> {
       });
     }
   }
-
-  // coco() {
-  //   iban = controliban.text;
-  //   montant = controlmontant.text;
-  //   numero = controlnum.text;
-  //   print("iban: $iban,montant =$montant,num= $numero");
-  // }
 
   afterSucces(var resi) async {
     var req2 = await Api.listenStatus(resi['serverCorrelationId']);
