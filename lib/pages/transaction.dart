@@ -28,6 +28,8 @@ class _TransactionState extends State<Transaction> {
   String totalSold = '';
   int sold = 0;
   NumberFormat format = NumberFormat("#,###");
+  String soldeafficher = "";
+  String soldeafficher2 = "";
   String totaldepot = '';
   String totalretrait = '';
   int pagedep = 1;
@@ -52,6 +54,9 @@ class _TransactionState extends State<Transaction> {
           loading = false;
           totalSold = listeGlobal['solde'];
           sold = int.parse(totalSold);
+          soldeafficher = (format.format(sold)).toString();
+          soldeafficher2 = soldeafficher.replaceAll(',', '  ');
+
           pagedep = pagedep + 1;
         });
       }
@@ -292,7 +297,7 @@ class _TransactionState extends State<Transaction> {
                           left: 30.0.sp,
                           right: 30.0.sp),
                       child: Text(
-                        "${format.format(sold)} MGA",
+                        "$soldeafficher2 MGA",
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -305,72 +310,84 @@ class _TransactionState extends State<Transaction> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 50,
-                  width: 150,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.arrow_circle_up_outlined,
-                        color: Colors.grey,
-                      ),
-                      title: Text(
-                        "${format.format(sold)} MGA",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF6334A9),
-                          fontFamily: 'PlusJakartaSans',
-                        ),
-                      ),
-                      subtitle: Text(
-                        "Total depot",
-                        style: TextStyle(
-                          fontSize: 9.sp,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey,
-                          fontFamily: 'PlusJakartaSans',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 150,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ListTile(
-                      leading: const Icon(
-                        Icons.arrow_circle_down_outlined,
-                        color: Colors.grey,
-                      ),
-                      title: Text(
-                        "${format.format(sold)} MGA",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF6334A9),
-                          fontFamily: 'PlusJakartaSans',
-                        ),
-                      ),
-                      subtitle: Text(
-                        "Total retrait",
-                        style: TextStyle(
-                          fontSize: 9.sp,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey,
-                          fontFamily: 'PlusJakartaSans',
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 50.sp,
+                      // width: 150.sp,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.arrow_circle_up_outlined,
+                            color: Colors.grey,
+                          ),
+                          title: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "$soldeafficher2 MGA",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xFF6334A9),
+                                fontFamily: 'PlusJakartaSans',
+                              ),
+                            ),
+                          ),
+                          subtitle: Text(
+                            "Total depot",
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.grey,
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                )
-              ],
+                  Expanded(
+                    child: SizedBox(
+                      height: 50.sp,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.arrow_circle_down_outlined,
+                            color: Colors.grey,
+                          ),
+                          title: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "$soldeafficher2 MGA",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xFF6334A9),
+                                fontFamily: 'PlusJakartaSans',
+                              ),
+                            ),
+                          ),
+                          subtitle: Text(
+                            "Total retrait",
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.grey,
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 20.sp,

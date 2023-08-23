@@ -259,7 +259,7 @@ class _PageDepotState extends State<PageDepot> {
                         width: screenwidth,
                         height: paymenmode == "Mvola"
                             ? screenheight * 0.6
-                            : screenheight * 0.8,
+                            : screenheight * 0.7,
                         decoration: BoxDecoration(
                             color: const Color(0xFF6334A9),
                             borderRadius: BorderRadius.circular(30)),
@@ -581,7 +581,7 @@ class _PageDepotState extends State<PageDepot> {
               ),
             ),
             SizedBox(
-              height: 8.sp,
+              height: 20.sp,
             ),
             Container(
               margin: const EdgeInsets.only(left: 10, right: 10),
@@ -612,17 +612,23 @@ class _PageDepotState extends State<PageDepot> {
                               style: TextStyle(color: Colors.white)),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 20, right: 20),
-                          child: const Text(
-                              'Veuillez faire un virement sur le compte Bancaire de CPAY avec la référence et le somme indiqué ci-dessus, puis cliquer sur continuer, et votre demande de dépôt sera en attente de validation, dès que votre transaction est valider, la somme sera mis sur votre compte.\n',
-                              style: TextStyle(color: Colors.white)),
-                        ),
-                        Container(
                           margin: const EdgeInsets.only(
                               left: 20, right: 20, bottom: 10),
-                          child: const Text(
-                              'NB: Veuillez mettre dans la référence de transfert sur le virement: REFERENCE + Montant MGA + Nom + Contact',
-                              style: TextStyle(color: Colors.white)),
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.circle_notifications_rounded,
+                                color: Colors.white,
+                              ),
+                              Expanded(
+                                child: Text(
+                                    'NB: Veuillez mettre dans la référence de transfert sur le virement: REFERENCE + Montant MGA + Nom + Contact',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
