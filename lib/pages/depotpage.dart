@@ -37,10 +37,11 @@ class _PageDepotState extends State<PageDepot> {
   String montantBCNT = '0';
   String montantEuro = '1';
   String reference = '';
-  String iban_bank = '';
-  String bank_bic = '';
-  String bank_nom = '';
-  String bank_domiciliation = '';
+  String iban_bank = 'MG4600006000080000114617359';
+  String bank_bic = 'MCBLMGMGXXX';
+  String bank_nom = 'The Mauritius Commercial Bank (Madagascar) S.A';
+  String bank_domiciliation =
+      'Novotel Business Center Alarobia, Route des Hydrocarbures, ANTANANARIVO 101';
   bool visibleInfoBNC = false;
   void alert(
     String titreAlert,

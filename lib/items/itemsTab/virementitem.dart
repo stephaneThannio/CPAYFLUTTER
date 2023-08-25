@@ -3,22 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+<<<<<<< HEAD
 class VirementItem extends StatefulWidget {
+=======
+class VirementItem extends StatelessWidget {
+>>>>>>> 5e0a9c28389311f5a5a0c6c5604bc93a42b1d631
   const VirementItem({
     super.key,
     required this.status,
     required this.date,
     required this.montant,
     required this.type,
+<<<<<<< HEAD
     required this.periodicite,
     required this.destination,
     required this.motif,
     required this.affiche,
+=======
+    required this.destination,
+    required this.motif,
+>>>>>>> 5e0a9c28389311f5a5a0c6c5604bc93a42b1d631
   });
   final String status;
   final String date;
   final String montant;
   final String type;
+<<<<<<< HEAD
   final String periodicite;
   final String destination;
   final String motif;
@@ -66,6 +76,10 @@ class _VirementItemState extends State<VirementItem>
   //   _animcontroller.dispose();
   //   super.dispose();
   // }
+=======
+  final String destination;
+  final String motif;
+>>>>>>> 5e0a9c28389311f5a5a0c6c5604bc93a42b1d631
 
   @override
   Widget build(BuildContext context) {
