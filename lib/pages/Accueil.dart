@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:cpay/items/itemsTab/virementitem.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
@@ -165,14 +164,6 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  // Future<void> dialogadepot() async {
-  //   await showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return const Dodeposit();
-  //       });
-  // }
-
   ontabBullButton() {
     setVisibleBulle();
     visibledep2();
@@ -184,33 +175,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         context, MaterialPageRoute(builder: (context) => const PageDepot()));
   }
 
-  // Future getdepot() async {
-  //   list = await Api.getDepotlist(User.sessionUser!.iban);
-  //   if (list['depot'][1]['application'] != "MVOLA") {
-  //     list2 = List<Map<String, dynamic>>.from(
-  //         jsonDecode(list['depot'][0]['application']));
-  //     print(" aa ${list2[0].entries.elementAt(0).value}");
-  //   } else {
-  //     list2 = list['depot'][1]['application'];
-  //     print(" bb $list2");
-  //   }
-
-  //   // print(list2[0]);
-
-  //   // print(list.length);
-  //   //}
-  // }
-
 //============================Widget=======================================================================
   @override
   Widget build(BuildContext context) {
     final ktabpage = <Widget>[
-      //Container(color: Colors.red,),
-      // const listdesArticles(),
       const MesArticles(),
       Container(color: Colors.green),
       const Transaction(),
-      //Container(color: Colors.red),
       const QrCode(),
     ];
     final kBottomNavBar = <BottomNavigationBarItem>[
@@ -290,16 +261,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               height: 30.sp,
               image: AssetImage('lib/photos/285-min.png'),
             ),
-            // iconSize: 200,
-            // icon: Image.asset(
-            //     width: 200.w, height: 50.h, ('lib/photos/285-min.png')),
-            onPressed: () {
-              //getdepot();
-              // .whenComplete(() => print(
-              //       list['depot'][0]["application"],
-              //     ));
-              // Navigator.push(context, MaterialPageRoute(builder: (context)=>const VirementItem(status: status, date: date, montant: montant, type: type, periodicite: periodicite, destination: destination, motif: motif)));
-            },
+            onPressed: () {},
           ),
           actions: [
             User.sessionUser == null && log
@@ -332,7 +294,11 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                               "Deconnexion",
                               QuickAlertType.confirm, () {
                             User.logOut();
+                            setState(() {
+                              currentTabIndex = 0;
+                            });
                             Navigator.pop(context);
+
                             setState(() {
                               log = true;
                             });

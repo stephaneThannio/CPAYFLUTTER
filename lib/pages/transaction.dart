@@ -19,7 +19,7 @@ class Transaction extends StatefulWidget {
 
 class _TransactionState extends State<Transaction> {
   Map<String, dynamic> listeGlobal = {};
-
+  List listeApis = [];
   List listedepot = [];
   List listvirement = [];
   List listveretrait = [];
@@ -41,9 +41,11 @@ class _TransactionState extends State<Transaction> {
   int pagedep = 1;
   int pagevir = 1;
   int pageRTR = 1;
+  int pageAPI = 1;
   ScrollController scrollController = ScrollController();
   ScrollController scrollControllerVIR = ScrollController();
   ScrollController scrollControllerRTR = ScrollController();
+  ScrollController scrollControllerAPIS = ScrollController();
 
   //depot===========================================
   Future getdepot() async {
@@ -170,6 +172,42 @@ class _TransactionState extends State<Transaction> {
   }
 
 //===================================================================
+//APIS===============================================================
+  Future getApis() async {
+    setState(() {
+      loading = true;
+    });
+    listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, 1);
+    for (int i = 0; i < listeGlobal["api"].length; i++) {
+      listeApis.add(listeGlobal["api"][i]);
+    }
+    if (listeGlobal.isNotEmpty) {
+      setState(() {
+        loading = false;
+        pageAPI = pageAPI + 1;
+      });
+    }
+  }
+
+  Future scrolllistApis() async {
+    if (scrollControllerAPIS.position.pixels ==
+        scrollControllerAPIS.position.maxScrollExtent) {
+      listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pageAPI);
+      for (int i = 0; i < listeGlobal["api"].length; i++) {
+        if (pageAPI <= listeGlobal["total_page_api"]) {
+          listeApis.add(listeGlobal["api"][i]);
+        }
+      }
+      setState(() {
+        if (pageAPI <= listeGlobal["total_page_api"]) {
+          pageAPI = pageAPI + 1;
+          //print(page);
+        }
+      });
+    }
+  }
+
+//=================================================================================
   bool zoomin = true;
   setzoom() {
     setState(() {
@@ -185,10 +223,12 @@ class _TransactionState extends State<Transaction> {
     scrollController.addListener(scrolllistner);
     scrollControllerVIR.addListener(scrolllistnervirement);
     scrollControllerRTR.addListener(scrolllistRetrait);
+    scrollControllerAPIS.addListener(scrolllistApis);
 
     getdepot();
     getdeVirement();
     getRetrait();
+    getApis();
   }
 
   @override
@@ -198,6 +238,7 @@ class _TransactionState extends State<Transaction> {
     scrollController.dispose();
     scrollControllerVIR.dispose();
     scrollControllerRTR.dispose();
+    scrollControllerAPIS.dispose();
   }
 
   @override
@@ -211,7 +252,10 @@ class _TransactionState extends State<Transaction> {
           ? const Loading(
               spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
           : Virement(list: listvirement, control: scrollControllerVIR),
-      const AchatApis(),
+      loading
+          ? const Loading(
+              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+          : AchatApis(list: listeApis, control: scrollControllerAPIS),
       loading
           ? const Loading(
               spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
