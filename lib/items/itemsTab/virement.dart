@@ -31,7 +31,6 @@ class _VirementState extends State<Virement> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-<<<<<<< HEAD
         controller: widget.control,
         itemCount: widget.list.length,
         itemBuilder: (context, index) {
@@ -91,18 +90,5 @@ class _VirementState extends State<Virement> {
             }),
           );
         });
-=======
-        controller: control,
-        itemCount: list.length,
-        itemBuilder: (context, index) => SizedBox(
-            height: 70.spMax,
-            child: VirementItem(
-                status: list[index]["status_payment"],
-                date: list[index]["date"],
-                montant: list[index]["montant"],
-                type: list[index]["type"],
-                destination: list[index]["destination"],
-                motif: list[index]["motif"])));
->>>>>>> 5e0a9c28389311f5a5a0c6c5604bc93a42b1d631
   }
 }
