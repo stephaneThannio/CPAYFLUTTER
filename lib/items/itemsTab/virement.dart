@@ -18,10 +18,11 @@ class Virement extends StatelessWidget {
         itemBuilder: (context, index) => SizedBox(
             height: 70.spMax,
             child: VirementItem(
-              status: list[index]["status_payment"],
-              date: list[index]["date"],
-              montant: list[index]["montant"],
-              info: list[index]["infos"],
-            )));
+                status: list[index]["status_payment"],
+                date: list[index]["date"],
+                montant: list[index]["montant"],
+                type: list[index]["type"],
+                destination: list[index]["destination"],
+                motif: list[index]["motif"])));
   }
 }

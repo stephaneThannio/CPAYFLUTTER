@@ -3,16 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VirementItem extends StatelessWidget {
-  const VirementItem(
-      {super.key,
-      required this.status,
-      required this.date,
-      required this.montant,
-      required this.info});
+  const VirementItem({
+    super.key,
+    required this.status,
+    required this.date,
+    required this.montant,
+    required this.type,
+    required this.destination,
+    required this.motif,
+  });
   final String status;
   final String date;
   final String montant;
-  final String info;
+  final String type;
+  final String destination;
+  final String motif;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +65,7 @@ class VirementItem extends StatelessWidget {
                   icon: Image(
                       width: 30.sp,
                       height: 30.sp,
-                      image: const AssetImage('lib/photos/mvola.webp')
+                      image: const AssetImage('lib/photos/285-min.png')
                       // : const AssetImage('lib/photos/banktransfert.png'),
                       ),
                   onPressed: () {},
