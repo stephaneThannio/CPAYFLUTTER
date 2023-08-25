@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:cpay/items/itemsTab/virementitem.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
@@ -297,6 +298,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               // .whenComplete(() => print(
               //       list['depot'][0]["application"],
               //     ));
+              // Navigator.push(context, MaterialPageRoute(builder: (context)=>const VirementItem(status: status, date: date, montant: montant, type: type, periodicite: periodicite, destination: destination, motif: motif)));
             },
           ),
           actions: [

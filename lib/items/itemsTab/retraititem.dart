@@ -59,7 +59,7 @@ class RetraitItem extends StatelessWidget {
                   icon: Image(
                       width: 30.sp,
                       height: 30.sp,
-                      image: const AssetImage('lib/photos/mvola.webp')
+                      image: const AssetImage('lib/photos/285-min.png')
                       // : const AssetImage('lib/photos/banktransfert.png'),
                       ),
                   onPressed: () {},

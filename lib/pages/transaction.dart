@@ -27,11 +27,17 @@ class _TransactionState extends State<Transaction> {
   bool loading = false;
   String totalSold = '';
   int sold = 0;
+  int entr = 0;
+  int sort = 0;
   NumberFormat format = NumberFormat("#,###");
   String soldeafficher = "";
   String soldeafficher2 = "";
-  String totaldepot = '';
-  String totalretrait = '';
+  String entree = '';
+  String entreeafficher = '';
+  String entreeafficher2 = '';
+  String sortie = '';
+  String sortieafficher = '';
+  String sortieafficher2 = '';
   int pagedep = 1;
   int pagevir = 1;
   int pageRTR = 1;
@@ -56,7 +62,14 @@ class _TransactionState extends State<Transaction> {
           sold = int.parse(totalSold);
           soldeafficher = (format.format(sold)).toString();
           soldeafficher2 = soldeafficher.replaceAll(',', '  ');
-
+          entree = listeGlobal['entree'];
+          entr = int.parse(entree);
+          entreeafficher = (format.format(entr)).toString();
+          entreeafficher2 = entreeafficher.replaceAll(',', '  ');
+          sortie = listeGlobal['sortie'];
+          sort = int.parse(sortie);
+          sortieafficher = (format.format(sort)).toString();
+          sortieafficher2 = sortieafficher.replaceAll(',', '  ');
           pagedep = pagedep + 1;
         });
       }
@@ -157,6 +170,14 @@ class _TransactionState extends State<Transaction> {
   }
 
 //===================================================================
+  bool zoomin = true;
+  setzoom() {
+    setState(() {
+      zoomin = !zoomin;
+      print(zoomin);
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -322,14 +343,19 @@ class _TransactionState extends State<Transaction> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: ListTile(
-                          leading: const Icon(
-                            Icons.arrow_circle_up_outlined,
-                            color: Colors.grey,
+                          leading: GestureDetector(
+                            onTap: () {
+                              setzoom();
+                            },
+                            child: const Icon(
+                              Icons.arrow_circle_up_outlined,
+                              color: Colors.grey,
+                            ),
                           ),
                           title: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "$soldeafficher2 MGA",
+                              "$entreeafficher2 MGA",
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
@@ -364,7 +390,7 @@ class _TransactionState extends State<Transaction> {
                           title: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "$soldeafficher2 MGA",
+                              "$sortieafficher2 MGA",
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,

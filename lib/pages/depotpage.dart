@@ -622,7 +622,7 @@ class _PageDepotState extends State<PageDepot> {
                               ),
                               Expanded(
                                 child: Text(
-                                    'NB: Veuillez mettre dans la référence de transfert sur le virement: REFERENCE + Montant MGA + Nom + Contact',
+                                    'NB:Veuillez mettre dans la référence de transfert du virement ou versement sur le compte de CPAY: REFERENCE + Montant MGA + Nom + Contact',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
