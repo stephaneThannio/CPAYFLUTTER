@@ -204,7 +204,7 @@ class _TransactionState extends State<Transaction> {
         text: "Virement",
       ),
       const Tab(
-        text: "Achats Api",
+        text: "Apis",
       ),
       const Tab(
         text: "Retrait",
