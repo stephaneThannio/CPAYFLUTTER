@@ -1,7 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
+//import 'package:cpay/pages/login.dart';
 import 'package:cpay/pages/mes_articles.dart';
 import 'package:cpay/pages/qr_code_page.dart';
 import 'package:cpay/pages/transaction.dart';
@@ -99,6 +101,20 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         text: textAlert,
         onConfirmBtnTap: func,
         confirmBtnColor: const Color(0xFF6334A9));
+  }
+
+  void showalert(String type, String titrealert, String descri,
+      String textsurboutton, bool annulerBtn, VoidCallback functionConfirm) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertAlert(
+              typealert: type,
+              titleAlert: titrealert,
+              descriAlert: descri,
+              confirmbtnText: textsurboutton,
+              cancelbtn: annulerBtn,
+              onpresConfirm: functionConfirm,
+            ));
   }
 
   //=====================Alert=======================================================================================
@@ -226,8 +242,16 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          alert("Authentification requis", "Veuillez vous connecter.",
-              "Se Connecter", QuickAlertType.info, () {
+          // alert("Authentification requis", "Veuillez vous connecter.",
+          //     "Se Connecter", QuickAlertType.info, () {
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => const Authentification()));
+          // });
+          showalert("info", "Authentification requis",
+              "Veuillez vous connecter.", "Se Connecter", false, () {
+            Navigator.pop(context);
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -261,7 +285,22 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               height: 30.sp,
               image: AssetImage('lib/photos/285-min.png'),
             ),
-            onPressed: () {},
+            onPressed: () {
+              // showalert("info", "Se connecter",
+              //     "Vous devez connecter pour faire cette action", () {
+              //   Navigator.pop(context);
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => const Authentification()));
+              // });
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => const AlertAlert(
+              //               typealert: "error",
+              //             )));
+            },
           ),
           actions: [
             User.sessionUser == null && log
@@ -288,11 +327,12 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                         ),
                         onPressed: () {
                           // Action à effectuer lorsque l'icône de droite est cliquée
-                          alert(
+                          showalert(
+                              "do you",
                               "Deconnexion",
-                              "Voulez vous vraiment deconnecter",
-                              "Deconnexion",
-                              QuickAlertType.confirm, () {
+                              "Voulez vous vraiment deconnecter?",
+                              "Se Deconnecter",
+                              true, () {
                             User.logOut();
                             setState(() {
                               currentTabIndex = 0;
@@ -303,6 +343,21 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                               log = true;
                             });
                           });
+                          // alert(
+                          //     "Deconnexion",
+                          //     "Voulez vous vraiment deconnecter",
+                          //     "Deconnexion",
+                          //     QuickAlertType.confirm, () {
+                          //   User.logOut();
+                          //   setState(() {
+                          //     currentTabIndex = 0;
+                          //   });
+                          //   Navigator.pop(context);
+
+                          //   setState(() {
+                          //     log = true;
+                          //   });
+                          // });
                         },
                       )
                     : IconButton(
@@ -312,17 +367,37 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                         ),
                         onPressed: () {
                           // Action à effectuer lorsque l'icône de droite est cliquée
-                          alert(
+                          showalert(
+                              "do you",
                               "Deconnexion",
-                              "Voulez vous vraiment deconnecter",
-                              "Deconnexion",
-                              QuickAlertType.confirm, () {
+                              "Voulez vous vraiment deconnecter?",
+                              "Se Deconnecter",
+                              true, () {
                             User.logOut();
+                            setState(() {
+                              currentTabIndex = 0;
+                            });
                             Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Accueil()));
+
                             setState(() {
                               log = true;
                             });
                           });
+                          // alert(
+                          //     "Deconnexion",
+                          //     "Voulez vous vraiment deconnecter",
+                          //     "Deconnexion",
+                          //     QuickAlertType.confirm, () {
+                          //   User.logOut();
+                          //   Navigator.pop(context);
+                          //   setState(() {
+                          //     log = true;
+                          //   });
+                          // });
                         },
                       ),
           ],

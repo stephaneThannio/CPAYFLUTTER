@@ -3,13 +3,14 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/Accueil.dart';
 import 'package:cpay/pages/confirmation.dart';
 import 'package:cpay/pages/createAcount.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quickalert/quickalert.dart';
+//import 'package:quickalert/quickalert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../items/TextFieldPreuse.dart';
@@ -30,19 +31,34 @@ class _LoginState extends State<Login> {
   String password = "";
   bool loading = false;
   Duration dur = const Duration(days: 365);
+//Alert======================================================================
+  // void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
+  //     VoidCallback func) {
+  //   QuickAlert.show(
+  //     context: context,
+  //     type: typeAlert,
+  //     title: titreAlert,
+  //     text: textAlert,
+  //     onConfirmBtnTap: func,
+  //     confirmBtnColor: const Color(0xFF6334A9),
+  //   );
+  // }
 
-  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
-      VoidCallback func) {
-    QuickAlert.show(
-      context: context,
-      type: typeAlert,
-      title: titreAlert,
-      text: textAlert,
-      onConfirmBtnTap: func,
-      confirmBtnColor: const Color(0xFF6334A9),
-    );
+  void showalert(String type, String titrealert, String descri,
+      String textsurboutton, bool annulerBtn, VoidCallback functionConfirm) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertAlert(
+              typealert: type,
+              titleAlert: titrealert,
+              descriAlert: descri,
+              confirmbtnText: textsurboutton,
+              cancelbtn: annulerBtn,
+              onpresConfirm: functionConfirm,
+            ));
   }
 
+//=======================================================================================================
   void welcome() {
     User.getUser();
     Navigator.push(
@@ -65,7 +81,9 @@ class _LoginState extends State<Login> {
     tel = uName.text;
     password = pWD.text;
     if (tel == '' && password == '') {
-      alert('Erreur', 'veillez remplir le champ', QuickAlertType.error,
+      // alert('Erreur', 'veillez remplir le champ', QuickAlertType.error,
+      //     notWelcome);
+      showalert("error", 'Erreur', 'veillez remplir le champ', "Valider", false,
           notWelcome);
     } else {
       setState(() {
@@ -85,7 +103,7 @@ class _LoginState extends State<Login> {
             ),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
-            });
+            }).timeout(const Duration(seconds: 15));
         // ignore: duplicate_ignore
         if (request.statusCode == 200) {
           var data = jsonDecode(request.body);
@@ -95,20 +113,26 @@ class _LoginState extends State<Login> {
               User.saveUser(User.fromJson(jsonDecode(data["mdata"])));
               print(data);
             });
-            alert("bienvenue", 'Vous etes maintenant connecter a cpay',
-                QuickAlertType.success, welcome);
+
+            showalert(
+                "succes",
+                'bienvenue',
+                'Vous etes maintenant connecter a cpay',
+                "Valider",
+                false,
+                welcome);
           } else if (data["status"] == 'error') {
             setState(() {
               loading = false;
             });
-            alert("Error", data['mdata'].toString(), QuickAlertType.error,
-                notWelcome);
+            showalert("error", 'Erreur', data['mdata'].toString(), "Valider",
+                false, notWelcome);
           } else if (data["status"] == 'warning') {
             setState(() {
               loading = false;
             });
-            alert("Attention", data['mdata'].toString(), QuickAlertType.warning,
-                () {
+            showalert("warning", 'Attention', data['mdata'].toString(),
+                "Valider", false, () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -126,8 +150,8 @@ class _LoginState extends State<Login> {
         if (error is TimeoutException) {
           setState(() {
             loading = false;
-            alert("TimeOut", "erreur de connexion au serveur",
-                QuickAlertType.error, notWelcome);
+            showalert("error", 'TimeOut', "erreur de connexion au serveur",
+                "Valider", false, notWelcome);
           });
         }
         print(error);

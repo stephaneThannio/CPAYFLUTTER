@@ -1,10 +1,11 @@
 import 'package:cpay/api/api.dart';
+import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quickalert/quickalert.dart';
+//import 'package:quickalert/quickalert.dart';
 
 class PageDepot extends StatefulWidget {
   const PageDepot({
@@ -43,20 +44,36 @@ class _PageDepotState extends State<PageDepot> {
   String bank_domiciliation =
       'Novotel Business Center Alarobia, Route des Hydrocarbures, ANTANANARIVO 101';
   bool visibleInfoBNC = false;
-  void alert(
-    String titreAlert,
-    String textAlert,
-    QuickAlertType typeAlert,
-  ) {
-    QuickAlert.show(
-      context: context,
-      type: typeAlert,
-      title: titreAlert,
-      text: textAlert,
-      confirmBtnColor: const Color(0xFF6334A9),
-    );
+  //alert================================================================================
+  // void alert(
+  //   String titreAlert,
+  //   String textAlert,
+  //   QuickAlertType typeAlert,
+  // ) {
+  //   QuickAlert.show(
+  //     context: context,
+  //     type: typeAlert,
+  //     title: titreAlert,
+  //     text: textAlert,
+  //     confirmBtnColor: const Color(0xFF6334A9),
+  //   );
+  // }
+
+  void showalert(String type, String titrealert, String descri,
+      String textsurboutton, bool annulerBtn, VoidCallback functionConfirm) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertAlert(
+              typealert: type,
+              titleAlert: titrealert,
+              descriAlert: descri,
+              confirmbtnText: textsurboutton,
+              cancelbtn: annulerBtn,
+              onpresConfirm: functionConfirm,
+            ));
   }
 
+//=======================================================================================
   onBouttonMvolatap() {
     setState(() {
       paymenmode = "Mvola";
@@ -97,8 +114,16 @@ class _PageDepotState extends State<PageDepot> {
     if (req2['status'] == "completed") {
       setState(() {
         loading = false;
-        alert('Succes', 'felicitation le compte a bien ete crediter ',
-            QuickAlertType.success);
+        // alert('Succes', 'felicitation le compte a bien ete crediter ',
+        //     QuickAlertType.success);
+        showalert(
+            "succes",
+            'Succes',
+            'felicitation le compte a bien ete crediter ',
+            "Valider",
+            false, () {
+          Navigator.pop(context);
+        });
       });
     } else if (req2['status'] == "pending") {
       Future.delayed(const Duration(seconds: 1), () {
@@ -107,8 +132,12 @@ class _PageDepotState extends State<PageDepot> {
     } else if (req2['status'] == "failed") {
       setState(() {
         loading = false;
-        alert("Transaction echouée", "la transaction a été rejetée",
-            QuickAlertType.error);
+        // alert("Transaction echouée", "la transaction a été rejetée",
+        //     QuickAlertType.error);
+        showalert("error", '"Transaction echouée"',
+            "la transaction a été rejetée", "Valider", false, () {
+          Navigator.pop(context);
+        });
       });
     }
   }
@@ -130,17 +159,30 @@ class _PageDepotState extends State<PageDepot> {
     } else if (res['status'] == "Warning") {
       setState(() {
         loading = false;
-        alert('titreAlert', res['mdata'].toString(), QuickAlertType.warning);
+        // alert('titreAlert', res['mdata'].toString(), QuickAlertType.warning);
+        showalert(
+            "warning", 'Attention', res['mdata'].toString(), "Valider", false,
+            () {
+          Navigator.pop(context);
+        });
       });
     } else if (res['status'] == "Error") {
       setState(() {
         loading = false;
-        alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+        // alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+        showalert("error", 'Erreur', res['mdata'].toString(), "Valider", false,
+            () {
+          Navigator.pop(context);
+        });
       });
     } else if (res['status'] == "timeOut") {
       setState(() {
         loading = false;
-        alert('titreAlert', "erreur du connexion", QuickAlertType.error);
+        //alert('titreAlert', "erreur du connexion", QuickAlertType.error);
+        showalert("error", 'Erreur', "erreur du connexion", "Valider", false,
+            () {
+          Navigator.pop(context);
+        });
       });
     }
   }
@@ -159,12 +201,20 @@ class _PageDepotState extends State<PageDepot> {
     if (res['status'] == "success") {
       setState(() {
         loading = false;
-        alert('titreAlert', res['mdata'].toString(), QuickAlertType.success);
+        //alert('titreAlert', res['mdata'].toString(), QuickAlertType.success);
+        showalert("succes", 'succes', res['mdata'].toString(), "Valider", false,
+            () {
+          Navigator.pop(context);
+        });
       });
     } else if (res['status'] == "error") {
       setState(() {
         loading = false;
-        alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+        // alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+        showalert("error", 'error', res['mdata'].toString(), "Valider", false,
+            () {
+          Navigator.pop(context);
+        });
       });
     }
   }

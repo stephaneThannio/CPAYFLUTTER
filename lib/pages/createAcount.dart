@@ -3,12 +3,13 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/pages/confirmation.dart';
 import 'package:cpay/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:quickalert/quickalert.dart';
+//import 'package:quickalert/quickalert.dart';
 
 import '../items/TextFieldPreuse.dart';
 import 'package:http/http.dart';
@@ -39,18 +40,34 @@ class _CreateAccountState extends State<CreateAccount> {
     print("phone = $phone, password =$password cpassword =$cpassword");
   }
 
-  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
-      VoidCallback func) {
-    QuickAlert.show(
-      context: context,
-      type: typeAlert,
-      title: titreAlert,
-      text: textAlert,
-      onConfirmBtnTap: func,
-      confirmBtnColor: const Color(0xFF6334A9),
-    );
+//Alert============================================================================
+  // void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
+  //     VoidCallback func) {
+  //   QuickAlert.show(
+  //     context: context,
+  //     type: typeAlert,
+  //     title: titreAlert,
+  //     text: textAlert,
+  //     onConfirmBtnTap: func,
+  //     confirmBtnColor: const Color(0xFF6334A9),
+  //   );
+  // }
+
+  void showalert(String type, String titrealert, String descri,
+      String textsurboutton, bool annulerBtn, VoidCallback functionConfirm) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertAlert(
+              typealert: type,
+              titleAlert: titrealert,
+              descriAlert: descri,
+              confirmbtnText: textsurboutton,
+              cancelbtn: annulerBtn,
+              onpresConfirm: functionConfirm,
+            ));
   }
 
+//=======================================================================
   void Confirm() {
     phone = phonenbr.text;
     //mail = email.text;
@@ -71,7 +88,12 @@ class _CreateAccountState extends State<CreateAccount> {
     password = pwd.text;
     cpassword = cpwd.text;
     if (phone.length < 10) {
-      alert('Erreur', 'le numero n est pas correct', QuickAlertType.error, () {
+      // alert('Erreur', 'le numero n est pas correct', QuickAlertType.error, () {
+      //   Navigator.pop(context);
+      // });
+      showalert(
+          "error", 'Erreur', 'le numero n est pas correct', "Valider", false,
+          () {
         Navigator.pop(context);
       });
     } else {
@@ -98,8 +120,18 @@ class _CreateAccountState extends State<CreateAccount> {
               setState(() {
                 loading = false;
               });
-              alert("validation", "Code de validation envoyer.",
-                  QuickAlertType.success, () {
+              // alert("validation", "Code de validation envoyer.",
+              //     QuickAlertType.success, () {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => Confirmation(
+              //                 phone: phone,
+              //                 pwd: cpassword,
+              //               )));
+              // });
+              showalert("succes", 'validation', 'Code de validation envoyer.',
+                  "Valider", false, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -112,7 +144,12 @@ class _CreateAccountState extends State<CreateAccount> {
               setState(() {
                 loading = false;
               });
-              alert("Error", data["mdata"].toString(), QuickAlertType.error,
+              // alert("Error", data["mdata"].toString(), QuickAlertType.error,
+              //     () {
+              //   Navigator.pop(context);
+              // });
+              showalert(
+                  "error", 'Erreur', data["mdata"].toString(), "Valider", false,
                   () {
                 Navigator.pop(context);
               });
@@ -125,17 +162,26 @@ class _CreateAccountState extends State<CreateAccount> {
           if (error is TimeoutException) {
             setState(() {
               loading = false;
-              alert("Error", "erreur de connection", QuickAlertType.error, () {
+              // alert("Error", "erreur de connection", QuickAlertType.error, () {
+              //   Navigator.pop(context);
+              // });
+              showalert(
+                  "error", 'Erreur', "erreur de connection", "Valider", false,
+                  () {
                 Navigator.pop(context);
               });
             });
           }
         }
       } else {
-        alert("Error", "Veillez verifeir le mot de passe", QuickAlertType.error,
-            () {
+        showalert("error", 'Erreur', "Veillez verifeir le mot de passe",
+            "Valider", false, () {
           Navigator.pop(context);
         });
+        // alert("Error", "Veillez verifeir le mot de passe", QuickAlertType.error,
+        //     () {
+        //   Navigator.pop(context);
+        // });
       }
     }
   }

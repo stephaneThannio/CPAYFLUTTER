@@ -2,12 +2,13 @@
 
 import 'dart:convert';
 
+import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/pages/Accueil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:quickalert/quickalert.dart';
+//import 'package:quickalert/quickalert.dart';
 
 // ignore: must_be_immutable
 class Confirmation extends StatefulWidget {
@@ -33,18 +34,34 @@ class _ConfirmationState extends State<Confirmation> {
     code = nb1.text + nb2.text + nb3.text + nb4.text + nb5.text + nb6.text;
   }
 
-  void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
-      VoidCallback func) {
-    QuickAlert.show(
-      context: context,
-      type: typeAlert,
-      title: titreAlert,
-      text: textAlert,
-      onConfirmBtnTap: func,
-      confirmBtnColor: const Color(0xFF6334A9),
-    );
+//alert=========================================================================
+  // void alert(String titreAlert, String textAlert, QuickAlertType typeAlert,
+  //     VoidCallback func) {
+  //   QuickAlert.show(
+  //     context: context,
+  //     type: typeAlert,
+  //     title: titreAlert,
+  //     text: textAlert,
+  //     onConfirmBtnTap: func,
+  //     confirmBtnColor: const Color(0xFF6334A9),
+  //   );
+  // }
+
+  void showalert(String type, String titrealert, String descri,
+      String textsurboutton, bool annulerBtn, VoidCallback functionConfirm) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertAlert(
+              typealert: type,
+              titleAlert: titrealert,
+              descriAlert: descri,
+              confirmbtnText: textsurboutton,
+              cancelbtn: annulerBtn,
+              onpresConfirm: functionConfirm,
+            ));
   }
 
+//==============================================================================
   Future resendcode() async {
     setState(() {
       loading = false;
@@ -68,8 +85,12 @@ class _ConfirmationState extends State<Confirmation> {
           setState(() {
             loading = false;
           });
-          alert("validation", data["mdata"].toString(), QuickAlertType.success,
-              () {
+          // alert("validation", data["mdata"].toString(), QuickAlertType.success,
+          //     () {
+          //   Navigator.pop(context);
+          // });
+          showalert("succes", 'validation', data["mdata"].toString(), "Valider",
+              false, () {
             Navigator.pop(context);
           });
         }
@@ -106,8 +127,13 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        alert("Felicitation", data["mdata"].toString(), QuickAlertType.success,
-            () {
+        // alert("Felicitation", data["mdata"].toString(), QuickAlertType.success,
+        //     () {
+        //   Navigator.push(context,
+        //       MaterialPageRoute(builder: (context) => const Accueil()));
+        // });
+        showalert("succes", 'Felicitation', data["mdata"].toString(), "Valider",
+            false, () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Accueil()));
         });
@@ -115,9 +141,13 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        alert("Erreur", data["mdata"].toString(), QuickAlertType.error, () {
+        showalert("error", 'Erreur', data["mdata"].toString(), "Valider", false,
+            () {
           Navigator.pop(context);
         });
+        // alert("Erreur", data["mdata"].toString(), QuickAlertType.error, () {
+        //   Navigator.pop(context);
+        // });
       }
 
       print(request.body);
