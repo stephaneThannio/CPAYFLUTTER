@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/items/essaidialog.dart';
+import 'package:cpay/items/itemsTab/trading.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
@@ -196,7 +197,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ktabpage = <Widget>[
       const MesArticles(),
-      Container(color: Colors.green),
+      const Trading(),
       const Transaction(),
       const QrCode(),
     ];
@@ -294,12 +295,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               //       MaterialPageRoute(
               //           builder: (context) => const Authentification()));
               // });
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const AlertAlert(
-              //               typealert: "error",
-              //             )));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Trading()));
             },
           ),
           actions: [
