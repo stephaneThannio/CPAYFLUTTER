@@ -210,7 +210,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           label: 'ACCUEIL'),
       BottomNavigationBarItem(
           icon: Icon(
-            Icons.shopping_cart_outlined,
+            Icons.candlestick_chart,
             size: 20.0.sp,
           ),
           label: 'TRADING'),
@@ -243,13 +243,6 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          // alert("Authentification requis", "Veuillez vous connecter.",
-          //     "Se Connecter", QuickAlertType.info, () {
-          //   Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //           builder: (context) => const Authentification()));
-          // });
           showalert("info", "Authentification requis",
               "Veuillez vous connecter.", "Se Connecter", false, () {
             Navigator.pop(context);
