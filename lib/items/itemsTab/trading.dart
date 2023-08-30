@@ -44,6 +44,9 @@ class _TradingState extends State<Trading> {
               dateFormat: DateFormat.MMM(),
               majorGridLines: MajorGridLines(width: 0)),
           primaryYAxis: NumericAxis(
+              isVisible: false,
+              majorGridLines: MajorGridLines(color: Colors.transparent),
+              minorGridLines: MinorGridLines(color: Colors.transparent),
               minimum: 70,
               maximum: 130,
               interval: 10,
