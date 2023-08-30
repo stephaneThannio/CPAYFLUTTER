@@ -116,17 +116,17 @@ class _LoginState extends State<Login> {
 
             showalert(
                 "succes",
-                'bienvenue',
-                'Vous etes maintenant connecter a cpay',
-                "Valider",
+                'Connexion réussie à CPAY',
+                'Vous êtes actuellement connecté.',
+                "Continuer",
                 false,
                 welcome);
           } else if (data["status"] == 'error') {
             setState(() {
               loading = false;
             });
-            showalert("error", 'Erreur', data['mdata'].toString(), "Valider",
-                false, notWelcome);
+            showalert("error", 'Erreur d\'identification',
+                data['mdata'].toString(), "Valider", false, notWelcome);
           } else if (data["status"] == 'warning') {
             setState(() {
               loading = false;

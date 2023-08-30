@@ -243,8 +243,12 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          showalert("info", "Authentification requis",
-              "Veuillez vous connecter.", "Se Connecter", false, () {
+          showalert(
+              "info",
+              "Authentification Requise",
+              "Veuillez vous connecter pour accéder à cette fonctionnalité.",
+              "Se Connecter",
+              false, () {
             Navigator.pop(context);
             Navigator.push(
                 context,
@@ -319,9 +323,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           // Action à effectuer lorsque l'icône de droite est cliquée
                           showalert(
                               "do you",
-                              "Deconnexion",
-                              "Voulez vous vraiment deconnecter?",
-                              "Se Deconnecter",
+                              "Déconnexion",
+                              "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
+                              "Se déconnecter",
                               true, () {
                             User.logOut();
                             setState(() {
@@ -359,9 +363,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           // Action à effectuer lorsque l'icône de droite est cliquée
                           showalert(
                               "do you",
-                              "Deconnexion",
-                              "Voulez vous vraiment deconnecter?",
-                              "Se Deconnecter",
+                              "Déconnexion",
+                              "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
+                              "Se déconnecter",
                               true, () {
                             User.logOut();
                             setState(() {
