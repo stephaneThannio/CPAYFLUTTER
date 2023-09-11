@@ -183,6 +183,6 @@ class AlertAlert extends StatelessWidget {
           ),
         ),
       ),
-    ).animate().scale(duration: Duration(milliseconds: 100));
+    ).animate().scale(duration: const Duration(milliseconds: 100));
   }
 }

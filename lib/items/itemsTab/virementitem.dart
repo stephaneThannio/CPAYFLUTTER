@@ -88,7 +88,7 @@ class _VirementItemState extends State<VirementItem>
               //     fontFamily: 'PlusJakartaSans',
               //   ),
               // ),
-              subtitle: Container(
+              subtitle: SizedBox(
                 // duration: Duration(milliseconds: 500),
                 // curve: Curves.fastOutSlowIn,
                 //color: Colors.amber,
@@ -169,7 +169,7 @@ class _VirementItemState extends State<VirementItem>
                               // ),
                             ],
                           ),
-                        ).animate().fade(duration: Duration(seconds: 1)),
+                        ).animate().fade(duration: const Duration(seconds: 1)),
                       )
                     ],
                   ),

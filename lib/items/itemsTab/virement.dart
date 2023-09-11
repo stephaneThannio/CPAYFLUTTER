@@ -43,7 +43,7 @@ class _VirementState extends State<Virement> {
               });
               if (listplace.length >= 2) {
                 if (listplace[0] == listplace[1]) {
-                  Future.delayed(Duration(milliseconds: 100), () {
+                  Future.delayed(const Duration(milliseconds: 100), () {
                     setState(() {
                       heightmin = 70;
                       listplace.clear();

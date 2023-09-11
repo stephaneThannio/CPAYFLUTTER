@@ -243,12 +243,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
           });
           defTitle(index);
         } else {
-          showalert(
-              "info",
-              "Authentification Requise",
-              "Veuillez vous connecter pour accéder à cette fonctionnalité.",
-              "Se Connecter",
-              false, () {
+          showalert("info", "Authentification requis",
+              "Veuillez vous connecter.", "Se Connecter", false, () {
             Navigator.pop(context);
             Navigator.push(
                 context,
@@ -281,7 +277,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
             icon: Image(
               width: 30.sp,
               height: 30.sp,
-              image: AssetImage('lib/photos/285-min.png'),
+              image: const AssetImage('lib/photos/285-min.png'),
             ),
             onPressed: () {
               // showalert("info", "Se connecter",
@@ -323,9 +319,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           // Action à effectuer lorsque l'icône de droite est cliquée
                           showalert(
                               "do you",
-                              "Déconnexion",
-                              "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
-                              "Se déconnecter",
+                              "Deconnexion",
+                              "Voulez vous vraiment deconnecter?",
+                              "Se Deconnecter",
                               true, () {
                             User.logOut();
                             setState(() {
@@ -363,9 +359,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                           // Action à effectuer lorsque l'icône de droite est cliquée
                           showalert(
                               "do you",
-                              "Déconnexion",
-                              "Êtes-vous sûr(e) de vouloir vous déconnecter ?",
-                              "Se déconnecter",
+                              "Deconnexion",
+                              "Voulez vous vraiment deconnecter?",
+                              "Se Deconnecter",
                               true, () {
                             User.logOut();
                             setState(() {

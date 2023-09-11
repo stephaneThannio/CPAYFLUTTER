@@ -299,7 +299,7 @@ class InfoBnc extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment(0, -0.5),
+              alignment: const Alignment(0, -0.5),
               child: Container(
                 height: 170.sp,
                 width: MediaQuery.of(context).size.width * 0.8,

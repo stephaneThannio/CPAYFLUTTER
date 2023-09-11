@@ -291,7 +291,7 @@ class _PageDepotState extends State<PageDepot> {
             alingementmainax: MainAxisAlignment.center,
             titreLoading: "Attente acceptation du paiment",
             contenttext: "verifiez votre telephone",
-            spincouleur: Color(0xFF6334A9),
+            spincouleur: const Color(0xFF6334A9),
             containcouleur: Colors.white,
             hauteurContainer: screenheight,
           )
@@ -352,7 +352,7 @@ class _PageDepotState extends State<PageDepot> {
                                     ? formulaireMvola()
                                     : formulairBanktransfer()
                                         .animate()
-                                        .fade(duration: Duration(seconds: 1)),
+                                        .fade(duration: const Duration(seconds: 1)),
                               ),
                             ],
                           ),
@@ -660,7 +660,7 @@ class _PageDepotState extends State<PageDepot> {
                               left: 40, right: 40, top: 10, bottom: 10),
                           child: Text(
                               "Montant a transferer :${montantEuro}Euro \nIBAN:$iban_bank \nBIC:$bank_bic \nNom:$bank_nom Domiciliation:$bank_domiciliation \nREFERENCE:$reference \nDATE: ${DateTime.now()}",
-                              style: TextStyle(color: Colors.white)),
+                              style: const TextStyle(color: Colors.white)),
                         ),
                         Container(
                           margin: const EdgeInsets.only(

@@ -132,9 +132,8 @@ class _ConfirmationState extends State<Confirmation> {
         //   Navigator.push(context,
         //       MaterialPageRoute(builder: (context) => const Accueil()));
         // });
-        showalert(
-            "succes", 'Felicitation', data["mdata"].toString(), "OK", false,
-            () {
+        showalert("succes", 'Felicitation', data["mdata"].toString(), "Valider",
+            false, () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Accueil()));
         });
@@ -142,7 +141,8 @@ class _ConfirmationState extends State<Confirmation> {
         setState(() {
           loading = false;
         });
-        showalert("error", 'Erreur', data["mdata"].toString(), "OK", false, () {
+        showalert("error", 'Erreur', data["mdata"].toString(), "Valider", false,
+            () {
           Navigator.pop(context);
         });
         // alert("Erreur", data["mdata"].toString(), QuickAlertType.error, () {

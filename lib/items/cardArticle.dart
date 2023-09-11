@@ -6,8 +6,27 @@ import '../models/articles.dart';
 
 class CardArticle extends StatefulWidget {
   const CardArticle(
-      {super.key, required this.couleurCpay, required this.article});
-  final Article article;
+      {super.key,
+      required this.couleurCpay,
+      required this.id,
+      required this.id_categorie,
+      required this.categorie,
+      required this.photos,
+      required this.designation,
+      required this.prix_ticket,
+      required this.reference,
+      required this.pourcentage,
+      required this.date_tirage});
+  final String id;
+  final String id_categorie;
+  final String categorie;
+  final String photos;
+  final String designation;
+  final String prix_ticket;
+  final String reference;
+  final int pourcentage;
+  final String date_tirage;
+  //final Article article;
   final Color couleurCpay;
 
   @override
@@ -18,10 +37,10 @@ class _CardArticleState extends State<CardArticle> {
   double init = 0.0;
   int percent = 0;
   late Timer time;
-  progressAnimation() {
+  progressAnimation(int nb) {
     if (mounted) {
       setState(() {
-        if (init < 0.4) {
+        if (init < nb * 0.5) {
           init = init + 0.1;
           percent = (init * 100).toInt();
         } else {
@@ -33,7 +52,7 @@ class _CardArticleState extends State<CardArticle> {
 
   animProgress() {
     time = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      progressAnimation();
+      progressAnimation(widget.pourcentage);
     });
   }
 
@@ -69,11 +88,12 @@ class _CardArticleState extends State<CardArticle> {
                   //   height: 10,
                   // ),
                   Container(
+                    //child: Image.network(widget.photos),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(widget.article.image)),
+                          fit: BoxFit.contain,
+                          image: NetworkImage(widget.photos)),
                       //color: Colors.orange,
                     ),
                     height: 160.sh,
@@ -94,7 +114,7 @@ class _CardArticleState extends State<CardArticle> {
                             //color: Colors.green,
                             child: Text(
                               textAlign: TextAlign.center,
-                              widget.article.titre,
+                              widget.designation,
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
@@ -108,7 +128,7 @@ class _CardArticleState extends State<CardArticle> {
                             //color: Colors.orange,
                             child: Text(
                               textAlign: TextAlign.center,
-                              "ref MBP-320-Madagascar",
+                              widget.reference,
                               style: TextStyle(
                                 // shadows: [
                                 //   Shadow(
@@ -134,7 +154,7 @@ class _CardArticleState extends State<CardArticle> {
                                   Expanded(
                                     child: Text(
                                       textAlign: TextAlign.center,
-                                      widget.article.prix,
+                                      '${widget.prix_ticket} MGA',
                                       textScaleFactor: 1.0,
                                       style: TextStyle(
                                         // shadows: [

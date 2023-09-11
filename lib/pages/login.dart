@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Future sendLoginRequest() async {
+  sendLoginRequest() async {
     tel = uName.text;
     password = pWD.text;
     if (tel == '' && password == '') {
@@ -116,17 +116,17 @@ class _LoginState extends State<Login> {
 
             showalert(
                 "succes",
-                'Connexion réussie à CPAY',
-                'Vous êtes actuellement connecté.',
-                "Continuer",
+                'bienvenue',
+                'Vous etes maintenant connecter a cpay',
+                "Valider",
                 false,
                 welcome);
           } else if (data["status"] == 'error') {
             setState(() {
               loading = false;
             });
-            showalert("error", 'Erreur d\'identification',
-                data['mdata'].toString(), "Valider", false, notWelcome);
+            showalert("error", 'Erreur', data['mdata'].toString(), "Valider",
+                false, notWelcome);
           } else if (data["status"] == 'warning') {
             setState(() {
               loading = false;

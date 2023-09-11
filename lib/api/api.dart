@@ -5,6 +5,31 @@ import 'package:http/http.dart';
 
 //test
 class Api {
+  static getarticle() async {
+    List listarticle = [];
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "Autorization": "...",
+            "action": "get_vente",
+            "page": "1"
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          }).timeout(const Duration(seconds: 20));
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        listarticle = data["mdata"];
+        return listarticle;
+      } else {
+        print('no response');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static faireDepotMvola(String iban, String montant, String phone) async {
     try {
       final request = await post(Uri.parse('https://api.c-pay.me'),

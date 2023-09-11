@@ -330,7 +330,7 @@ class _TransactionState extends State<Transaction> {
             Center(
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     // color: Colors.blue,
                     height: 50.sp,
                     child: Align(

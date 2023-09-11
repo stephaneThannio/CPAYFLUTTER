@@ -62,7 +62,7 @@ class AchatApisItem extends StatelessWidget {
                     height: 30.sp,
                     image: info == "MVOLA"
                         ? const AssetImage('lib/photos/mvola.webp')
-                        : const AssetImage('lib/photos/285-min.png'),
+                        : const AssetImage('lib/photos/banktransfert.png'),
                   ),
                   onPressed: () {},
                 ),

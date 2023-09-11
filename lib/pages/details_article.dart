@@ -3,8 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetaisArticle extends StatefulWidget {
-  const DetaisArticle({super.key, required this.article});
-  final Article article;
+  const DetaisArticle({
+    super.key,
+    required this.id,
+    required this.id_categorie,
+    required this.categorie,
+    required this.photos,
+    required this.designation,
+    required this.prix_ticket,
+    required this.reference,
+    required this.pourcentage,
+    required this.date_tirage,
+  });
+  final String id;
+  final String id_categorie;
+  final String categorie;
+  final String photos;
+  final String designation;
+  final String prix_ticket;
+  final String reference;
+  final int pourcentage;
+  final String date_tirage;
   @override
   State<DetaisArticle> createState() => _DetaisArticleState();
 }
@@ -55,7 +74,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage(widget.article.image)),
+                            image: NetworkImage(widget.photos)),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
                     margin: const EdgeInsets.all(20),
@@ -113,7 +132,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                         //color: Colors.green,
                         child: Text(
                           textAlign: TextAlign.start,
-                          widget.article.titre,
+                          widget.designation,
                           style: TextStyle(
                             fontSize: 22.sp,
                             fontWeight: FontWeight.bold,
