@@ -82,7 +82,8 @@ class _MesArticlesState extends State<MesArticles> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? const Loading(spincouleur: Colors.red, containcouleur: Colors.white)
+        ? const Loading(
+            spincouleur: const Color(0xFF6334A9), containcouleur: Colors.white)
         : Scaffold(
             body: Center(
             child: Column(

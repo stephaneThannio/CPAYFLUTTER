@@ -92,7 +92,7 @@ class _CardArticleState extends State<CardArticle> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                           image: NetworkImage(widget.photos)),
                       //color: Colors.orange,
                     ),
