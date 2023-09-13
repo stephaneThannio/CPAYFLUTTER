@@ -170,7 +170,7 @@ class _OneArticleState extends State<OneArticle> {
                         width: 50,
                         decoration: BoxDecoration(
                             image: const DecorationImage(
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                               image: AssetImage('lib/photos/285-min.png'),
                             ),
                             color: Colors.white,
@@ -199,7 +199,7 @@ class _OneArticleState extends State<OneArticle> {
                                   widget.designation,
                                   style: TextStyle(
                                     fontSize: 15.sp,
-                                    fontWeight: FontWeight.normal,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                     fontFamily: 'PlusJakartaSans',
                                   ),
@@ -291,7 +291,7 @@ class _OneArticleState extends State<OneArticle> {
                                   'Achat ticket',
                                   style: TextStyle(
                                     fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                     color: Colors.white,
                                     fontFamily: 'PlusJakartaSans',
                                   ),
