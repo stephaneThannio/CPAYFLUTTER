@@ -5,6 +5,7 @@
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/TextFieldPreuse.dart';
 import 'package:cpay/items/loading.dart';
+import 'package:cpay/items/oneArticle.dart';
 import 'package:cpay/models/articles.dart';
 import 'package:cpay/pages/details_article.dart';
 //import 'package:cpay/pages/details_article.dart';
@@ -116,11 +117,11 @@ class _MesArticlesState extends State<MesArticles> {
                                           ['date_tirage']),
                                 )),
                             child: SizedBox(
-                              height: 160.spMax,
+                              height: MediaQuery.of(context).size.height * 0.75,
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 5.0, bottom: 5),
-                                child: CardArticle(
+                                child: OneArticle(
                                     couleurCpay: couleurCpay,
                                     id: articles[index]['id'],
                                     id_categorie: articles[index]

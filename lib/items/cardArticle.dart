@@ -35,14 +35,14 @@ class CardArticle extends StatefulWidget {
 
 class _CardArticleState extends State<CardArticle> {
   double init = 0.0;
-  int percent = 0;
+  double percent = 0;
   late Timer time;
   progressAnimation(int nb) {
     if (mounted) {
       setState(() {
-        if (init < nb * 0.5) {
-          init = init + 0.1;
-          percent = (init * 100).toInt();
+        if (init < nb / 100) {
+          init = init + 0.01;
+          percent = init * 100;
         } else {
           time.cancel();
         }
@@ -51,7 +51,7 @@ class _CardArticleState extends State<CardArticle> {
   }
 
   animProgress() {
-    time = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    time = Timer.periodic(const Duration(milliseconds: 1), (timer) {
       progressAnimation(widget.pourcentage);
     });
   }
@@ -112,35 +112,41 @@ class _CardArticleState extends State<CardArticle> {
                           Container(
                             margin: const EdgeInsets.only(bottom: 5),
                             //color: Colors.green,
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              widget.designation,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'PlusJakartaSans',
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                widget.designation,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'PlusJakartaSans',
+                                ),
                               ),
                             ),
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 10),
                             //color: Colors.orange,
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              widget.reference,
-                              style: TextStyle(
-                                // shadows: [
-                                //   Shadow(
-                                //     color: Colors.black.withOpacity(0.8),
-                                //     blurRadius: 10.0,
-                                //     offset: const Offset(0, 4),
-                                //   ),
-                                // ],
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.white,
-                                fontFamily: 'PlusJakartaSans',
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                widget.reference,
+                                style: TextStyle(
+                                  // shadows: [
+                                  //   Shadow(
+                                  //     color: Colors.black.withOpacity(0.8),
+                                  //     blurRadius: 10.0,
+                                  //     offset: const Offset(0, 4),
+                                  //   ),
+                                  // ],
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white,
+                                  fontFamily: 'PlusJakartaSans',
+                                ),
                               ),
                             ),
                           ),
@@ -152,23 +158,26 @@ class _CardArticleState extends State<CardArticle> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: Text(
-                                      textAlign: TextAlign.center,
-                                      '${widget.prix_ticket} MGA',
-                                      textScaleFactor: 1.0,
-                                      style: TextStyle(
-                                        // shadows: [
-                                        //   Shadow(
-                                        //     color: Colors.black.withOpacity(0.8),
-                                        //     blurRadius: 10.0,
-                                        //     offset: const Offset(0, 4),
-                                        //   ),
-                                        // ],
-                                        fontSize: 10.sp,
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        textAlign: TextAlign.center,
+                                        '${widget.prix_ticket} MGA',
+                                        textScaleFactor: 1.0,
+                                        style: TextStyle(
+                                          // shadows: [
+                                          //   Shadow(
+                                          //     color: Colors.black.withOpacity(0.8),
+                                          //     blurRadius: 10.0,
+                                          //     offset: const Offset(0, 4),
+                                          //   ),
+                                          // ],
+                                          fontSize: 10.sp,
 
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white,
-                                        fontFamily: 'PlusJakartaSans',
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                          fontFamily: 'PlusJakartaSans',
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -180,14 +189,17 @@ class _CardArticleState extends State<CardArticle> {
                                               BorderRadius.circular(30)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          textAlign: TextAlign.center,
-                                          'Achat ticket',
-                                          style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.white,
-                                            fontFamily: 'PlusJakartaSans',
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Text(
+                                            textAlign: TextAlign.center,
+                                            'Achat ticket',
+                                            style: TextStyle(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.white,
+                                              fontFamily: 'PlusJakartaSans',
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -200,7 +212,7 @@ class _CardArticleState extends State<CardArticle> {
                           Stack(
                             children: [
                               FractionallySizedBox(
-                                widthFactor: 0.7,
+                                widthFactor: 1,
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -222,10 +234,10 @@ class _CardArticleState extends State<CardArticle> {
                                 ),
                               ),
                               Align(
-                                alignment: Alignment.centerRight,
+                                alignment: Alignment.center,
                                 child: Text(
                                   textAlign: TextAlign.center,
-                                  "$percent %",
+                                  "${percent.toStringAsFixed(0)} %",
                                   style: TextStyle(
                                     // shadows: [
                                     //   Shadow(
@@ -236,7 +248,7 @@ class _CardArticleState extends State<CardArticle> {
                                     // ],
                                     fontSize: 10.sp,
                                     fontWeight: FontWeight.normal,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontFamily: 'PlusJakartaSans',
                                   ),
                                 ),
