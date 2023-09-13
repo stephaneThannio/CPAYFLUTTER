@@ -117,11 +117,11 @@ class _MesArticlesState extends State<MesArticles> {
                                           ['date_tirage']),
                                 )),
                             child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.75,
+                              height: 220.spMax,
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 5.0, bottom: 5),
-                                child: OneArticle(
+                                child: CardArticle(
                                     couleurCpay: couleurCpay,
                                     id: articles[index]['id'],
                                     id_categorie: articles[index]
