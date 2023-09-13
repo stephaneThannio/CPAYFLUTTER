@@ -110,7 +110,7 @@ class _CardArticleState extends State<CardArticle> {
                           ),
                           Expanded(
                             child: SizedBox(
-                              height: 160.w,
+                              height: 120.w,
                               //color: Colors.red,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
