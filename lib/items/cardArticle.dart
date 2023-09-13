@@ -102,7 +102,7 @@ class _CardArticleState extends State<CardArticle> {
                                   image: NetworkImage(widget.photos)),
                               //color: Colors.orange,
                             ),
-                            height: 170.h,
+                            height: 120.h,
                             width: 140.w,
                           ),
                           SizedBox(
@@ -167,7 +167,7 @@ class _CardArticleState extends State<CardArticle> {
                                             const FittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: Icon(
-                                                size: 50,
+                                                size: 30,
                                                 Icons.calendar_month,
                                                 color: Colors.black,
                                               ),
@@ -182,9 +182,9 @@ class _CardArticleState extends State<CardArticle> {
                                                   fit: BoxFit.scaleDown,
                                                   child: Text(
                                                     textAlign: TextAlign.center,
-                                                    'Ticket 0 MGA',
+                                                    'Ticket 50 000 MGA',
                                                     style: TextStyle(
-                                                      fontSize: 15.sp,
+                                                      fontSize: 12.sp,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black,
@@ -204,7 +204,7 @@ class _CardArticleState extends State<CardArticle> {
                                                     textAlign: TextAlign.center,
                                                     '0% Avant tirage',
                                                     style: TextStyle(
-                                                      fontSize: 15.sp,
+                                                      fontSize: 12.sp,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                       color: Colors.black,
@@ -294,16 +294,15 @@ class _CardArticleState extends State<CardArticle> {
                     ],
                   ),
                 ),
-                Align(
-                  alignment: Alignment(1, -1),
+                Positioned(
+                  top: 0,
+                  left: 0,
                   child: ClipPath(
                     clipper: TrapeziumClipper(),
                     child: Container(
                       width: 80,
                       height: 80,
-                      decoration: const BoxDecoration(
-                        color: Colors.green,
-                      ),
+                      decoration: BoxDecoration(color: Colors.green),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Transform.rotate(
@@ -313,10 +312,9 @@ class _CardArticleState extends State<CardArticle> {
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                textAlign: TextAlign.center,
                                 widget.reference,
                                 style: TextStyle(
-                                  fontSize: 11.sp,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                   fontFamily: 'PlusJakartaSans',
