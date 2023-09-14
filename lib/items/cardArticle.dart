@@ -355,6 +355,9 @@ class _CardArticleState extends State<CardArticle> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 2.sp,
+                      ),
                     ],
                   ),
                 ),
