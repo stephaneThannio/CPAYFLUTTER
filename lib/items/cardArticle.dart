@@ -98,9 +98,10 @@ class _CardArticleState extends State<CardArticle> {
                               //child: Image.network(widget.photos),
                               margin: const EdgeInsets.fromLTRB(7, 0, 0, 0),
                               decoration: BoxDecoration(
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.contain,
                                     image: NetworkImage(widget.photos)),
                                 //color: Colors.orange,
                               ),
