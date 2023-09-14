@@ -84,7 +84,8 @@ class _CardArticleState extends State<CardArticle> {
             child: Stack(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(7.0.sp),
+                  padding: const EdgeInsets.fromLTRB(
+                      0, 7, 0, 0), //EdgeInsets.all(2.0.sp),
                   child: Column(
                     children: [
                       Expanded(
@@ -95,6 +96,7 @@ class _CardArticleState extends State<CardArticle> {
                             // ),
                             Container(
                               //child: Image.network(widget.photos),
+                              margin: const EdgeInsets.fromLTRB(7, 0, 0, 0),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
@@ -111,8 +113,8 @@ class _CardArticleState extends State<CardArticle> {
                                   child: Container(
                                     width: 80,
                                     height: 80,
-                                    decoration:
-                                        BoxDecoration(color: Colors.green),
+                                    decoration: BoxDecoration(
+                                        color: widget.couleurCpay),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Transform.rotate(
@@ -148,25 +150,26 @@ class _CardArticleState extends State<CardArticle> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    // Container(
+                                    //   margin: const EdgeInsets.only(bottom: 5),
+                                    //   //color: Colors.green,
+                                    //   child: FittedBox(
+                                    //     fit: BoxFit.scaleDown,
+                                    //     child: Text(
+                                    //       textAlign: TextAlign.center,
+                                    //       '',
+                                    //       style: TextStyle(
+                                    //         fontSize: 12.sp,
+                                    //         fontWeight: FontWeight.bold,
+                                    //         color: Colors.white,
+                                    //         fontFamily: 'PlusJakartaSans',
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     Container(
-                                      margin: const EdgeInsets.only(bottom: 5),
-                                      //color: Colors.green,
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: Text(
-                                          textAlign: TextAlign.center,
-                                          'Informatique:',
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontFamily: 'PlusJakartaSans',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(bottom: 10),
+                                      margin: const EdgeInsets.only(
+                                          bottom: 10, right: 7, top: 20),
                                       //color: Colors.orange,
                                       child: Text(
                                         //textAlign: TextAlign.center,
@@ -179,8 +182,8 @@ class _CardArticleState extends State<CardArticle> {
                                           //     offset: const Offset(0, 4),
                                           //   ),
                                           // ],
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.normal,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           fontFamily: 'PlusJakartaSans',
                                         ),
@@ -189,7 +192,9 @@ class _CardArticleState extends State<CardArticle> {
                                     Expanded(
                                       child: Card(
                                           elevation: 2,
-                                          color: Colors.amber,
+                                          margin: const EdgeInsets.fromLTRB(
+                                              0, 0, 7, 0),
+                                          color: widget.couleurCpay,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
@@ -199,7 +204,7 @@ class _CardArticleState extends State<CardArticle> {
                                                 child: Icon(
                                                   size: 30,
                                                   Icons.calendar_month,
-                                                  color: Colors.black,
+                                                  color: Colors.white,
                                                 ),
                                               ),
                                               Column(
@@ -228,7 +233,7 @@ class _CardArticleState extends State<CardArticle> {
                                                                   FontWeight
                                                                       .bold,
                                                               color:
-                                                                  Colors.black,
+                                                                  Colors.white,
                                                               fontFamily:
                                                                   'PlusJakartaSans',
                                                             ),
@@ -238,7 +243,7 @@ class _CardArticleState extends State<CardArticle> {
                                                     ),
                                                   ),
                                                   Container(
-                                                    color: Colors.black,
+                                                    color: Colors.white,
                                                     width: 120,
                                                     height: 1,
                                                   ),
@@ -259,7 +264,7 @@ class _CardArticleState extends State<CardArticle> {
                                                                   FontWeight
                                                                       .normal,
                                                               color:
-                                                                  Colors.black,
+                                                                  Colors.white,
                                                               fontFamily:
                                                                   'PlusJakartaSans',
                                                             ),
@@ -312,12 +317,12 @@ class _CardArticleState extends State<CardArticle> {
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20)),
-                              height: 10.h,
+                              height: 7.h,
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: FractionallySizedBox(
                                   alignment: Alignment.centerLeft,
-                                  widthFactor: init,
+                                  widthFactor: 0.5,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: widget.couleurCpay,
@@ -341,7 +346,7 @@ class _CardArticleState extends State<CardArticle> {
                                 //     offset: const Offset(0, 4),
                                 //   ),
                                 // ],
-                                fontSize: 8.sp,
+                                fontSize: 5.sp,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.black,
                                 fontFamily: 'PlusJakartaSans',
