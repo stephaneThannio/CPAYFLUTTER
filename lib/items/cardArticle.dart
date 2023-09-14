@@ -294,9 +294,29 @@ class _CardArticleState extends State<CardArticle> {
                     ],
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  left: 0,
+                Align(
+                  alignment: Alignment(-0.78, 0.4),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        textAlign: TextAlign.left,
+                        'Tirage dans:24:00:00',
+                        style: TextStyle(
+                          fontSize: 9.sp,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
                   child: ClipPath(
                     clipper: TrapeziumClipper(),
                     child: Container(
