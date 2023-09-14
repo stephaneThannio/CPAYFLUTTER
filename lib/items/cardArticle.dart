@@ -80,7 +80,7 @@ class _CardArticleState extends State<CardArticle> {
           width: screenwidth,
           child: Card(
             elevation: 2,
-            color: widget.couleurCpay.withOpacity(0.6),
+            color: widget.couleurCpay.withOpacity(0.8),
             child: Stack(
               children: [
                 Padding(
