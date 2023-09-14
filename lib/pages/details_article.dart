@@ -73,7 +73,7 @@ class _DetaisArticleState extends State<DetaisArticle> {
                   child: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                             image: NetworkImage(widget.photos)),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),

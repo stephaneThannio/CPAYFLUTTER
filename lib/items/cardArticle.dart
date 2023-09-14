@@ -257,7 +257,7 @@ class _CardArticleState extends State<CardArticle> {
                                                         child: FittedBox(
                                                           fit: BoxFit.scaleDown,
                                                           child: Text(
-                                                            '0% Avant tirage',
+                                                            '${percent.toStringAsFixed(0)}% Avant tirage',
                                                             style: TextStyle(
                                                               fontSize: 12.sp,
                                                               fontWeight:
@@ -322,7 +322,7 @@ class _CardArticleState extends State<CardArticle> {
                                 padding: const EdgeInsets.all(2.0),
                                 child: FractionallySizedBox(
                                   alignment: Alignment.centerLeft,
-                                  widthFactor: 0.5,
+                                  widthFactor: init,
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: widget.couleurCpay,
