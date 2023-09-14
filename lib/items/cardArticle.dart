@@ -81,48 +81,44 @@ class _CardArticleState extends State<CardArticle> {
           child: Card(
             elevation: 2,
             color: widget.couleurCpay.withOpacity(0.6),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(7.0.sp),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        children: <Widget>[
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
-                          Container(
-                            //child: Image.network(widget.photos),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(widget.photos)),
-                              //color: Colors.orange,
-                            ),
-                            height: 120.h,
-                            width: 140.w,
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              height: 120.w,
-                              //color: Colors.red,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 5),
-                                    //color: Colors.green,
+            child: Padding(
+              padding: EdgeInsets.all(7.0.sp),
+              child: Column(
+                children: [
+                  Row(
+                    children: <Widget>[
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
+                      Container(
+                        //child: Image.network(widget.photos),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(widget.photos)),
+                          //color: Colors.orange,
+                        ),
+                        height: 120.h,
+                        width: 140.w,
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: ClipPath(
+                            clipper: TrapeziumClipper(),
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(color: Colors.green),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Transform.rotate(
+                                  angle: pi / 4,
+                                  child: Align(
+                                    alignment: Alignment(0.5, -0.7),
                                     child: FittedBox(
                                       fit: BoxFit.scaleDown,
                                       child: Text(
-                                        textAlign: TextAlign.center,
-                                        'Informatique:',
+                                        widget.reference,
                                         style: TextStyle(
                                           fontSize: 12.sp,
                                           fontWeight: FontWeight.bold,
@@ -132,222 +128,221 @@ class _CardArticleState extends State<CardArticle> {
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 10),
-                                    //color: Colors.orange,
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(
-                                        textAlign: TextAlign.center,
-                                        widget.designation,
-                                        style: TextStyle(
-                                          // shadows: [
-                                          //   Shadow(
-                                          //     color: Colors.black.withOpacity(0.8),
-                                          //     blurRadius: 10.0,
-                                          //     offset: const Offset(0, 4),
-                                          //   ),
-                                          // ],
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white,
-                                          fontFamily: 'PlusJakartaSans',
-                                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8.w,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 120.w,
+                          //color: Colors.red,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 25,
+                                decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      textAlign: TextAlign.left,
+                                      'Tirage dans:24:00:00',
+                                      style: TextStyle(
+                                        fontSize: 9.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                        fontFamily: 'PlusJakartaSans',
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Card(
-                                        elevation: 2,
-                                        color: Colors.amber,
-                                        child: Row(
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 5),
+                                //color: Colors.green,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    'Informatique:',
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontFamily: 'PlusJakartaSans',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 10),
+                                //color: Colors.orange,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    widget.designation,
+                                    style: TextStyle(
+                                      // shadows: [
+                                      //   Shadow(
+                                      //     color: Colors.black.withOpacity(0.8),
+                                      //     blurRadius: 10.0,
+                                      //     offset: const Offset(0, 4),
+                                      //   ),
+                                      // ],
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                      fontFamily: 'PlusJakartaSans',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Card(
+                                    elevation: 2,
+                                    color: Colors.amber,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        const FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Icon(
+                                            size: 30,
+                                            Icons.calendar_month,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            const FittedBox(
+                                            FittedBox(
                                               fit: BoxFit.scaleDown,
-                                              child: Icon(
-                                                size: 30,
-                                                Icons.calendar_month,
-                                                color: Colors.black,
+                                              child: Text(
+                                                textAlign: TextAlign.center,
+                                                'Ticket 50 000 MGA',
+                                                style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
+                                                  fontFamily: 'PlusJakartaSans',
+                                                ),
                                               ),
                                             ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                FittedBox(
-                                                  fit: BoxFit.scaleDown,
-                                                  child: Text(
-                                                    textAlign: TextAlign.center,
-                                                    'Ticket 50 000 MGA',
-                                                    style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
-                                                      fontFamily:
-                                                          'PlusJakartaSans',
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
+                                            Container(
+                                              color: Colors.black,
+                                              width: 120,
+                                              height: 1,
+                                            ),
+                                            FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: Text(
+                                                textAlign: TextAlign.center,
+                                                '0% Avant tirage',
+                                                style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.normal,
                                                   color: Colors.black,
-                                                  width: 120,
-                                                  height: 1,
+                                                  fontFamily: 'PlusJakartaSans',
                                                 ),
-                                                FittedBox(
-                                                  fit: BoxFit.scaleDown,
-                                                  child: Text(
-                                                    textAlign: TextAlign.center,
-                                                    '0% Avant tirage',
-                                                    style: TextStyle(
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                      color: Colors.black,
-                                                      fontFamily:
-                                                          'PlusJakartaSans',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            )
+                                              ),
+                                            ),
                                           ],
-                                        )),
-                                  ),
+                                        )
+                                      ],
+                                    )),
+                              ),
 
-                                  // StepProgressIndicator(
-                                  //   totalSteps: 90,
-                                  //   currentStep: 32,
-                                  //   padding: 2,
-                                  //   selectedColor: Color(0xFF6334A9),
-                                  //   unselectedColor: Colors.white,
-                                  //   roundedEdges: Radius.circular(10),
-                                  //   selectedGradientColor: LinearGradient(
-                                  //     begin: Alignment.topLeft,
-                                  //     end: Alignment.bottomRight,
-                                  //     colors: [
-                                  //       Color(0xFF6334A9).withOpacity(0.7),
-                                  //       Color(0xFF6334A9)
-                                  //     ],
-                                  //   ),
-                                  //   unselectedGradientColor: LinearGradient(
-                                  //       begin: Alignment.topCenter,
-                                  //       end: Alignment.topLeft,
-                                  //       colors: [Colors.black, Colors.blue]),
-                                  // )
-                                ],
+                              // StepProgressIndicator(
+                              //   totalSteps: 90,
+                              //   currentStep: 32,
+                              //   padding: 2,
+                              //   selectedColor: Color(0xFF6334A9),
+                              //   unselectedColor: Colors.white,
+                              //   roundedEdges: Radius.circular(10),
+                              //   selectedGradientColor: LinearGradient(
+                              //     begin: Alignment.topLeft,
+                              //     end: Alignment.bottomRight,
+                              //     colors: [
+                              //       Color(0xFF6334A9).withOpacity(0.7),
+                              //       Color(0xFF6334A9)
+                              //     ],
+                              //   ),
+                              //   unselectedGradientColor: LinearGradient(
+                              //       begin: Alignment.topCenter,
+                              //       end: Alignment.topLeft,
+                              //       colors: [Colors.black, Colors.blue]),
+                              // )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Stack(
+                    children: [
+                      FractionallySizedBox(
+                        widthFactor: 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20)),
+                          height: 10.h,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FractionallySizedBox(
+                              alignment: Alignment.centerLeft,
+                              widthFactor: init,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: widget.couleurCpay,
+                                    borderRadius: BorderRadius.circular(20)),
                               ),
                             ),
-                          )
-                        ],
+                          ),
+                        ),
                       ),
-                      Stack(
-                        children: [
-                          FractionallySizedBox(
-                            widthFactor: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)),
-                              height: 10.h,
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: FractionallySizedBox(
-                                  alignment: Alignment.centerLeft,
-                                  widthFactor: init,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: widget.couleurCpay,
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                  ),
-                                ),
-                              ),
-                            ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          "${percent.toStringAsFixed(0)} %",
+                          style: TextStyle(
+                            // shadows: [
+                            //   Shadow(
+                            //     color: Colors.black.withOpacity(0.8),
+                            //     blurRadius: 10.0,
+                            //     offset: const Offset(0, 4),
+                            //   ),
+                            // ],
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black,
+                            fontFamily: 'PlusJakartaSans',
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              "${percent.toStringAsFixed(0)} %",
-                              style: TextStyle(
-                                // shadows: [
-                                //   Shadow(
-                                //     color: Colors.black.withOpacity(0.8),
-                                //     blurRadius: 10.0,
-                                //     offset: const Offset(0, 4),
-                                //   ),
-                                // ],
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black,
-                                fontFamily: 'PlusJakartaSans',
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-                Align(
-                  alignment: Alignment(-0.78, 0.4),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        textAlign: TextAlign.left,
-                        'Tirage dans:24:00:00',
-                        style: TextStyle(
-                          fontSize: 9.sp,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white,
-                          fontFamily: 'PlusJakartaSans',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: ClipPath(
-                    clipper: TrapeziumClipper(),
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(color: Colors.green),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Transform.rotate(
-                          angle: pi / 4,
-                          child: Align(
-                            alignment: Alignment(0.5, -0.7),
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Text(
-                                widget.reference,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -117,7 +117,7 @@ class _MesArticlesState extends State<MesArticles> {
                                           ['date_tirage']),
                                 )),
                             child: SizedBox(
-                              height: 200.spMax,
+                              height: 180.spMax,
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(top: 5.0, bottom: 5),
