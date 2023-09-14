@@ -139,30 +139,28 @@ class _CardArticleState extends State<CardArticle> {
                       ),
                       Expanded(
                         child: SizedBox(
-                          height: 120.w,
+                          height: 150.w,
                           //color: Colors.red,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                height: 25,
+                                height: 26,
+                                width: 200,
                                 decoration: const BoxDecoration(
                                     color: Colors.red,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Tirage dans:24:00:00',
-                                      style: TextStyle(
-                                        fontSize: 9.sp,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white,
-                                        fontFamily: 'PlusJakartaSans',
-                                      ),
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    'Tirage dans:24:00:00',
+                                    style: TextStyle(
+                                      fontSize: 8.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontFamily: 'PlusJakartaSans',
                                     ),
                                   ),
                                 ),
@@ -332,7 +330,7 @@ class _CardArticleState extends State<CardArticle> {
                             //     offset: const Offset(0, 4),
                             //   ),
                             // ],
-                            fontSize: 10.sp,
+                            fontSize: 8.sp,
                             fontWeight: FontWeight.normal,
                             color: Colors.black,
                             fontFamily: 'PlusJakartaSans',
