@@ -152,10 +152,8 @@ class _CardArticleState extends State<CardArticle> {
                                       color: Colors.red,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                  child: Center(
                                     child: Text(
-                                      textAlign: TextAlign.center,
                                       'Tirage dans:24:00:00',
                                       style: TextStyle(
                                         fontSize: 8.sp,
@@ -186,24 +184,21 @@ class _CardArticleState extends State<CardArticle> {
                                 Container(
                                   margin: const EdgeInsets.only(bottom: 10),
                                   //color: Colors.orange,
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      textAlign: TextAlign.center,
-                                      widget.designation,
-                                      style: TextStyle(
-                                        // shadows: [
-                                        //   Shadow(
-                                        //     color: Colors.black.withOpacity(0.8),
-                                        //     blurRadius: 10.0,
-                                        //     offset: const Offset(0, 4),
-                                        //   ),
-                                        // ],
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white,
-                                        fontFamily: 'PlusJakartaSans',
-                                      ),
+                                  child: Text(
+                                    //textAlign: TextAlign.center,
+                                    widget.designation,
+                                    style: TextStyle(
+                                      // shadows: [
+                                      //   Shadow(
+                                      //     color: Colors.black.withOpacity(0.8),
+                                      //     blurRadius: 10.0,
+                                      //     offset: const Offset(0, 4),
+                                      //   ),
+                                      // ],
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                      fontFamily: 'PlusJakartaSans',
                                     ),
                                   ),
                                 ),
