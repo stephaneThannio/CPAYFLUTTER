@@ -356,8 +356,9 @@ class _CardArticleState extends State<CardArticle> {
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
+                    padding: const EdgeInsets.all(2.0),
                     height: 26,
-                    width: 80,
+                    width: 100,
                     decoration: const BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.only(
@@ -367,7 +368,7 @@ class _CardArticleState extends State<CardArticle> {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          'Tirage dans:24:00:00',
+                          'Tirage dans 24:00:00',
                           style: TextStyle(
                             fontSize: 8.sp,
                             fontWeight: FontWeight.bold,
