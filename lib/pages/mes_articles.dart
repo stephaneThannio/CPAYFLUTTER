@@ -4,13 +4,15 @@
 
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/TextFieldPreuse.dart';
-import 'package:cpay/items/itemsTab/barre_rechrche.dart';
+import 'package:cpay/items/barre_rechrche.dart';
+import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/items/oneArticle.dart';
 import 'package:cpay/models/articles.dart';
 import 'package:cpay/pages/details_article.dart';
 //import 'package:cpay/pages/details_article.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../items/cardArticle.dart';
@@ -30,7 +32,14 @@ class _MesArticlesState extends State<MesArticles> {
   //int listeArticlelength = articles.length;
   List<Article> afterRech = [];
   bool recherche = false;
+  bool categrorie = false;
   String motcle = '';
+  affichCategries() {
+    setState(() {
+      categrorie = !categrorie;
+    });
+  }
+
   rechercher() {
     setState(() {
       recherche = true;
@@ -88,68 +97,88 @@ class _MesArticlesState extends State<MesArticles> {
             spincouleur: const Color(0xFF6334A9), containcouleur: Colors.white)
         : Scaffold(
             body: Center(
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Stack(
               children: [
-                SizedBox(
-                  height: 10.sp,
+                Column(
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 10.sp,
+                    ),
+                    //barredeRecherche(context),
+                    BarreRech(
+                      context: context,
+                      affichCategries: () => affichCategries(),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount:
+                              !recherche ? articles.length : afterRech.length,
+                          itemBuilder: (context, index) => Padding(
+                              padding:
+                                  EdgeInsets.only(right: 7.0.w, left: 7.0.w),
+                              child: GestureDetector(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetaisArticle(
+                                          id: articles[index]['id'],
+                                          id_categorie: articles[index]
+                                              ['id_categorie'],
+                                          categorie: articles[index]
+                                              ['categorie'],
+                                          photos: articles[index]['photos'],
+                                          designation: articles[index]
+                                              ['designation'],
+                                          prix_ticket: articles[index]
+                                              ['prix_ticket'],
+                                          reference: articles[index]
+                                              ['reference'],
+                                          pourcentage: articles[index]
+                                              ['pourcentage'],
+                                          date_tirage: articles[index]
+                                              ['date_tirage']),
+                                    )),
+                                child: SizedBox(
+                                  height: 180.spMax,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5.0, bottom: 5),
+                                    child: CardArticle(
+                                        couleurCpay: couleurCpay,
+                                        id: articles[index]['id'],
+                                        id_categorie: articles[index]
+                                            ['id_categorie'],
+                                        categorie: articles[index]['categorie'],
+                                        photos: articles[index]['photos'],
+                                        designation: articles[index]
+                                            ['designation'],
+                                        prix_ticket: articles[index]
+                                            ['prix_ticket'],
+                                        reference: articles[index]['reference'],
+                                        pourcentage: articles[index]
+                                            ['pourcentage'],
+                                        date_tirage: articles[index]
+                                            ['date_tirage']),
+                                    // child: CardArticle(
+                                    //   couleurCpay: couleurCpay,
+                                    //   article:
+                                    //       !recherche ? articles[index] : afterRech[index],
+                                    // ),
+                                  ),
+                                ),
+                                //),
+                              ))),
+                    ),
+                  ],
                 ),
-                //barredeRecherche(context),
-                BarreRech(context: context),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount:
-                          !recherche ? articles.length : afterRech.length,
-                      itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(right: 7.0.w, left: 7.0.w),
-                          child: GestureDetector(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetaisArticle(
-                                      id: articles[index]['id'],
-                                      id_categorie: articles[index]
-                                          ['id_categorie'],
-                                      categorie: articles[index]['categorie'],
-                                      photos: articles[index]['photos'],
-                                      designation: articles[index]
-                                          ['designation'],
-                                      prix_ticket: articles[index]
-                                          ['prix_ticket'],
-                                      reference: articles[index]['reference'],
-                                      pourcentage: articles[index]
-                                          ['pourcentage'],
-                                      date_tirage: articles[index]
-                                          ['date_tirage']),
-                                )),
-                            child: SizedBox(
-                              height: 180.spMax,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5.0, bottom: 5),
-                                child: CardArticle(
-                                    couleurCpay: couleurCpay,
-                                    id: articles[index]['id'],
-                                    id_categorie: articles[index]
-                                        ['id_categorie'],
-                                    categorie: articles[index]['categorie'],
-                                    photos: articles[index]['photos'],
-                                    designation: articles[index]['designation'],
-                                    prix_ticket: articles[index]['prix_ticket'],
-                                    reference: articles[index]['reference'],
-                                    pourcentage: articles[index]['pourcentage'],
-                                    date_tirage: articles[index]
-                                        ['date_tirage']),
-                                // child: CardArticle(
-                                //   couleurCpay: couleurCpay,
-                                //   article:
-                                //       !recherche ? articles[index] : afterRech[index],
-                                // ),
-                              ),
-                            ),
-                            //),
-                          ))),
-                ),
+                Visibility(
+                  visible: categrorie,
+                  child: Align(
+                    alignment: const Alignment(0, -0.65),
+                    child: Categoris().animate().fade(),
+                  ),
+                )
               ],
             ),
           ));
