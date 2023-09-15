@@ -4,6 +4,7 @@
 
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/TextFieldPreuse.dart';
+import 'package:cpay/items/itemsTab/barre_rechrche.dart';
 import 'package:cpay/items/loading.dart';
 import 'package:cpay/items/oneArticle.dart';
 import 'package:cpay/models/articles.dart';
@@ -88,8 +89,13 @@ class _MesArticlesState extends State<MesArticles> {
         : Scaffold(
             body: Center(
             child: Column(
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                barredeRecherche(context),
+                SizedBox(
+                  height: 10.sp,
+                ),
+                //barredeRecherche(context),
+                BarreRech(context: context),
                 Expanded(
                   child: ListView.builder(
                       itemCount:

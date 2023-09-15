@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/items/essaidialog.dart';
+import 'package:cpay/items/itemsTab/barre_rechrche.dart';
 import 'package:cpay/items/itemsTab/trading.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
@@ -288,8 +289,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               //       MaterialPageRoute(
               //           builder: (context) => const Authentification()));
               // });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Trading()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => const BarreRech()));
             },
           ),
           actions: [
