@@ -7,6 +7,7 @@ import 'package:cpay/items/TextFieldPreuse.dart';
 import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/loading.dart';
+import 'package:cpay/items/loadinglistview.dart';
 import 'package:cpay/items/oneArticle.dart';
 import 'package:cpay/models/articles.dart';
 import 'package:cpay/pages/details_article.dart';
@@ -29,11 +30,15 @@ class _MesArticlesState extends State<MesArticles> {
   Color couleurCpay = const Color(0xFF6334A9);
   List articles = [];
   bool loading = false;
+  bool listchargement = false;
   //int listeArticlelength = articles.length;
   List<Article> afterRech = [];
   bool recherche = false;
   bool categrorie = false;
   String motcle = '';
+  int page = 1;
+  int totalpage = 0;
+  ScrollController onScrollmax = ScrollController();
   affichCategries() {
     setState(() {
       categrorie = !categrorie;
@@ -68,14 +73,16 @@ class _MesArticlesState extends State<MesArticles> {
       loading = true;
     });
     try {
-      articles = await Api.getarticle();
-      if (articles != []) {
+      var arttemp = await Api.getarticle(1);
+      print(arttemp["total_page"]);
+      totalpage = arttemp["total_page"];
+      if (arttemp != {}) {
+        for (int i = 0; i < arttemp['mdata'].length; i++) {
+          articles.add(arttemp['mdata'][i]);
+        }
         setState(() {
           loading = false;
-        });
-      } else {
-        setState(() {
-          loading = false;
+          page = page + 1;
         });
       }
     } catch (e) {
@@ -83,11 +90,38 @@ class _MesArticlesState extends State<MesArticles> {
     }
   }
 
+  Future onScrollend() async {
+    // List scrolListtmep = [];
+    if (onScrollmax.position.pixels == onScrollmax.position.maxScrollExtent) {
+      if (page <= totalpage) {
+        setState(() {
+          listchargement = true;
+        });
+        var scrolListtmep = await Api.getarticle(page);
+        for (int i = 0; i < scrolListtmep["mdata"].length; i++) {
+          articles.add(scrolListtmep["mdata"][i]);
+        }
+        setState(() {
+          page = page + 1;
+          listchargement = false;
+        });
+      }
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     getarticle();
+    onScrollmax.addListener(onScrollend);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    onScrollmax.dispose();
+    super.dispose();
   }
 
   @override
@@ -112,6 +146,7 @@ class _MesArticlesState extends State<MesArticles> {
                     ),
                     Expanded(
                       child: ListView.builder(
+                          controller: onScrollmax,
                           itemCount:
                               !recherche ? articles.length : afterRech.length,
                           itemBuilder: (context, index) => Padding(
@@ -170,6 +205,14 @@ class _MesArticlesState extends State<MesArticles> {
                                 //),
                               ))),
                     ),
+                    Visibility(
+                      visible: listchargement,
+                      child: Container(
+                        height: 20,
+                        child: LoadingLisview(),
+                      ),
+                    )
+                    //const LoadingLisview(),
                   ],
                 ),
                 Visibility(

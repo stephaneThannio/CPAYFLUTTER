@@ -1,6 +1,6 @@
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/itemsTab/achatapi.dart';
-import 'package:cpay/items/itemsTab/depos.dart';
+import 'package:cpay/items/itemsTab/depot.dart';
 import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
 import 'package:cpay/items/loading.dart';
@@ -25,6 +25,7 @@ class _TransactionState extends State<Transaction> {
   List listveretrait = [];
   Map<String, dynamic> listnext = {};
   bool loading = false;
+  bool loadinglist = false;
   String totalSold = '';
   int sold = 0;
   int entr = 0;
@@ -81,19 +82,25 @@ class _TransactionState extends State<Transaction> {
   Future scrolllistner() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pagedep);
-      for (int i = 0; i < listeGlobal["depot"].length; i++) {
-        if (pagedep <= listeGlobal["total_page_depot"]) {
-          listedepot.add(listeGlobal["depot"][i]);
-        }
-      }
-      if (mounted) {
+      if (pagedep <= listeGlobal["total_page_depot"]) {
         setState(() {
-          if (pagedep <= listeGlobal["total_page_depot"]) {
-            pagedep = pagedep + 1;
-            //print(page);
-          }
+          loadinglist = true;
         });
+        listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pagedep);
+        for (int i = 0; i < listeGlobal["depot"].length; i++) {
+          if (pagedep <= listeGlobal["total_page_depot"]) {
+            listedepot.add(listeGlobal["depot"][i]);
+          }
+        }
+        if (mounted) {
+          setState(() {
+            if (pagedep <= listeGlobal["total_page_depot"]) {
+              pagedep = pagedep + 1;
+              //print(page);
+              loadinglist = false;
+            }
+          });
+        }
       }
     }
   }
@@ -247,7 +254,11 @@ class _TransactionState extends State<Transaction> {
       loading
           ? const Loading(
               spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
-          : DepotListe(list: listedepot, control: scrollController),
+          : DepotListe(
+              list: listedepot,
+              control: scrollController,
+              loadlist: loadinglist,
+            ),
       loading
           ? const Loading(
               spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)

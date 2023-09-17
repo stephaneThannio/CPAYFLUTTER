@@ -3,6 +3,7 @@ import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/itemsTab/trading.dart';
+import 'package:cpay/items/loadinglistview.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
@@ -291,7 +292,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               //           builder: (context) => const Authentification()));
               // });
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Categoris()));
+                  MaterialPageRoute(builder: (context) => LoadingLisview()));
             },
           ),
           actions: [

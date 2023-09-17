@@ -16,11 +16,11 @@ class DepotItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.height;
+    double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
         child: SizedBox(
-          width: screenwidth * 0.8,
+          width: screenwidth * 0.9,
           child: Card(
             elevation: 2,
             color: Colors.white,
