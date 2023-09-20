@@ -3,7 +3,8 @@
 import 'dart:convert';
 
 import 'package:cpay/items/essaidialog.dart';
-import 'package:cpay/items/loading.dart';
+import 'package:cpay/items/loadingsimple.dart';
+//import 'package:cpay/items/loading.dart';
 import 'package:cpay/pages/Accueil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -165,7 +166,6 @@ class _ConfirmationState extends State<Confirmation> {
       child: loading
           ? const Loading(
               spincouleur: Color(0xFF6334A9),
-              containcouleur: Colors.transparent,
             )
           : Scaffold(
               body: Stack(

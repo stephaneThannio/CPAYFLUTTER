@@ -1,6 +1,8 @@
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/essaidialog.dart';
-import 'package:cpay/items/loading.dart';
+//import 'package:cpay/items/loading.dart';
+import 'package:cpay/items/loading_depot.dart';
+//import 'package:cpay/items/loadingsimple.dart';
 import 'package:cpay/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -110,7 +112,7 @@ class _PageDepotState extends State<PageDepot> {
 
   afterSucces(var resi) async {
     var req2 = await Api.listenStatus(resi['serverCorrelationId']);
-    print(req2);
+
     if (req2['status'] == "completed") {
       setState(() {
         loading = false;
@@ -151,7 +153,6 @@ class _PageDepotState extends State<PageDepot> {
     montant = controlmontant.text;
     numero = controlnum.text;
 
-    print("iban:$iban,montant:$montant, numero:$numero");
     var res = await Api.faireDepotMvola(iban, montant, numero);
     print(res);
     if (res['status'] == "Success") {
@@ -194,10 +195,10 @@ class _PageDepotState extends State<PageDepot> {
     ibanBCNT = controlibanBNCT.text;
     montantBCNT = controlmontantBNCT.text;
 
-    print("iban:$iban,montant:$montant, numero:$numero");
+    //print("iban:$iban,montant:$montant, numero:$numero");
     var res = await Api.sendrequestdepositBnktransfer(
         ibanBCNT, montantBCNT, reference);
-    print(res);
+    //print(res);
     if (res['status'] == "success") {
       setState(() {
         loading = false;
@@ -239,7 +240,7 @@ class _PageDepotState extends State<PageDepot> {
   onContunueBNCT() {
     ibanBCNT = controlibanBNCT.text;
     montantBCNT = controlmontantBNCT.text;
-    print("IBAN: $ibanBCNT,MONTANT:$montantBCNT");
+    //print("IBAN: $ibanBCNT,MONTANT:$montantBCNT");
   }
 
   Future getREF() async {
@@ -287,9 +288,9 @@ class _PageDepotState extends State<PageDepot> {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
     return loading
-        ? Loading(
+        ? LoadingDepot(
             alingementmainax: MainAxisAlignment.center,
-            titreLoading: "Attente acceptation du paiment",
+            titreLoadingDepot: "Attente acceptation du paiment",
             contenttext: "verifiez votre telephone",
             spincouleur: const Color(0xFF6334A9),
             containcouleur: Colors.white,
@@ -350,9 +351,8 @@ class _PageDepotState extends State<PageDepot> {
                               Expanded(
                                 child: paymenmode == "Mvola"
                                     ? formulaireMvola()
-                                    : formulairBanktransfer()
-                                        .animate()
-                                        .fade(duration: const Duration(seconds: 1)),
+                                    : formulairBanktransfer().animate().fade(
+                                        duration: const Duration(seconds: 1)),
                               ),
                             ],
                           ),
@@ -481,6 +481,7 @@ class _PageDepotState extends State<PageDepot> {
   }
 
   Container formulaireMvola() {
+    // ignore: avoid_unnecessary_containers
     return Container(
       //color: Colors.amber,
       child: Column(

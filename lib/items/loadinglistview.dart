@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoadingLisview extends StatefulWidget {
@@ -12,14 +11,14 @@ class LoadingLisview extends StatefulWidget {
 class _LoadingLisviewState extends State<LoadingLisview> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Container(
+        child: SizedBox(
           // color: Colors.amber,
           height: 10,
           width: 100,
-          child: const Center(
-            child: SpinKitThreeBounce(color: const Color(0xFF6334A9)),
+          child: Center(
+            child: SpinKitThreeBounce(color: Color(0xFF6334A9)),
           ),
         ),
       ),

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../models/articles.dart';
+//import '../models/articles.dart';
 
 class CardArticle extends StatefulWidget {
   const CardArticle(
@@ -59,14 +59,12 @@ class _CardArticleState extends State<CardArticle> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     animProgress();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -121,7 +119,7 @@ class _CardArticleState extends State<CardArticle> {
                                       child: Transform.rotate(
                                         angle: pi / 4,
                                         child: Align(
-                                          alignment: Alignment(0.5, -0.7),
+                                          alignment: const Alignment(0.5, -0.7),
                                           child: FittedBox(
                                             fit: BoxFit.scaleDown,
                                             child: Text(
@@ -216,7 +214,7 @@ class _CardArticleState extends State<CardArticle> {
                                                         .spaceEvenly,
                                                 children: [
                                                   Expanded(
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       width: 150,
                                                       //color: Colors.red,
                                                       child: Align(
@@ -249,7 +247,7 @@ class _CardArticleState extends State<CardArticle> {
                                                     height: 1,
                                                   ),
                                                   Expanded(
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       width: 150,
                                                       //color: Colors.red,
                                                       child: Align(

@@ -3,12 +3,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:cpay/api/api.dart';
-import 'package:cpay/items/TextFieldPreuse.dart';
 import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/categories.dart';
-import 'package:cpay/items/loading.dart';
+//import 'package:cpay/items/itemcategories.dart';
+//import 'package:cpay/items/loading.dart';
 import 'package:cpay/items/loadinglistview.dart';
-import 'package:cpay/items/oneArticle.dart';
+import 'package:cpay/items/loadingsimple.dart';
+
 import 'package:cpay/models/articles.dart';
 import 'package:cpay/pages/details_article.dart';
 //import 'package:cpay/pages/details_article.dart';
@@ -31,10 +32,13 @@ class _MesArticlesState extends State<MesArticles> {
   List articles = [];
   bool loading = false;
   bool listchargement = false;
+  int scrollmaxcount = 0;
   //int listeArticlelength = articles.length;
   List<Article> afterRech = [];
+  List listCategories = [];
   bool recherche = false;
   bool categrorie = false;
+  //String text='';
   String motcle = '';
   int page = 1;
   int totalpage = 0;
@@ -68,20 +72,60 @@ class _MesArticlesState extends State<MesArticles> {
     });
   }
 
-  Future getarticle() async {
+  // Future getarticle() async {
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //   try {
+  //     var arttemp = await Api.getarticle(1);
+  //     print(arttemp["total_page"]);
+  //     totalpage = arttemp["total_page"];
+  //     if (arttemp != {}) {
+  //       for (int i = 0; i < arttemp['mdata'].length; i++) {
+  //         articles.add(arttemp['mdata'][i]);
+  //       }
+  //       setState(() {
+  //         loading = false;
+  //         page = page + 1;
+  //       });
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  Future getCategories() async {
+    var mapcategories = await Api.getcategories();
+    if (mapcategories != {}) {
+      for (int i = 0; i < mapcategories['mdata'].length; i++) {
+        listCategories.add(mapcategories['mdata'][i]);
+      }
+    }
+  }
+
+  Future searchbycategories() async {
+    print('hello');
+    articles.clear();
     setState(() {
       loading = true;
+      categrorie = false;
     });
+    // setState(() {
+    //     categrorie = false;
+    //   });
     try {
-      var arttemp = await Api.getarticle(1);
+      var arttemp = await Api.getarticlebycategories(
+          Categoris.filtre, page, BarreRech.text);
       print(arttemp["total_page"]);
       totalpage = arttemp["total_page"];
       if (arttemp != {}) {
         for (int i = 0; i < arttemp['mdata'].length; i++) {
           articles.add(arttemp['mdata'][i]);
         }
+        //print(articles);
         setState(() {
           loading = false;
+
           page = page + 1;
         });
       }
@@ -90,21 +134,48 @@ class _MesArticlesState extends State<MesArticles> {
     }
   }
 
+  essai() {
+    //print("hello");
+    print(Categoris.filtre);
+    setState(() {
+      categrorie = false;
+    });
+  }
+
+  // Future searchbycategories() async {
+  //   var mapcategories = await Api.getarticlebycategories(Categoris.filtre);
+  //   if (mapcategories != {}) {
+  //     for (int i = 0; i < mapcategories['mdata'].length; i++) {
+  //       listCategories.add(mapcategories['mdata'][i]);
+  //     }
+  //     setState(() {
+  //       categrorie = false;
+  //     });
+  //   }
+  // }
+
   Future onScrollend() async {
     // List scrolListtmep = [];
     if (onScrollmax.position.pixels == onScrollmax.position.maxScrollExtent) {
-      if (page <= totalpage) {
-        setState(() {
-          listchargement = true;
-        });
-        var scrolListtmep = await Api.getarticle(page);
-        for (int i = 0; i < scrolListtmep["mdata"].length; i++) {
-          articles.add(scrolListtmep["mdata"][i]);
+      scrollmaxcount = scrollmaxcount + 1;
+
+      if (scrollmaxcount == 1) {
+        print(scrollmaxcount);
+        if (page <= totalpage) {
+          setState(() {
+            listchargement = true;
+          });
+          var scrolListtmep = await Api.getarticlebycategories(
+              Categoris.filtre, page, BarreRech.text);
+          for (int i = 0; i < scrolListtmep["mdata"].length; i++) {
+            articles.add(scrolListtmep["mdata"][i]);
+          }
+          setState(() {
+            page = page + 1;
+            listchargement = false;
+            scrollmaxcount = 0;
+          });
         }
-        setState(() {
-          page = page + 1;
-          listchargement = false;
-        });
       }
     }
   }
@@ -112,7 +183,9 @@ class _MesArticlesState extends State<MesArticles> {
   @override
   void initState() {
     // TODO: implement initState
-    getarticle();
+    searchbycategories();
+    //getarticle();
+    getCategories();
     onScrollmax.addListener(onScrollend);
     super.initState();
   }
@@ -126,25 +199,36 @@ class _MesArticlesState extends State<MesArticles> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? const Loading(
-            spincouleur: const Color(0xFF6334A9), containcouleur: Colors.white)
-        : Scaffold(
-            body: Center(
-            child: Stack(
-              children: [
-                Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: 10.sp,
-                    ),
-                    //barredeRecherche(context),
-                    BarreRech(
-                      context: context,
-                      affichCategries: () => affichCategries(),
-                    ),
-                    Expanded(
+    return Scaffold(
+        body: Center(
+      child: Stack(
+        children: [
+          Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                height: 10.sp,
+              ),
+              //barredeRecherche(context),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: BarreRech(
+                  context: context,
+                  affichCategries: () => affichCategries(),
+                  onchangedtext: () {
+                    page = 1;
+                    searchbycategories();
+                    //print(BarreRech.text);
+                  },
+                ),
+              ),
+              loading
+                  ? const Expanded(
+                      child: Loading(
+                        spincouleur: Color(0xFF6334A9),
+                      ),
+                    )
+                  : Expanded(
                       child: ListView.builder(
                           controller: onScrollmax,
                           itemCount:
@@ -205,61 +289,38 @@ class _MesArticlesState extends State<MesArticles> {
                                 //),
                               ))),
                     ),
-                    Visibility(
-                      visible: listchargement,
-                      child: Container(
-                        height: 20,
-                        child: LoadingLisview(),
-                      ),
-                    )
-                    //const LoadingLisview(),
-                  ],
+              Visibility(
+                visible: listchargement,
+                child: const SizedBox(
+                  height: 20,
+                  child: LoadingLisview(),
                 ),
-                Visibility(
-                  visible: categrorie,
-                  child: Align(
-                    alignment: const Alignment(0, -0.65),
-                    child: Categoris().animate().fade(),
-                  ),
-                )
-              ],
+              )
+              //const LoadingLisview(),
+            ],
+          ),
+          Visibility(
+            visible: categrorie,
+            child: Align(
+              alignment: const Alignment(0, -0.65),
+              child: Categoris(
+                listcat: listCategories,
+                fuctionannuler: () {
+                  setState(() {
+                    categrorie = false;
+                  });
+                },
+                dosearch: () {
+                  //essai();
+                  page = 1;
+                  searchbycategories();
+                },
+                // dosearch: searchbycategories(),
+              ).animate().fade(),
             ),
-          ));
-  }
-
-  Widget barredeRecherche(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          //color: Colors.grey,
-          borderRadius: BorderRadius.circular(20)),
-      height: 40.sp,
-      child: TextFieldPreuse(
-          hint: 'Rechercher',
-          obscur: false,
-          colorinside: const Color(0xFF6334A9).withOpacity(0.8),
-          typeWord: TextInputType.text,
-          sufixICO: !recherche
-              ? IconButton(
-                  onPressed: () {
-                    rechercher();
-                  },
-                  icon: Icon(
-                    Icons.search,
-                    size: 20.sp,
-                  ),
-                  color: Colors.white,
-                )
-              : IconButton(
-                  onPressed: () {
-                    motvide();
-                  },
-                  icon: Icon(
-                    Icons.refresh,
-                    size: 20.sp,
-                  ),
-                  color: Colors.white,
-                ),
-          control: rechCOntrol),
-    );
+          )
+        ],
+      ),
+    ));
   }
 }

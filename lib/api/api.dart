@@ -4,7 +4,55 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 //test
+
 class Api {
+  static getcategories() async {
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "Autorization": "...",
+            "action": "get_vente_categorie"
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          }).timeout(const Duration(seconds: 20));
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return {};
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+  static getarticlebycategories(String cat, int page, String textsearch) async {
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "Autorization": "...",
+            "action": "get_vente",
+            "page": page,
+            "categorie": cat,
+            "search": textsearch
+          }),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          }).timeout(const Duration(seconds: 20));
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
   static getarticle(int page) async {
     //List listarticle = [];
     try {
@@ -23,10 +71,10 @@ class Api {
         //listarticle = data["mdata"];
         return data;
       } else {
-        print('no response');
+        return 0;
       }
     } catch (e) {
-      print(e);
+      return e;
     }
   }
 
@@ -47,8 +95,6 @@ class Api {
       if (request.statusCode == 200) {
         var data = jsonDecode(request.body);
         return data;
-      } else {
-        print("request not found");
       }
     } catch (erreur) {
       if (erreur is TimeoutException) {
@@ -65,7 +111,7 @@ class Api {
       var data = jsonDecode(request.body);
       return data;
     } else {
-      print("error");
+      return 0;
     }
   }
 
@@ -85,7 +131,7 @@ class Api {
       var data = jsonDecode(request.body);
       return data;
     } else {
-      return null;
+      return 0;
     }
   }
 
@@ -111,7 +157,7 @@ class Api {
         return null;
       }
     } catch (erreur) {
-      print(erreur);
+      return 0;
     }
   }
 
@@ -136,10 +182,10 @@ class Api {
         var data = jsonDecode(request.body);
         return data;
       } else {
-        return null;
+        return 0;
       }
     } catch (erreur) {
-      print(erreur);
+      return erreur;
     }
   }
 }

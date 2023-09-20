@@ -29,11 +29,6 @@ class BulleRetraitVers extends StatelessWidget {
     //       });
     // }
 
-    void goTodepot() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const PageDepot()));
-    }
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(

@@ -17,7 +17,6 @@ class _QrCodeState extends State<QrCode> {
   Barcode? barcode;
   @override
   void dispose() {
-    // TODO: implement dispose
     qrViewController?.dispose();
     super.dispose();
   }

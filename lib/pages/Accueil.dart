@@ -1,9 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/items/categories.dart';
+//import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/essaidialog.dart';
-import 'package:cpay/items/barre_rechrche.dart';
+//import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/itemsTab/trading.dart';
-import 'package:cpay/items/loadinglistview.dart';
+//import 'package:cpay/items/loadinglistview.dart';
 import 'package:cpay/models/user.dart';
 import 'package:cpay/pages/authentification.dart';
 import 'package:cpay/pages/depotpage.dart';
@@ -91,7 +92,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
 
   Map<String, dynamic> list = {};
   List<Map<String, dynamic>> list22 = [];
-  var list2;
+
 //===========================Titre de page control===================================================================================
 
 //==============================Alert=======================================================================
@@ -190,7 +191,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   }
 
   goTodepot() {
-    print('HELLO');
+    //print('HELLO');
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const PageDepot()));
   }
@@ -283,6 +284,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               image: const AssetImage('lib/photos/285-min.png'),
             ),
             onPressed: () {
+              print(Categoris.filtre);
               // showalert("info", "Se connecter",
               //     "Vous devez connecter pour faire cette action", () {
               //   Navigator.pop(context);
@@ -291,8 +293,10 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               //       MaterialPageRoute(
               //           builder: (context) => const Authentification()));
               // });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoadingLisview()));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => const LoadingLisview()));
             },
           ),
           actions: [

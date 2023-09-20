@@ -3,9 +3,9 @@ import 'dart:math';
 
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+//import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../models/articles.dart';
+//import '../models/articles.dart';
 
 class OneArticle extends StatefulWidget {
   const OneArticle(
@@ -61,14 +61,12 @@ class _OneArticleState extends State<OneArticle> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     animProgress();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -101,7 +99,7 @@ class _OneArticleState extends State<OneArticle> {
                     child: Stack(
                       children: [
                         Align(
-                          alignment: Alignment(1, -1),
+                          alignment: const Alignment(1, -1),
                           child: ClipPath(
                             clipper: TrapeziumClipper(),
                             child: Container(
@@ -115,7 +113,7 @@ class _OneArticleState extends State<OneArticle> {
                                 child: Transform.rotate(
                                   angle: pi / 4,
                                   child: Align(
-                                    alignment: Alignment(0.5, -0.7),
+                                    alignment: const Alignment(0.5, -0.7),
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       widget.reference,
@@ -164,7 +162,7 @@ class _OneArticleState extends State<OneArticle> {
                 Expanded(
                   child: Stack(children: [
                     Align(
-                      alignment: Alignment(0.9, -1),
+                      alignment: const Alignment(0.9, -1),
                       child: Container(
                         height: 50,
                         width: 50,
@@ -186,7 +184,7 @@ class _OneArticleState extends State<OneArticle> {
                           clipper: UpperNipMessageClipper(MessageType.send,
                               bubbleRadius: 20, sizeOfNip: 20, sizeRatio: 2),
                           child: Container(
-                            margin: EdgeInsets.only(top: 25),
+                            margin: const EdgeInsets.only(top: 25),
                             decoration: BoxDecoration(
                                 color: const Color(0xFFd2d6de),
                                 borderRadius: BorderRadius.circular(10)),

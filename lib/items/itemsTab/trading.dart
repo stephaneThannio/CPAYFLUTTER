@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:cpay/api/api.dart';
-import 'package:cpay/items/loading.dart';
-import 'package:cpay/models/modeltrade.dart';
+//import 'package:cpay/api/api.dart';
+//import 'package:cpay/items/loading.dart';
+//import 'package:cpay/models/modeltrade.dart';
 import 'package:cpay/models/modeltradenet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +28,6 @@ class _TradingState extends State<Trading> {
   bool loading = false;
   late TrackballBehavior _trackballBehavior;
   afficherligne() {
-    print(chartDatatrade2);
     setState(() {
       //print(chartDatatrade2);
       // Rafraîchissez le graphique après chaque mise à jour des données
@@ -37,8 +36,7 @@ class _TradingState extends State<Trading> {
       lastDataPointY = chartDatatrade.first.close;
       // crosshairBehavior.show(lastDataPointX, lastDataPointY);
       // _trackballBehavior.show(lastDataPointX, lastDataPointY);
-      print(lastDataPointX);
-      print(lastDataPointY);
+
       //}
     });
   }
@@ -57,12 +55,12 @@ class _TradingState extends State<Trading> {
             // chartDatatrade2 =
             //     listaftertransform(data["Time Series FX (5min)"][0]);
             titlelist = data["Meta Data"];
-            print(titlelist["1. Information"]);
+
             lastDataPointX = chartDatatrade.first.date;
             lastDataPointY = chartDatatrade.first.close;
           });
         }
-        Future.delayed(Duration(minutes: 5), () {
+        Future.delayed(const Duration(minutes: 5), () {
           gettrade();
         });
 
@@ -77,16 +75,15 @@ class _TradingState extends State<Trading> {
         //   getapitrading();
         // });
       } else {
-        print("request not send");
+        return null;
       }
     } catch (error) {
-      print(error);
+      return error;
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     // _chartData = getChartData();
     gettrade();
     //_chartDatatrade = listaftertransform(Api.getapitrading());
@@ -266,13 +263,15 @@ class _TradingState extends State<Trading> {
                     )
                   ],
                   primaryXAxis: DateTimeAxis(
-                      maximum: DateTime.now().add(Duration(minutes: 15)),
+                      maximum: DateTime.now().add(const Duration(minutes: 15)),
                       dateFormat: DateFormat.Hms(),
-                      majorGridLines: MajorGridLines(width: 0)),
+                      majorGridLines: const MajorGridLines(width: 0)),
                   primaryYAxis: NumericAxis(
                     isVisible: false,
-                    majorGridLines: MajorGridLines(color: Colors.transparent),
-                    minorGridLines: MinorGridLines(color: Colors.transparent),
+                    majorGridLines:
+                        const MajorGridLines(color: Colors.transparent),
+                    minorGridLines:
+                        const MinorGridLines(color: Colors.transparent),
                     // minimum: 1,
                     // maximum: 1,
                     // interval: 0.001,

@@ -4,7 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cpay/items/essaidialog.dart';
-import 'package:cpay/items/loading.dart';
+//import 'package:cpay/items/loading.dart';
+import 'package:cpay/items/loadingsimple.dart';
 import 'package:cpay/pages/confirmation.dart';
 import 'package:cpay/pages/login.dart';
 import 'package:flutter/material.dart';
@@ -215,171 +216,169 @@ class _CreateAccountState extends State<CreateAccount> {
                       height: 28.h,
                     ),
                     loading
-                        ? const Loading(
-                            containcouleur: Color(0xFF6334A9),
-                            spincouleur: Colors.white,
+                        ? SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.4,
+                            child: const Loading(
+                              spincouleur: Colors.white,
+                            ),
                           )
-                        : Container(
-                            //color: Colors.amber,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 20.sp,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      'Create ACCOUNT',
-                                      style: TextStyle(
-                                        fontSize: 28.sp,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white,
-                                        fontFamily: 'PlusJakartaSans',
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20.sp,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 280.sp,
-                                  height: 50.sp,
-                                  child: TextFieldPreuse(
-                                    control: phonenbr,
-                                    obscur: false,
-                                    prefixIco: Icon(
-                                      size: 20.sp,
-                                      Icons.phone,
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height: 20.sp,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    textAlign: TextAlign.center,
+                                    'Create ACCOUNT',
+                                    style: TextStyle(
+                                      fontSize: 28.sp,
+                                      fontWeight: FontWeight.normal,
                                       color: Colors.white,
+                                      fontFamily: 'PlusJakartaSans',
                                     ),
-                                    label: "Telephone",
-                                    typeWord: TextInputType.phone,
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 20.sp,
-                                ),
-                                SizedBox(
-                                  //color: Colors.red,
-                                  width: 280.sp,
-                                  height: 50.sp,
-                                  child: TextFieldPreuse(
-                                    control: pwd,
-                                    obscur: true,
-                                    prefixIco: Icon(
-                                      size: 20.sp,
-                                      Icons.security,
-                                      color: Colors.white,
-                                    ),
-                                    sufixICO: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.check_sharp,
-                                        size: 20.sp,
-                                      ),
-                                      color: Colors.white,
-                                    ),
-                                    label: "Mot de passe",
-                                    typeWord: TextInputType.text,
+                                  SizedBox(
+                                    width: 20.sp,
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 20.sp,
-                                ),
-                                SizedBox(
-                                  //color: Colors.red,
-                                  width: 280.sp,
-                                  height: 50.sp,
-                                  child: TextFieldPreuse(
-                                    control: cpwd,
-                                    obscur: true,
-                                    prefixIco: Icon(
-                                      size: 20.sp,
-                                      Icons.security,
-                                      color: Colors.white,
-                                    ),
-                                    sufixICO: IconButton(
-                                      onPressed: () {},
-                                      icon:
-                                          Icon(size: 20.sp, Icons.check_sharp),
-                                      color: Colors.white,
-                                    ),
-                                    label: "Confirmation du mot de passe",
-                                    typeWord: TextInputType.text,
+                                ],
+                              ),
+                              SizedBox(
+                                width: 280.sp,
+                                height: 50.sp,
+                                child: TextFieldPreuse(
+                                  control: phonenbr,
+                                  obscur: false,
+                                  prefixIco: Icon(
+                                    size: 20.sp,
+                                    Icons.phone,
+                                    color: Colors.white,
                                   ),
+                                  label: "Telephone",
+                                  typeWord: TextInputType.phone,
                                 ),
-                                SizedBox(
-                                  height: 20.sp,
+                              ),
+                              SizedBox(
+                                height: 20.sp,
+                              ),
+                              SizedBox(
+                                //color: Colors.red,
+                                width: 280.sp,
+                                height: 50.sp,
+                                child: TextFieldPreuse(
+                                  control: pwd,
+                                  obscur: true,
+                                  prefixIco: Icon(
+                                    size: 20.sp,
+                                    Icons.security,
+                                    color: Colors.white,
+                                  ),
+                                  sufixICO: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.check_sharp,
+                                      size: 20.sp,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  label: "Mot de passe",
+                                  typeWord: TextInputType.text,
                                 ),
-                                SizedBox(
-                                  //color: Colors.red,
-                                  width: 280.sp,
-                                  height: 50.sp,
-                                  child: ElevatedButton(
-                                    child: Text(
-                                      textAlign: TextAlign.center,
-                                      'S\'inscrire',
-                                      style: TextStyle(
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.normal,
-                                        color: const Color(0xFF6334A9),
-                                        fontFamily: 'PlusJakartaSans',
-                                      ),
+                              ),
+                              SizedBox(
+                                height: 20.sp,
+                              ),
+                              SizedBox(
+                                //color: Colors.red,
+                                width: 280.sp,
+                                height: 50.sp,
+                                child: TextFieldPreuse(
+                                  control: cpwd,
+                                  obscur: true,
+                                  prefixIco: Icon(
+                                    size: 20.sp,
+                                    Icons.security,
+                                    color: Colors.white,
+                                  ),
+                                  sufixICO: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(size: 20.sp, Icons.check_sharp),
+                                    color: Colors.white,
+                                  ),
+                                  label: "Confirmation du mot de passe",
+                                  typeWord: TextInputType.text,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.sp,
+                              ),
+                              SizedBox(
+                                //color: Colors.red,
+                                width: 280.sp,
+                                height: 50.sp,
+                                child: ElevatedButton(
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    'S\'inscrire',
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.normal,
+                                      color: const Color(0xFF6334A9),
+                                      fontFamily: 'PlusJakartaSans',
+                                    ),
+                                  ),
+                                  onPressed: () => {
+                                    sendCreateAccountRequest(),
+                                    //Confirm()
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.sp,
+                              ),
+                              SizedBox(
+                                //color: Colors.red,
+                                width: 140.sp,
+                                height: 25.sp,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xFF6334A9),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            side: const BorderSide(
+                                                width: 1,
+                                                color: Colors.white))),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Icon(
+                                          Icons.arrow_back,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          textAlign: TextAlign.center,
+                                          'Se connecter',
+                                          style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.white,
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     onPressed: () => {
-                                      sendCreateAccountRequest(),
-                                      //Confirm()
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20.sp,
-                                ),
-                                SizedBox(
-                                  //color: Colors.red,
-                                  width: 140.sp,
-                                  height: 25.sp,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xFF6334A9),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              side: const BorderSide(
-                                                  width: 1,
-                                                  color: Colors.white))),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Icon(
-                                            Icons.arrow_back,
-                                            color: Colors.white,
-                                          ),
-                                          Text(
-                                            textAlign: TextAlign.center,
-                                            'Se connecter',
-                                            style: TextStyle(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.white,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      onPressed: () => {
-                                            setState(() {
-                                              pagechange = true;
-                                            })
-                                          }),
-                                ),
-                              ],
-                            ),
+                                          setState(() {
+                                            pagechange = true;
+                                          })
+                                        }),
+                              ),
+                            ],
                           )
                   ],
                 )

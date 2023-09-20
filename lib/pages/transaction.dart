@@ -3,7 +3,8 @@ import 'package:cpay/items/itemsTab/achatapi.dart';
 import 'package:cpay/items/itemsTab/depot.dart';
 import 'package:cpay/items/itemsTab/retrait.dart';
 import 'package:cpay/items/itemsTab/virement.dart';
-import 'package:cpay/items/loading.dart';
+import 'package:cpay/items/loadingsimple.dart';
+//import 'package:cpay/items/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -47,6 +48,7 @@ class _TransactionState extends State<Transaction> {
   ScrollController scrollControllerVIR = ScrollController();
   ScrollController scrollControllerRTR = ScrollController();
   ScrollController scrollControllerAPIS = ScrollController();
+  int scrollcount = 0;
 
   //depot===========================================
   Future getdepot() async {
@@ -82,24 +84,28 @@ class _TransactionState extends State<Transaction> {
   Future scrolllistner() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      if (pagedep <= listeGlobal["total_page_depot"]) {
-        setState(() {
-          loadinglist = true;
-        });
-        listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pagedep);
-        for (int i = 0; i < listeGlobal["depot"].length; i++) {
-          if (pagedep <= listeGlobal["total_page_depot"]) {
-            listedepot.add(listeGlobal["depot"][i]);
-          }
-        }
-        if (mounted) {
+      scrollcount = scrollcount + 1;
+      if (scrollcount == 1) {
+        if (pagedep <= listeGlobal["total_page_depot"]) {
           setState(() {
-            if (pagedep <= listeGlobal["total_page_depot"]) {
-              pagedep = pagedep + 1;
-              //print(page);
-              loadinglist = false;
-            }
+            loadinglist = true;
           });
+          listeGlobal = await Api.getDepotlist(User.sessionUser!.iban, pagedep);
+          for (int i = 0; i < listeGlobal["depot"].length; i++) {
+            if (pagedep <= listeGlobal["total_page_depot"]) {
+              listedepot.add(listeGlobal["depot"][i]);
+            }
+          }
+          if (mounted) {
+            setState(() {
+              if (pagedep <= listeGlobal["total_page_depot"]) {
+                pagedep = pagedep + 1;
+                //print(page);
+                loadinglist = false;
+                scrollcount = 0;
+              }
+            });
+          }
         }
       }
     }
@@ -219,13 +225,11 @@ class _TransactionState extends State<Transaction> {
   setzoom() {
     setState(() {
       zoomin = !zoomin;
-      print(zoomin);
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     scrollController.addListener(scrolllistner);
     scrollControllerVIR.addListener(scrolllistnervirement);
@@ -240,7 +244,6 @@ class _TransactionState extends State<Transaction> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     scrollController.dispose();
     scrollControllerVIR.dispose();
@@ -253,7 +256,8 @@ class _TransactionState extends State<Transaction> {
     final tabpage = <Widget>[
       loading
           ? const Loading(
-              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+              spincouleur: Color(0xFF6334A9),
+            )
           : DepotListe(
               list: listedepot,
               control: scrollController,
@@ -261,15 +265,18 @@ class _TransactionState extends State<Transaction> {
             ),
       loading
           ? const Loading(
-              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+              spincouleur: Color(0xFF6334A9),
+            )
           : Virement(list: listvirement, control: scrollControllerVIR),
       loading
           ? const Loading(
-              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+              spincouleur: Color(0xFF6334A9),
+            )
           : AchatApis(list: listeApis, control: scrollControllerAPIS),
       loading
           ? const Loading(
-              spincouleur: Color(0xFF6334A9), containcouleur: Colors.white)
+              spincouleur: Color(0xFF6334A9),
+            )
           : Retrait(list: listveretrait, control: scrollControllerRTR),
     ];
     final buttonTop = <Tab>[
@@ -485,12 +492,9 @@ class _TransactionState extends State<Transaction> {
               height: 20.sp,
             ),
             Expanded(
-              child: Container(
-                //color: Colors.red,
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: tabpage,
-                ),
+              child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                children: tabpage,
               ),
             ),
           ],

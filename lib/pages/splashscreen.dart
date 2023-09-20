@@ -44,7 +44,6 @@ class _SplashscreenState extends State<Splashscreen> {
   props() {}
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     verifuse();
   }

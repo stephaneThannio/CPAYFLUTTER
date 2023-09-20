@@ -136,156 +136,153 @@ class InfoBnc extends StatelessWidget {
                                 Padding(
                                   padding: EdgeInsets.only(
                                       left: 20.sp, right: 20.sp),
-                                  child: Container(
-                                    //color: Colors.red,
-                                    child: Column(
-                                      children: [
-                                        ListTile(
-                                          title: Text(
-                                            "REFERENCE",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(5)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        title: Text(
+                                          "REFERENCE",
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF6334A9),
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
                                         ),
-                                        ListTile(
-                                          title: Text(
-                                            "IBAN",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(1)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                        subtitle: Text(
+                                          list[0]
+                                              .entries
+                                              .elementAt(5)
+                                              .value
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey,
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
                                         ),
-                                        ListTile(
-                                          title: Text(
-                                            "BIC",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(2)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                      ),
+                                      ListTile(
+                                        title: Text(
+                                          "IBAN",
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF6334A9),
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
                                         ),
-                                        ListTile(
-                                          title: Text(
-                                            "Nom",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(3)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                        subtitle: Text(
+                                          list[0]
+                                              .entries
+                                              .elementAt(1)
+                                              .value
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey,
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
                                         ),
-                                        ListTile(
-                                          title: Text(
-                                            "Domiciliation",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(4)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                      ),
+                                      ListTile(
+                                        title: Text(
+                                          "BIC",
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF6334A9),
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
                                         ),
-                                        ListTile(
-                                          title: Text(
-                                            "DATE",
-                                            style: TextStyle(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF6334A9),
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                        subtitle: Text(
+                                          list[0]
+                                              .entries
+                                              .elementAt(2)
+                                              .value
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey,
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
-                                          subtitle: Text(
-                                            list[0]
-                                                .entries
-                                                .elementAt(6)
-                                                .value
-                                                .toString(),
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.grey,
-                                              fontFamily: 'PlusJakartaSans',
-                                            ),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        title: Text(
+                                          "Nom",
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF6334A9),
+                                            fontFamily: 'PlusJakartaSans',
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                        ),
+                                        subtitle: Text(
+                                          list[0]
+                                              .entries
+                                              .elementAt(3)
+                                              .value
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey,
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        title: Text(
+                                          "Domiciliation",
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF6334A9),
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          list[0]
+                                              .entries
+                                              .elementAt(4)
+                                              .value
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey,
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                      ),
+                                      ListTile(
+                                        title: Text(
+                                          "DATE",
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF6334A9),
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                          list[0]
+                                              .entries
+                                              .elementAt(6)
+                                              .value
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.grey,
+                                            fontFamily: 'PlusJakartaSans',
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 )
                               ],

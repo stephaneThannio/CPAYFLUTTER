@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
-class BarreRech extends StatelessWidget {
-  BarreRech({super.key, required this.context, required this.affichCategries});
+class BarreRech extends StatefulWidget {
+  BarreRech(
+      {super.key,
+      required this.context,
+      required this.affichCategries,
+      required this.onchangedtext});
   BuildContext context;
   final Function affichCategries;
+  final Function onchangedtext;
+  static String text = '';
+  @override
+  State<BarreRech> createState() => _BarreRechState();
+}
 
+class _BarreRechState extends State<BarreRech> {
+  TextEditingController textcontroller = TextEditingController();
   @override
   Widget build(context) {
     return Container(
@@ -19,40 +30,41 @@ class BarreRech extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                child: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
+            const Expanded(
+              child: Icon(
+                Icons.search,
+                color: Colors.white,
               ),
             ),
-            Container(
+            SizedBox(
               width: 220.spMax,
               //color: Colors.green,
-              child: const TextField(
-                style: TextStyle(
+              child: TextField(
+                controller: textcontroller,
+                onEditingComplete: () {
+                  BarreRech.text = textcontroller.text;
+                  widget.onchangedtext();
+                },
+                style: const TextStyle(
                   color: Colors.white,
                 ),
                 cursorColor: Colors.white,
                 maxLines: 1,
-                decoration: InputDecoration.collapsed(
+                decoration: const InputDecoration.collapsed(
                   hintStyle: TextStyle(color: Colors.white),
                   hintText: "Rechercher...",
                 ),
               ),
             ),
             Expanded(
-              child: Container(
-                child: IconButton(
-                    onPressed: () {
-                      affichCategries();
-                    },
-                    icon: const Icon(
-                      Icons.tune_rounded,
-                      color: Colors.white,
-                    )),
-              ),
+              child: IconButton(
+                  onPressed: () {
+                    widget.affichCategries();
+                  },
+                  icon: const Icon(
+                    Icons.tune_rounded,
+                    color: Colors.white,
+                  )),
             )
           ],
         ),

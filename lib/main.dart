@@ -80,7 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
   props() {}
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     verifuse();
   }

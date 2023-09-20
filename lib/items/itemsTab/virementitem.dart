@@ -54,7 +54,7 @@ class _VirementItemState extends State<VirementItem>
 
   // @override
   // void initState() {
-  //   // TODO: implement initState
+
   //   super.initState();
   //   _animcontroller = AnimationController(
   //       vsync: this, duration: const Duration(milliseconds: 200));
@@ -62,7 +62,7 @@ class _VirementItemState extends State<VirementItem>
 
   // @override
   // void dispose() {
-  //   // TODO: implement dispose
+
   //   _animcontroller.dispose();
   //   super.dispose();
   // }
@@ -98,22 +98,45 @@ class _VirementItemState extends State<VirementItem>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        //color: Colors.red,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.status,
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF6334A9),
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
+                          Text(
+                            widget.date,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.grey,
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
+                          Text(
+                            widget.destination,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.grey,
+                              fontFamily: 'PlusJakartaSans',
+                            ),
+                          ),
+                        ],
+                      ),
+                      Visibility(
+                        visible: widget.affiche,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.status,
-                              style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFF6334A9),
-                                fontFamily: 'PlusJakartaSans',
-                              ),
-                            ),
-                            Text(
-                              widget.date,
+                              widget.type,
                               style: TextStyle(
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.normal,
@@ -122,7 +145,7 @@ class _VirementItemState extends State<VirementItem>
                               ),
                             ),
                             Text(
-                              widget.destination,
+                              widget.motif,
                               style: TextStyle(
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.normal,
@@ -130,45 +153,16 @@ class _VirementItemState extends State<VirementItem>
                                 fontFamily: 'PlusJakartaSans',
                               ),
                             ),
+                            // Text(
+                            //   periodicite,
+                            //   style: TextStyle(
+                            //     fontSize: 10.sp,
+                            //     fontWeight: FontWeight.normal,
+                            //     color: Colors.grey,
+                            //     fontFamily: 'PlusJakartaSans',
+                            //   ),
+                            // ),
                           ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: widget.affiche,
-                        child: Container(
-                          //color: Colors.blue,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.type,
-                                style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.grey,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                              Text(
-                                widget.motif,
-                                style: TextStyle(
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.grey,
-                                  fontFamily: 'PlusJakartaSans',
-                                ),
-                              ),
-                              // Text(
-                              //   periodicite,
-                              //   style: TextStyle(
-                              //     fontSize: 10.sp,
-                              //     fontWeight: FontWeight.normal,
-                              //     color: Colors.grey,
-                              //     fontFamily: 'PlusJakartaSans',
-                              //   ),
-                              // ),
-                            ],
-                          ),
                         ).animate().fade(duration: const Duration(seconds: 1)),
                       )
                     ],
