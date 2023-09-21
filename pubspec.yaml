@@ -78,6 +78,7 @@ flutter:
     - lib/photos/
     - lib/photos/articles/
     - lib/photos/gif_alert/
+    - lib/items/error/img/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

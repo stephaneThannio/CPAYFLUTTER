@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:cpay/items/categories.dart';
+import 'package:cpay/items/error/errorpage.dart';
 //import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/essaidialog.dart';
 //import 'package:cpay/items/barre_rechrche.dart';
@@ -284,7 +285,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               image: const AssetImage('lib/photos/285-min.png'),
             ),
             onPressed: () {
-              print(Categoris.filtre);
+              //print(Categoris.filtre);
               // showalert("info", "Se connecter",
               //     "Vous devez connecter pour faire cette action", () {
               //   Navigator.pop(context);
@@ -293,10 +294,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               //       MaterialPageRoute(
               //           builder: (context) => const Authentification()));
               // });
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const LoadingLisview()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const PageEror()));
             },
           ),
           actions: [

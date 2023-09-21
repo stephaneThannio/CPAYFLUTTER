@@ -29,27 +29,23 @@ class Api {
   }
 
   static getarticlebycategories(String cat, int page, String textsearch) async {
-    try {
-      final request = await post(Uri.parse("https://api.c-pay.me"),
-          body: jsonEncode({
-            "app": "cpay",
-            "Autorization": "...",
-            "action": "get_vente",
-            "page": page,
-            "categorie": cat,
-            "search": textsearch
-          }),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          }).timeout(const Duration(seconds: 20));
-      if (request.statusCode == 200) {
-        var data = jsonDecode(request.body);
-        return data;
-      } else {
-        return 0;
-      }
-    } catch (e) {
-      return e;
+    final request = await post(Uri.parse("https://api.c-pay.me"),
+        body: jsonEncode({
+          "app": "cpay",
+          "Autorization": "...",
+          "action": "get_vente",
+          "page": page,
+          "categorie": cat,
+          "search": textsearch
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        }).timeout(const Duration(seconds: 15));
+    if (request.statusCode == 200) {
+      var data = jsonDecode(request.body);
+      return data;
+    } else {
+      return 0;
     }
   }
 

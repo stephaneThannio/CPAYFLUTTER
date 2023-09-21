@@ -2,9 +2,13 @@
 
 // ignore_for_file: avoid_print
 
+import 'dart:async';
+
 import 'package:cpay/api/api.dart';
 import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/categories.dart';
+import 'package:cpay/items/error/errorTimeout.dart';
+import 'package:cpay/items/error/errorpage.dart';
 //import 'package:cpay/items/itemcategories.dart';
 //import 'package:cpay/items/loading.dart';
 import 'package:cpay/items/loadinglistview.dart';
@@ -42,6 +46,7 @@ class _MesArticlesState extends State<MesArticles> {
   String motcle = '';
   int page = 1;
   int totalpage = 0;
+  bool mobiledata = true;
   ScrollController onScrollmax = ScrollController();
   affichCategries() {
     setState(() {
@@ -108,6 +113,7 @@ class _MesArticlesState extends State<MesArticles> {
     articles.clear();
     setState(() {
       loading = true;
+      mobiledata = true;
       categrorie = false;
     });
     // setState(() {
@@ -130,7 +136,13 @@ class _MesArticlesState extends State<MesArticles> {
         });
       }
     } catch (e) {
-      print(e);
+      if (e is TimeoutException) {
+        setState(() {
+          loading = false;
+          mobiledata = false;
+          print("mobiledata: $mobiledata");
+        });
+      }
     }
   }
 
@@ -229,65 +241,13 @@ class _MesArticlesState extends State<MesArticles> {
                       ),
                     )
                   : Expanded(
-                      child: ListView.builder(
-                          controller: onScrollmax,
-                          itemCount:
-                              !recherche ? articles.length : afterRech.length,
-                          itemBuilder: (context, index) => Padding(
-                              padding:
-                                  EdgeInsets.only(right: 7.0.w, left: 7.0.w),
-                              child: GestureDetector(
-                                onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetaisArticle(
-                                          id: articles[index]['id'],
-                                          id_categorie: articles[index]
-                                              ['id_categorie'],
-                                          categorie: articles[index]
-                                              ['categorie'],
-                                          photos: articles[index]['photos'],
-                                          designation: articles[index]
-                                              ['designation'],
-                                          prix_ticket: articles[index]
-                                              ['prix_ticket'],
-                                          reference: articles[index]
-                                              ['reference'],
-                                          pourcentage: articles[index]
-                                              ['pourcentage'],
-                                          date_tirage: articles[index]
-                                              ['date_tirage']),
-                                    )),
-                                child: SizedBox(
-                                  height: 180.spMax,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5.0, bottom: 5),
-                                    child: CardArticle(
-                                        couleurCpay: couleurCpay,
-                                        id: articles[index]['id'],
-                                        id_categorie: articles[index]
-                                            ['id_categorie'],
-                                        categorie: articles[index]['categorie'],
-                                        photos: articles[index]['photos'],
-                                        designation: articles[index]
-                                            ['designation'],
-                                        prix_ticket: articles[index]
-                                            ['prix_ticket'],
-                                        reference: articles[index]['reference'],
-                                        pourcentage: articles[index]
-                                            ['pourcentage'],
-                                        date_tirage: articles[index]
-                                            ['date_tirage']),
-                                    // child: CardArticle(
-                                    //   couleurCpay: couleurCpay,
-                                    //   article:
-                                    //       !recherche ? articles[index] : afterRech[index],
-                                    // ),
-                                  ),
-                                ),
-                                //),
-                              ))),
+                      child: mobiledata
+                          ? (articles.isNotEmpty
+                              ? ListviewArticle()
+                              : PageEror())
+                          : PageTimeout(func: () {
+                              searchbycategories();
+                            }),
                     ),
               Visibility(
                 visible: listchargement,
@@ -322,5 +282,52 @@ class _MesArticlesState extends State<MesArticles> {
         ],
       ),
     ));
+  }
+
+  ListView ListviewArticle() {
+    return ListView.builder(
+        controller: onScrollmax,
+        itemCount: !recherche ? articles.length : afterRech.length,
+        itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.only(right: 7.0.w, left: 7.0.w),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetaisArticle(
+                        id: articles[index]['id'],
+                        id_categorie: articles[index]['id_categorie'],
+                        categorie: articles[index]['categorie'],
+                        photos: articles[index]['photos'],
+                        designation: articles[index]['designation'],
+                        prix_ticket: articles[index]['prix_ticket'],
+                        reference: articles[index]['reference'],
+                        pourcentage: articles[index]['pourcentage'],
+                        date_tirage: articles[index]['date_tirage']),
+                  )),
+              child: SizedBox(
+                height: 180.spMax,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                  child: CardArticle(
+                      couleurCpay: couleurCpay,
+                      id: articles[index]['id'],
+                      id_categorie: articles[index]['id_categorie'],
+                      categorie: articles[index]['categorie'],
+                      photos: articles[index]['photos'],
+                      designation: articles[index]['designation'],
+                      prix_ticket: articles[index]['prix_ticket'],
+                      reference: articles[index]['reference'],
+                      pourcentage: articles[index]['pourcentage'],
+                      date_tirage: articles[index]['date_tirage']),
+                  // child: CardArticle(
+                  //   couleurCpay: couleurCpay,
+                  //   article:
+                  //       !recherche ? articles[index] : afterRech[index],
+                  // ),
+                ),
+              ),
+              //),
+            )));
   }
 }
