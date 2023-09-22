@@ -75,28 +75,21 @@ class Api {
   }
 
   static faireDepotMvola(String iban, String montant, String phone) async {
-    try {
-      final request = await post(Uri.parse('https://api.c-pay.me'),
-          body: jsonEncode({
-            "app": "cpay",
-            "iban": iban,
-            "montant": montant,
-            "telephone": phone,
-            "Autorization": "...",
-            "action": "depot_mvola"
-          }),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          }).timeout(const Duration(seconds: 20));
-      if (request.statusCode == 200) {
-        var data = jsonDecode(request.body);
-        return data;
-      }
-    } catch (erreur) {
-      if (erreur is TimeoutException) {
-        Map<String, String> norm = ({"status": "timeOut"});
-        return norm;
-      }
+    final request = await post(Uri.parse('https://api.c-pay.me'),
+        body: jsonEncode({
+          "app": "cpay",
+          "iban": iban,
+          "montant": montant,
+          "telephone": phone,
+          "Autorization": "...",
+          "action": "depot_mvola"
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        }).timeout(const Duration(seconds: 20));
+    if (request.statusCode == 200) {
+      var data = jsonDecode(request.body);
+      return data;
     }
   }
 

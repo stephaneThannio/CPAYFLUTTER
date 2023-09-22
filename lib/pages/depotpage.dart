@@ -1,4 +1,5 @@
 import 'package:cpay/api/api.dart';
+import 'package:cpay/items/error/errorTimeout.dart';
 import 'package:cpay/items/essaidialog.dart';
 //import 'package:cpay/items/loading.dart';
 import 'package:cpay/items/loading_depot.dart';
@@ -32,6 +33,7 @@ class _PageDepotState extends State<PageDepot> {
   String iban = '';
   String montant = '';
   String numero = '';
+  bool uneerreur = false;
   //=====================================
   //Banc Transfert
   TextEditingController controlibanBNCT = TextEditingController();
@@ -148,42 +150,49 @@ class _PageDepotState extends State<PageDepot> {
   Future onpressContinuerMvola() async {
     setState(() {
       loading = true;
+      uneerreur = false;
     });
     iban = controliban.text;
     montant = controlmontant.text;
     numero = controlnum.text;
-
-    var res = await Api.faireDepotMvola(iban, montant, numero);
-    print(res);
-    if (res['status'] == "Success") {
-      afterSucces(res);
-    } else if (res['status'] == "Warning") {
+    try {
+      var res = await Api.faireDepotMvola(iban, montant, numero);
+      print(res);
+      if (res['status'] == "Success") {
+        afterSucces(res);
+      } else if (res['status'] == "Warning") {
+        setState(() {
+          loading = false;
+          // alert('titreAlert', res['mdata'].toString(), QuickAlertType.warning);
+          showalert(
+              "warning", 'Attention', res['mdata'].toString(), "Valider", false,
+              () {
+            Navigator.pop(context);
+          });
+        });
+      } else if (res['status'] == "Error") {
+        setState(() {
+          loading = false;
+          // alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
+          showalert(
+              "error", 'Erreur', res['mdata'].toString(), "Valider", false, () {
+            Navigator.pop(context);
+          });
+        });
+      } else if (res['status'] == "timeOut") {
+        setState(() {
+          loading = false;
+          //alert('titreAlert', "erreur du connexion", QuickAlertType.error);
+          showalert("error", 'Erreur', "erreur du connexion", "Valider", false,
+              () {
+            Navigator.pop(context);
+          });
+        });
+      }
+    } catch (e) {
       setState(() {
         loading = false;
-        // alert('titreAlert', res['mdata'].toString(), QuickAlertType.warning);
-        showalert(
-            "warning", 'Attention', res['mdata'].toString(), "Valider", false,
-            () {
-          Navigator.pop(context);
-        });
-      });
-    } else if (res['status'] == "Error") {
-      setState(() {
-        loading = false;
-        // alert('titreAlert', res['mdata'].toString(), QuickAlertType.error);
-        showalert("error", 'Erreur', res['mdata'].toString(), "Valider", false,
-            () {
-          Navigator.pop(context);
-        });
-      });
-    } else if (res['status'] == "timeOut") {
-      setState(() {
-        loading = false;
-        //alert('titreAlert', "erreur du connexion", QuickAlertType.error);
-        showalert("error", 'Erreur', "erreur du connexion", "Valider", false,
-            () {
-          Navigator.pop(context);
-        });
+        uneerreur = true;
       });
     }
   }
@@ -297,187 +306,194 @@ class _PageDepotState extends State<PageDepot> {
             hauteurContainer: screenheight,
           )
         : Scaffold(
-            body: SingleChildScrollView(
-              child: SizedBox(
+            body: !uneerreur
+                ? Formulaire(screenwidth, screenheight)
+                : Center(
+                    child: PageTimeout(func: () {
+                      onpressContinuerMvola();
+                    }),
+                  ),
+          );
+  }
+
+  SingleChildScrollView Formulaire(double screenwidth, double screenheight) {
+    return SingleChildScrollView(
+      child: SizedBox(
+        width: screenwidth,
+        // height:
+        //     paymenmode == "Mvola" ? screenheight : screenheight * 1.2,
+        child: Column(
+          children: [
+            Center(
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                curve: Curves.fastOutSlowIn,
                 width: screenwidth,
-                // height:
-                //     paymenmode == "Mvola" ? screenheight : screenheight * 1.2,
-                child: Column(
-                  children: [
-                    Center(
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.fastOutSlowIn,
-                        width: screenwidth,
-                        height: paymenmode == "Mvola"
-                            ? screenheight * 0.6
-                            : screenheight * 0.7,
-                        decoration: BoxDecoration(
-                            color: const Color(0xFF6334A9),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 30.sp,
-                                    ),
-                                    Text(
-                                      'Faire un depot',
-                                      style: TextStyle(
-                                        fontSize: 25.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'PlusJakartaSans',
-                                      ),
-                                    ),
-                                    Text(
-                                      'Veillez remplir le formulaire',
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white,
-                                        fontFamily: 'PlusJakartaSans',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: paymenmode == "Mvola"
-                                    ? formulaireMvola()
-                                    : formulairBanktransfer().animate().fade(
-                                        duration: const Duration(seconds: 1)),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: Text(
-                              'METHODE DE PAIEMENT',
+                height: paymenmode == "Mvola"
+                    ? screenheight * 0.6
+                    : screenheight * 0.7,
+                decoration: BoxDecoration(
+                    color: const Color(0xFF6334A9),
+                    borderRadius: BorderRadius.circular(30)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 30.sp,
+                            ),
+                            Text(
+                              'Faire un depot',
                               style: TextStyle(
                                 fontSize: 25.sp,
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF6334A9),
+                                color: Colors.white,
                                 fontFamily: 'PlusJakartaSans',
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10.sp,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 100.h,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    //setAnimation();
-                                    onBouttonMvolatap();
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: mvolaContentColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 100.h,
-                                    width: 100.w,
-                                    child: paymenmode == "Mvola"
-                                        ? Card(
-                                            elevation: 6,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Image.asset(
-                                                  'lib/photos/mvola.webp'),
-                                            ),
-                                          ).animate().shake()
-                                        : Card(
-                                            elevation: 6,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Image.asset(
-                                                  'lib/photos/mvola.webp'),
-                                            ),
-                                          ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    onButtonBanktransfertap();
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: banktransferContentcolor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 100.h,
-                                    width: 100.w,
-                                    child: paymenmode == "banc transfert"
-                                        ? Card(
-                                            elevation: 6,
-                                            child: Image.asset(
-                                                'lib/photos/banktransfert.png'),
-                                          ).animate().shake()
-                                        : Card(
-                                            elevation: 6,
-                                            child: Image.asset(
-                                                'lib/photos/banktransfert.png'),
-                                          ),
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              'Veillez remplir le formulaire',
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontFamily: 'PlusJakartaSans',
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10.sp,
-                          ),
-                          SizedBox(
-                            width: 200.w,
-                            height: 50.h,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF6334A9)),
-                                child: Text(
-                                  textAlign: TextAlign.center,
-                                  'Continuer',
-                                  style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.white,
-                                    fontFamily: 'PlusJakartaSans',
-                                  ),
-                                ),
-                                onPressed: () => {
-                                      paymenmode == "Mvola"
-                                          ? onpressContinuerMvola()
-                                          : onpressbanktransfertcontinue(),
-                                    }),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: paymenmode == "Mvola"
+                            ? formulaireMvola()
+                            : formulairBanktransfer()
+                                .animate()
+                                .fade(duration: const Duration(seconds: 1)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          );
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'METHODE DE PAIEMENT',
+                      style: TextStyle(
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF6334A9),
+                        fontFamily: 'PlusJakartaSans',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 100.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            //setAnimation();
+                            onBouttonMvolatap();
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: mvolaContentColor,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 100.h,
+                            width: 100.w,
+                            child: paymenmode == "Mvola"
+                                ? Card(
+                                    elevation: 6,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child:
+                                          Image.asset('lib/photos/mvola.webp'),
+                                    ),
+                                  ).animate().shake()
+                                : Card(
+                                    elevation: 6,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child:
+                                          Image.asset('lib/photos/mvola.webp'),
+                                    ),
+                                  ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            onButtonBanktransfertap();
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: banktransferContentcolor,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 100.h,
+                            width: 100.w,
+                            child: paymenmode == "banc transfert"
+                                ? Card(
+                                    elevation: 6,
+                                    child: Image.asset(
+                                        'lib/photos/banktransfert.png'),
+                                  ).animate().shake()
+                                : Card(
+                                    elevation: 6,
+                                    child: Image.asset(
+                                        'lib/photos/banktransfert.png'),
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  SizedBox(
+                    width: 200.w,
+                    height: 50.h,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF6334A9)),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          'Continuer',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white,
+                            fontFamily: 'PlusJakartaSans',
+                          ),
+                        ),
+                        onPressed: () => {
+                              paymenmode == "Mvola"
+                                  ? onpressContinuerMvola()
+                                  : onpressbanktransfertcontinue(),
+                            }),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Container formulaireMvola() {
