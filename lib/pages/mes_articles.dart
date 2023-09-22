@@ -272,6 +272,7 @@ class _MesArticlesState extends State<MesArticles> {
                 },
                 dosearch: () {
                   //essai();
+                  scrollmaxcount = 0;
                   page = 1;
                   searchbycategories();
                 },
