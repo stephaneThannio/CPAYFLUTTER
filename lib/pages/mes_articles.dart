@@ -9,6 +9,7 @@ import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/error/errorTimeout.dart';
 import 'package:cpay/items/error/errorpage.dart';
+import 'package:cpay/items/itemcategories.dart';
 //import 'package:cpay/items/itemcategories.dart';
 //import 'package:cpay/items/loading.dart';
 import 'package:cpay/items/loadinglistview.dart';
@@ -52,6 +53,15 @@ class _MesArticlesState extends State<MesArticles> {
     setState(() {
       categrorie = !categrorie;
     });
+  }
+
+  fillCategorieslist() {
+    if (Itemcategories.listselect.isEmpty) {
+      for (int i = 0; i < listCategories.length; i++) {
+        Itemcategories.listselect.add(listCategories[i]['id']);
+      }
+      print(Itemcategories.listselect);
+    }
   }
 
   rechercher() {
@@ -142,6 +152,12 @@ class _MesArticlesState extends State<MesArticles> {
           mobiledata = false;
           print("mobiledata: $mobiledata");
         });
+      } else {
+        setState(() {
+          loading = false;
+          mobiledata = false;
+          print("mobiledata: $mobiledata");
+        });
       }
     }
   }
@@ -196,8 +212,9 @@ class _MesArticlesState extends State<MesArticles> {
   void initState() {
     // TODO: implement initState
     searchbycategories();
+
     //getarticle();
-    getCategories();
+    getCategories().whenComplete(() => fillCategorieslist());
     onScrollmax.addListener(onScrollend);
     super.initState();
   }

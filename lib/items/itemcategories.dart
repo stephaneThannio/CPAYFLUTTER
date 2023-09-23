@@ -26,10 +26,17 @@ class _ItemcategoriesState extends State<Itemcategories> {
     }
   }
 
+  filllist() {
+    if (!Itemcategories.listselect.contains(widget.idcat)) {
+      Itemcategories.listselect.add(widget.idcat);
+    }
+  }
+
   //static String idid = '';
   @override
   void initState() {
     // TODO: implement initState
+    //filllist();
     setActivation();
     super.initState();
   }
