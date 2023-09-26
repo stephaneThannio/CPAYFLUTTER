@@ -294,8 +294,9 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               //       MaterialPageRoute(
               //           builder: (context) => const Authentification()));
               // });
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const PageEror()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => const PageEror()));
+              print(DateTime.now().microsecondsSinceEpoch / 1000);
             },
           ),
           actions: [
