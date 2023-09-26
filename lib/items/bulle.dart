@@ -1,6 +1,7 @@
 //import 'package:cpay/items/itemsTab/Showdialog/fairedepot.dart';
 //import 'package:cpay/items/itemsTab/Showdialog/faireretrait.dart';
 import 'package:cpay/pages/depotpage.dart';
+import 'package:cpay/pages/retraitpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -106,7 +107,7 @@ class BulleRetraitVers extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const PageDepot()));
+                                  builder: (context) => const RetraitPage()));
                         },
                         icon: Image.asset('lib/photos/retrait.png')),
                   ),

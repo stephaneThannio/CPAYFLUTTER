@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class Trading extends StatefulWidget {
   const Trading({super.key});
@@ -19,6 +20,7 @@ class Trading extends StatefulWidget {
 
 class _TradingState extends State<Trading> {
   Map<String, dynamic> titlelist = {};
+  late SfRangeValues _rangeValues;
   List<Modeltradenet> chartDatatrade = [];
   List<Modeltradenet> chartDatatrade2 = [];
   CrosshairBehavior crosshairBehavior =
@@ -27,19 +29,19 @@ class _TradingState extends State<Trading> {
   double lastDataPointY = 0.0;
   bool loading = false;
   late TrackballBehavior _trackballBehavior;
-  afficherligne() {
-    setState(() {
-      //print(chartDatatrade2);
-      // Rafraîchissez le graphique après chaque mise à jour des données
-      //if (chartDatatrade.isNotEmpty) {
-      lastDataPointX = chartDatatrade.first.date;
-      lastDataPointY = chartDatatrade.first.close;
-      // crosshairBehavior.show(lastDataPointX, lastDataPointY);
-      // _trackballBehavior.show(lastDataPointX, lastDataPointY);
+  // afficherligne() {
+  //   setState(() {
+  //     //print(chartDatatrade2);
+  //     // Rafraîchissez le graphique après chaque mise à jour des données
+  //     //if (chartDatatrade.isNotEmpty) {
+  //     lastDataPointX = chartDatatrade.first.date;
+  //     lastDataPointY = chartDatatrade.first.close;
+  //     // crosshairBehavior.show(lastDataPointX, lastDataPointY);
+  //     // _trackballBehavior.show(lastDataPointX, lastDataPointY);
 
-      //}
-    });
-  }
+  //     //}
+  //   });
+  // }
 
   gettrade() async {
     try {
@@ -86,6 +88,8 @@ class _TradingState extends State<Trading> {
   void initState() {
     // _chartData = getChartData();
     gettrade();
+    _rangeValues = SfRangeValues(
+        DateTime(2023, 9, 25, 10, 00), DateTime(2023, 9, 25, 15, 00));
     //_chartDatatrade = listaftertransform(Api.getapitrading());
     _trackballBehavior = TrackballBehavior(
         enable: true, activationMode: ActivationMode.singleTap);
@@ -161,40 +165,55 @@ class _TradingState extends State<Trading> {
                   ),
                 ),
               ),
-              Expanded(
+              SfRangeSelector(
+                activeColor: Colors.red,
+                min: DateTime(2023, 9, 25, 5, 00),
+                max: DateTime(2023, 9, 25, 16, 00),
+                initialValues: _rangeValues,
+                showTicks: true,
+                enableTooltip: true,
+                dateFormat: DateFormat.y(),
+                dateIntervalType: DateIntervalType.hours,
+                stepDuration: SliderStepDuration(hours: 1),
+                onChanged: (SfRangeValues newValues) {
+                  print(newValues);
+                },
                 child: SfCartesianChart(
                   trackballBehavior: _trackballBehavior,
                   crosshairBehavior: CrosshairBehavior(
                       enable: true, activationMode: ActivationMode.singleTap),
-                  // annotations: <CartesianChartAnnotation>[
-                  //   //Annotations personnalisées pour les signaux d'achat/vente
-                  //   CartesianChartAnnotation(
-                  //     region: AnnotationRegion.plotArea,
-                  //     widget: Container(
-                  //       decoration: BoxDecoration(
-                  //           color: const Color(0xFF6334A9),
-                  //           borderRadius: BorderRadius.circular(50)),
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(8.0),
-                  //         child: Text(
-                  //           lastDataPointY.toString(),
-                  //           style: TextStyle(color: Colors.white),
-                  //         ),
-                  //       ),
-                  //       // height: 40,
-                  //       // width: 40,
-                  //       //child: Text('hello'),
-                  //     ),
-                  //     //x: DateTime.now().microsecondsSinceEpoch,
-                  //     coordinateUnit: CoordinateUnit.point,
-                  //     x: lastDataPointX
-                  //         .subtract(Duration(hours: 2)), // Position x en tant que date
-                  //     y: lastDataPointY,
-                  //     // Valeur de l'axe Y où afficher le signal d'achat
-                  //   ),
+                  annotations: <CartesianChartAnnotation>[
+                    //Annotations personnalisées pour les signaux d'achat/vente
+                    CartesianChartAnnotation(
+                      region: AnnotationRegion.plotArea,
+                      widget: Container(
+                        width: 100,
+                        height: 200,
+                        color: Colors.orange.withOpacity(0.3),
+                        // decoration: BoxDecoration(
+                        //     color: const Color(0xFF6334A9),
+                        //     borderRadius: BorderRadius.circular(50)),
+                        // child: Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Text(
+                        //     lastDataPointY.toString(),
+                        //     style: TextStyle(color: Colors.white),
+                        //   ),
+                        // ),
+                        // height: 40,
+                        // width: 40,
+                        //child: Text('hello'),
+                      ),
+                      //x: DateTime.now().microsecondsSinceEpoch,
+                      coordinateUnit: CoordinateUnit.point,
+                      x: lastDataPointX.add(
+                          Duration(hours: 10)), // Position x en tant que date
+                      y: lastDataPointY,
+                      // Valeur de l'axe Y où afficher le signal d'achat
+                    ),
 
-                  //   //Ajoutez plus d'annotations pour d'autres signaux d'achat/vente
-                  // ],
+                    //Ajoutez plus d'annotations pour d'autres signaux d'achat/vente
+                  ],
                   //crosshairBehavior: crosshairBehavior,
                   zoomPanBehavior: ZoomPanBehavior(
                       //maximumZoomLevel: 0.1,
@@ -267,7 +286,7 @@ class _TradingState extends State<Trading> {
                       dateFormat: DateFormat.Hms(),
                       majorGridLines: const MajorGridLines(width: 0)),
                   primaryYAxis: NumericAxis(
-                    isVisible: false,
+                    isVisible: true,
                     majorGridLines:
                         const MajorGridLines(color: Colors.transparent),
                     minorGridLines:
