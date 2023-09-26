@@ -4,6 +4,7 @@ import 'package:cpay/pages/depotpage.dart';
 import 'package:cpay/pages/retraitpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cpay/models/user.dart';
 
 class BulleRetraitVers extends StatelessWidget {
   final Function func;
@@ -14,22 +15,6 @@ class BulleRetraitVers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future<void> dialogadepot() async {
-    //   await showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) {
-    //         return const Dodeposit();
-    //       });
-    // }
-
-    // Future<void> dialogretrait() async {
-    //   await showDialog(
-    //       context: context,
-    //       builder: (BuildContext context) {
-    //         return const Retireit();
-    //       });
-    // }
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
@@ -80,51 +65,54 @@ class BulleRetraitVers extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 70.sp,
-            width: 70.sp,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 7,
-                          blurRadius: 9,
-                          offset: const Offset(
-                              2, 5), // Décalage vertical de l'ombre
+          User.sessionUser != null
+              ? SizedBox(
+                  height: 70.sp,
+                  width: 70.sp,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                spreadRadius: 7,
+                                blurRadius: 9,
+                                offset: const Offset(
+                                    2, 5), // Décalage vertical de l'ombre
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(60.sp)),
+                        child: SizedBox(
+                          height: 45.sp,
+                          width: 45.sp,
+                          child: IconButton(
+                              onPressed: () {
+                                func();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const RetraitPage()));
+                              },
+                              icon: Image.asset('lib/photos/retrait.png')),
                         ),
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(60.sp)),
-                  child: SizedBox(
-                    height: 45.sp,
-                    width: 45.sp,
-                    child: IconButton(
-                        onPressed: () {
-                          func();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RetraitPage()));
-                        },
-                        icon: Image.asset('lib/photos/retrait.png')),
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        'RETRAIT',
+                        style: TextStyle(
+                          fontSize: 8.sp,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                          fontFamily: 'PlusJakartaSans',
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  textAlign: TextAlign.center,
-                  'RETRAIT',
-                  style: TextStyle(
-                    fontSize: 8.sp,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                    fontFamily: 'PlusJakartaSans',
-                  ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : const SizedBox(),
           SizedBox(
             height: 70.sp,
             width: 70.sp,
