@@ -50,6 +50,7 @@ dependencies:
   chart_sparkline: ^1.0.13
   flutter_custom_clippers: ^2.1.0
   custom_clippers: ^2.0.0
+  syncfusion_flutter_sliders: ^22.2.12
 
 dev_dependencies:
   flutter_test:
