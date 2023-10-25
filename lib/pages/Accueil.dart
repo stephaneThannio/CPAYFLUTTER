@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 //import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/essaidialog.dart';
 import 'package:cpay/items/itemsTab/tiroire.dart';
+import 'package:cpay/items/itemsTab/tiroiredisconect.dart';
 //import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/itemsTab/trading.dart';
 //import 'package:cpay/items/loadinglistview.dart';
@@ -269,8 +270,10 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
       },
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: const Drawer(
-          child: Tiroire(),
+        drawer: Drawer(
+          child: User.sessionUser != null
+              ? const Tiroire()
+              : const Tiroiredisconect(),
         ),
         appBar: AppBar(
           title: Center(
