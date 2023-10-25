@@ -1,11 +1,111 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cpay/models/user.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 //test
 
 class Api {
+  //send code
+  static send3dcode(String montant) async {
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "iban": User.sessionUser!.iban,
+            "montant": montant,
+            "Autorization": "...",
+            "action": "send_3d_secure"
+          }),
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8"
+          }).timeout(const Duration(seconds: 20));
+
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return {};
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+//=======================================
+//Virement===============================
+  static sendMoney(
+    String ibandest,
+    String montant,
+    String code,
+    String virmenttype,
+    String id_periodicity,
+    String datefin,
+    String motif,
+  ) async {
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "Autorization": "...",
+            "action": "virement",
+            "iban": User.sessionUser!.iban,
+            "IBAN1": ibandest,
+            "montant": montant,
+            "id_cpay_type_virement": virmenttype,
+            "id_cpay_periodicite": id_periodicity,
+            "code": code,
+            "du": DateFormat('yy-MM-dd').format(DateTime.now()),
+            "au": datefin,
+            "motif": motif
+          }),
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8"
+          }).timeout(const Duration(seconds: 20));
+
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return {};
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+//=======================================
+//Demande de retrait
+  static sendretirer(String montant, String code) async {
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "iban": User.sessionUser!.iban,
+            "Autorization": "...",
+            "montant": montant,
+            "code": code,
+            "action": "retrait"
+          }),
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8"
+          }).timeout(const Duration(seconds: 20));
+
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return {};
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
+//==========================================
+//categorie rehcerche
   static getcategories() async {
     try {
       final request = await post(Uri.parse("https://api.c-pay.me"),
@@ -28,6 +128,8 @@ class Api {
     }
   }
 
+//=======================================================
+//Recherche par categories article
   static getarticlebycategories(String cat, int page, String textsearch) async {
     final request = await post(Uri.parse("https://api.c-pay.me"),
         body: jsonEncode({
@@ -49,6 +151,8 @@ class Api {
     }
   }
 
+//========================================================
+//afficher article
   static getarticle(int page) async {
     //List listarticle = [];
     try {
@@ -74,6 +178,8 @@ class Api {
     }
   }
 
+//=====================================================
+//deposer de l'argent mvola======================
   static faireDepotMvola(String iban, String montant, String phone) async {
     final request = await post(Uri.parse('https://api.c-pay.me'),
         body: jsonEncode({
@@ -93,6 +199,8 @@ class Api {
     }
   }
 
+//===============================================================
+//ecouter la statu api mvola=========
   static listenStatus(String servercorrelationid) async {
     final request =
         await get(Uri.parse("https://api.c-pay.me/mvola/$servercorrelationid"));
@@ -104,6 +212,8 @@ class Api {
     }
   }
 
+//=====================
+//
   static getDepotlist(String iban, int page) async {
     final request = await post(Uri.parse('https://api.c-pay.me/depot'),
         body: jsonEncode({

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 //import 'package:flutter/foundation.dart';
+import 'package:cpay/pages/virement.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -15,6 +16,7 @@ class _QrCodeState extends State<QrCode> {
   final qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? qrViewController;
   Barcode? barcode;
+  String ibanscan = "";
   @override
   void dispose() {
     qrViewController?.dispose();
@@ -67,8 +69,19 @@ class _QrCodeState extends State<QrCode> {
       );
 
   void onQRViewCreated(QRViewController qrViewController) {
-    setState(() => this.qrViewController = qrViewController);
-    qrViewController.scannedDataStream
-        .listen((barcode) => setState(() => this.barcode = barcode));
+    this.qrViewController = qrViewController;
+    qrViewController.scannedDataStream.listen((barcode) {
+      if (mounted) {
+        setState(() {
+          this.barcode = barcode;
+          ibanscan = barcode.code.toString();
+          print("iban: $ibanscan");
+          Virement.ibanQr = ibanscan;
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) => Virement()));
+          qrViewController.stopCamera();
+        });
+      }
+    });
   }
 }

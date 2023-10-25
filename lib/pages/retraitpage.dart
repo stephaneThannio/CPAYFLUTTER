@@ -1,11 +1,13 @@
 import 'package:cpay/api/api.dart';
-import 'package:cpay/items/error/errorTimeout.dart';
+//import 'package:cpay/items/error/errorTimeout.dart';
 import 'package:cpay/items/essaidialog.dart';
 //import 'package:cpay/items/loading.dart';
-import 'package:cpay/items/loading_depot.dart';
+//import 'package:cpay/items/loading_depot.dart';
+import 'package:cpay/items/loadingsimple.dart';
 //import 'package:cpay/items/loadingsimple.dart';
 import 'package:cpay/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:quickalert/quickalert.dart';
@@ -22,54 +24,91 @@ class RetraitPage extends StatefulWidget {
 class _RetraitPageState extends State<RetraitPage> {
   String paymenmode = "Mvola";
   bool loading = false;
+  bool loadingsendcode = false;
   bool enabled = false;
   Color mvolaContentColor = Colors.green;
   //Mvola
-  TextEditingController controliban = TextEditingController();
+  //TextEditingController controliban = TextEditingController();
   TextEditingController controlmontant = TextEditingController();
-  TextEditingController controlnum = TextEditingController();
-
-  String iban = '';
+  TextEditingController controlcode = TextEditingController();
+  Icon iconCode = Icon(
+    Icons.telegram,
+    color: Colors.white,
+  );
+  String codetxt = "Send code";
+  //String iban = '';
   String montant = '';
-  String numero = '';
+  String code = '';
   bool uneerreur = false;
-
-  void showalert(String type, String titrealert, String descri,
-      String textsurboutton, bool annulerBtn, VoidCallback functionConfirm) {
+  //Alert==================================
+  void showalert(String type, String titreAlert, String descri,
+      String textsurboutton, VoidCallback func) {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertAlert(
               typealert: type,
-              titleAlert: titrealert,
+              titleAlert: titreAlert,
               descriAlert: descri,
-              confirmbtnText: textsurboutton,
-              cancelbtn: annulerBtn,
-              onpresConfirm: functionConfirm,
+              onpresConfirm: func,
             ));
   }
+  //======================================
 
+//fuction
+  sendCode() async {
+    montant = controlmontant.text;
+    setState(() {
+      loadingsendcode = true;
+    });
+    var request = await Api.send3dcode(montant);
+    if (request != {}) {
+      setState(() {
+        loadingsendcode = false;
+        iconCode = Icon(Icons.refresh, color: Colors.white);
+        codetxt = "Resend code";
+      });
+      if (request["status"] == "success") {
+        showalert("succes", "felicitation", request["mdata"], "valider", () {
+          Navigator.pop(context);
+        });
+      }
+    }
+  }
+
+  sendrequestretrait() async {
+    montant = controlmontant.text;
+    code = controlcode.text;
+    setState(() {
+      loading = true;
+    });
+    var request = await Api.sendretirer(montant, code);
+    if (request != {}) {
+      setState(() {
+        loading = false;
+        iconCode = Icon(Icons.refresh, color: Colors.white);
+        codetxt = "Resend code";
+      });
+      if (request["status"] == "success") {
+        showalert("succes", "felicitation", request["mdata"], "valider", () {
+          Navigator.pop(context);
+          controlmontant.clear();
+          controlcode.clear();
+          montant = '';
+          code = "";
+        });
+      }
+    }
+  }
+
+//===========
   @override
   Widget build(BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
-    return loading
-        ? LoadingDepot(
-            alingementmainax: MainAxisAlignment.center,
-            titreLoadingDepot: "Attente acceptation du paiment",
-            contenttext: "verifiez votre telephone",
-            spincouleur: const Color(0xFF6334A9),
-            containcouleur: Colors.white,
-            hauteurContainer: screenheight,
-          )
-        : Scaffold(
-            body: !uneerreur
-                ? Formulaire(screenwidth, screenheight)
-                : Center(
-                    child: PageTimeout(func: () {
-                      print('hii');
-                    }),
-                  ),
-          );
+    return Scaffold(
+        body: loading
+            ? Loading(spincouleur: const Color(0xFF6334A9))
+            : Formulaire(screenwidth, screenheight));
   }
 
   SingleChildScrollView Formulaire(double screenwidth, double screenheight) {
@@ -94,7 +133,7 @@ class _RetraitPageState extends State<RetraitPage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Retirer de l\'argent',
+                        ' Retirer de l\'argent',
                         style: TextStyle(
                           fontSize: 25.sp,
                           fontWeight: FontWeight.bold,
@@ -106,7 +145,7 @@ class _RetraitPageState extends State<RetraitPage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Veillez remplir le formulaire',
+                        ' Veillez remplir le formulaire',
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.normal,
@@ -201,7 +240,17 @@ class _RetraitPageState extends State<RetraitPage> {
                               fontFamily: 'PlusJakartaSans',
                             ),
                           ),
-                          onPressed: () => {print('retrait fait')}),
+                          onPressed: () => {
+                                montant == "" && code == ""
+                                    ? showalert(
+                                        "type",
+                                        "error",
+                                        "veillez remplire les champ",
+                                        "valider", () {
+                                        Navigator.pop(context);
+                                      })
+                                    : sendrequestretrait()
+                              }),
                     ),
                   ],
                 ),
@@ -219,32 +268,6 @@ class _RetraitPageState extends State<RetraitPage> {
       //color: Colors.amber,
       child: Column(
         children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //       color: Colors.white, borderRadius: BorderRadius.circular(10)),
-          //   width: double.infinity,
-          //   height: 70.h,
-          //   child: Row(
-          //     children: [
-          //       IconButton(
-          //           icon: const Icon(
-          //             Icons.credit_card,
-          //             size: 60,
-          //             color: Color(0xFF6334A9),
-          //           ),
-          //           onPressed: () => Null),
-          //       Expanded(
-          //           child: TextField(
-          //         controller: controliban,
-          //         enabled: enabled,
-          //         keyboardType: TextInputType.text,
-          //         maxLines: 1,
-          //         decoration: const InputDecoration.collapsed(
-          //             hintText: "IBAN CPAY DU DESTINATAIRE"),
-          //       ))
-          //     ],
-          //   ),
-          // ),
           Container(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
@@ -281,21 +304,56 @@ class _RetraitPageState extends State<RetraitPage> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () => Null,
-                  icon: const Icon(
-                    Icons.phone,
-                    size: 60,
-                    color: Color(0xFF6334A9),
-                  ),
-                ),
+                    icon: const Icon(
+                      Icons.lock,
+                      size: 60,
+                      color: Color(0xFF6334A9),
+                    ),
+                    onPressed: () => Null),
                 Expanded(
-                    child: TextField(
-                  controller: controlnum,
-                  keyboardType: TextInputType.phone,
-                  maxLines: 1,
-                  decoration: const InputDecoration.collapsed(
-                      hintText: "Telephone MVOLA"),
-                ))
+                    child: !loadingsendcode
+                        ? TextField(
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(6)
+                            ],
+                            controller: controlcode,
+                            keyboardType: TextInputType.phone,
+                            maxLines: 1,
+                            decoration: InputDecoration.collapsed(
+                                hintStyle: TextStyle(fontSize: 11.sp),
+                                hintText:
+                                    "code sur le telephone  ${User.sessionUser!.telephone.toString().replaceRange(0, 8, '**********')}"),
+                          )
+                        : Loading(spincouleur: Color(0xFF6334A9))),
+                Container(
+                  margin: EdgeInsets.only(right: 10),
+                  width: 100.w,
+                  height: 35.h,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          backgroundColor: const Color(0xFF6334A9)),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            iconCode,
+                            Text(
+                              textAlign: TextAlign.center,
+                              codetxt,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white,
+                                fontFamily: 'PlusJakartaSans',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onPressed: () => {sendCode()}),
+                ),
               ],
             ),
           )

@@ -195,7 +195,7 @@ class _ConfirmationState extends State<Confirmation> {
                                   ),
                                 ),
                                 Text(
-                                  'Nous allons vous envoyer un code de validation au numero ${widget.phone}',
+                                  'Nous allons vous envoyer un code de validation au numero ${widget.phone.toString().replaceRange(0, 8, '**********')}',
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.normal,

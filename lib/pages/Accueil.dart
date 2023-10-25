@@ -1,8 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:cpay/items/categories.dart';
-import 'package:cpay/items/error/errorpage.dart';
+// import 'package:cpay/items/categories.dart';
+// import 'package:cpay/items/error/errorpage.dart';
 //import 'package:cpay/items/categories.dart';
 import 'package:cpay/items/essaidialog.dart';
+import 'package:cpay/items/itemsTab/tiroire.dart';
 //import 'package:cpay/items/barre_rechrche.dart';
 import 'package:cpay/items/itemsTab/trading.dart';
 //import 'package:cpay/items/loadinglistview.dart';
@@ -165,6 +166,8 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
 
   //======================InitState======================================================================================
   late FToast fToast;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   late Article article;
   @override
   void initState() {
@@ -265,6 +268,10 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
         return false;
       },
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: const Drawer(
+          child: Tiroire(),
+        ),
         appBar: AppBar(
           title: Center(
             child: Text(
@@ -285,18 +292,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               image: const AssetImage('lib/photos/285-min.png'),
             ),
             onPressed: () {
-              //print(Categoris.filtre);
-              // showalert("info", "Se connecter",
-              //     "Vous devez connecter pour faire cette action", () {
-              //   Navigator.pop(context);
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) => const Authentification()));
-              // });
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => const PageEror()));
-              print(DateTime.now().microsecondsSinceEpoch / 1000);
+              _scaffoldKey.currentState!.openDrawer();
             },
           ),
           actions: [

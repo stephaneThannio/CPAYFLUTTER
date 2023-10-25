@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-//import 'package:cpay/api/api.dart';
-//import 'package:cpay/items/loading.dart';
-//import 'package:cpay/models/modeltrade.dart';
 import 'package:cpay/models/modeltradenet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+//import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class Trading extends StatefulWidget {
   const Trading({super.key});
@@ -20,7 +17,9 @@ class Trading extends StatefulWidget {
 
 class _TradingState extends State<Trading> {
   Map<String, dynamic> titlelist = {};
-  late SfRangeValues _rangeValues;
+  bool invest = false;
+  List<Modeltradenet> markinvest = [];
+
   List<Modeltradenet> chartDatatrade = [];
   List<Modeltradenet> chartDatatrade2 = [];
   CrosshairBehavior crosshairBehavior =
@@ -29,19 +28,6 @@ class _TradingState extends State<Trading> {
   double lastDataPointY = 0.0;
   bool loading = false;
   late TrackballBehavior _trackballBehavior;
-  // afficherligne() {
-  //   setState(() {
-  //     //print(chartDatatrade2);
-  //     // Rafraîchissez le graphique après chaque mise à jour des données
-  //     //if (chartDatatrade.isNotEmpty) {
-  //     lastDataPointX = chartDatatrade.first.date;
-  //     lastDataPointY = chartDatatrade.first.close;
-  //     // crosshairBehavior.show(lastDataPointX, lastDataPointY);
-  //     // _trackballBehavior.show(lastDataPointX, lastDataPointY);
-
-  //     //}
-  //   });
-  // }
 
   gettrade() async {
     try {
@@ -54,8 +40,6 @@ class _TradingState extends State<Trading> {
             var data = jsonDecode(requeset.body);
             chartDatatrade = listaftertransform(data["Time Series FX (5min)"]);
             chartDatatrade2.add(chartDatatrade[0]);
-            // chartDatatrade2 =
-            //     listaftertransform(data["Time Series FX (5min)"][0]);
             titlelist = data["Meta Data"];
 
             lastDataPointX = chartDatatrade.first.date;
@@ -65,17 +49,6 @@ class _TradingState extends State<Trading> {
         Future.delayed(const Duration(minutes: 5), () {
           gettrade();
         });
-
-        // Modeltradenet modeltradenet =
-        //     Modeltradenet.fromJson(data["Time Series FX (5min)"]);
-        // list.add(modeltradenet);
-        // data["Time Series FX (5min)"]['$formattedDateTime:00']);
-        //print(data["Time Series (1min)"]);
-        //print(modeltradenet);
-        //return (modeltradenet);
-        // Future.delayed(Duration(minutes: 5), () {
-        //   getapitrading();
-        // });
       } else {
         return null;
       }
@@ -84,12 +57,19 @@ class _TradingState extends State<Trading> {
     }
   }
 
+  miser() {
+    markinvest.add(chartDatatrade[1]);
+    setState(() {
+      invest = !invest;
+    });
+    print("miser: $invest");
+  }
+
   @override
   void initState() {
     // _chartData = getChartData();
     gettrade();
-    _rangeValues = SfRangeValues(
-        DateTime(2023, 9, 25, 10, 00), DateTime(2023, 9, 25, 15, 00));
+
     //_chartDatatrade = listaftertransform(Api.getapitrading());
     _trackballBehavior = TrackballBehavior(
         enable: true, activationMode: ActivationMode.singleTap);
@@ -165,138 +145,163 @@ class _TradingState extends State<Trading> {
                   ),
                 ),
               ),
-              SfRangeSelector(
-                activeColor: Colors.red,
-                min: DateTime(2023, 9, 25, 5, 00),
-                max: DateTime(2023, 9, 25, 16, 00),
-                initialValues: _rangeValues,
-                showTicks: true,
-                enableTooltip: true,
-                dateFormat: DateFormat.y(),
-                dateIntervalType: DateIntervalType.hours,
-                stepDuration: SliderStepDuration(hours: 1),
-                onChanged: (SfRangeValues newValues) {
-                  print(newValues);
-                },
-                child: SfCartesianChart(
-                  trackballBehavior: _trackballBehavior,
-                  crosshairBehavior: CrosshairBehavior(
-                      enable: true, activationMode: ActivationMode.singleTap),
-                  annotations: <CartesianChartAnnotation>[
-                    //Annotations personnalisées pour les signaux d'achat/vente
-                    CartesianChartAnnotation(
-                      region: AnnotationRegion.plotArea,
-                      widget: Container(
-                        width: 100,
-                        height: 200,
-                        color: Colors.orange.withOpacity(0.3),
-                        // decoration: BoxDecoration(
-                        //     color: const Color(0xFF6334A9),
-                        //     borderRadius: BorderRadius.circular(50)),
-                        // child: Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Text(
-                        //     lastDataPointY.toString(),
-                        //     style: TextStyle(color: Colors.white),
-                        //   ),
-                        // ),
-                        // height: 40,
-                        // width: 40,
-                        //child: Text('hello'),
-                      ),
-                      //x: DateTime.now().microsecondsSinceEpoch,
-                      coordinateUnit: CoordinateUnit.point,
-                      x: lastDataPointX.add(
-                          Duration(hours: 10)), // Position x en tant que date
-                      y: lastDataPointY,
-                      // Valeur de l'axe Y où afficher le signal d'achat
-                    ),
+              SfCartesianChart(
+                trackballBehavior: _trackballBehavior,
+                crosshairBehavior: CrosshairBehavior(
+                    enable: true, activationMode: ActivationMode.singleTap),
 
-                    //Ajoutez plus d'annotations pour d'autres signaux d'achat/vente
-                  ],
-                  //crosshairBehavior: crosshairBehavior,
-                  zoomPanBehavior: ZoomPanBehavior(
-                      //maximumZoomLevel: 0.1,
-                      enablePanning: true,
-                      enablePinching: true,
-                      zoomMode: ZoomMode.x),
-                  title: ChartTitle(
-                      text:
-                          "${titlelist["2. From Symbol"]}/${titlelist["3. To Symbol"]}"),
-                  //legend: const Legend(isVisible: true),
-                  //trackballBehavior: _trackballBehavior,
-                  series: <ChartSeries>[
-                    AreaSeries<Modeltradenet, DateTime>(
-                      borderColor: const Color(0xFF6334A9),
-                      borderWidth: 1,
-                      color: const Color(0xFF6334A9).withOpacity(0.2),
-                      dataSource: chartDatatrade,
-                      xValueMapper: (Modeltradenet sales, _) => sales.date,
-                      yValueMapper: (Modeltradenet sales, _) => sales.close,
+                zoomPanBehavior: ZoomPanBehavior(
+                    //maximumZoomLevel: 0.1,
+                    enablePanning: true,
+                    enablePinching: true,
+                    zoomMode: ZoomMode.x),
+                title: ChartTitle(
+                    text:
+                        "${titlelist["2. From Symbol"]}/${titlelist["3. To Symbol"]}"),
+                //legend: const Legend(isVisible: true),
+                //trackballBehavior: _trackballBehavior,
+                series: <ChartSeries>[
+                  AreaSeries<Modeltradenet, DateTime>(
+                    borderColor: const Color(0xFF6334A9),
+                    borderWidth: 1,
+                    color: const Color(0xFF6334A9).withOpacity(0.2),
+                    dataSource: chartDatatrade,
+                    xValueMapper: (Modeltradenet sales, _) => sales.date,
+                    yValueMapper: (Modeltradenet sales, _) => sales.close,
 
-                      // lowValueMapper: (Modeltradenet sales, _) => sales.low,
-                      // highValueMapper: (Modeltradenet sales, _) => sales.high,
-                      // openValueMapper: (Modeltradenet sales, _) => sales.open,
-                      // closeValueMapper: (Modeltradenet sales, _) => sales.close,
-                    ),
-                    SplineSeries<Modeltradenet, DateTime>(
-                      dataSource: chartDatatrade2,
-                      color: const Color(0xFF6334A9),
-                      width: 2,
-                      xValueMapper: (Modeltradenet sales, _) => sales.date,
-                      yValueMapper: (Modeltradenet sales, _) => sales.close,
-                      markerSettings: MarkerSettings(
-                        isVisible: true, // Afficher les marqueurs
-                        shape: DataMarkerType
-                            .horizontalLine, // Forme du marqueur (circle, square, etc.)
-                        color: const Color(0xFF6334A9)
-                            .withOpacity(0.5), // Couleur des marqueurs
-                        width: 1000, // Largeur des marqueurs
-                      ),
-                      dataLabelSettings: const DataLabelSettings(
-                        offset: Offset(-50, 25),
-                        useSeriesColor: true,
-                        borderWidth: 2,
-                        borderColor: Color(0xFF6334A9),
-                        // connectorLineSettings: ConnectorLineSettings(
-                        //     width: 2, color: Colors.red, type: ConnectorType.curve),
-                        isVisible: true,
-                        alignment: ChartAlignment.center,
-                        labelAlignment: ChartDataLabelAlignment.bottom,
-                      ),
-                    ),
-                    SplineSeries<Modeltradenet, DateTime>(
-                      dataSource: chartDatatrade2,
-                      color: const Color(0xFF6334A9),
-                      width: 2,
-                      xValueMapper: (Modeltradenet sales, _) => sales.date,
-                      yValueMapper: (Modeltradenet sales, _) => sales.close,
-                      markerSettings: MarkerSettings(
-                        isVisible: true, // Afficher les marqueurs
-                        shape: DataMarkerType
-                            .circle, // Forme du marqueur (circle, square, etc.)
-                        color: Colors.white
-                            .withOpacity(0.5), // Couleur des marqueurs
-                        width: 4, // Largeur des marqueurs
-                      ),
-                    )
-                  ],
-                  primaryXAxis: DateTimeAxis(
-                      maximum: DateTime.now().add(const Duration(minutes: 15)),
-                      dateFormat: DateFormat.Hms(),
-                      majorGridLines: const MajorGridLines(width: 0)),
-                  primaryYAxis: NumericAxis(
-                    isVisible: true,
-                    majorGridLines:
-                        const MajorGridLines(color: Colors.transparent),
-                    minorGridLines:
-                        const MinorGridLines(color: Colors.transparent),
-                    // minimum: 1,
-                    // maximum: 1,
-                    // interval: 0.001,
-                    // numberFormat:
-                    //     NumberFormat.simpleCurrency(decimalDigits: 0)
+                    // lowValueMapper: (Modeltradenet sales, _) => sales.low,
+                    // highValueMapper: (Modeltradenet sales, _) => sales.high,
+                    // openValueMapper: (Modeltradenet sales, _) => sales.open,
+                    // closeValueMapper: (Modeltradenet sales, _) => sales.close,
                   ),
+                  SplineSeries<Modeltradenet, DateTime>(
+                    dataSource: chartDatatrade2,
+                    color: const Color(0xFF6334A9),
+                    width: 2,
+                    xValueMapper: (Modeltradenet sales, _) => sales.date,
+                    yValueMapper: (Modeltradenet sales, _) => sales.close,
+                    markerSettings: MarkerSettings(
+                      isVisible: true, // Afficher les marqueurs
+                      shape: DataMarkerType
+                          .horizontalLine, // Forme du marqueur (circle, square, etc.)
+                      color: const Color(0xFF6334A9)
+                          .withOpacity(0.5), // Couleur des marqueurs
+                      width: 1000, // Largeur des marqueurs
+                    ),
+                    dataLabelSettings: const DataLabelSettings(
+                      offset: Offset(-50, 25),
+                      useSeriesColor: true,
+                      borderWidth: 2,
+                      borderColor: Color(0xFF6334A9),
+                      // connectorLineSettings: ConnectorLineSettings(
+                      //     width: 2, color: Colors.red, type: ConnectorType.curve),
+                      isVisible: true,
+                      alignment: ChartAlignment.center,
+                      labelAlignment: ChartDataLabelAlignment.bottom,
+                    ),
+                  ),
+                  SplineSeries<Modeltradenet, DateTime>(
+                    dataSource: chartDatatrade2,
+                    color: const Color(0xFF6334A9),
+                    width: 2,
+                    xValueMapper: (Modeltradenet sales, _) => sales.date,
+                    yValueMapper: (Modeltradenet sales, _) => sales.close,
+                    markerSettings: MarkerSettings(
+                      isVisible: true, // Afficher les marqueurs
+                      shape: DataMarkerType
+                          .circle, // Forme du marqueur (circle, square, etc.)
+                      color: Colors.white
+                          .withOpacity(0.5), // Couleur des marqueurs
+                      width: 4, // Largeur des marqueurs
+                    ),
+                  ),
+                  invest
+                      ? SplineSeries<Modeltradenet, DateTime>(
+                          dataSource: markinvest,
+                          color: Colors.red,
+                          width: 2,
+                          xValueMapper: (Modeltradenet sales, _) => sales.date,
+                          yValueMapper: (Modeltradenet sales, _) => sales.close,
+                          markerSettings: MarkerSettings(
+                            isVisible: true, // Afficher les marqueurs
+                            shape: DataMarkerType
+                                .horizontalLine, // Forme du marqueur (circle, square, etc.)
+                            color: Colors.red
+                                .withOpacity(0.5), // Couleur des marqueurs
+                            width: 1000, // Largeur des marqueurs
+                          ),
+                          dataLabelSettings: const DataLabelSettings(
+                            offset: Offset(-70, 25),
+                            useSeriesColor: true,
+                            borderWidth: 2,
+                            borderColor: Colors.red,
+                            // connectorLineSettings: ConnectorLineSettings(
+                            //     width: 2, color: Colors.red, type: ConnectorType.curve),
+                            isVisible: true,
+                            alignment: ChartAlignment.center,
+                            labelAlignment: ChartDataLabelAlignment.bottom,
+                          ),
+                        )
+                      : SplineSeries<Modeltradenet, DateTime>(
+                          dataSource: chartDatatrade2,
+                          color: const Color(0xFF6334A9),
+                          width: 2,
+                          xValueMapper: (Modeltradenet sales, _) => sales.date,
+                          yValueMapper: (Modeltradenet sales, _) => sales.close,
+                        ),
+                  invest
+                      ? SplineSeries<Modeltradenet, DateTime>(
+                          dataSource: markinvest,
+                          color: Colors.red,
+                          width: 2,
+                          xValueMapper: (Modeltradenet sales, _) => sales.date,
+                          yValueMapper: (Modeltradenet sales, _) => sales.close,
+                          markerSettings: MarkerSettings(
+                            isVisible: true, // Afficher les marqueurs
+                            shape: DataMarkerType
+                                .circle, // Forme du marqueur (circle, square, etc.)
+                            color: Colors.red
+                                .withOpacity(0.5), // Couleur des marqueurs
+                            width: 4, // Largeur des marqueurs
+                          ),
+                        )
+                      : SplineSeries<Modeltradenet, DateTime>(
+                          dataSource: chartDatatrade2,
+                          width: 2,
+                          xValueMapper: (Modeltradenet sales, _) => sales.date,
+                          yValueMapper: (Modeltradenet sales, _) => sales.close,
+                        )
+                ],
+
+                primaryXAxis: DateTimeAxis(
+                    plotBands: <PlotBand>[
+                      PlotBand(
+                          //start: DateTime(2023, 10, 20, 20, 00),
+                          start: DateTime.parse(
+                              titlelist.entries.elementAt(3).value),
+                          end: DateTime(2023, 10, 23, 06, 30),
+                          textAngle: 0,
+                          verticalTextAlignment: TextAnchor.start,
+                          verticalTextPadding: '%-5',
+                          //text: 'Christmas Offer \nDec 2017',
+                          //textStyle: TextStyle(color: Colors.red, fontSize: 13),
+                          color: const Color.fromRGBO(50, 198, 255, 1),
+                          opacity: 0.3),
+                    ],
+                    maximum: DateTime.now().add(const Duration(minutes: 15)),
+                    dateFormat: DateFormat.Hms(),
+                    majorGridLines: const MajorGridLines(width: 0)),
+                primaryYAxis: NumericAxis(
+                  isVisible: false,
+                  majorGridLines:
+                      const MajorGridLines(color: Colors.transparent),
+                  minorGridLines:
+                      const MinorGridLines(color: Colors.transparent),
+                  // minimum: 1,
+                  // maximum: 1,
+                  // interval: 0.001,
+                  // numberFormat:
+                  //     NumberFormat.simpleCurrency(decimalDigits: 0)
                 ),
               ),
               const SizedBox(
@@ -426,7 +431,10 @@ class _TradingState extends State<Trading> {
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {},
+                        onPressed: () {
+                          print(DateTime.parse(
+                              titlelist.entries.elementAt(3).value));
+                        },
                         child: Column(
                           children: [
                             Text(
@@ -462,7 +470,9 @@ class _TradingState extends State<Trading> {
                             backgroundColor: Colors.green,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {},
+                        onPressed: () {
+                          miser();
+                        },
                         child: Column(
                           children: [
                             Text(
