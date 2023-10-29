@@ -1,4 +1,6 @@
 import 'package:cpay/models/user.dart';
+import 'package:cpay/pages/confirmation.dart';
+import 'package:cpay/pages/ticket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -82,7 +84,11 @@ class _TiroiredisconectState extends State<Tiroiredisconect> {
                         ),
                       ),
                       onTap: () {
-                        print("hello");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Confirmation(
+                                    phone: "0343787731", pwd: '1234')));
                       },
                     ),
                   ),
@@ -101,9 +107,7 @@ class _TiroiredisconectState extends State<Tiroiredisconect> {
                           color: Colors.black,
                         ),
                       ),
-                      onTap: () {
-                        print("hello");
-                      },
+                      onTap: () {},
                     ),
                   ),
                 ],

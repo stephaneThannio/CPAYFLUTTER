@@ -149,38 +149,12 @@ class _CardArticleState extends State<CardArticle> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Container(
-                                    //   margin: const EdgeInsets.only(bottom: 5),
-                                    //   //color: Colors.green,
-                                    //   child: FittedBox(
-                                    //     fit: BoxFit.scaleDown,
-                                    //     child: Text(
-                                    //       textAlign: TextAlign.center,
-                                    //       '',
-                                    //       style: TextStyle(
-                                    //         fontSize: 12.sp,
-                                    //         fontWeight: FontWeight.bold,
-                                    //         color: Colors.white,
-                                    //         fontFamily: 'PlusJakartaSans',
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
                                     Container(
                                       margin: const EdgeInsets.only(
                                           bottom: 10, right: 7, top: 20),
-                                      //color: Colors.orange,
                                       child: Text(
-                                        //textAlign: TextAlign.center,
                                         widget.designation,
                                         style: TextStyle(
-                                          // shadows: [
-                                          //   Shadow(
-                                          //     color: Colors.black.withOpacity(0.8),
-                                          //     blurRadius: 10.0,
-                                          //     offset: const Offset(0, 4),
-                                          //   ),
-                                          // ],
                                           fontSize: 12.sp,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
@@ -194,110 +168,83 @@ class _CardArticleState extends State<CardArticle> {
                                           margin: const EdgeInsets.fromLTRB(
                                               0, 0, 7, 0),
                                           color: widget.couleurCpay,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              const FittedBox(
-                                                fit: BoxFit.scaleDown,
-                                                child: Icon(
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: Row(
+                                              children: [
+                                                const Icon(
                                                   size: 30,
                                                   Icons.calendar_month,
                                                   color: Colors.white,
                                                 ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Expanded(
-                                                    child: SizedBox(
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    SizedBox(
                                                       width: 150,
                                                       //color: Colors.red,
                                                       child: Align(
                                                         alignment: Alignment
                                                             .centerLeft,
-                                                        child: FittedBox(
-                                                          fit: BoxFit.scaleDown,
-                                                          child: Text(
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            'Ticket 50 000 MGA',
-                                                            style: TextStyle(
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontFamily:
-                                                                  'PlusJakartaSans',
-                                                            ),
+                                                        child: Text(
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          'Ticket: ${widget.prix_ticket} MGA',
+                                                          style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                            fontFamily:
+                                                                'PlusJakartaSans',
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    color: Colors.white,
-                                                    width: 120,
-                                                    height: 1,
-                                                  ),
-                                                  Expanded(
-                                                    child: SizedBox(
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Container(
+                                                      color: Colors.white,
+                                                      width: 120,
+                                                      height: 1,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    SizedBox(
                                                       width: 150,
                                                       //color: Colors.red,
                                                       child: Align(
                                                         alignment: Alignment
                                                             .centerLeft,
-                                                        child: FittedBox(
-                                                          fit: BoxFit.scaleDown,
-                                                          child: Text(
-                                                            '${percent.toStringAsFixed(0)}% Avant tirage',
-                                                            style: TextStyle(
-                                                              fontSize: 12.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .normal,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontFamily:
-                                                                  'PlusJakartaSans',
-                                                            ),
+                                                        child: Text(
+                                                          '${percent.toStringAsFixed(0)}% Avant tirage',
+                                                          style: TextStyle(
+                                                            fontSize: 12.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            color: Colors.white,
+                                                            fontFamily:
+                                                                'PlusJakartaSans',
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
+                                                  ],
+                                                )
+                                              ],
+                                            ),
                                           )),
                                     ),
-
-                                    // StepProgressIndicator(
-                                    //   totalSteps: 90,
-                                    //   currentStep: 32,
-                                    //   padding: 2,
-                                    //   selectedColor: Color(0xFF6334A9),
-                                    //   unselectedColor: Colors.white,
-                                    //   roundedEdges: Radius.circular(10),
-                                    //   selectedGradientColor: LinearGradient(
-                                    //     begin: Alignment.topLeft,
-                                    //     end: Alignment.bottomRight,
-                                    //     colors: [
-                                    //       Color(0xFF6334A9).withOpacity(0.7),
-                                    //       Color(0xFF6334A9)
-                                    //     ],
-                                    //   ),
-                                    //   unselectedGradientColor: LinearGradient(
-                                    //       begin: Alignment.topCenter,
-                                    //       end: Alignment.topLeft,
-                                    //       colors: [Colors.black, Colors.blue]),
-                                    // )
                                   ],
                                 ),
                               ),

@@ -82,15 +82,12 @@ class _LoginState extends State<Login> {
     tel = uName.text;
     password = pWD.text;
     if (tel == '' && password == '') {
-      // alert('Erreur', 'veillez remplir le champ', QuickAlertType.error,
-      //     notWelcome);
       showalert("error", 'Erreur', 'veillez remplir le champ', "Valider", false,
           notWelcome);
     } else {
       setState(() {
         loading = true;
       });
-      //AlertLoad();
       try {
         final request = await post(Uri.parse('https://api.c-pay.me'),
             body: jsonEncode(
@@ -141,12 +138,7 @@ class _LoginState extends State<Login> {
                           Confirmation(phone: tel, pwd: password)));
             });
           }
-          // print(data["status"]);
-          // ignore: avoid_print
-          print(data);
-        } else {
-          print('request not send');
-        }
+        } else {}
       } catch (error) {
         if (error is TimeoutException) {
           setState(() {
@@ -155,7 +147,6 @@ class _LoginState extends State<Login> {
                 "Valider", false, notWelcome);
           });
         }
-        print(error);
       }
     }
   }

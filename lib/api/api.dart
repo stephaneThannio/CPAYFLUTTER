@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:cpay/models/user.dart';
@@ -9,6 +8,33 @@ import 'package:intl/intl.dart';
 
 class Api {
   //send code
+  static buyTicket(String idvente, String code, String nbticket) async {
+    try {
+      final request = await post(Uri.parse("https://api.c-pay.me"),
+          body: jsonEncode({
+            "app": "cpay",
+            "Autorization": "...",
+            "id_vente": idvente,
+            "iban": User.sessionUser!.iban,
+            "action": "achat_ticket",
+            "code": code,
+            "nb_ticket": nbticket
+          }),
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8"
+          }).timeout(const Duration(seconds: 20));
+
+      if (request.statusCode == 200) {
+        var data = jsonDecode(request.body);
+        return data;
+      } else {
+        return {};
+      }
+    } catch (e) {
+      return e;
+    }
+  }
+
   static send3dcode(String montant) async {
     try {
       final request = await post(Uri.parse("https://api.c-pay.me"),

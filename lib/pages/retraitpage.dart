@@ -1,3 +1,4 @@
+import 'package:alt_sms_autofill/alt_sms_autofill.dart';
 import 'package:cpay/api/api.dart';
 //import 'package:cpay/items/error/errorTimeout.dart';
 import 'package:cpay/items/essaidialog.dart';
@@ -68,11 +69,29 @@ class _RetraitPageState extends State<RetraitPage> {
         codetxt = "Resend code";
       });
       if (request["status"] == "success") {
+        initSmsListener();
         showalert("succes", "felicitation", request["mdata"], "valider", () {
           Navigator.pop(context);
         });
       }
     }
+  }
+
+  String _commingSms = "";
+  Future<void> initSmsListener() async {
+    String? commingSms;
+
+    try {
+      commingSms = await AltSmsAutofill().listenForSms;
+    } on PlatformException {
+      commingSms = 'Failed to get Sms.';
+    }
+    if (!mounted) return;
+
+    setState(() {
+      _commingSms = commingSms!.substring(21, 27);
+      controlcode = TextEditingController(text: _commingSms);
+    });
   }
 
   sendrequestretrait() async {
